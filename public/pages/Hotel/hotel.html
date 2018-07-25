@@ -1,0 +1,390 @@
+<section class="content-header">
+      <h1 style="color: #ecf0f5">
+        I
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#/dashboard"><i class="fa fa-dashboard"></i> Tablero</a></li>
+        <li><a href="#/hotel">Hoteles</a></li>
+      </ol>
+</section>
+<section ng-show="!ver" class="content">
+
+  <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
+  
+  </div>
+</section>
+<!-- Main content -->
+<section ng-show="ver" class="content">
+
+ <!-- <img src="img/banner/empresas.jpg" style="width: 100%;">-->
+ <style type="text/css">
+   canvas {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    }
+ </style>
+  <div class="content">
+  <!-- Info boxes -->
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-building"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{reporte.cantHotel}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TOTAL HOTELES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="ion ion-android-boat"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{reporte.rtn}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">REG. NACIONAL</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-tripadvisor"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{reporte.tripadvisor}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TRIPADVISOR</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-bed"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{reporte.cantCama}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">HABITACIONES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+
+     <div class="row">
+      
+      <div class="col-md-8 col-xs-12">
+        <div class="box" style="border:none !important;">
+           <div class="box-header with-border">
+              <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">LISTADO DE HOTELES</h3>
+              <div class="box-tools pull-right">
+                <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;" data-toggle="modal" ng-click="cambiarButton()" data-target="#myModal2" >NUEVO HOTEL</button>
+              </div>
+
+            </div>
+          <div class="box-body table-responsive">
+
+            <table class="table table-hover table-striped">
+                <tbody>
+                <tr>
+                  <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">TELEFONO</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">EMAIL</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;"></th>
+                </tr>
+                  
+                <tr ng-repeat="hotel in hoteles">
+                  <td class="mailbox-name"><a style="color: #00a3ee !important;">{{hotel.nombre}}</a></td>
+                  <td>{{hotel.telefono}}</td>
+                  <td>{{hotel.correo}}</td>
+
+                  <td>            
+                    <div class="btn-group">
+                      <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="cargarHotel(hotel)" data-toggle="modal" data-target="#myModal2"><i class="fa fa-edit"></i></button>
+                      <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal6" ng-click="eliminar(hotel , $index)"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                
+                </tbody>
+              </table>
+              <!-- /.table -->
+              
+            
+          </div>
+         </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <div class="box" style="border:none !important;">
+            <div class="box-header with-border">
+              <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">DATOS RELEVANTES</h3>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer no-padding" style="height: 500px; overflow-y: scroll;">
+              <ul class="nav nav-pills nav-stacked">
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Parqueaderos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.parqueaderoProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Aire Acondicionado <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.aireProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Tv Digital <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.tvProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[3]"></i> Jardin <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.jardinProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Venta de Artesanía <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.jardinProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Wifi <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.wifiProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Lavandería <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.lavanderiaProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[3]"></i> Piscina <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.lavanderiaProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Bar <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.barProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Room Service <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.barProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Restaurantes <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.restauranteProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[3]"></i> Gimnasio <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.gimnasioProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Servicio de Llamadas <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.llamadaProm.toFixed(0)}} %</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Vip Areas Sociales <span class="pull-right" style="color: #B6BBC0 !important">{{reporte.vipProm.toFixed(0)}} %</span></a></li>
+                
+                
+              </ul>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        
+
+     </div>
+    
+
+</section>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel"><b>Datos del Hotel </b></h4></center>
+       
+      </div>
+      <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
+        <div class="row">              
+          <div class="col-md-4 col-xs-12">
+              <label>Nombre:</label>
+              <input id="nombre" ng-model="hotel.nombre" type="text" class="form-control" >
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label>Dirección:</label>
+              <input id="apellido" ng-model="hotel.direccion" type="text" class="form-control">
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label>Categoría:</label>
+               <select id="sexo" class="form-control" ng-model="hotel.clasificacion">
+                <option value="1">Hotel</option>
+                <option value="2">Apartamentos y suites</option>
+                <option value="3">Hostal</option>
+                <option value="4">Residencia</option>
+                <option value="5">Casas</option>
+                <option value="6">Hotel Boutique</option>
+                <option value="7">Complejo</option>
+                <option value="8">Fincas</option>
+                <option value="9">Posada</option>
+                <option value="10">Centro Turístico</option>
+               </select>
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-md-4 col-xs-12">
+              <label>teléfono:</label>
+             <input ng-model="hotel.telefono" type="number" class="form-control">
+          </div>
+         <div class="col-md-4 col-xs-12">
+              <label>teléfono 2:</label>
+             <input ng-model="hotel.telefono2" type="number" class="form-control">
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label>Email:</label>
+             <input ng-model="hotel.correo" type="email" class="form-control">
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-md-4 col-xs-12">
+              <label>Descripción:</label>
+             <textarea ng-model="hotel.descripcion" class="form-control"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer modalBorde colorModal" style="margin: 0;">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline" data-dismiss="modal" ng-click="guardarHotel(hotel)">Guardar</button>
+      </div>
+      
+        
+    </div>
+  </div>
+</div>
+
+<!--Modal Insertar de hoteles-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <form name="formHotel">
+      <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel"><b>Nuevo Hotel</b></h4></center>
+       
+      </div>
+      <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
+        <div class="box box-blanco" >
+          <div class="box-header">
+
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos básicos</h3>
+          </div><br>
+            
+          </div>
+            <div class="box-body">
+              <div class="row">
+              <div class="col-md-4 col-xs-12">
+              <label>Nombre:</label>
+              <input id="nombre" ng-model="hotel.nombre" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                 <label>Dirección:</label>
+                 <input id="direccion" ng-model="hotel.direccion" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+               <label>Categoría:</label>
+                  <select ng-model="hotel.categoria" class="form-control" required>
+                    <option ng-repeat="categoria in categoriaHotel" ng-selected ="categoria.id == categoriaSelect" value="{{categoria.id}}">{{categoria.name}}</option>
+                  </select>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <label>teléfono:</label>
+                   <input ng-model="hotel.telefono" type="number" class="form-control" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                   <label>teléfono2 (Opcional):</label>
+                   <input ng-model="hotel.telefono2" type="number" class="form-control">
+                </div>
+                <div class="col-md-4 col-xs-12">
+                 <label>Email:</label>
+                  <input ng-model="hotel.correo" type="email" class="form-control" required>
+                </div>
+           </div><br>
+             <div class="row">
+                 <div class="col-md-4 col-xs-12">
+                <label>Departamento:</label>
+                  <select ng-model="hotel.departamento" class="form-control" ng-change="buscarCiudad(departamento)" required>
+                     <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos" ng-selected ="departamento.idDepartamento == departamentoSelect">{{departamento.nombre}}</option>
+                  </select>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <label>Ciudad:</label>
+                    <select ng-model="hotel.ciudad" class="form-control" required>
+                      <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-selected ="ciudad.idCiudad == ciudadSelect">{{ciudad.nombre}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                   <label>Gerente:</label>
+                   <input ng-model="hotel.gerente" type="text" class="form-control" >
+                </div>
+           </div>
+          </div>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos relevantes</h3>
+          </div><br>
+
+
+           <div class="row">
+               <div class="col-md-4 col-xs-12">
+                 <label>Página: (Opcional)</label>
+                 <input ng-model="hotel.pagina" type="text" class="form-control">
+              </div>
+               <div class="col-md-4 col-xs-12">
+                 <label>N° Habitaciones:</label>
+                 <input ng-model="hotel.habitaciones" type="number" class="form-control" required>
+              </div>
+               <div class="col-md-4 col-xs-12">
+                 <label>Capacidad Máxima:</label>
+                 <input ng-model="hotel.capacidadMax" type="number" class="form-control" required> 
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <label>Seleccione los atributos de su hotel:</label>
+                <div isteven-multi-select input-model="modernBrowsers"
+                  output-model="outputBrowsers"
+                  button-label="icon name"
+                  item-label="icon name maker"
+                  tick-property="ticked">
+                </div>
+              </div>
+           </div><br>
+
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Ubicación</h3>
+          </div><br>
+          <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="deleteMarkers();"><i class="fa fa-close"></i>
+              Eliminar Marker
+          </button>
+
+          <div class="row"  ng-init="initMap()">
+            <div style="width: 100% !important;" id="map2"></div>
+          </div><br>
+        
+        </div>
+        <!-- /.box -->
+      </div>
+      <div class="modal-footer" style="margin: 0">
+          <button  type="button" ng-click="nuevoHotel()" class="btn  btn-outline pull-left" data-dismiss="modal" >Cerrar</button>
+          <button type="button" ng-disabled="formHotel.$invalid " class="btn " data-dismiss="modal" ng-click="guardarHotel()">{{button}}</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal5" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-body">
+        <div class="box" style="border-top: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="info">
+              <h3 class="title">Éxito!</h3>
+              <p>
+                Se ha realizado correctamente.
+              </p>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal6" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body" style="padding-top: 15px">
+        <div class="box" style="border: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="info">
+              <h3 class="title">Espere!</h3>
+              <p>
+                ¿Está seguro de que desea eliminar la actividad?
+              </p>
+            <br> <br>
+             <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="delete()">Aceptar</button>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>

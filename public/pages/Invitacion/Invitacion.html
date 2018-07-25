@@ -1,0 +1,515 @@
+<section class="content-header">
+      <ol class="breadcrumb">
+        <li><a href="#/dashboard"><i class="fa fa-dashboard"></i> Tablero</a></li>
+        <li><a href="#/evento">Eventos</a></li>
+        <li><a href="#/detalle">Detalles del evento</a></li>
+        <li><a href="#/invitacion">Invitación</a></li>
+      </ol>
+</section>
+<section ng-show="!ver" class="content">
+  <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
+  </div>
+</section>
+<br>
+<!-- Main content -->
+<section ng-show="ver" class="content">
+  <div class="row">
+    <div class="col-md-8 col-xs-12">
+      <div class="box" style="border : none ! important">
+          <div class="box-header" >
+           <div class="row">
+              <div class="col-md-8">
+                <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">INVITACIONES</h3>
+                <label class="radio-inline" style="margin-left: 5%">
+                  <input type="radio" name="radiobutton" value="1"  ng-click="cambiarTabla()">Sin invitación
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="radiobutton" value="0" checked="checked" ng-click="cambiarTabla()">Invitados
+                </label>
+              </div>
+              <div class="col-md-4">
+                  <select class="form-control pageList" name="tipo" ng-model="tipo" ng-change="buscarLista(tipo); limpiarLista()">
+                    <option ng-repeat="t in tipoUsuario" ng-selected ="t.id == tipousuarioSelect" value="{{t.id}}">{{t.name}}</option>
+                  </select>
+              </div>
+           </div>
+          </div>
+           <!-- <div class="mailbox-controls">
+                <button type="button" class="btn btn-default btn-sm checkbox-toggle" data-toggle="tooltip" ng-click="cambiarTabla(0)">
+                    Invitados
+                </button>
+                <button type="button" class="btn btn-default btn-sm checkbox-toggle" data-toggle="tooltip" ng-click="cambiarTabla(1)">
+                    No Invitados
+                </button>
+            </div> -->
+          <!-- /.box-header -->
+        <div class="box-body no-padding" style="border:none !important;  height: 370px; overflow-y: scroll;">
+          <div class="table mailbox-messages">
+            <table class="table table-hover table-striped">
+              <tbody>
+              <tr ng-if="valor == 0 && invitados[0]">
+                <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">ESTADO</th>
+                <th></th>
+              </tr>
+              <tr ng-if="valor == 1 && noinvitadas[0]">
+                <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">CORREO</th>
+                <th></th>
+              </tr>
+              <tr ng-repeat="i in noinvitadas" ng-if="valor == 1 "> <!--NO iINVITADAS-->
+                <td class="mailbox-name">
+                  <input type="checkbox" class="minimal" ng-model="listado" ng-change="listaSeleccionada(i)">
+                </td>
+                <td class="mailbox-subject" style="color: #00a3ee !important;">{{i.nombre}}
+                </td>
+                <td class="mailbox-subject"> {{i.correo}}</td>
+                <th></th>
+              </tr>
+              <!--BOX DE VACIO EN NO INVITADOS-->
+              <div class="box" ng-if="!invitados[0] && valor == 0 " style="border: none !important; background-color:#fafafb">  
+                <div class="icon">
+                  <div class="image"><i class="ion ion-sad-outline"></i></div>
+                  <div class="info" style="background-color:#fafafb !important">
+                    <h3 class="title">OPS!</h3>
+                    <p ng-if="tipoSelect == 0" >
+                      Aún no ha invitado a ninguna empresa
+                    </p>
+                    <p ng-if="tipoSelect == 1" >
+                      Aún no ha invitado a ninguna agrupación
+                    </p>
+                    <p ng-if="tipoSelect == 2" >
+                      Aún no ha invitado a ningún participante
+                    </p>
+                    <p ng-if="tipoSelect == 3" >
+                      Aún no ha invitado a ningún hotel
+                    </p>
+                    <p ng-if="tipoSelect == 4">
+                      Aún no ha invitado a ningún restaurante
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <tr ng-repeat="i in invitados" ng-if="valor == 0 "> <!-- INVITADOS-->
+                <td class="mailbox-subject" style="color: #00a3ee !important;">{{i.nombre}}
+                </td>
+                <td ng-if="i.estado == 0" class="mailbox-subject" >
+                  Sin Respuesta
+                </td>
+                <td class="mailbox-subject" ng-if="i.estado == 1">
+                  Aceptado
+                </td>
+                <td class="mailbox-subject" ng-if="i.estado == 2">
+                  Denegado
+                </td>
+                <td>            
+                  <div class="btn-group">
+                    <button ng-if="i.estado == 0" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal" ng-click="capturaValor(i , $index)"><i class="fa fa-exchange"></i></button>
+                  </div>
+                </td>
+               </tr>
+               <!--BOX DE NO INVITADOS-->
+              <div class="box" ng-if="!noinvitadas[0] && valor == 1 " style="border: none !important; background-color:#fafafb">  
+                  <div class="icon">
+                    <div class="image"><i class="ion ion-sad-outline"></i></div>
+                    <div class="info" style="background-color:#fafafb !important">
+                      <h3 class="title">OPS!</h3>
+                      <p ng-if="tipoSelect == 0" >
+                        No hay más empresas que invitar.
+                      </p>
+                      <p ng-if="tipoSelect == 1" >
+                        No hay más agrupaciones que invitar.
+                      </p>
+                      <p ng-if="tipoSelect == 2" >
+                        No hay más participantes que invitar.
+                      </p>
+                      <p ng-if="tipoSelect == 3" >
+                        No hay más hoteles que invitar
+                      </p>
+                      <p ng-if="tipoSelect == 4">
+                        No hay más restaurantes que invitar.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                 <!---->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <span  ng-if="valor == 1 " class="pull-right btn " style="margin-right: 1%; color:#06A2EB" ng-click="guardar(1)" data-toggle="modal">Guardar Selección</span>
+          <span  ng-if="valor == 1 " class="pull-right btn" data-toggle="modal" data-target="#myModal4" style="color:#06A2EB">
+             Nueva Difusión
+          </span>
+        </div>
+             <!-- /.box-body -->
+        
+      </div>
+    </div>
+    <div class="col-md-4 col-xs-12">
+      <div class="box" style="border:none !important;" >
+        <div class="box-header">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">MENSAJE PERSONALIZADO</h3>
+        </div>
+              <div class="box-body">
+                <p style="text-align: justify; font-size: smaller; font-family: inherit;">Esta sección es para crear un mensaje personalizado, de lo contrario se enviará uno por defecto.
+                 Elija a quién va dirigido el mensaje</p>
+                <div class="form-group">
+                 <center><label style="font-size: xx-small; color: #B6BBC0 !important">OPCIONES</label></center>
+                  <select class="form-control" ng-model="mensaje.tipo">
+                    <option value="0">Empresa</option>
+                    <option value="1">Agrupaciones</option>
+                    <option value="2">Participantes</option>
+                    <option value="3">Hoteles</option>
+                    <option value="4">Restaurantes</option>
+                  </select>
+                </div>
+                <center><label style="font-size: xx-small; color: #B6BBC0 !important">SU MENSAJE</label></center>
+                <textarea class="form-control" placeholder="Escriba Su Mensaje" rows="6" cols="90" ng-model="mensaje.texto"></textarea>
+                <br>
+                <button  class="btn btn-block buttonLogin " style="text-align: center ;" ng-click="guardarMensaje(mensaje)" >GUARDAR</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!--VIEJO-->
+    <div ng-if="djahdklash" class="row" style="padding: 1%">
+        <div class="col-md-6">
+          <div class="box" >
+            <div class="box-header with-border">
+             <div class="row">
+                <div class="col-md-8">
+                  <h3 class="box-title">Invitaciones (Invitados y no invitados)</h3>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control pageList" name="tipo" ng-model="tipo" ng-change="buscarLista(tipo); limpiarLista()">
+                      <option ng-repeat="t in tipoUsuario" ng-selected ="t.id == tipousuarioSelect" value="{{t.id}}">{{t.name}}</option>
+                    </select>
+                </div>
+             </div>
+            </div>
+            <div class="mailbox-controls">
+                <button type="button" class="btn btn-default btn-sm checkbox-toggle" data-toggle="tooltip" ng-click="cambiarTabla(0)">
+                    Invitados
+                </button>
+                <button type="button" class="btn btn-default btn-sm checkbox-toggle" data-toggle="tooltip" ng-click="cambiarTabla(1)">
+                    No Invitados
+                </button>
+            </div>
+          <!-- /.box-header -->
+            <div class="box-body no-padding" style="background-color: #fafafb;border:none !important;  height: 270px; overflow-y: scroll;">
+              <table class="table table-hover table-striped">
+                  <tr ng-if="valor == 0 && invitados[0]">
+                    <th></th>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                  </tr>
+                  <tr ng-if="valor == 1 && noinvitadas[0]">
+                    <th></th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                  </tr>
+                  <tr ng-repeat="i in noinvitadas" ng-if="valor == 1 ">
+                    <td>   
+                      <input type="checkbox" class="minimal" ng-model="listado" ng-change="listaSeleccionada(i)">
+                    </td>
+                    <td>{{i.nombre}}</td>
+                    <td>{{i.correo}}</td>
+                  </tr>
+                  <div class="box" ng-if="!invitados[0] && valor == 0 " style="border: none !important; background-color:#fafafb">  
+                    <div class="icon">
+                      <div class="image"><i class="ion ion-sad-outline"></i></div>
+                      <div class="info" style="background-color:#fafafb !important">
+                        <h3 class="title">OPS!</h3>
+                        <p ng-if="tipoSelect == 0" >
+                          Aún no ha invitado a ninguna empresa
+                        </p>
+                        <p ng-if="tipoSelect == 1" >
+                          Aún no ha invitado a ninguna agrupación
+                        </p>
+                        <p ng-if="tipoSelect == 2" >
+                          Aún no ha invitado a ningún participante
+                        </p>
+                        <p ng-if="tipoSelect == 3" >
+                          Aún no ha invitado a ningún hotel
+                        </p>
+                        <p ng-if="tipoSelect == 4">
+                          Aún no ha invitado a ningún restaurante
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="box" ng-if="!noinvitadas[0] && valor == 1 " style="border: none !important; background-color:#fafafb">  
+                    <div class="icon">
+                      <div class="image"><i class="ion ion-sad-outline"></i></div>
+                      <div class="info" style="background-color:#fafafb !important">
+                        <h3 class="title">OPS!</h3>
+                        <p ng-if="tipoSelect == 0" >
+                          No hay más empresas que invitar.
+                        </p>
+                        <p ng-if="tipoSelect == 1" >
+                          No hay más agrupaciones que invitar.
+                        </p>
+                        <p ng-if="tipoSelect == 2" >
+                          No hay más participantes que invitar.
+                        </p>
+                        <p ng-if="tipoSelect == 3" >
+                          No hay más hoteles que invitar
+                        </p>
+                        <p ng-if="tipoSelect == 4">
+                          No hay más restaurantes que invitar.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                   <tr ng-repeat="i in invitados" ng-if="valor == 0 ">
+                      <td class="mailbox-star"><i class="fa fa-star text-yellow"></i></td>
+                      <td>{{i.nombre}}</td>
+                      <td ng-if="i.estado == 0" ><span class="label label-warning"  data-toggle="modal" data-target="#myModal" ng-click="capturaValor(i , $index)">Sin Respuesta</span></td>
+                      <td ng-if="i.estado == 1"><span class="label label-success">Aceptado</span></td>
+                      <td ng-if="i.estado == 2"><span class="label label-danger">Denegado</span></td>
+                  </tr>
+              </table>
+            </div>
+            <div class="row">
+              <span  ng-if="valor == 1 " class="pull-right btn " style="margin-right: 1%;" ng-click="guardar(1)" data-toggle="modal">Guardar Selección</span>
+             
+              <span  ng-if="valor == 1 " class="pull-right btn"  data-toggle="modal" data-target="#myModal4" >
+                 Nueva Difusión
+              </span>
+            </div>
+             <!-- /.box-body -->
+        
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="box" style="background-color: #fafafb;border:none !important;" >
+            <div class="box-header">
+              <h3 class="box-title">Mensaje Personalizado</h3>
+            </div>
+              <form class="form-group">
+                  <div class="box-body">
+                     <div class="row">
+                        <div class="col-md-10 col-sm-10 col-xs-10">
+                          <p>Esta sección es para crear un mensaje personalizado, de lo contrario se enviará uno por defecto.
+                           Elija a quién va dirigido el mensaje</p>
+                            <label>Opciones</label>
+                            <select class="form-control" ng-model="mensaje.tipo">
+                              <option value="0">Empresa</option>
+                              <option value="1">Agrupaciones</option>
+                              <option value="2">Participantes</option>
+                              <option value="3">Hoteles</option>
+                              <option value="4">Restaurantes</option>
+                            </select>
+                            <textarea class="form-control" rows="6" cols="90" ng-model="mensaje.texto"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-default btn-sm checkbox-toggle pull-right" ng-click="guardarMensaje(mensaje)">
+                    Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="box" style="border : none ! important">
+        <div class="box-header">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">MENSAJES CREADOS</h3>
+        </div>
+        <div class="box-body">
+          <div class="table mailbox-messages">
+            <table class="table table-hover table-striped">
+              <tbody>
+              <tr>
+                <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">TIPO</th>
+                <th style="font-size: small; color: #B6BBC0 !important;"></th>
+              </tr>
+              <tr ng-repeat="mensaje in mensajes">
+                <td ng-if="mensajes.lenght == 0" style="color:gray"> No tiene ningún mensaje personalizado</td>
+                <td class="mailbox-name">{{mensaje.texto}}</td>
+                <td class="mailbox-subject" ng-if="mensaje.tipo == 0" >Empresa</td>
+                <td class="mailbox-subject" ng-if="mensaje.tipo == 1" >Agrupaciones</td>
+                <td class="mailbox-subject" ng-if="mensaje.tipo == 2" >Participantes</td>
+                <td class="mailbox-subject" ng-if="mensaje.tipo == 3" >Hoteles</td>
+                <td class="mailbox-subject" ng-if="mensaje.tipo == 4" >Restaurantes</td>
+                <td>            
+                  <div class="btn-group">
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal5" ng-click="selectMensaje(mensaje , $index)"><i class="fa fa-edit"></i></button>
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal3" ng-click="selectMensaje(mensaje , $index)"><i class="fa fa-trash-o"></i></button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- /.table -->
+          </div>
+          
+        </div>
+     <!--<div class="row" >
+          <div class="col-xs-12 table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="mensaje in mensajes">
+                <td ng-if="mensajes.lenght == 0" style="color:red"> No tiene ningún mensaje personalizado</td>
+                <td>{{$index + 1}}</td>
+                <td>{{mensaje.texto}}</td>
+                <td ng-if="mensaje.tipo == 0" >Empresa</td>
+                <td ng-if="mensaje.tipo == 1" >Agrupaciones</td>
+                <td ng-if="mensaje.tipo == 2" >Participantes</td>
+                <td ng-if="mensaje.tipo == 3" >Hoteles</td>
+                <td ng-if="mensaje.tipo == 4" >Restaurantes</td>
+                <td>
+                  <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal5" ng-click="selectMensaje(mensaje , $index)" title="Eliminar mensaje"><i class="fa fa-edit"></i></button>
+                  
+                  <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal3" ng-click="selectMensaje(mensaje , $index)" title="Eliminar mensaje"><i class="fa fa-trash-o"></i></button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>-->
+      </div>
+</section>
+
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-body">
+        <div class="box" style="border-top: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image"><i class="fa fa-info"></i></div>
+            <div class="info">
+              <h3 class="title">Información</h3>
+              <p>
+                {{responseMensaje}}
+              </p>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal4" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-body">
+        <div class="box" style="border-top: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image"><i class="fa fa-warning"></i></div>
+            <div class="info">
+              <h3 class="title">Difusión</h3>
+              <p>
+                ¿Está seguro que desea enviar el mensaje a toda la lista?
+              </p>
+              <br> <br>
+              <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+              <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="guardar(0)">Aceptar</button>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal3" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body" style="padding-top: 15px">
+        <div class="box" style="border: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="info">
+              <h3 class="title">Espere!</h3>
+              <p>
+                ¿Está seguro de que desea eliminar?
+              </p>
+            <br> <br>
+             <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminarMensaje()" >Aceptar</button>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<!--<div class="modal" tabindex="-1" role="dialog" id="myModal5">
+  <div class="modal-dialog" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Editar Mensaje</h4></center>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" rows="6" cols="90" ng-model="mensajeSelect.texto"></textarea>
+      </div>
+      <div class="modal-footer" style="margin: 0">
+          <button  type="button" class="btn  pull-left" data-dismiss="modal" >Cerrar</button>
+          <button type="button" ng-disabled="formEmpresa.$invalid" class="btn " data-dismiss="modal" ng-click="actualizarMensaje()">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>-->
+<!--MODAL PARA CAMBIAR ESTADO-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-sm" role="document" >
+    <div class="modal-content">
+      <div class="modal-header">
+       <button ng-click="cerrar()" type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #06a2eb !important;"><span aria-hidden="true">&times;</span></button>
+        <center><h3 class="modal-title" id="myModalLabel" style="color: #B6BBC0 !important;"><b>Cambiar Estado</b></h3></center>
+      </div>
+      <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
+        <div class="modal-body">
+          <div class="row">
+            <center><p style="color: #B6BBC0 !important; margin-top: 0px">Seleccione el cambio de estado que desea</p></center>
+            <div class="col-md-6">
+                <a class="btn btn-app text-center" ng-click="cambiarEstado(1)" style="color: white;background-color: #009DE4;" data-dismiss="modal">
+                  <i class="fa fa-check" ></i> Aceptado
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a class="btn btn-app text-center" data-dismiss="modal" ng-click="cambiarEstado(2)" style="color: white;background-color: #009DE4;">
+                  <i class="fa fa-remove" ></i> Denegado
+                </a>
+            </div>   
+         </div>
+        </div>
+        <!-- /.box -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--MODAL PARA EDITAR EL MENSAJE-->
+<div class="modal fade" id="myModal5" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-md" role="document" >
+    <div class="modal-content">
+      <div class="modal-header">
+       <button ng-click="cerrar()" type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #06a2eb !important;"><span aria-hidden="true">&times;</span></button>
+        <center><h3 class="modal-title" id="myModalLabel" style="color: #B6BBC0 !important;"><b>Editar Mensaje</b></h3></center>
+      </div>
+      <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
+        <div class="modal-body">
+          <textarea class="form-control" rows="6" cols="90" ng-model="mensajeSelect.texto"></textarea>
+        </div>
+        <div class="modal-footer" style="margin: 0">
+          <!--<button type="button" ng-disabled="formEmpresa.$invalid" class="btn " data-dismiss="modal" ng-click="actualizarMensaje()">Actualizar</button> -->
+          <button  class="btn btn-lg buttonLogin" ng-disabled="formEmpresa.$invalid" style="text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="actualizarMensaje()">GUARDAR</button>
+        </div>
+        <!-- /.box -->
+      </div>
+    </div>
+  </div>
+</div>

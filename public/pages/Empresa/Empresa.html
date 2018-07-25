@@ -1,0 +1,326 @@
+<section class="content-header">
+      <h1 style="color: #ecf0f5">
+        I
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#/dashboard"><i class="fa fa-dashboard"></i> Tablero</a></li>
+        <li><a href="#/empresa">Empresa</a></li>
+      </ol>
+</section>
+<section ng-show="!ver" class="content">
+
+  <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
+  
+  </div>
+</section>
+<!-- Main content -->
+<section ng-show="ver" class="content">
+    <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-building-o"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{reporte.cantEmpresas}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TOTAL EMPRESAS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-user"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{reporte.cantPersonas}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TOTAL EMPLEADOS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-venus"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{reporte.cantMujeres}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">N° MUJERES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-mars"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{reporte.cantHombres}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">N° HOMBRES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row-->
+  <!-- Main row -->
+  <div class="row">
+      <!-- Left col -->
+    <div class="col-md-8 col-xs-12">
+      <div class="box " style="border:none !important;">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">LISTADO DE EMPRESAS</h3>
+          <div class="box-tools pull-right">
+            <button data-toggle="modal" data-target="#myModal" ng-click="cambiarButton()" type="button" class="btn btn-box-tool" ><i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <div class="box-tools pull-right">
+            <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  data-toggle="modal" data-target="#myModal" ng-click="cambiarButton()" >NUEVA EMPRESA</button>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <div class="table mailbox-messages table-responsive">
+            <table class="table table-hover table-striped">
+              <tbody>
+              <tr>
+                <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">TIPO</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">TELÉFONO</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">CORREO</th>
+                <th style="font-size: small; color: #B6BBC0 !important;"></th>
+              </tr>
+              <tr ng-repeat="empresa in empresas | filter:filtro">
+                <td class="mailbox-name"><a ng-click="verDetalle(evento)" style="color: #00a3ee !important;">{{empresa.nombre}}</a></td>
+                <td class="mailbox-subject" ng-if="evento.ciudad">{{evento.ciudad}}
+                </td>
+                <td class="mailbox-subject" ng-if="empresa.sector == 0">Microempresa</td>
+                <td class="mailbox-subject" ng-if="empresa.sector == 1">Pequeña</td>
+                <td class="mailbox-subject" ng-if="empresa.sector == 2">Mediana</td>
+                <td class="mailbox-subject" ng-if="empresa.sector == 3">Grande</td>
+                <td class="mailbox-subject"> {{empresa.telefono1}}</td>
+                <td class="mailbox-subject">{{empresa.correo}}</td>
+                <td>            
+                  <div class="btn-group">
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="cargarEmpresa(empresa)" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></button>
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="eliminar(empresa, $index)" data-toggle="modal" data-target="#myModal6"><i class="fa fa-trash-o"></i></button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- /.table -->
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+          </div>
+        </div>
+      </div>
+      <!-- /. box -->
+    </div>
+    <div class="col-md-4 col-xs-12">
+      <div class="box" style="border:none !important;">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TIPO DE EMPRESA</h3>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options">
+          </canvas>
+        </div>
+        <div class="box-footer no-padding">
+          <ul class="nav nav-pills nav-stacked">
+            <li ng-if="sectorR[0].cantidad != 0"><a href=""><i class="fa fa-circle" style="color: #00EAB5"></i> Micro <span class="pull-right" style="color: #B6BBC0 !important">{{sectorR[0].promedio.toFixed(1)}} %</span></a></li>
+            <li ng-if="sectorR[1].cantidad != 0"><a href=""><i class="fa fa-circle" style="color: #FF6C00"></i> Pequeña <span class="pull-right" style="color: #B6BBC0 !important">{{sectorR[1].promedio.toFixed(1)}} %</span></a></li>
+            <li ng-if="sectorR[2].cantidad != 0"><a href=""><i class="fa fa-circle" style="color: #00ABF8"></i> Mediana <span class="pull-right" style="color: #B6BBC0 ">{{sectorR[2].promedio.toFixed(1)}} %</span></a></li>
+          </ul>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+
+
+  </div>
+</section>
+<!-- Modal de insertar evento-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Nueva Empresa</h4></center>
+      </div>
+      <div class="modal-body " style="background-color:rgb(255, 255, 255) !important; color: black !important;">
+        <form name="formEmpresa">
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos básicos</h3>
+          </div><br>
+
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <label>Nombre:</label>
+                    <input ng-model="empresa.nombre" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <label>Nit:</label>
+                    <!-- Para la prueba de los puntitos id="empresanit"-->
+                    <input  ng-model="empresa.nit"  class="form-control" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Tipo de Empresa:</label>
+                 <!-- <select class="form-control" ng-model="empresa.sector" required>
+                    <option value="0">Microempresa</option>
+                    <option value="1">Pequeña Empresa</option>
+                    <option value="2">Mediana Empresa</option>
+                    <option value="3">Grande Empresa</option>
+                  </select>-->
+
+                  <select class="form-control pageList" name="tipo empresa" ng-model="empresa.sector" required>
+                      <option ng-repeat="tipo in tipoEmpresa" ng-selected ="tipo.id == tipoSelect" value="{{tipo.id}}">{{tipo.name}}</option>
+                  </select>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                <label>Gerente:</label>
+                  <input type="text" class="form-control"  ng-model="empresa.gerente" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Departamento:</label>
+                  <select ng-model="empresa.departamento" class="form-control" ng-change="buscarCiudad(empresa.departamento)" required>
+                     <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos" ng-selected ="departamento.idDepartamento == departamentoSelect">{{departamento.nombre}}</option>
+                  </select>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <label>Ciudad:</label>
+                    <select ng-model="empresa.ciudad" class="form-control" required>
+                      <option ng-repeat="ciudad in ciudades" ng-selected ="ciudad.idCiudad == ciudadSelect" value="{{ciudad.idCiudad}}">{{ciudad.nombre}}</option>
+                    </select>
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                  <label>Dirección:</label>
+                  <input id="direccion" ng-model="empresa.direccion" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Telefono1:</label>
+                  <input class="form-control" type="number" ng-model="empresa.telefono1" required> 
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Telefono2:</label>
+                  <input class="form-control" type="number" ng-model="empresa.telefono2" >
+                </div>
+            </div><br>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Detalles</h3>
+          </div><br>
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                  <label>Número de Empleados:</label>
+                  <input ng-model="empresa.nempleados" type="number" class="form-control" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <label>Cantidad de Mujeres:</label>
+                  <input id="direccion" ng-model="empresa.cantMujeres" type="number" class="form-control" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <label>Cantidad de Hombres:</label>
+                  <input id="direccion" ng-model="empresa.cantHombres" type="number" class="form-control" required>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                  <label>Correo:</label>
+                  <input type="email" class="form-control"  ng-model="empresa.correo" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <label>Facebook (opcional):</label>
+                  <input type="text" class="form-control"  ng-model="empresa.facebook">
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <label>Twitter (opcional):</label>
+                  <input type="text" class="form-control"  ng-model="empresa.twitter">
+                </div>
+            </div><br>
+              <div class="row">
+                <div class="col-md-4 col-xs-12">
+                  <label>Youtube (opcional):</label>
+                  <input type="text" class="form-control"  ng-model="empresa.youtube">
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <label>Instagram (opcional):</label>
+                  <input type="text" class="form-control"  ng-model="empresa.instagram">
+                </div>
+            </div><br>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Ubicación</h3>
+          </div>
+          <div class="row"  ng-init="initMap()">
+             <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="deleteMarkers();"><i class="fa fa-close"></i>
+              Eliminar Marker
+            </button>
+              <div style="width: 100% !important;" id="map2"></div>
+          </div>
+      </div>
+      <div class="modal-footer" style="margin: 0">
+          <button  type="button" class="btn  pull-left" data-dismiss="modal" >Cerrar</button>
+          <button type="button" ng-disabled="formEmpresa.$invalid" class="btn " data-dismiss="modal" ng-click="guardar()">{{button}}</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<!--modal de eliminar-->
+<div class="modal fade" id="myModal6" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body" style="padding-top: 15px">
+        <div class="box" style="border: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="info">
+              <h3 class="title">Espere!</h3>
+              <p>
+                ¿Está seguro de que desea eliminar la empresa?
+              </p>
+            <br> <br>
+             <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="delete()">Aceptar</button>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal5" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-body">
+        <div class="box" style="border-top: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="info">
+              <h3 class="title">Éxito!</h3>
+              <p>
+                Se ha realizado correctamente.
+              </p>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+

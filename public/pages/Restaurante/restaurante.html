@@ -1,0 +1,298 @@
+<section class="content-header">
+      <h1>
+        Idecon Restaurante
+        <small>principal</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#/dashboard"><i class="fa fa-dashboard"></i> Tablero</a></li>
+        <li><a href="#/restaurante">Restaurante</a></li>
+      </ol>
+</section>
+<section ng-show="!ver" class="content">
+
+  <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
+  
+  </div>
+</section>
+<!-- Main content -->
+<section ng-show="ver" class="content" style="padding: 10px! important ; padding-top: 0px;">
+
+  <div class="row">
+    <div class="col-md-4 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="ion ion-wineglass"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{cantidad}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">RESTAURANTES REGISTRADOS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-4 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="ion ion-pizza"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">5</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TIPOS DE RESTAURANTES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-4 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="ion ion-wifi"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">10</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TIPOS DE SERVICIOS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+
+  <!-- Main row -->
+  <div class="row">
+    <!-- Left col -->
+    <div class="col-md-8 col-xs-12">
+      <div class="box " style="border:none !important;">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">LISTADO DE RESTAURANTES</h3>
+          <div class="box-tools pull-right">
+            <button data-toggle="modal" data-target="#myModal" ng-click="cambiarButton()" type="button" class="btn btn-box-tool" ><i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <div class="box-tools pull-right">
+            <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  data-toggle="modal" data-target="#myModal" ng-click="cambiarButton()" >NUEVO RESTAURANTE</button>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <div class="table mailbox-messages table-responsive">
+            <table class="table table-hover table-striped">
+              <tbody>
+              <tr>
+                <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">TELÉFONO</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">CORREO</th>
+                <th style="font-size: small; color: #B6BBC0 !important;"></th>
+              </tr>
+              <tr ng-repeat="restaurante in restaurantes | filter:filtro">
+                <td class="mailbox-name">{{restaurante.nombre}}</td>
+                <td class="mailbox-subject">{{restaurante.telefono}}</td>
+                <td class="mailbox-subject">{{restaurante.correo}}</td>
+                <td>            
+                  <div class="btn-group">
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="cargarRestaurante(restaurante)" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></button>
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal6" ng-click="eliminar(restaurante , $index)"><i class="fa fa-trash-o"></i></button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- /.table -->
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /. box -->
+    </div>
+    <!--end col left-->
+    <div class="col-md-4 col-xs-12 ">
+      <div class="box" style="border:none !important;">
+        <div class="box-header with-border">
+           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TIPOS DE RESTAURANTES</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="chart-responsive">
+               <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options">
+              </canvas>
+              </div>
+              <!-- ./chart-responsive -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <div class="box-footer no-padding">
+          <ul class="nav nav-pills nav-stacked">
+            <li ng-repeat="l in labels"><a href=""><i class="fa fa-circle" ng-style="colores[$index]"></i> {{l}} <span class="pull-right" style="color: #B6BBC0 !important">{{data[$index]}}</span></a></li>
+          </ul>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+</section>
+<!-- Modal de insertar restaurante-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="limpiar()"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Nuevo Restaurante</h4></center>
+      </div>
+      <div class="modal-body " style="background-color:rgb(255, 255, 255) !important; ">
+        <form name="formRestaurante">
+          
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos básicos</h3>
+          </div><br>
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <label>Nombre:</label>
+                    <input ng-model="restaurante.nombre" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <label>Gerente:</label>
+                    <input ng-model="restaurante.gerente" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Dirección:</label>
+                  <input type="text" class="form-control" ng-model="restaurante.direccion" required>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                <label>Teléfono:</label>
+                  <input type="number" class="form-control"  ng-model="restaurante.telefono" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Correo:</label>
+                  <input type="email" class="form-control"  ng-model="restaurante.correo" required> 
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Facebook: (Opcional)</label>
+                  <input type="text" class="form-control"  ng-model="restaurante.facebook" required> 
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                <label>Twitter:  (Opcional)</label>
+                  <input type="text" class="form-control"  ng-model="restaurante.twitter" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Instagram:  (Opcional)</label>
+                  <input type="text" class="form-control"  ng-model="restaurante.instagram" required> 
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Youtube:  (Opcional)</label>
+                  <input type="text" class="form-control"  ng-model="restaurante.youtube" required> 
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                <label>Detalle:</label>
+                  <select ng-model="restaurante.detalle" class="form-control" required>
+                    <option ng-repeat="detalle in detalleComida" ng-selected ="detalle.id == detalleSelect" value="{{detalle.id}}">{{detalle.name}}</option>
+                  </select>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Tipo de Restaurantes:</label>
+                  <select ng-model="restaurante.tipoRestaurante" class="form-control" required>
+                    <option ng-repeat="tipo in tipodeRestaurante" ng-selected ="tipo.id == tipoSelect" value="{{tipo.id}}">{{tipo.name}}</option>
+                  </select>
+               </div>
+            </div><br>
+            
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Especificaciones</h3>
+          </div><br>
+           <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <label >Seleccione los atributos de su restaurante:</label>
+            </div>
+              <div class="col-md-6 col-xs-12"   
+                  isteven-multi-select
+                  input-model="modernBrowsers"
+                  output-model="outputBrowsers"
+                  button-label="icon name"
+                  item-label="icon name maker"
+                  tick-property="ticked"
+
+              >
+              </div>
+           </div> <br>
+            <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <label >Seleccione las proteinas de su restaurante:</label>
+            </div>
+              <div class="col-md-6 col-xs-12"   
+                  isteven-multi-select
+                  input-model="modernBrowsers2"
+                  output-model="outputBrowsers2"
+                  button-label="icon name"
+                  item-label="icon name maker"
+                  tick-property="ticked"
+                >
+              </div>
+           </div> 
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Ubicación</h3>
+          </div><br>
+          <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="deleteMarkers();"><i class="fa fa-close"></i>
+              Eliminar Marker
+          </button>
+          <div class="row"  ng-init="initMap()">
+             <div style="width: 100% !important;" id="map2"></div>
+          </div><br>
+        </form>
+      </div>
+      <div class="modal-footer" style="margin: 0">
+          <button  type="button" class="btn  btn-outline pull-left" data-dismiss="modal" >Cerrar</button>
+          <button type="button" ng-disabled="formHotel.$invalid" class="btn " data-dismiss="modal" ng-click="guardar(); limpiar()">{{button}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal5" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-body">
+        <div class="box" style="border-top: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="info">
+              <h3 class="title">Éxito!</h3>
+              <p>
+                Se ha realizado correctamente.
+              </p>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal6" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body" style="padding-top: 15px">
+        <div class="box" style="border: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="info">
+              <h3 class="title">Espere!</h3>
+              <p>
+                ¿Está seguro de que desea eliminar la actividad?
+              </p>
+            <br> <br>
+             <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="delete()">Aceptar</button>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>

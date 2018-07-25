@@ -1,0 +1,452 @@
+<section class="content-header">
+      <h1 style="color: #ecf0f5">
+        I
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#/dashboard"> Tablero</a></li>
+        <li><a href="#/evento">Eventos</a></li>
+      </ol>
+</section>
+<section ng-show="!ver" class="content">
+
+  <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
+  
+  </div>
+</section>
+<!-- Main content -->
+<section ng-show="ver" class="content">
+  <!-- Info boxes -->
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-bullhorn"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{total.eventos}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TOTAL EVENTOS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-music"></i></span>
+          <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{total.agrupaciones}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">AGRUPACIONES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-building-o"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{total.empresas}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TOTAL EMPRESAS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-user"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{total.participantes}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">PARTICIPANTES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+
+  <div class="row">
+    
+    <div class="col-md-8 col-sm-12 ">
+      <div class="box " style="border:none !important;">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">LISTADO DE EVENTOS</h3>
+          <select class="btn btn-box-tool form-control"  ng-change="filtrar(seleccionado)" ng-model="seleccionado" >
+              <option value="0" selected>Todos los eventos</option>
+              <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in depEventos">{{departamento.nombre}}</option>
+          </select>
+          <div class="box-tools pull-right">
+            <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  ng-if="mostrar" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" >NUEVO EVENTO</button>
+          </div>
+          
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+
+          <div class="table mailbox-messages table-responsive">
+            <table class="table table-hover table-striped">
+              <tbody>
+              <tr>
+                <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
+                <th ng-if="evento.ciudad" style="font-size: small; color: #B6BBC0 !important;"> CIUDAD</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">FECHA</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">DIAS</th>
+                <th style="font-size: small; color: #B6BBC0 !important;"></th>
+              </tr>
+                
+              <tr ng-repeat="evento in eventos | filter:filtro">
+                <td class="mailbox-name"><a ng-click="verDetalle(evento)" style="color: #00a3ee !important;font-size: small">{{evento.descripcion}}</a></td>
+                <td class="mailbox-subject" ng-if="evento.ciudad" style="font-size: small">{{evento.ciudad}}
+                </td>
+                <td class="mailbox-subject" style="font-size: small"> {{evento.inicio}} <span ng-if="!evento.mismo">- {{evento.fin}}</span>
+                </td>
+                <td class="mailbox-date" style="font-size: small">{{evento.dias}} <span ng-if="!evento.horas"> Dia(s)</span><span ng-if="evento.horas">Horas</span></td>
+                <td>            
+                  <div class="btn-group">
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="seleccionaridEvento(evento.idEvento)" data-toggle="modal" data-target="#myModal7"><i class="fa fa-trash-o"></i></button>
+                  </div>
+                </td>
+              </tr>
+              
+              </tbody>
+            </table>
+            <!-- /.table -->
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+          </div>
+        </div>
+      </div>
+      <!-- /. box -->
+    </div>
+    <!-- /.col -->
+
+    <div class="col-md-4 col-sm-12">
+      <div class="box " style="border:none !important;">
+        <div class="box-header with-border">
+          <span class="flaticon-address-book"></span>
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TIPO DE ACTIVIDADES</h3>
+        </div>
+        <!-- /.box-header -->
+        <!--<div class="box-body ">
+          <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options">
+          </canvas> 
+        </div>-->
+        <div class="box-footer no-padding" style="height: 340px; overflow-y: scroll;">
+          <ul class="nav nav-pills nav-stacked">
+            <li ng-if="totales.tipo0 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Encuentros y espectaculos religiosos <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo0}}</span></a></li>
+            <li ng-if="totales.tipo1 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Eventos Religiosos<span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo1}}</span></a></li>
+            <li ng-if="totales.tipo2 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Congregaciones Políticas <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo2}}</span></a></li>
+            <li ng-if="totales.tipo3 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[3]"></i> Conciertos y presentaciones políticas <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo3}}</span></a></li>
+            <li ng-if="totales.tipo4 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Ferias, Festivales, Rodeos y Corralejas <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo4}}</span></a></li>
+            <li ng-if="totales.tipo5 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Concursos <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo5}}</span></a></li>
+            <li ng-if="totales.tipo6 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Congresos, Simposios, Seminarios o similares <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo6}}</span></a></li>
+            <li ng-if="totales.tipo7 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[3]"></i> Teatro <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo7}}</span></a></li>
+            <li ng-if="totales.tipo8 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Exhibiciones  <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo8}}</span></a></li>
+            <li ng-if="totales.tipo9 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Atracciones y Entretenimiento <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo9}}</span></a></li>
+            <li ng-if="totales.tipo10 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Otros  <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo10}}</span></a></li>
+          </ul>
+        </div>
+        <!-- /.footer -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!--/.col-->
+  </div>
+  <!-- /.row -->
+
+	  
+          
+</section>
+<!-- Modal de insertar evento-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Nuevo Evento</h4></center>
+      </div>
+      <div class="modal-body" style="background-color:rgba(255, 255, 255, 1) !important; margin-top: 2%; padding-bottom: 0px;">
+          
+          <div id="wizard" onload="" style="padding: 0px !important; margin: 0px !important;" ng-if="!finish">
+            
+              <h2>Datos</h2>
+              <section>
+                  <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                      <label style="color:black">imagen</label>
+                      <input type="file" file-model="imagen" id="file" accept="image/x-png,image/gif,image/jpeg" class="file-input">
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Nombre:</label>
+                        <input id="nombre" ng-model="evento.nombre" type="text" class="form-control" placeholder="Festival nombre">
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Departamento:</label>
+                        <select id="departamento" class="form-control">
+                            <option value="{{departamento}}" ng-repeat="departamento in departamentos">{{departamento.nombre}}</option>
+                        </select>
+                    </div>
+                    
+                </div><br>
+                <div class="row">
+                    
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Región:</label>
+                        <select id="region" class="form-control" ng-model="evento.region">
+                            <option value="{{region}}" ng-repeat="region in regiones" >{{region.nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Nit:</label>
+                        <input id="nit" ng-model="evento.nit" type="number" class="form-control" placeholder="1111111">
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Código Postal:</label>
+                        <input id="codigo" ng-model="evento.codigo" type="number" class="form-control" placeholder="200001">
+                    </div>
+                </div>
+              </section>
+
+              <h2>Dirección y Contacto</h2>
+              <section>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Ciudad:</label>
+                        <select id="ciudad" class="form-control" ng-model="evento.ciudad">
+                            <option value="{{ciudad}}" ng-repeat="ciudad in ciudades" >{{ciudad.nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Dirección:</label>
+                        <textarea id="direccion" ng-model="evento.direccion" type="text" class="form-control" placeholder=" carrera x # 24c3 - 08 Mayales"> </textarea>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Teléfono:</label>
+                        <input id="telefono" ng-model="evento.telefono" type="number" class="form-control" placeholder="301 1234569">
+                    </div>
+                    
+                </div><br>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Teléfono 2:</label>
+                        <input id="telefono2" ng-model="evento.telefono2" type="number" class="form-control" placeholder="310 3265487">
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Correo:</label>
+                        <input id="correo" ng-model="evento.correo" type="email" class="form-control" placeholder="ejemplo@domain.com">
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Correo 2:</label>
+                        <input id="correo2" ng-model="evento.correo2" type="email" class="form-control" placeholder="ejemplo@domain.com">
+                    </div>
+                    
+                </div>
+              </section>
+            <h2>Fechas</h2>
+              <section>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Fecha de Fundado:</label>
+                        <input id="fundado" ng-model="evento.fundado" type="date" class="form-control" placeholder="">
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Versión:</label>
+                        <input id="version" ng-model="evento.version" type="text" class="form-control" placeholder="50">
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Población Objetivo:</label>
+                        <input id="poblacion" ng-model="evento.poblacion" type="number" class="form-control" placeholder="200">
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Fecha de Inicio:</label>
+                        <input id="inicio" ng-model="evento.fechaInicio" type="datetime-local" class="form-control" placeholder="">
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Fecha de Finalización:</label>
+                        <input id="fin" ng-model="evento.fechaFin" type="datetime-local" class="form-control" placeholder="">
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Población Circulante:</label>
+                        <input id="poblacionCirculante" ng-model="evento.poblacionCirculante" type="number" class="form-control" placeholder="">
+                    </div>
+                </div><br>
+              </section>
+              <h2>Redes Sociales</h2>
+              <section>
+                  <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <label style="color:black">Web Site:</label>
+                        <input id="web" ng-model="evento.web" type="text" class="form-control" placeholder="www.example.com">
+                    </div>
+                     <div class="col-md-4 col-xs-12">
+                          <label style="color:black">Facebook:</label>
+                          <input id="facebook" ng-model="evento.facebook" type="text" class="form-control" placeholder="facebook.com/ejemplo3">
+                      </div>
+                      <div class="col-md-4 col-xs-12">
+                          <label style="color:black">Instagram:</label>
+                          <input id="instagram" ng-model="evento.instagram" type="text" class="form-control" placeholder="ejemplo32">
+                      </div>
+                  </div><br>
+                  <div class="row">
+                      <div class="col-md-4 col-xs-12">
+                          <label style="color:black">Twitter:</label>
+                          <input id="twitter" ng-model="evento.twitter" type="text" class="form-control" placeholder="twitter.com/ejemplo3">
+                      </div>
+                      <div class="col-md-4 col-xs-12">
+                          <label style="color:black">Otro:</label>
+                          <input id="otro" ng-model="evento.instagram" type="text" class="form-control" placeholder="">
+                      </div>
+                      <div class="col-md-4 col-xs-12">
+                          <label style="color:black">contraseña de usuario:</label>
+                          <input id="pass" ng-model="evento.facebook" type="password" class="form-control" placeholder="">
+                      </div>
+                  </div>
+              </section>
+           </div>
+        <!-- FALTA
+        <form name="formEvento">
+        </form>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- MODAl DE REPORTE-->
+<div class="modal fade" id="myModalR" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header modalBorde colorModal">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title"><b>Seleccione Los reportes que desea ver</b></h4></center>
+      </div>
+      <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
+        <div class="row">
+          <div class="col-md-2" style="padding-right: 0">
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox">
+              <span ng-click="filtrarReporte(1)" class="slider round"></span>
+            </label>  
+          </div>
+          <div class="col-md-10" style="padding: 0">
+            <span  style="font-weight: 300 !important;font-size: x-large; float: left;">Población</span>
+          </div>
+            
+        </div>
+        <div class="row">
+          <div class="col-md-2" style="padding-right: 0">
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox">
+              <span ng-click="filtrarReporte(2)" class="slider round"></span>
+            </label>  
+          </div>
+          <div class="col-md-10" style="padding: 0">
+            <span  style="font-weight: 300 !important;font-size: x-large; float: left;">Organizadores del Evento</span>
+          </div>
+            
+        </div>
+        <div class="row">
+          <div class="col-md-2" style="padding-right: 0">
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox">
+              <span ng-click="filtrarReporte(3)" class="slider round"></span>
+            </label>  
+          </div>
+          <div class="col-md-10" style="padding: 0">
+            <span  style="font-weight: 300 !important;font-size: x-large; float: left;">Actividades</span>
+          </div>
+            
+        </div>
+        <div class="row">
+          <div class="col-md-2" style="padding-right: 0">
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox">
+              <span ng-click="filtrarReporte(4)" class="slider round"></span>
+            </label>  
+          </div>
+          <div class="col-md-10" style="padding: 0">
+            <span  style="font-weight: 300 !important;font-size: x-large; float: left;">Impacto Socioeconómico</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2" style="padding-right: 0">
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox">
+              <span ng-click="filtrarReporte(5)"  class="slider round"></span>
+            </label>  
+          </div>
+          <div class="col-md-10" style="padding: 0">
+            <span  style="font-weight: 300 !important;font-size: x-large; float: left;">Impacto Creativo y Cultural</span>
+          </div>
+        </div>
+      </div>
+     <div class="modal-footer modalBorde colorModal" style="margin: 0;">
+      <!--  <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>-->
+          <button type="button" class=" btn btn-outline pull-left" data-dismiss="modal" aria-label="Close">Cancelar</button>
+          <button type="submit"  class="btn btn-outline" data-dismiss="modal" aria-label="Close" ng-click="verReporte()">Ver Reporte</button>
+      </div>
+      
+        
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-body">
+        <div class="box" style="border-top: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="info">
+              <h3 class="title">Éxito!</h3>
+              <p>
+                Se ha realizado correctamente.
+              </p>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal7" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body" style="padding-top: 15px">
+        <div class="box" style="border: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="info">
+              <h3 class="title">Espere!</h3>
+              <p>
+                ¿Está seguro de que desea eliminar el evento?
+              </p>
+            <br> <br>
+             <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminarEvento()" >Aceptar</button>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>

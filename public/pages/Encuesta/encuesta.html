@@ -1,0 +1,303 @@
+
+<section class="content-header">
+  <ol class="breadcrumb">
+    <li><a href="#/dashboard"><i class="fa fa-dashboard"></i>Tablero</a></li>
+    <li><a href="#/evento">Eventos</a></li>
+    <li><a href="#/detalle">Detalle del evento</a></li>
+    <li><a href="#/encuesta">Encuesta</a></li>
+  </ol>
+</section>
+<section ng-show="!ver" class="content">
+
+  <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
+  
+  </div>
+</section>
+<br>
+<!-- Main content -->
+<section ng-show="ver" class="content">
+	 <div class="row" style="margin-right: 0px; margin-left: 0px">
+      <div class="col-md-8   col-sm-12 ">
+        <div class="box " style="border:none !important;">
+          <div class="box-header with-border">
+            <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">PREGUNTAS REALIZADAS</h3>
+              <p  ng-if="preguntas.length == 0" class="text-center" style="color:red">
+                No posee preguntas para encuestar, por favor presione en "agregar"
+              </p>
+            <div class="box-tools pull-right">
+              <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  data-toggle="modal" data-target="#myModal" ng-click="cambiarButton(0)" data-toggle="tooltip" >NUEVA PREGUNTA</button>
+            </div>
+          </div>
+          <div class="box-body no-padding">
+            <div class="table mailbox-messages">
+              <table class="table table-hover table-striped">
+                <tbody>
+                <tr>
+                  <th style="font-size: small; color: #B6BBC0 !important;">DESCRIPCIÓN</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">TIPO</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;"></th>
+                </tr>
+                <tr ng-repeat="pregunta in preguntas">
+                  <td class="mailbox-name"><a ng-click="verDetalle(evento)" style="color: #00a3ee !important;font-size: medium;">{{pregunta.pregunta}}</a>
+                  </td>
+                  <td class="mailbox-subject" style="font-size: medium">
+                    <span ng-if="pregunta.tipo == 0"> (Si o no)</span><span ng-if="pregunta.tipo == 1">(Escala 1-5)</span>
+                  </td>
+                  <td>            
+                    <div class="btn-group">
+                       <button type="button" class="btn btn-clean btn-sm" style="background-color: transparent;color: #b6bbc0;font-size: medium;" ng-click="editarEvento(pregunta); cambiarButton(1)" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></button>
+                      <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal6" ng-click="selectID(pregunta.idPregunta , $index);"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="box-footer no-padding">
+            <div class="mailbox-controls">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-4 col-lg-6" ng-if="preguntas.length == 0">
+        <div class="box" style="height: 300px; background-color:#fafafb ! important ">             
+          <div class="icon">
+            <div class="image"><i class="ion ion-sad-outline"></i></div>
+            <div class="info" style=" background-color:#fafafb ! important">
+              <h3 class="title">OPS!</h3>
+              <p>
+                Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
+              </p>
+            </div>
+          </div>
+          <div class="space"></div>
+        </div> 
+      </div>
+    <div class="col-md-4">
+      <div class="box" style="border: none !important;">
+        <div class="box-header with-border">
+            <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RESPUESTAS</h3>
+           <div class="box-tools pull-right">
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+             <canvas id="pie2" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options">
+             </canvas>
+          </div>
+        </div>
+        <div class="box-footer no-padding" >
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="nav nav-pills nav-stacked" style="margin-top: 0px">
+                <li><a style="font-size: small;"><i class="fa fa-circle iconBlue"></i>Participante:<span class="pull-right letraGris" ng-style="nivel">{{reporteTipo[0].tipoParticipante}}</span></a></li>
+                <li><a style="font-size: small;"><i class="fa fa-circle" style="color:#00eab5"></i>Agrupación:<span class="pull-right letraGris" ng-style="nivel">{{reporteTipo[0].tipoAgrupacion}}</span></a></li>
+                <li><a style="font-size: small;"><i class="fa fa-circle" style="color: #ff6c00"></i>Empresa:<span class="pull-right letraGris" ng-style="nivel">{{reporteTipo[0].tipoEmpresa}}</span></a></li>
+                <li><a style="font-size: small;"><i class="fa fa-circle iconOrange"></i>Total de Respuestas:<span class="pull-right letraGris" ng-style="nivel">{{reporteTipo[0].total}}</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+    <!-- /.col -->
+   <!-- <div class="col-md-4 col-xs-12">
+      <div class="box" style="background-color: #fafafb;border:none !important; height: 300px ! important; overflow: scroll; padding: 0px">
+        <div class="box-header with-border">
+          <h3 class="box-title">Preguntas Realizadas
+          </h3>
+        </div>
+        <div class="box-body">
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle" data-toggle="modal" data-target="#myModal" ng-click="cambiarButton(0)"><i class="fa fa-plus"></i>
+            Nueva Pregunta</button>
+            <p  ng-if="preguntas.length == 0" class="text-center" style="color:red">
+              No posee preguntas para encuestar, por favor presione en "agregar"
+            </p>
+              
+         <div class="mailbox-controls">
+        </div>
+         <div class="table mailbox-messages">
+            <table class="table table-hover table-striped">
+              <tbody>
+              <tr ng-if="switch == 1">
+                <td class="mailbox-star"><i class="fa fa-star text-yellow"></i></td>
+                <td class="mailbox-name"> <textarea class="form-control" ng-model="pregunta"></textarea></td>
+                <td class="mailbox-attachment"></td>
+                <td>            
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="agregarPregunta(pregunta)"><i class="fa fa-check"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr ng-repeat="pregunta in preguntas">
+                <td class="mailbox-star"><i class="fa fa-star text-yellow"></i></td>
+                <td char="mailbox-name">
+                   <span>{{pregunta.pregunta}}</span> <span ng-if="pregunta.tipo == 0"> (Si o no)</span><span ng-if="pregunta.tipo == 1">(Escala 1-5)</span>
+                </td>
+                <td class="mailbox-attachment"></td>
+                <td>     
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li  ng-click="editarEvento(pregunta); cambiarButton(1)" data-toggle="modal" data-target="#myModal"><a><span class="fa fa-edit" style="color:#f1a64d"></span>editar</a></li>
+                      <li data-toggle="modal" data-target="#myModal6" ng-click="selectID(pregunta.idPregunta , $index);"><a><span class="fa  fa-trash-o" style="color:#f1a64d" ></span>Eliminar</a></li>
+                    </ul>
+                  </div>   
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-xs-12" ng-if="preguntas[0]">
+      <div class="box" style="background-color: #fafafb;border:none !important;  height: 300px ! important">
+        <div class="box-header with-border">
+          <h3 class="box-title">Cantidad de Encuestados</h3>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-12" style="padding : 0px">
+              <canvas id="pie2" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-xs-12" ng-if="preguntas[0]">
+      <div class="box" style="background-color: #fafafb;border:none !important;  height: 300px ! important">
+        <div class="box-header with-border">
+          <h3 class="box-title">Total de Respuestas</h3>
+        </div>
+        <div class="box-body" >
+          <div class="row">
+            <div class="col-md-12" >
+                <h3 class="text-center" style="font-size:70px; color:white; margin: 0px;  padding-top: 15%; color:#eca64f" >
+                 <i style="font-size:larger" class="fa fa-bar-chart"></i>
+                </h3>
+                <h3 class="text-center" style="font-size:xx-large; margin: 0px; color:white; color:#eca64f">{{reporteTipo[0].total}} Respuestas</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+   </div>
+  --> 
+
+
+  <br>
+    <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 2px;" class="row">
+    <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: medium; color: #B6BBC0 !important">RECEPCIÓN DE RESPUESTAS</h3>  
+  </div> 
+  <br>
+<div class="row" ng-if="preguntas[0] " >
+  <div class="col-md-4" ng-repeat="r in reporte">
+      <div class="box" style="background-color: #fafafb;border:none !important;">
+        <div class="box-header with-border">
+          <h3 class="box-title">{{r.pregunta}} </h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="chart-responsive" ng-if="r.tipo == 1">
+              <canvas id="bar" class="chart chart-bar" chart-data="data2[$index]" chart-labels="labels2"> 
+              </canvas>
+              </div>
+              <div class="chart-responsive" ng-if="r.tipo == 0">
+              <canvas id="bar" class="chart chart-bar" chart-data="data2[$index]" chart-labels="labels3"> 
+              </canvas>
+              </div>
+              <!-- ./chart-responsive -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+    </div>
+  </div>
+</section>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-sm" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">{{titulo}}</h4></center>
+      </div>
+      <form name="formCosto">
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12 col-xs-12 col-lg-12" ng-if="cambio == 0" >
+              <label>Selecciona el Tipo:</label>
+              <select ng-model="pregunta.tipo" class="form-control">
+                  <option value="0"> Si o No</option>
+                  <option value="1" >Escala 1-5</option>
+              </select>
+            </div>
+            <div class="col-md-12 col-xs-12 col-lg-12" >
+              <label >Pregunta:</label>
+              <textarea ng-model="pregunta.pregunta" type="text" class="form-control" >
+              </textarea>
+            </div>
+            </div>
+        </div>
+      <div class="modal-footer" style="margin: 0;">
+           <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+          <button ng-if="cambio == 0" type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formActividad.$invalid" ng-click="agregarPregunta(pregunta)">Guardar</button>
+          <button ng-if="cambio == 1" type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formActividad.$invalid" ng-click="editarPregunta(pregunta)">Actualizar</button>
+      </div>
+     </form>    
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal5" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+       <div class="modal-body">
+          <div class="box" style="border-top: none; box-shadow: none;">             
+            <div class="icon">
+              <div class="image"><i class="ion ion-happy-outline"></i></div>
+              <div class="info">
+                <h3 class="title">Éxito!</h3>
+                <p>
+                  Se ha realizado correctamente.
+                </p>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal6" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body" style="padding-top: 15px">
+          <div class="box" style="border: none; box-shadow: none;">             
+            <div class="icon">
+              <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+              <div class="info">
+                <h3 class="title">Espere!</h3>
+                <p>
+                  ¿Está seguro de que desea eliminar?
+                </p>
+              <br> <br>
+               <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+              <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminarPregunta()">Aceptar</button>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>

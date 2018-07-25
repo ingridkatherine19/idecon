@@ -1,0 +1,523 @@
+/* The switch - the box around the slider */
+body, section,a,h3,p .box-title{
+  font-family: inherit;  
+}
+
+.sidebar-menu>li:hover>a:hover, .sidebar-menu>li.active>a{
+  color:#000;
+  background:#009DE4;
+  border-left-color:#000;
+}
+
+.buttonLogin {
+    background-color: #06A2EB !important;
+    color: white;
+}
+
+.iconosPrincipal{
+  background-color: white !important;
+  color: #00A3EE !important;
+}
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+.botonCrear{
+  background-color: #f4f4f4;
+  color: #4e313c;
+  border-color: #4e313c;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.btnEvento{
+	border-color: #f2651d; 
+	color: #f2651d;
+}
+
+.botonEliminar{
+	border-color: #b90245;
+	color: #b90245;
+}
+.botonIcono{
+    border: none;
+    background-color: transparent;
+}
+
+.botonModal{
+	background-color: #3c8dbc !important;
+    color: white !important;
+}
+
+.separador{
+    text-align: center;
+    background-color: whitesmoke;
+    font-size: larger;
+}
+ /* Always set the map height explicitly to define the size of the div
+}
+}
+* element that contains the map. */
+#map {
+	
+	height: 250px !important;
+}
+
+#map2 {
+	
+	height: 200px !important;
+}
+
+/* Optional: Makes the sample page fill the window. */
+
+#floating-panel {
+position: absolute;
+top: 10px;
+left: 25%;
+z-index: 5;
+background-color: #fff;
+padding: 5px;
+border: 1px solid #999;
+text-align: center;
+font-family: 'Roboto','sans-serif';
+line-height: 30px;
+padding-left: 10px;
+}
+/*para  los box de la descripcion*/
+.bg-caja{
+  background: #fafafa !important;
+}
+
+
+.linea1{
+  border-bottom: 2px solid #996a30;
+}
+.icon1{
+  color: #f5dfc9 !important;
+  font-size: smaller;
+}
+.numero1{
+  color: #eca64f !important;
+}
+.text1{
+  color: #996a30 !important;
+}
+
+
+.linea2{
+  border-bottom: 2px solid #9a4631;
+}
+.icon2{
+  color: #facfc7 !important;
+  font-size: smaller;
+}
+.numero2{
+  color: #d18166 !important;
+}
+.text2{
+  color: #9a4631 !important;
+}
+
+
+.linea3{
+  border-bottom: 2px solid #8c2c36;
+}
+.icon3{
+  color: #edc0c3 !important;
+  font-size: smaller;
+}
+.numero3{
+  color: #c63445 !important;
+}
+.text3{
+  color: #8c2c36 !important;
+}
+
+
+.linea4{
+  border-bottom: 2px solid #2f1e29;
+}
+.icon4{
+  color: #c8bdc3 !important;
+  font-size: smaller;
+}
+.numero4{
+  color: #4e313c !important;
+}
+.text4{
+  color: #2f1e29 !important;
+}
+/*fin de los box*/
+.bg-primary{
+	background: #3c8dbc !important;
+}
+
+.colorModal{
+	background-color: #3c8dbc !important;
+    color: #fff;
+    
+}
+.modalBorde{
+	border-color: #3c8dbc;
+}
+.box-blanco{
+	border-top-color: #fff !important;
+}
+
+.btnEmpresa{
+	border-color: #af6775;
+	color: #af6775;
+}
+
+.gris{
+	background-color: rgba(180, 190, 195, 0.65) !important;
+}
+
+body {
+    padding: 0 !important 
+}
+
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.tabcontent {
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+.dataTables_filter{
+  float: right;
+  padding-bottom: 2%;
+}
+.dataTables_length{
+  float: left;
+  padding-bottom: 2%;
+}
+
+.buttonSize {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 8px 1px;
+}
+
+#rtn .notActive{
+    color: #3276b1 !important;
+    background-color: #fff !important;
+}
+#parqueadero .notActive{
+    color: #3276b1 !important;
+    background-color: #fff !important;
+}
+#aire .notActive{
+    color: #3276b1 !important;
+    background-color: #fff !important;
+}
+#tv .notActive{
+    color: #3276b1 !important;
+    background-color: #fff !important;
+}
+#jardin .notActive{
+    color: #3276b1 !important;
+    background-color: #fff !important;
+}
+#artesania .notActive{
+    color: #3276b1 !important;
+    background-color: #fff !important;
+}
+#wifi .notActive{
+    color: #3276b1 !important;
+    background-color: #fff !important;
+}
+#lavanderia .notActive{
+    color: #3276b1 !important;
+    background-color: #fff !important;
+}
+ /*CLASE QUE ANULA EL SCROLL DEL CALENDARIO
+.fc-scroller {
+   overflow-y: hidden !important;
+}*/
+
+.box > .icon { text-align: center; position: relative; }
+.box > .icon > .image { position: relative; z-index: 2; margin: auto; width: 88px; height: 88px; border: 8px solid white; line-height: 88px; border-radius: 50%; background: #f1a64d; vertical-align: middle; }
+.box > .icon > .image > i { font-size: 36px !important; color: #fff !important; }
+.box > .icon:hover > .image > i { color: white !important; }
+.box > .icon > .info { margin-top: -24px; background: #ffffff; border: none; padding: 15px 0 10px 0; }
+.box > .icon > .info > h3.title { font-family: "Roboto",sans-serif !important; font-size: 16px; color: #222; font-weight: 500; }
+.box > .icon > .info > p { font-family: "Roboto",sans-serif !important; font-size: 13px; color: #666; line-height: 1.5em; margin: 20px;}
+.box > .icon:hover > .info > h3.title, .box > .icon:hover > .info > p, .box > .icon:hover > .info > .more > a { color: #222; }
+.box > .icon > .info > .more a { font-family: "Roboto",sans-serif !important; font-size: 12px; color: #222; line-height: 12px; text-transform: uppercase; text-decoration: none; }
+.box > .icon:hover > .info > .more > a { color: #fff; padding: 6px 8px; background-color: #63B76C; }
+.box .space { height: 30px; }
+
+#contenido {
+    width:80%;
+    height:200px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+
+.cuadro1 {
+  background-color:#eca64fd6; 
+}
+.cuadro2 {
+  background-color:#d18166bf; 
+}
+.cuadro3 {
+  background-color:#c63445c7; 
+}
+.cuadro4 {
+  background-color:#c6b17a; 
+}
+.cuadro5 {
+  background-color:#c95f4d; 
+}
+.cuadro6 {
+  background-color:#9c3842; 
+}
+.cuadro7 {
+  background-color:#a69176; 
+}
+.cuadro8 {
+  background-color:#f9ae67; 
+}
+.cuadro9 {
+  background-color:#876653; 
+}
+.cuadro10 {
+  background-color:#f6ad4e; 
+}
+.cuadro11 {
+ background-color:#dd634e;
+}
+.cuadro12 {
+ background-color: #928b7b;
+}
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.col-xs-15 {
+    width: 20%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+.col-sm-15 {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-15 {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-15 {
+        width: 20%;
+        float: left;
+    }
+}
+
+
+.boxBlue {
+  background-color: #00a3ee;
+  color: #ffff;
+}
+
+/*IMAGEN EN CIRCULO*/
+
+div.avatar {
+    /* cambia estos dos valores para definir el tamaño de tu círculo */
+    height: 100px;
+    width: 100px;
+    /* los siguientes valores son independientes del tamaño del círculo */
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    background-size: 100% auto;
+}
+.iconBlue {
+   color: #00abf8
+}
+.iconBlue2 {
+   color: #c8f7ed
+}
+.selectP {
+	border-color: #fff !important;
+}
+
+.letraGris {
+	color: grey;
+}
+/* BOTONES CIRCULARES*/
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+  background-color: #00a3ee;
+  color: white;
+}
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+  background-color: #00a3ee;
+  color: white;
+}
+
+.imgRedonda {
+    width:70px;
+    height:70px;
+    border-radius:40px;
+}
+
+.letraBlanca {
+  color:white;
+}
+.letraAzul {
+  color:#202e5894;
+}
+
+.bgBlue {
+  background-color: #00abf8b0 ! important;
+}
+
+.bgAgua {
+  background-color: #00eab5c7 ! important;
+}
+.bgOrange {
+  background-color: #ff6c00bf ! important;
+}
+.bgPurple {
+  background-color: #a290d7bf ! important;
+}
+.bgGray {
+  background-color: #9E9E9E  ! important;
+}
+
+
+
+
+

@@ -1,0 +1,300 @@
+<section class="content-header">
+      <h1 style="color: #ecf0f5">
+        I
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Lugares</a></li>
+      </ol>
+</section>
+<section ng-show="!ver" class="content">
+
+  <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
+  
+  </div>
+</section>
+<!-- Main content -->
+<section ng-show="ver" class="content">
+  <!-- Info boxes -->
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-map-marker"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{resultado.cantLugares}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">CANTIDAD DE LUGARES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="ion ion-ios-partlysunny"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{resultado.recursosCulturales}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">RECURSOS NATURALES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="ion ion-ios-home"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{resultado.destinos}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">NATURALES Y TURISTICOS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="ion ion-ios-wineglass"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{resultado.festividades}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">FESTIVIDADES Y EVENTOS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+    <!-- Main row -->
+    <div class="row">
+      <div class="col-md-8 col-xs-12">
+        <!-- MAP & BOX PANE -->
+          <div class="box" style="border:none !important;">
+            <div class="box-header with-border">
+              <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">LISTADO DE LUGARES</h3>
+              <div class="box-tools pull-right">
+                <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  data-toggle="modal" data-target="#myModal" ng-click="cambiarButton(); limpiar()">NUEVO LUGAR</button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive">
+              <table class="table table-hover table-striped">
+              <tbody>
+              <tr>
+                <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">TIPO</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">RECURSOS</th>
+                <th style="font-size: small; color: #B6BBC0 !important;"></th>
+                
+              </tr>
+                
+              <tr ng-repeat="lugar in lugares">
+                <td class="mailbox-name"><a style="color: #00a3ee !important;">{{lugar.nombre}}</a></td>
+                <td ng-if="lugar.tipo == 0">Edificaciones</td>
+                <td ng-if="lugar.tipo == 1">Edificios y Expresiones Religiosas</td>
+                <td ng-if="lugar.tipo == 2">Realizaciones técnico cientificas</td>
+                <td ng-if="lugar.tipo == 3">Parque Natural</td>
+                <td ng-if="lugar.tipo == 4">Monumentos</td>
+                <td ng-if="lugar.tipo == 5">Ríos</td>
+                <td ng-if="lugar.tipo == 6">Arroyos</td>
+                <td ng-if="lugar.tipo == 7">Actividad Turística</td>
+                <td ng-if="lugar.tipo == 8">Festivales y Fiestas</td>
+                <td ng-if="lugar.tipo == 10">Ferias y Exposiciones</td>
+                <td ng-if="lugar.tipo == 11">Gastronomía</td>
+                <td ng-if="lugar.tipo == 12">Grupos Culturales</td>
+                <td ng-if="lugar.tipo == 13">Pueblos Indígenas</td>
+                <td ng-if="lugar.tipo == 14">Balneario</td>
+                <td ng-if="lugar.tipo == 15">Artesanía </td>
+                <td ng-if="lugar.tipo == 16">Museos</td>
+                <td ng-if="lugar.tipo == 17">Tradiciones-Cuentos-Bailes</td>
+                <td ng-if="lugar.tipo == 18">Eco-turismo</td>
+                <td ng-if="lugar.tipo == 19">Acequía</td>
+                <td ng-if="lugar.tipo == 20">Humedades</td>
+                <td ng-if="lugar.tipo == 21">Quebradas</td>
+                <td ng-if="lugar.tipo == 22">Ciénagas</td>
+                <td ng-if="lugar.tipo == 23">Biblioteca</td>
+                <td ng-if="lugar.tipo == 24">Escuelas</td>
+                <td ng-if="lugar.recurso == 0"> Recursos Naturales</td>
+                <td ng-if="lugar.recurso == 1">Destinos Naturales y Turísticos</td>
+                <td ng-if="lugar.recurso == 2">Festividades y Eventos</td>
+
+                <td>            
+                  <div class="btn-group">
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="cargarLugar(lugar)" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></button>
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="delete(lugar , $index)" data-toggle="modal" data-target="#myModal6"><i class="fa fa-trash-o"></i></button>
+                  </div>
+                </td>
+              </tr>
+              
+              </tbody>
+            </table>
+            <!-- /.table -->
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <div class="box" style="border:none !important;">
+            <div class="box-header with-border">
+              <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RECURSOS NATURALES</h3>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer no-padding" style="height: 500px; overflow-y: scroll;">
+              <ul class="nav nav-pills nav-stacked">
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Edificaciones <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[0].cantidad}}</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Edf. y Exp. Religiosos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[1].cantidad}}</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Técnico científicos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[2].cantidad}}</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[3]"></i> Parques Naturales <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[3].cantidad}}</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Monumentos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[4].cantidad}}</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Ríos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[5].cantidad}}</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Arroyos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[6].cantidad}}</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[3]"></i> Act. Turísticas <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[7].cantidad}}</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Festividades <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[8].cantidad}}</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Exp. Religiosas <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[9].cantidad}}</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Ferias <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[10].cantidad}}</span></a></li>
+                <li><a href=""><i class="fa fa-circle" ng-style="colores[3]"></i> Gastronomía <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[11].cantidad}}</span></a></li>
+                
+              </ul>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        
+   
+    </div>
+
+
+</section>
+<!-- Modal de insertar evento-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Nuevo Lugar</h4></center>
+      </div>
+      <div class="modal-body " style="background-color:rgb(255, 255, 255) !important; color: black !important;">
+        <form name="formEmpresa">
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos básicos</h3>
+          </div>
+          <br>
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <label>Nombre:</label>
+                    <input ng-model="lugar.nombre" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <label>Descripción:</label>
+                    <input ng-model="lugar.descripcion" type="text" class="form-control" required>
+                </div>
+                 <div class="col-md-4 col-xs-12">
+                    <label>Capacidad:</label>
+                    <input ng-model="lugar.capacidad" type="number" class="form-control" required>
+                </div>
+            </div><br>
+            <div class="row">
+              <div class="col-md-4 col-xs-12">
+                <label>Tipo:</label>
+                <select ng-model="lugar.tipo" class="form-control" required>
+                    <option ng-repeat="tipo in tipos" ng-selected ="tipo.id == tipoSelect" value="{{tipo.id}}">{{tipo.name}}</option>
+                </select>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Recursos</label>
+                <select ng-model="lugar.recurso" class="form-control" required>
+                    <option ng-repeat="recurso in recursos" ng-selected ="recurso.id == recursoSelect" value="{{recurso.id}}">{{recurso.name}}</option>
+                </select>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Categoría de Recursos</label>
+                <select ng-model="lugar.categoriaderecurso" class="form-control" required>
+                    <option ng-repeat="categoria in categorias" ng-selected ="categoria.id == categoriaSelect" value="{{categoria.id}}">{{categoria.name}}</option>
+                </select>
+                </div>
+                </div>
+                <br>
+                <div class="row">
+                <div class="col-md-4 col-xs-12">
+                   <label>Dirección:</label>
+                  <input type="text" class="form-control"  ng-model="lugar.direccion" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label>Departamento:</label>
+                  <select ng-model="lugar.departamento" class="form-control" required>
+                     <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos" ng-selected ="departamento.idDepartamento == departamentoSelect">{{departamento.nombre}}</option>
+                  </select>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <label>Región:</label>
+                    <select ng-model="lugar.region" class="form-control" required>
+                      <option value="{{region}}" ng-repeat="region in regiones" ng-selected="region.idRegion == regionSelect">{{region.nombre}}</option>
+                    </select>
+                </div>
+              </div>
+              <br>
+            <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Ubicación</h3>
+          </div> <br>
+          <div class="row"  ng-init="initMap()">
+             <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="deleteMarkers();"><i class="fa fa-close"></i>
+              Eliminar Marker
+          </button>
+              <div style="width: 100% !important;" id="map2"></div>
+          </div><br>
+            </div><br>
+        <div class="modal-footer" style="margin: 0">
+          <button  type="button" class="btn  btn-outline pull-left" data-dismiss="modal" >Cerrar</button>
+          <button type="button" ng-disabled="formHotel.$invalid" class="btn " data-dismiss="modal" ng-click="guardar();">{{button}}</button>
+        </div>
+     </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal5" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-body">
+        <div class="box" style="border-top: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="info">
+              <h3 class="title">Éxito!</h3>
+              <p>
+                Se ha realizado correctamente.
+              </p>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal6" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body" style="padding-top: 15px">
+        <div class="box" style="border: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="info">
+              <h3 class="title">Espere!</h3>
+              <p>
+                ¿Está seguro de que desea eliminar el lugar?
+              </p>
+            <br> <br>
+             <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminar()">Aceptar</button>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>

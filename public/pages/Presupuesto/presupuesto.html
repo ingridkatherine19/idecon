@@ -1,0 +1,574 @@
+<section class="content-header">
+      <h1 style="color: #ecf0f5">
+        I
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#/dashboard"><i class="fa fa-dashboard"></i> Tablero</a></li>
+        <li><a href="#/eventos">Eventos</a></li>
+        <li><a href="#/detalle">Detalles del evento</a></li>
+        <li><a href="#/presupuesto">Presupuesto</a></li>
+      </ol>
+</section>
+<!-- Main content -->
+<section ng-show="!ver" class="">
+
+  <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
+  </div>
+</section>
+<section ng-show="ver" class="" style="padding: 0px! important">
+  <!-- title row -->
+  <br>
+
+  <div class="row" style="padding-left: 2%; padding-right: 2% ;">
+    <div class="row" ng-if="costos.length == 0 && ingresos.length == 0">
+      <div class="col-md-3"></div>
+        <div class="col-xs-12 col-sm-6 col-lg-6" ng-if="costos.length == 0">
+        <div class="box">             
+          <div class="icon">
+            <div class="image"><i class="ion ion-sad-outline"></i></div>
+            <div class="info">
+              <h3 class="title">OPS!</h3>
+              <p>
+                Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
+              </p>
+            </div>
+          </div>
+          <div class="space"></div>
+        </div> 
+      </div>
+    </div>
+    <div class="col-md-12" >
+      <div class="box " style="border:none !important;" ng-if="costos.length != 0">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TABLERO DE EGRESOS</h3>
+          <div class="box-tools pull-right">
+            <div class="row">
+              <div class="col-md-6" style="padding-top: 1%; padding-right: 0">
+                <div class="has-feedback ">
+                  <input type="text" class="form-control input-sm" placeholder="Search" ng-model="filtro">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <button  class="btn  btn-lg buttonLogin pull-right" style="text-align: center ;  font-size: 10px ;"   data-toggle="modal" data-target="#myModal" >NUEVO COSTO</button>
+              </div>
+            </div> 
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          
+          <div style="height: 300px; overflow-y: scroll;">
+            <table class="table table-hover table-striped">
+              <tbody>
+              <tr>
+                <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">CANTIDAD</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">TIPO</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">TOTAL</th>
+                <th style="font-size: small; color: #B6BBC0 !important;"></th>
+              </tr>
+                
+              <tr ng-repeat="costo in costos | filter:filtro" >
+                <td class="mailbox-name"><a  style="color: #00a3ee !important;">{{costo.nombre}}</a></td>
+                <td class="mailbox-subject">{{costo.cantidad2}} <span ng-if="costo.tipo==0">(SubAct)</span></td>
+                <td class="mailbox-attachment">
+                  <span ng-if="costo.tipo==0">{{costo.tipoNombre}}</span>
+                  <span ng-if="!costo.tipo==0" >{{costo.tipoNombre}}</span>
+                </td>
+                <td style="color: #ff6c00 ; width: 35%;"><span>${{costo.costo2}}</span> 
+                <td>            
+                  <div  ng-if="costo.tipo!=0" class="btn-group">
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actCosto(costo)" data-toggle="modal" data-target="#myModal3"><i class="fa fa-edit"></i></button>
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal6" ng-click="seleccionar(costo.idCosto , 1)"><i class="fa fa-trash-o"></i></button>
+                  </div>
+                  <div ng-if="costo.tipo==0" class="btn-group">
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="selectActividad(costo)" data-toggle="modal" data-target="#myModal7"><i class="fa fa-plus"></i></button>
+                  </div>
+                </td>
+                 
+              </tr>
+              
+              </tbody>
+            </table>
+            <!-- /.table -->
+            </div>
+          <!-- /.mail-box-messages -->
+        </div>
+      </div>
+      <!-- /. box -->
+    </div>
+    <div class="col-md-12">
+      <div class="box " style="border:none !important;" ng-if="ingresos.length != 0">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TABLERO DE INGRESOS</h3>
+          <div class="box-tools pull-right">
+            <div class="row">
+              <div class="col-md-6" style="padding-top: 1%; padding-right: 0">
+                <div class="has-feedback ">
+                  <input type="text" class="form-control input-sm" placeholder="Search" ng-model="filtro2">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <button  class="btn  btn-lg buttonLogin pull-right" style="text-align: center ;  font-size: 10px ;"   data-toggle="modal" data-target="#myModal2" >NUEVO INGRESO</button>
+              </div>
+            </div> 
+          </div>
+        </div>
+        
+
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <div style="height: 300px; overflow-y: scroll;">
+            <table class="table table-hover table-striped">
+              <tbody>
+              <tr>
+                <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">CANTIDAD</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">TIPO</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">TOTAL</th>
+                <th style="font-size: small; color: #B6BBC0 !important;"></th>
+              </tr>
+                
+              <tr ng-repeat="ingreso in ingresos | filter:filtro2" >
+                <td class="mailbox-name"><a  style="color: #00a3ee !important;">{{ingreso.nombre}}</a></td>
+                <td class="mailbox-subject">{{ingreso.cantidad2}} <span ng-if="ingreso.tipo==0">(SubAct)</span></td>
+                <td class="mailbox-attachment">
+                 <span ng-if="ingreso.tipo==0">{{ingreso.tipoNombre}}</span>
+                  <span ng-if="!ingreso.tipo==0">{{ingreso.tipoNombre}}</span>
+                </td>
+                
+                <td style="color: #00eab5; width: 35%;"><span>${{ingreso.costo2}}</span> 
+                <td>            
+                  <div class="btn-group" ng-if="ingreso.tipo!=0">
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actIngreso(ingreso)" data-toggle="modal" data-target="#myModal4"><i class="fa fa-edit"></i></button>
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal6" ng-click="seleccionar(ingreso.idIngreso , 2)"><i class="fa fa-trash-o"></i></button>
+                  </div>
+                </td>
+                 
+              </tr>
+              
+              </tbody>
+            </table>
+            <!-- /.table -->
+          </div>
+        </div>
+      </div>
+      <!-- /. box -->
+    </div>
+  </div>
+</section>
+<!-- /.content -->	
+<!-- Main content -->
+<section ng-show="ver" class="">
+  <!-- title row -->
+  <div class="row" style="padding-left: 2%; padding-right: 2% ">
+
+  </div>  
+</section>
+
+<section ng-show="ver">
+<div class="row" style="padding-left: 2%; padding-right: 2% ">
+    <div class="col-md-4 col-xs-3">
+      <div class="box " style="border:none !important;" ng-if="costos.length != 0">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TOTALES DE EGRESOS</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body ">
+          <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options">
+          </canvas> 
+        </div>
+        <div class="box-footer no-padding">
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i>Totales por actividades: <span class="pull-right" style="color: #B6BBC0 !important">${{costoxact2}}</span></a></li>
+            <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i>Otros costos: <span class="pull-right" style="color: #B6BBC0 !important">${{otrosCostos2}} </span></a></li>
+            <li><a href="">Total: <span class="pull-right" style="color: #ff6c00 !important">${{subCosto2}} </span></a></li>
+          </ul>
+        </div>
+        <!-- /.footer -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <div class="col-md-4 col-xs-3">
+      <div class="box " style="border:none !important;" ng-if="ingresos.length != 0">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TOTALES DE INGRESOS</h3>
+          
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body ">
+          <canvas id="pie2" class="chart chart-pie" chart-data="data2" chart-labels="labels2" chart-options="options">
+          </canvas> 
+        </div>
+        <div class="box-footer no-padding">
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i>Totales por actividades: <span class="pull-right" style="color: #B6BBC0 !important">${{ingresoxact2}}</span></a>
+              
+            </li>
+            <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i>Otros ingresos: <span class="pull-right" style="color: #B6BBC0 !important">${{otrosIngresos2}} </span></a></li>
+            <li><a href="">Total: <span class="pull-right" style="color: #00eab5; ">${{subIngreso2}}  </span></a></li>
+          </ul>
+        </div>
+        <!-- /.footer -->
+      </div>
+      <!-- /.box -->
+    </div>
+   <div class="col-md-4 col-xs-3">
+      <div class="box " style="border:none !important;" ng-show="costos.length != 0 && ingresos.length!= 0" >
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TOTALES GENERALES</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body ">
+        <!--  <canvas id="bar3" class="chart chart-bar" chart-data="data3" chart-labels="labels3" chart-series="s"> 
+          </canvas>-->
+            <canvas id="barChart" style="height:230px"></canvas>
+        </div>
+        <div class="box-footer no-padding">
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Total de Egresos:<span class="pull-right" style="color: #B6BBC0 !important">${{subCosto2}} </span></a>
+            </li>
+            <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i>Total de Ingresos: <span class="pull-right" style="color: #B6BBC0 !important">${{subIngreso2}} </span></a></li>
+            <li><a href="">Margen: <span class="pull-right" style="color: #00eab5 ">{{neto2}}%  </span></a></li>
+          </ul>
+        </div>
+        <!-- /.footer -->
+      </div>
+      <!-- /.box -->
+    </div>
+ </div>
+</section>
+<!-- /.content -->  
+
+<!-- Modal de insertar nuevo costo al evento-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Otro Costo</h4></center>
+      </div>
+      <form name="formCosto">
+      <div class="modal-body">
+         <div class="row" >
+            <div class="col-md-4 col-xs-12 col-lg-4">
+              <!-- text input -->
+              <div class="form-group">
+                <label style="font-weight: 300;">
+                  <span ng-if="!tipoNuevo" class="fa fa-plus " style="color:#3c8dbc" ng-click="agregarTipo()"></span>
+                  <span ng-if="tipoNuevo" class="fa  fa-list-ul " style="color:#3c8dbc" ng-click="agregarTipo()"></span>
+                  <span ng-if="!tipoNuevo">Selecciona el Tipo:</span>
+                  <span ng-if="tipoNuevo">Nombre del Tipo:</span>
+                </label>
+                <input ng-if="tipoNuevo" ng-model="costo.tipoNombre" type="text" class="form-control" >
+                <select ng-if="!tipoNuevo" ng-model="costo.tipo"  class="form-control">
+                  <option value="{{tipo.idTipo}}" ng-repeat="tipo in tipoCosto">{{tipo.nombre}}</option>
+                </select>
+              </div> 
+            </div>
+            <div class="col-md-4 col-xs-12 col-lg-4">
+                <label>Nombre:</label>
+                <input ng-model="costo.nombre" type="text" class="form-control" >
+            </div>
+            <div class="col-md-4 col-xs-12 col-lg-4" >
+              <label>Cantidad:</label>
+              <input ng-model="costo.cantidad" id="cantidadcosto" class="form-control" >
+            </div>
+          </div><br>
+          <div class="row">
+            <div class="col-md-4 col-xs-12 col-lg-4">
+                <label>Costo Total:</label>
+                <input ng-model="costo.costo" id="costodecosto" class="form-control" >
+            </div>
+            <div style="margin-top: 3%;" class="col-md-4 col-xs-12 col-lg-4">
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" id="appCheck" class="minimal" ng-change="mostrarApp()" ng-model="checkApp" >
+                </label>
+                <label style="color: #b7adad">
+                  ¿Mostrar en la App?
+                </label>
+              </div>
+             
+            </div>  
+         </div>
+      </div>
+      <div class="modal-footer" style="margin: 0;">
+           <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formActividad.$invalid" ng-click="guardarCosto()">Guardar</button>
+      </div>
+     </form>    
+    </div>
+  </div>
+</div>
+
+<!-- Modal de insertar n nuevo costo al evento-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Otros Ingresos</h4></center>
+      </div>
+      <form name="formIngreso">
+      <div class="modal-body">
+        <div class="row" >
+                <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label>Nombre:</label>
+                    <input ng-model="ingreso.nombre" type="text" class="form-control" >
+                </div>
+                <div class="col-md-4 col-xs-12 col-lg-4" >
+                  <label>Cantidad:</label>
+                  <input ng-model="ingreso.cantidad" id="cantidadingreso" class="form-control" >
+                </div>
+                <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label>Costo Total:</label>
+                    <input ng-model="ingreso.costo" id="costodeingreso" class="form-control" >
+                </div>
+          </div><br>
+          <div class="row">
+                <div class="col-md-4 col-xs-12 col-lg-4">
+                <!-- text input -->
+                  <div class="form-group">
+                    <label style="font-weight: 300;">
+                      <span ng-if="!tipoNuevo" class="fa fa-plus " style="color:#3c8dbc" ng-click="agregarTipo()"></span>
+                      <span ng-if="tipoNuevo" class="fa  fa-list-ul " style="color:#3c8dbc" ng-click="agregarTipo()"></span>
+                      <span ng-if="!tipoNuevo">Selecciona el Tipo:</span>
+                      <span ng-if="tipoNuevo">Nombre del Tipo:</span>
+                    </label>
+                    <input ng-if="tipoNuevo" ng-model="ingreso.tipoNombre" type="text" class="form-control" >
+                    <select ng-if="!tipoNuevo" ng-model="ingreso.tipo" class="form-control">
+                      <option value="{{tipo.idTipo}}" ng-repeat="tipo in tipoIngreso">{{tipo.nombre}}</option>
+                    </select>
+                  </div> 
+                </div>
+          </div>
+      </div>
+      <div class="modal-footer" style="margin: 0;">
+           <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formActividad.$invalid" ng-click="guardarIngreso()">Guardar</button>
+      </div>
+     </form>    
+    </div>
+  </div>
+</div>
+<!-- Modal de insertar nuevo costo al evento-->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Editar Costo</h4></center>
+      </div>
+      <form name="formCosto">
+      <div class="modal-body">
+        <div class="row" >
+            <div class="col-md-4 col-xs-12 col-lg-4">
+                <label>Nombre:</label>
+                <input ng-model="costo.nombre" type="text" class="form-control" >
+            </div>
+            <div class="col-md-4 col-xs-12 col-lg-4" >
+              <label>Cantidad:</label>
+              <input ng-model="costo.cantidad" id="cantidadcosto" class="form-control" >
+            </div>
+            <div class="col-md-4 col-xs-12 col-lg-4">
+                <label>Costo Total:</label>
+                <input ng-model="costo.costo" id="costodecosto" class="form-control" >
+            </div>     
+          </div><br>
+          <div class="row">
+            <div class="col-md-4 col-xs-12 col-lg-4">
+            <!-- text input -->
+              <div class="form-group">
+                <label style="font-weight: 300;">Selecciona el Tipo:</label>
+                <select ng-model="costo.tipo" class="form-control">
+                  <option value="{{tipo.idTipo}}" ng-repeat="tipo in tipoCosto">{{tipo.nombre}}</option>
+                </select>
+              </div> 
+            </div>
+         </div>
+      </div>
+      <div class="modal-footer" style="margin: 0;">
+           <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formActividad.$invalid" ng-click="actualizarCosto()">Actualizar</button>
+      </div>
+     </form>    
+    </div>
+  </div>
+</div>
+
+<!-- Modal de insertar n nuevo costo al evento-->
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Editar Ingresos</h4></center>
+      </div>
+      <form name="formIngreso">
+      <div class="modal-body">
+        <div class="row" >
+                <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label>Nombre:</label>
+                    <input ng-model="ingreso.nombre" type="text" class="form-control" >
+                </div>
+                <div class="col-md-4 col-xs-12 col-lg-4" >
+                  <label>Cantidad:</label>
+                  <input ng-model="ingreso.cantidad" id="cantidadingreso" class="form-control" >
+                </div>
+                <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label>Costo Total:</label>
+                    <input ng-model="ingreso.costo" id="costodeingreso" class="form-control" >
+                </div>
+                
+          </div><br>
+          <div class="row">
+                <div class="col-md-4 col-xs-12 col-lg-4">
+                <!-- text input -->
+                  <div class="form-group">
+                    <label style="font-weight: 300;">
+                      Selecciona el Tipo:
+                    </label>
+                    <select ng-model="ingreso.tipo" class="form-control">
+                      <option value="{{tipo.idTipo}}" ng-repeat="tipo in tipoIngreso">{{tipo.nombre}}</option>
+                    </select>
+                  </div> 
+                </div>
+           </div>
+      </div>
+      <div class="modal-footer" style="margin: 0;">
+           <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formActividad.$invalid" ng-click="actualizarIngreso()">Actualizar</button>
+      </div>
+     </form>    
+    </div>
+  </div>
+</div>
+
+  <div class="modal fade" id="myModal5" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+       <div class="modal-body">
+          <div class="box" style="border-top: none; box-shadow: none;">             
+            <div class="icon">
+              <div class="image"><i class="ion ion-happy-outline"></i></div>
+              <div class="info">
+                <h3 class="title">Éxito!</h3>
+                <p>
+                  Se ha realizado correctamente.
+                </p>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal6" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body" style="padding-top: 15px">
+          <div class="box" style="border: none; box-shadow: none;">             
+            <div class="icon">
+              <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+              <div class="info">
+                <h3 class="title">Espere!</h3>
+                <p>
+                  ¿Está seguro de que desea eliminar?
+                </p>
+              <br> <br>
+               <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+              <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminarCoI()">Aceptar</button>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal de insertar nuevo costo al evento-->
+<div class="modal fade" id="myModal7" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Costos de la actividad {{actSeleccionado.nombre}}</h4></center>
+      </div>
+      
+      <div class="modal-body">
+        
+      <div class="row" style="padding-left: 1%">
+                        
+        <div class="col-md-4 col-xs-12">
+            <label>Nombre:</label>
+            <input  ng-model="costoa.nombre" type="text" class="form-control" placeholder="sillas">
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <label>Cantidad:</label>
+            <input  ng-model="costoa.cantidad"  type="number" class="form-control" placeholder="130">
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <label>Costo Total:</label>
+            <input  ng-model="costoa.costo"  type="number" class="form-control" placeholder="130000">
+        </div>
+        <div class="pull-right col-md-6 col-xs-12 " style="padding-top: 2%">
+          <div class="form-group pull-right" >
+            <label>
+              <input type="checkbox" class="minimal" ng-change="chequea()" ng-model="app" >
+            </label>
+            <label style="color: #b7adad">
+              ¿Mostrar en la app?
+            </label>
+            <button  type="button" ng-click="createCostoActividad()" class="btn btn-flat margin"><i class="fa fa-plus"></i> Agregar</button>
+          </div>
+        </div>
+        
+      </div>
+      <br>
+      <div class="row" style="padding-left: 3%;padding-right: 3%">
+          <div class="row" ng-if="!costosActividad[0]">
+          <div class="col-md-3"></div>
+            <div class="col-xs-12 col-sm-6 col-lg-6">
+            <div class="box" style="border: none; box-shadow: none">             
+              <div class="icon">
+                 <i style="font-size: medium; color: green" class="fa fa-plus"></i>
+                <div class="info">
+                  <p>
+                    No posee Costos debe insertarlos en el boton "agregar"
+                  </p>
+                </div>
+              </div>
+              <div class="space"></div>
+            </div> 
+          </div>
+       </div>
+        <table ng-if="costosActividad[0]" class="table table-striped">
+          <thead>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Costo Total</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="costo in costosActividad">
+              <td>{{$index + 1}}</td>
+              <td>{{costo.nombre}}</td>
+              <td>{{costo.cantidad}}</td>
+              <td>${{costo.costo}}</td>
+              <td>
+                <button type="button" class="btn btn-default btn-sm"  ng-click="deleteCostoActividad(costo)"><i class="fa fa-trash-o"></i></button>
+                <!--ng-click="eliminarCosto(costo.idProvee)"-->
+              </td>
+            </tr>
+          </tbody>
+        </table>  
+      </div>
+
+      </div>
+
+     </div>
+  </div>
+</div>
+

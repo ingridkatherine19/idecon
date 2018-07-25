@@ -1,0 +1,861 @@
+<section class="content-header">
+      <h1>
+       {{evento.descripcion}}
+     <!--   <small>principal</small>-->
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#/evento">Evento</a></li>
+        <li><a href="#/detalle">Detalle del evento</a></li>
+        <li><a href="#/actividad">Actividades</a></li>
+      </ol>
+</section>
+<section ng-show="!ver" class="content">
+  <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
+  </div>
+</section>
+<!-- Main content -->
+<section ng-show="ver" class="content">
+
+  <div class="row">
+    <div class="col-md-3 col-xs-3">
+      <div class="small-box bg-caja">
+        <div class="inner linea1">
+          <h3 class="numero1">{{actividades.length}}</h3>
+          <p class="text1">Actividades</p>
+        </div>
+        <div class="icon icon1">
+          <i class="fa fa-calendar-check-o"></i>
+        </div>
+      </div> 
+    </div>
+    <div class="col-md-3 col-xs-3">
+      <div class="small-box bg-caja">
+        <div class="inner linea2">
+          <h3 class="numero2">{{total.cantidadSub}}</h3>
+          <p class="text2">Sub-actividades</p>
+        </div>
+        <div class="icon icon2">
+          <i class="fa fa-calendar-o "></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-xs-3">
+      <div class="small-box bg-caja">
+        <div class="inner linea3">
+          <h3 class="numero3">{{total.horas}}h</h3>
+          <p class="text3">Entretenimiento</p>
+        </div>
+        <div class="icon icon3">
+          <i class="fa fa-hourglass-end"></i>
+        </div>
+      </div>  
+    </div>
+    <div class="col-md-3 col-xs-3">
+      <!-- small box -->
+      <div class="small-box bg-caja">
+        <div class="inner linea4">
+          <h3 class="numero4">{{total.empleo}}</h3>
+          <p class="text4">Empleos</p>
+        </div>
+        <div class="icon icon4">
+          <i class="fa  fa-suitcase"></i>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+   
+  
+  <div class="row">
+    <div class="col-md-7 col-xs-12">
+      <!-- MAP & BOX PANE -->
+      <div class="box" style="background-color: #fafafb;border:none !important;">
+        <div class="box-header with-border">
+          <h3 class="box-title">Todas las Actividades</h3>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding"> 
+          <div class="mailbox-controls">
+            <button ng-click="limpiarForm()" type="button" class="btn btn-default btn-sm checkbox-toggle" data-toggle="modal" data-target="#myModal" data-toggle="tooltip"><i class="fa fa-plus"></i>
+                Nueva Actividad
+            </button>
+          </div>
+
+          <div class="box" ng-if="!actividades[0]" style="border: 0">             
+            <div class="icon">
+              <div class="image"><i class="ion ion-sad-outline"></i></div>
+              <div class="info">
+                <h3 class="title">OPS!</h3>
+                <p>
+                  Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
+                </p>
+              </div>
+            </div>
+          </div>
+          <table class="table table-hover table-striped" ng-if="actividades[0]">
+              <tr>
+                <th>Nombre</th>
+                <th>Responsable</th>
+                <th></th>
+              </tr>
+              <tr ng-repeat="actividad in actividades">
+                <td>
+                  {{actividad.nombre}}
+                </td>
+                <td>{{actividad.responsable}}</td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li data-toggle="modal" ng-click="seleccionarAct(actividad)" data-toggle="modal" data-target="#myModal2"><a><span class="fa fa-plus" style="color:#f1a64d" ></span>Sub-Actividades</a></li>
+                      
+                      <li ng-click="editarAct(actividad)" data-toggle="modal" data-target="#myModal3"><a><span class="fa fa-edit" style="color:#f1a64d"></span>editar</a></li>
+
+                      <li ng-click="buscarAsociar(actividad)" data-toggle="modal" data-target="#myModal8"><a><span class="fa fa-plus" style="color:#f1a64d" ></span>Asignar</a></li>
+
+                      <li data-toggle="modal" data-target="#myModal6" ng-click="seleccionarActividad(actividad.idActividad)"><a><span class="fa  fa-trash-o" style="color:#f1a64d" ></span>Eliminar</a></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+    <div class="col-md-5 col-xs-12">
+      <div class="box" style="background-color: #fafafb;border:none !important;">
+        <div class="box-body no-padding">
+          <!-- THE CALENDAR -->
+          <div id="calendar"></div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /. box -->
+    </div>
+  </div>
+
+
+</section>
+<!-- Modal de insertar evento-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Nueva Actividad</h4></center>
+      </div>
+      <form name="formActividad">
+      <div class="modal-body">
+        <div class="row" >
+
+              <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+                <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos de la actividad</h3>
+              </div><br>
+
+                <div class="col-md-3 col-xs-12 col-lg-3">
+                    <label style="font-weight: 300;">Nombre:</label>
+                    <input ng-model="actividad.nombre" type="text" class="form-control" >
+                </div>
+                <div class="col-md-3 col-xs-12 col-lg-3">
+                    <label style="font-weight: 300;">Responsable:</label>
+                    <input ng-model="actividad.responsable" type="text" class="form-control" >
+                </div>
+                <div class="col-md-3 col-xs-12 col-lg-3">
+                    <label style="font-weight: 300;">Costo de la actividad:</label>
+                   <!-- <input ng-model="actividad.costo" type="number" class="form-control" >-->
+                    <input ng-model="actividad.costo" type="number"  class="form-control" >
+                </div>
+                <div style="margin-top: 3%;" class="col-md-3 col-xs-12 col-lg-3">
+                  <div class="form-group">
+                    <label>
+                      <input type="checkbox" id="lugarCheck" class="minimal" ng-change="traeCheck(1)" ng-model="lugar" >
+                    </label>
+                    <label style="color: #b7adad">
+                      ¿Misma localidad?
+                    </label>
+                  </div>
+                 
+                </div>
+          </div><br>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Población</h3>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-4 col-xs-12 col-lg-4">
+                <label style="font-weight: 300;">Cantidad de Empleos:</label>
+                <input ng-model="actividad.empleo" type="number" class="form-control" >
+            </div>
+            <div class="col-md-4 col-xs-12 col-lg-4">
+                <label style="font-weight: 300;">Cantidad de Hombres:</label>
+                <input ng-model="actividad.cantHombres" type="number" class="form-control" >
+            </div>
+            <div class="col-md-4 col-xs-12 col-lg-4">
+                <label style="font-weight: 300;">Cantidad de Mujeres:</label>
+                <input ng-model="actividad.cantMujeres" type="number" class="form-control" >
+            </div>
+         </div>
+         <br>
+          <div ng-if="swichPalco" style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos de la Dirección</h3>
+          </div>
+            <br ng-if="swichPalco">
+          <div class="row" ng-if="swichPalco">
+              <div class="col-md-4 col-xs-12 col-lg-4">
+                  <label style="font-weight: 300;">Dirección:</label>
+                  <input ng-model="actividad.direccion" id="myDate" type="text"  class="form-control" >
+              </div>
+              <div class="col-md-4 col-xs-12 col-lg-4">
+                  <label style="font-weight: 300;">Fecha y hora de inicio:</label>
+                  <input ng-model="actividad.fechaInicio" id="myDate1" type="datetime-local"  class="form-control" >
+              </div>
+              <div class="col-md-4 col-xs-12 col-lg-4">
+                  <label style="font-weight: 300;">Fecha y hora de finalización:</label>
+                  <input ng-model="actividad.fechaFin" id="myDate2" type="datetime-local"  class="form-control" >
+              </div>
+          </div><br ng-if="swichPalco">
+
+          <div ng-if="swichPalco" class="row" ng-init="initMap()">
+            <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="deleteMarkers();"><i class="fa fa-close"></i>
+              Eliminar Marker
+            </button>
+              <div style="width: 100% !important;" id="map2"></div>
+          </div><br ng-if="swichPalco">
+          
+          <div ng-if="swichPalco" style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos de los Palcos</h3>
+          </div> 
+
+          <div ng-if="swichPalco">
+            <div class="row">
+              <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="nuevoPalcoActividad()"><i class="fa fa-plus"></i>
+                Nuevo Palco
+              </button>
+            </div>
+            <div ng-repeat="palco in palcoActividad" class="row">
+                
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label style="font-weight: 300;">Detalle:</label>
+                    <input ng-model="palco.detalle" type="text" class="form-control" placeholder="Palco VIP">
+                  </div>
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                      <label style="font-weight: 300;">Capacidad:</label>
+                      <input ng-model="palco.capacidad" id="" type="number" class="form-control" >
+                  </div>
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                      <label style="font-weight: 300;">Costo Unitario:</label>
+                      <input ng-model="palco.cu" id="" type="number" class="form-control" >
+                  </div>
+              
+            </div>
+            
+          </div><br ng-if="swichPremio">
+          
+
+          <div ng-if="swichPremio" style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos de la Premiación</h3>
+          </div> 
+
+          <div ng-if="swichPremio">
+            <div class="row">
+              <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="nuevoPremioActividad()"><i class="fa fa-plus"></i>
+                Nuevo Premio
+              </button>
+            </div>
+            <div ng-repeat="premio in premioActividad" class="row">
+                
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label style="font-weight: 300;">Detalle:</label>
+                    <input ng-model="premio.detalle" type="text" class="form-control" placeholder="Primer lugar">
+                  </div>
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                      <label style="font-weight: 300;">costo:</label>
+                      <input ng-model="premio.costo" id="" type="number" class="form-control" >
+                  </div>
+            </div>
+          </div>       
+      </div>
+
+      <div class="modal-footer" style="margin: 0">
+          <button  type="button" class="btn  btn-outline pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+          <button type="button" ng-disabled="formActividad.$invalid" class="btn " data-dismiss="modal" ng-click="guardar();limpiarForm()">Guardar</button>
+      </div>
+     </form>    
+    </div>
+  </div>
+</div>
+
+<!--MODAL SUB ACTIVIDADES-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header">
+       <button ng-click="cerrar()" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel"><b>Sub actividades de  {{actSeleccionada.nombre}}</b></h4></center>
+      </div>
+      <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
+        <div ng-if="swichsub">
+          
+
+          <form name="formJunta">
+              <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+                <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos de la actividad</h3>
+              </div><br>
+              <div class="row">
+                        
+                <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label style="font-weight: 300;">Nombre:</label>
+                    <input id="nombre" ng-model="sub.nombre" type="text" class="form-control" placeholder="Agrupación Vallenata">
+                </div>
+                <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label style="font-weight: 300;">N° Presentaciones:</label>
+                    <input id="apellido" ng-model="sub.cantidad" type="number" class="form-control" placeholder="">
+                </div>
+
+                <div class="col-md-4 col-xs-12 col-lg-4" >
+                  <label style="font-weight: 300;">Tipo:</label>
+                    <select class="form-control pageList" name="tipo" ng-model="sub.tipo" required>
+                        <option ng-repeat="tipo in tipoEvento" ng-selected ="sub.tipo == tipoeventoSelect" value="{{tipo.id}}">{{tipo.name}}</option>
+                    </select>
+              <!-- <select class="form-control" ng-model="sub.tipo">
+                    <option value="0">Encuentros y Espectáculos Deportivos</option>
+                    <option value="1">Eventos Religiosos</option>
+                    <option value="2">Congregaciones Políticas</option>
+                    <option value="3">Conciertos y Presentaciones Musicales</option>
+                    <option value="4">Ferias, Festivales, Rodeos y Corralejas</option>
+                    <option value="10">Concursos</option>
+                    <option value="5">Congresos, Simposios, Seminarios o similares</option>
+                    <option value="6">Teatro</option>
+                    <option value="7">Exhibiciones (Desfiles de Modas, Exposiciones, etc.)</option>
+                    <option value="8">Atracciones y Entretenimiento (Parques de Atracciones, Ciudades de Hierro, Circos, etc.)</option>
+                    <option value="9">Otros (Marchas, Ventas, etc.)</option>
+                  </select>-->
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-4 col-xs-12 col-lg-4" >
+                  <label style="font-weight: 300;">Modalidad:</label>
+                  <select class="form-control pageList" name="modalidad" ng-model="sub.modalidad" required>
+                      <option ng-repeat="modalidad in modalidadEvento" ng-selected ="sub.modalidad == modalidadSelect" value="{{modalidad.id}}">{{modalidad.name}}</option>
+                  </select>
+                <!--  <select class="form-control" ng-model="sub.modalidad" >
+                    <option value="0">Sin valor comercial</option>
+                    <option value="1">Con boleta de ingreso</option>
+                    <option value="2">Con valor comercial</option>
+                  </select>-->
+                </div>
+                <div class="col-md-4 col-xs-12 col-lg-4" >
+                  <label style="font-weight: 300;">Tipo de Participante:</label>
+                 <!-- <select class="form-control" ng-model="sub.tipoPoblacion" >
+                    <option value="0">Participante Natural</option>
+                    <option value="1">Participante Juridico</option>
+                    <option value="2">Grupos Artisticos</option>
+                  </select>-->
+                  <select class="form-control pageList" name="tipo participante" ng-model="sub.tipoPoblacion" required>
+                      <option ng-repeat="participante in participanteEvento" ng-selected ="sub.tipoPoblacion == participanteeventoSelect" value="{{participante.id}}">{{participante.name}}</option>
+                  </select>
+                </div>
+                
+              </div><br>
+                
+              <div ng-if="actSeleccionada.lugar==0" style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+                <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos de la Dirección</h3>
+              </div>
+
+
+                <br ng-if="actSeleccionada.lugar==0">
+                <div class="row" ng-if="actSeleccionada.lugar==0&&!subEditar">
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                      <label style="font-weight: 300;">Dirección:</label>
+                      <input ng-model="sub.direccion" id="myDate" type="text"  class="form-control" >
+                  </div>
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                      <label style="font-weight: 300;">Fecha y hora de inicio:</label>
+                      <input ng-model="sub.fechaInicio" id="myDate3" type="datetime-local"  class="form-control" >
+                  </div>
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                      <label style="font-weight: 300;">Fecha y hora de finalización:</label>
+                      <input ng-model="sub.fechaFin" id="myDate4" type="datetime-local"  class="form-control" >
+                  </div>
+                </div>
+                <div ng-if="subEditar&&actSeleccionada.lugar==0" class="row" >
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                      <label style="font-weight: 300;">Dirección:</label>
+                      <input ng-model="sub.direccion.direccion" id="myDate" type="text"  class="form-control" >
+                  </div>
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                      <label style="font-weight: 300;">Fecha y hora de inicio:</label>
+                      <input ng-model="sub.direccion.fechaInicio" id="myDate3" type="datetime-local"  class="form-control" >
+                  </div>
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                      <label style="font-weight: 300;">Fecha y hora de finalización:</label>
+                      <input ng-model="sub.direccion.fechaFin" id="myDate4" type="datetime-local"  class="form-control" >
+                  </div>
+                </div><br>
+                <div ng-if="actSeleccionada.lugar==0&&!subEditar" class="row" ng-init="initMap()">
+                 
+                  <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="deleteMarkers();"><i class="fa fa-close"></i>
+                  Eliminar Marker
+                  </button>
+                  <div style="width: 100% !important;" id="map2"></div>
+                </div><br>
+
+                <div ng-if="actSeleccionada.lugar==0" style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+                  <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos de los Palcos</h3>
+                </div>
+                <div ng-if="actSeleccionada.lugar==0">
+                  <div class="row">
+                    <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="nuevoPalcoActividadAct()"><i class="fa fa-plus"></i>
+                      Nuevo Palco
+                    </button>
+                  </div>
+                  <div ng-repeat="palco in palcoActividadAct" class="row">
+                      
+                        <div class="col-md-4 col-xs-12 col-lg-4">
+                          <label style="font-weight: 300;">Detalle:</label>
+                          <input ng-model="palco.detalle" type="text" class="form-control" placeholder="Palco VIP">
+                        </div>
+                        <div class="col-md-4 col-xs-12 col-lg-4">
+                            <label style="font-weight: 300;">Capacidad:</label>
+                            <input ng-model="palco.capacidad" id="" type="number" class="form-control" >
+                        </div>
+                        <div class="col-md-4 col-xs-12 col-lg-4">
+                            <label style="font-weight: 300;">Costo Unitario:</label>
+                            <input ng-model="palco.cu" id="" type="number" class="form-control" >
+                        </div>
+                    
+                  </div>
+                  <br ng-if="palcoActividadAct">
+                  <div ng-repeat="palco in sub.palco" class="row">
+                      
+                        <div class="col-md-3 col-xs-3 col-lg-3">
+                          <label style="font-weight: 300;">Detalle:</label>
+                          <input ng-model="palco.detalle" type="text" class="form-control" placeholder="Palco VIP">
+                        </div>
+                        <div class="col-md-3 col-xs-3 col-lg-3">
+                            <label style="font-weight: 300;">Capacidad:</label>
+                            <input ng-model="palco.capacidad" id="" type="number" class="form-control" >
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-lg-3">
+                            <label style="font-weight: 300;">Costo Unitario:</label>
+                            <input ng-model="palco.costo" id="" type="number" class="form-control" >
+                        </div>
+                        <div style="padding-top: 3%;padding-left: 0;" class="col-md-3 col-xs-3 col-lg-3">
+                          <button ng-click="eliminarPalcoSub(palco.idPalco, $index)" type="button" class="btn btn-default btn-sm">
+                              <span class="fa fa-trash-o"></span>
+                          </button>
+                        </div>
+                        <br>
+                  </div>
+                  
+                </div>
+          </form>
+        </div>
+        <div ng-if="!swichsub">
+
+          <button type="button" style="margin: 1%" class="btn botonCrear btn-sm" ng-click="nuevaAct()"><i class="fa fa-plus"></i>
+            Nuevo Sub-actividad</button>
+            <br>
+
+          <div class="box" ng-if="!subActividades[0]" style="border: 0">             
+            <div class="icon">
+              <div class="image"><i class="ion ion-sad-outline"></i></div>
+              <div class="info">
+                <h3 class="title">OPS!</h3>
+                <p>
+                  Aún no ha ingresado sub actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
+                </p>
+              </div>
+            </div>
+          </div>
+          <table ng-if="subActividades[0]" class="table table-striped">
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>N° Presentaciones:</th>
+                <th></th>
+              </tr>
+              <tr ng-repeat="actividad in subActividades | filter: filtro">
+                <td>
+                  <i ng-if="actividad.modalidad == 0" class="fa fa-circle" style="color: #f1a64d"></i>
+                  <i ng-if="actividad.modalidad == 1" class="fa fa-circle" style="color: #f9714c"></i>
+                  <i ng-if="actividad.modalidad == 2" class="fa fa-circle" style="color: #e0ca7f"></i>
+                  {{actividad.nombre}}
+                </td>
+                <td>
+                  <span ng-if="actividad.tipoPoblacion ==0">Participante Natural</span>
+                  <span ng-if="actividad.tipoPoblacion ==1">Participante Juridico</span>
+                  <span ng-if="actividad.tipoPoblacion ==2"> Grupor Artisticos</span>
+                </td>
+                <td>{{actividad.cantidad}}</td>
+                <td align="center">
+                  <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal7" ng-click="seleccionarSub(actividad.idEventoActividad , $index)"><i class="fa fa-trash-o"></i></button>
+                  <button type="button" class="btn btn-default btn-sm" ng-click="editarSub(actividad);"><i class="fa fa-edit"></i></button>
+                </td>
+              </tr>
+            </table>
+        </div>
+        <!-- /.box -->
+      </div>
+      <div class="modal-footer" style="margin: 0">
+          <button ng-if="swichsub" type="button" class="btn  pull-left" ng-click="nuevaAct()">Cancelar</button>
+          <button ng-if="swichsub&&!subEditar" type="button"  class="btn" ng-click="guardarSub()">Guardar</button>
+          <button ng-if="swichsub&&subEditar" type="button"  class="btn" ng-click="updateSub()">Actualizar</button>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<!-- editar la actividad-->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Editar la Actividad</h4></center>
+      </div>
+      <form name="formActividad">
+      <div class="modal-body">
+        <div class="row" >
+              <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+                <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos de la actividad</h3>
+              </div><br>
+
+                <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label style="font-weight: 300;">Nombre:</label>
+                    <input ng-model="actividad.nombre" type="text" class="form-control" >
+                </div>
+                <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label style="font-weight: 300;">Responsable:</label>
+                    <input ng-model="actividad.responsable" type="text" class="form-control" >
+                </div>
+                <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label style="font-weight: 300;">Costo de la actividad:</label>
+                    <input ng-model="actividad.costo" type="number" class="form-control" >
+                </div>          
+          </div><br>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Población</h3>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-4 col-xs-12 col-lg-4">
+                <label style="font-weight: 300;">Cantidad de Empleos:</label>
+                <input ng-model="actividad.empleo" type="number" class="form-control" >
+            </div>
+            <div class="col-md-4 col-xs-12 col-lg-4">
+                <label style="font-weight: 300;">Cantidad de Hombres:</label>
+                <input ng-model="actividad.cantHombres" type="number" class="form-control" >
+            </div>
+            <div class="col-md-4 col-xs-12 col-lg-4">
+                <label style="font-weight: 300;">Cantidad de Mujeres:</label>
+                <input ng-model="actividad.cantMujeres" type="number" class="form-control" >
+            </div>
+         </div>
+         <br>
+          <div ng-if="actividad.direccion" style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos de la Dirección</h3>
+          </div>
+            <br ng-if="actividad.direccion">
+          <div class="row" ng-if="actividad.direccion">
+              <div class="col-md-4 col-xs-12 col-lg-4">
+                  <label style="font-weight: 300;">Dirección:</label>
+                  <input ng-model="actividad.direccion[0].direccion" id="myDate" type="text"  class="form-control" >
+              </div>
+              <div class="col-md-4 col-xs-12 col-lg-4">
+                  <label style="font-weight: 300;">Fecha y hora de inicio:</label>
+                  <input ng-model="actividad.direccion[0].fechaInicio" id="myDate1U" type="datetime-local"  class="form-control" >
+              </div>
+              <div class="col-md-4 col-xs-12 col-lg-4">
+                  <label style="font-weight: 300;">Fecha y hora de finalización:</label>
+                  <input ng-model="actividad.direccion[0].fechaFin" id="myDate2U" type="datetime-local"  class="form-control" >
+              </div>
+          </div><br ng-if="actividad.direccion">
+          
+          <div ng-if="actividad.direccion" style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos de los Palcos</h3>
+          </div> 
+
+          <div ng-if="actividad.palco">
+            <div class="row">
+              <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="nuevoPalcoActividadAct()"><i class="fa fa-plus"></i>
+                Nuevo Palco
+              </button>
+            </div>
+            <div ng-repeat="palco in palcoActividadAct" class="row">
+                
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                    <label style="font-weight: 300;">Detalle:</label>
+                    <input ng-model="palco.detalle" type="text" class="form-control" placeholder="Palco VIP">
+                  </div>
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                      <label style="font-weight: 300;">Capacidad:</label>
+                      <input ng-model="palco.capacidad" id="" type="number" class="form-control" >
+                  </div>
+                  <div class="col-md-4 col-xs-12 col-lg-4">
+                      <label style="font-weight: 300;">Costo Unitario:</label>
+                      <input ng-model="palco.cu" id="" type="number" class="form-control" >
+                  </div>
+              
+            </div>
+            <br ng-if="palcoActividadAct">
+            <div ng-repeat="palco in actividad.palco" class="row">
+                
+                  <div class="col-md-3 col-xs-3 col-lg-3">
+                    <label style="font-weight: 300;">Detalle:</label>
+                    <input ng-model="palco.detalle" type="text" class="form-control" placeholder="Palco VIP">
+                  </div>
+                  <div class="col-md-3 col-xs-3 col-lg-3">
+                      <label style="font-weight: 300;">Capacidad:</label>
+                      <input ng-model="palco.capacidad" id="" type="number" class="form-control" >
+                  </div>
+                  <div class="col-md-3 col-xs-12 col-lg-3">
+                      <label style="font-weight: 300;">Costo Unitario:</label>
+                      <input ng-model="palco.costo" id="" type="number" class="form-control" >
+                  </div>
+                  <div style="padding-top: 3%;padding-left: 0;" class="col-md-3 col-xs-3 col-lg-3">
+                    <button ng-click="eliminarPalco(palco.idPalco, $index)" type="button" class="btn btn-default btn-sm">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                  </div>
+                  <br>
+            </div>
+            
+          </div><br ng-if="actividad.premio==1">
+          
+
+          <div ng-if="actividad.premio == 1" style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos de la Premiación</h3>
+          </div> 
+
+          <div ng-if="actividad.premio == 1">
+            
+            <div ng-repeat="premioD in actividad.premioD" class="row">
+                
+                  <div class="col-md-4 col-xs-4 col-lg-4">
+                    <label style="font-weight: 300;">Detalle:</label>
+                    <input ng-model="premioD.detalle" type="text" class="form-control" placeholder="Primer lugar">
+                  </div>
+                  <div class="col-md-4 col-xs-4 col-lg-4">
+                      <label style="font-weight: 300;">costo:</label>
+                      <input ng-model="premioD.costo" id="" type="number" class="form-control" >
+                  </div>
+                  <div style="padding-top: 3%;padding-left: 0;" class="col-md-4 col-xs-4 col-lg-4">
+                    <button ng-click="eliminarPremio(premioD.idPremio, $index)" type="button" class="btn btn-default btn-sm">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                  </div><br>
+
+            </div>
+          </div>       
+      </div>
+
+      <div class="modal-footer" style="margin: 0">
+          <button type="button" ng-disabled="formActividad.$invalid" class="btn " data-dismiss="modal" ng-click="actualizarAct()">Actualizar</button>
+      </div>
+     </form>    
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal5" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-body">
+        <div class="box" style="border-top: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="info">
+              <h3 class="title">Éxito!</h3>
+              <p>
+                Se ha realizado correctamente.
+              </p>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal6" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body" style="padding-top: 15px">
+        <div class="box" style="border: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="info">
+              <h3 class="title">Espere!</h3>
+              <p>
+                ¿Está seguro de que desea eliminar la actividad?
+              </p>
+            <br> <br>
+             <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminarAct()">Aceptar</button>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal7" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body" style="padding-top: 15px">
+        <div class="box" style="border: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="info">
+              <h3 class="title">Espere!</h3>
+              <p>
+                ¿Está seguro de que desea eliminar la actividad?
+              </p>
+            <br> <br>
+             <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminarSub()">Aceptar</button>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAl DE ASOCIAR PARTICIPANTES-->
+<div class="modal fade" id="myModal8" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button ng-click="limpiarAsociar()" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center>
+        <h3 class="modal-title" id="myModalLabel" ng-if="buttonNuevo == 0 ">Asociados</h3>
+        <h3 class="modal-title" id="myModalLabel" ng-if="buttonNuevo == 1 ">Por Asociar</h3></center>
+      </div>
+      <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;padding-top: 0px">
+        <div  class="row" >
+          <br>
+          <div class="box-body" style="color: black; padding-top: 0px" >
+            <div class="row">
+              <div class="col-md-12">
+                <button type="button" class="btn btn-default btn-sm checkbox-toggle " ng-click="nuevoAsociar()" ng-if=" buttonNuevo == 0"><i class="fa fa-plus"></i>
+                 Nueva Asociación
+                </button>  
+              <br><br>
+              </div>
+              <div class="col-md-12">
+               <div class="box" ng-if=" buttonNuevo == 0 && !asociacion[0]" style="border: 0">             
+                <div class="icon">
+                  <div class="image"><i class="ion ion-sad-outline"></i></div>
+                  <div class="info">
+                    <h3 class="title">OPS!</h3>
+                    <p>
+                    No hay más
+                    <span ng-if="actividadSelect.tipoPoblacion == 0"> Participantes</span>
+                    <span ng-if="actividadSelect.tipoPoblacion == 1"> Empresas</span>
+                    <span ng-if="actividadSelect.tipoPoblacion == 2"> Agrupaciones</span> por asociar.
+                  </p>
+                  </div>
+                </div>
+              </div>
+                <table ng-if="buttonNuevo == 0 && asociacion[0]" class="table table-striped">
+                  <tr>
+                    <th>Identificación</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                  </tr>
+                  <tr ng-repeat="a in asociacion" ng-if="a.participante">
+                    <td>{{a.participante[0].cedula}}</td>
+                    <td>{{a.participante[0].nombre}}</td>
+                    <td>{{a.participante[0].telefono}}</td>
+                    <td align="center">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="desAsociar(a , $index)"  title="Eliminar Asociación" ><i class="fa fa-trash-o"></i></button>
+                    </td>
+                  </tr>
+                  <tr ng-repeat="a in asociacion" ng-if="a.empresa">
+                    <td>{{a.empresa[0].nit}}</td>
+                    <td>{{a.empresa[0].nombre}}</td>
+                    <td>{{a.empresa[0].telefono1}}</td>
+                    <td>
+                      <button type="button" class="btn btn-default btn-sm" ng-click="desAsociar(a , $index)"  title="Eliminar Asociación" ><i class="fa fa-trash-o"></i></button>
+                    </td>
+                  </tr>
+                  <tr  ng-repeat="a in asociacion" ng-if="a.agrupacion">
+                    <td>{{a.agrupacion[0].nit}}</td>
+                    <td>{{a.agrupacion[0].nombre}}</td>
+                    <td>{{a.agrupacion[0].telefono1}}</td>
+                    <td>
+                      <button type="button" class="btn btn-default btn-sm" ng-click="desAsociar(a , $index)"  title="Eliminar Asociación" ><i class="fa fa-trash-o"></i></button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            
+             <div class="box" ng-if=" buttonNuevo == 1 && !nuevo[0]" style="border: 0">  <div class="icon">
+                <div class="image"><i class="ion ion-sad-outline"></i></div>
+                <div class="info">
+                  <h3 class="title">OPS!</h3>
+                  <p>
+                    No hay más
+                    <span ng-if="actividadSelect.tipoPoblacion == 0"> Participantes</span>
+                    <span ng-if="actividadSelect.tipoPoblacion == 1"> Empresas</span>
+                    <span ng-if="actividadSelect.tipoPoblacion == 2"> Agrupaciones</span> por asociar.
+                  </p>
+                </div>
+              </div>
+            </div>
+              <table ng-if="buttonNuevo == 1 && nuevo[0]" class="table table-striped">
+                <tr>
+                  <th>Identificación</th>
+                  <th>Nombre</th>
+                  <th>Teléfono</th>
+                  <th></th>
+                </tr>
+                <tr ng-repeat="a in nuevo" ng-if="a.tipoPoblacion == 0">
+                    <td>{{a.cedula}}</td>
+                    <td>{{a.nombre}}</td>
+                    <td>{{a.telefono}}</td>
+                    <td align="center">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="Asociar(a)"  title="Asociar" ><i class="fa fa-plus"></i></button>
+                    </td>
+                  </tr>
+                  <tr ng-repeat="a in nuevo" ng-if="a.tipoPoblacion == 1">
+                    <td>{{a.nit}}</td>
+                    <td>{{a.nombre}}</td>
+                    <td>{{a.telefono1}}</td>
+                    <td>
+                      <button type="button" class="btn btn-default btn-sm" ng-click="Asociar(a)"  title="Asociar" ><i class="fa fa-plus"></i></button>
+                    </td>
+                  </tr>
+                  <tr ng-repeat="a in nuevo" ng-if="a.tipoPoblacion == 2">
+                    <td>{{a.nit}}</td>
+                    <td>{{a.nombre}}</td>
+                    <td>{{a.telefono}}</td>
+                    <td>
+                      <button type="button" class="btn btn-default btn-sm" ng-click="Asociar(a)"  title="Asociar" ><i class="fa fa-plus"></i></button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            <div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <div class="modal-footer" style="margin: 0;">
+        <button type="button" data-dismiss="modal" ng-if="buttonNuevo == 0"  class=" btn  pull-left">Cancelar</button>
+        <button type="button" ng-click="funcionAtras()" ng-if="buttonNuevo == 1"  class=" btn pull-left">Volver a Asociados</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,318 @@
+<section class="content-header">
+      <h1 style="color: #ecf0f5">
+        I
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#/dashboard"><i class="fa fa-dashboard"></i>Tablero</a></li>
+        <li><a href="#/agrupacion">Grupos Artísticos</a></li>
+      </ol>
+</section>
+<section ng-show="!ver" class="content">
+
+  <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
+  
+  </div>
+</section>
+<!-- Main content -->
+<section ng-show="ver" class="content">
+  <!-- Info boxes -->
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-music"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{agrupaciones.length}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">GRUPOS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-user"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{reporte.cantPersonas}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">ARTISTAS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-venus"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{reporte.cantMujeres}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">MUJERES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-mars"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: large; color: black !important">{{reporte.cantHombres}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">HOMBRES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+    
+  <!-- Main row -->
+  <div class="row">
+      <!-- Left col -->
+      <div class="col-md-8 col-xs-12">
+        <!-- MAP & BOX PANE -->
+          <div class="box" style="border:none !important;">
+            <div class="box-header with-border">
+              
+              <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">LISTADO DE GRUPOS ARTISTICOS</h3>
+              <div class="box-tools pull-right">
+                <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  data-toggle="modal" data-target="#myModal" ng-click="cambiarButton()">NUEVA AGRUPACION</button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive">
+              <table class="table table-hover table-striped">
+                <tbody>
+                <tr>
+                  <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">TELEFONO</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">EMAIL</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">GENERO</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;"></th>
+                  
+                </tr>
+                  
+                <tr ng-repeat="agrupacion in agrupaciones">
+                  <td class="mailbox-name"><a style="color: #00a3ee !important;">{{agrupacion.nombre}}</a></td>
+                  <td>{{agrupacion.telefono}}</td>   
+                  <td>{{agrupacion.correo}}</td>
+                  <td>{{agrupacion.nombreGenero}}</td>
+                  <td>            
+                    <div class="btn-group">
+                      <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="cargarAgrupacion(agrupacion)" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></button>
+                      <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal6" ng-click="eliminar(agrupacion , $index)"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+    </div>
+    <!--end col left-->
+    <div class="col-md-4 col-xs-12">
+      <div class="box " style="border:none !important;">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TIPOS DE GENEROS</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body ">
+          <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options">
+          </canvas> 
+        </div>
+        <div class="box-footer no-padding">
+          <ul class="nav nav-pills nav-stacked">
+            <li ng-repeat="l in labels"><a href=""><i class="fa fa-circle" ng-style="colores[$index]"></i> {{l}} <span class="pull-right" style="color: #B6BBC0 !important">{{data[$index]}}</span></a></li>
+            
+          </ul>
+        </div>
+        <!-- /.footer -->
+        
+      </div>
+      <!-- /.box -->
+    </div>
+    
+  </div>
+  
+
+</section>
+
+<!-- Modal DE INSERTAR AGRUPACIONES-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <center><h4 class="modal-title"><b>Datos de las Agrupaciones </b></h4></center>
+      </div>
+      <form name="formCosto">
+      <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
+        <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+          <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos básicos</h3>
+        </div><br>
+        <div class="row">
+          <div class="col-md-4 col-xs-12">
+              <label>Nombre:</label>
+              <input  ng-model="agrupacion.nombre" type="text" class="form-control" required>
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label>Representante:</label>
+              <input  ng-model="agrupacion.representante" type="text" class="form-control" required>
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label>Nit:</label>
+              <input  ng-model="agrupacion.nit" type="number" class="form-control" required>
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-md-4 col-xs-12">
+              <label>Departamento:</label>
+               <select ng-model="agrupacion.departamento" class="form-control" ng-change="buscarCiudad(agrupacion.departamento)" required>
+                <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos" ng-selected ="departamento.idDepartamento == departamentoSelect">{{departamento.nombre}}</option>
+            </select>
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label>Ciudad:</label>
+              <select ng-model="agrupacion.ciudad" class="form-control" required>
+                <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-selected ="ciudad.idCiudad == ciudadSelect">{{ciudad.nombre}}</option>
+              </select>
+          </div>
+           <div class="col-md-4 col-xs-12">
+              <label>Región:</label>
+              <select ng-model="agrupacion.region" class="form-control" required>
+                <option value="{{region.idRegion}}" ng-repeat="region in regiones" ng-selected ="region.idRegion == regionSelect">{{region.nombre}}</option>
+              </select>
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-md-4 col-xs-12">
+              <label>Dirección:</label>
+              <input id="direccion" ng-model="agrupacion.direccion" type="text" class="form-control" required>
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label>telefono:</label>
+             <input ng-model="agrupacion.telefono" type="number" class="form-control" required>
+          </div>
+         <div class="col-md-4 col-xs-12">
+              <label>telefono 2:</label>
+             <input ng-model="agrupacion.telefono2" type="number" class="form-control">
+          </div>
+        </div><br>
+        <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+          <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Detalles</h3>
+        </div><br>
+        <div class="row">
+         <div class="col-md-4 col-xs-12">
+              <label>Número Empleados:</label>
+             <input ng-model="agrupacion.nempleados" type="number" class="form-control" required>
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label>Cantidad de Mujeres:</label>
+              <input ng-model="agrupacion.cantMujeres" type="number" class="form-control" required>
+           </div>
+          <div class="col-md-4 col-xs-12">
+              <label>Cantidad de Hombres:</label>
+             <input ng-model="agrupacion.cantHombres" type="number" class="form-control" required>
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-md-4 col-xs-12">
+              <label>Email:</label>
+             <input ng-model="agrupacion.email" type="email" class="form-control" required>
+          </div>
+          <div class="col-md-4 col-xs-12">
+            <label><span ng-if="swichCargo==0" class="fa fa-plus " style="color:#3c8dbc" ng-click="cambiaCargo()" ></span><span ng-if="swichCargo==1" class="fa  fa-list-ul " style="color:#3c8dbc" ng-click="cambiaCargo()" ></span> <span ng-if="swichCargo==0">Seleccione un Género:</span><span ng-if="swichCargo==1||swichCargo==2">Nuevo Género:</span></label>
+            <input ng-if="swichCargo==1||swichCargo==2" id="cargo" ng-model="agrupacion.genero" type="text" class="form-control" placeholder="">
+
+            <select ng-if="swichCargo==0" ng-model="agrupacion.genero" class="form-control" required>
+               <option value="{{g.idGenero}}" ng-repeat="g in genero" ng-selected ="g.idGenero == generoSelect">{{g.nombre}}</option>
+            </select>
+
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label>Facebook (opcional):</label>
+             <input ng-model="agrupacion.facebook" type="text" class="form-control">
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-md-4 col-xs-12">
+              <label>Instagram (opcional):</label>
+             <input ng-model="agrupacion.instagram" type="text" class="form-control">
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label>Youtube (opcional):</label>
+             <input ng-model="agrupacion.youtube" type="text" class="form-control">
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label>Twitter (opcional):</label>
+             <input ng-model="agrupacion.twitter" type="text" class="form-control">
+          </div>          
+        </div><br>
+        <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
+          <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Ubicación</h3>
+        </div>
+        <div class="row"  ng-init="initMap()">
+           <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="deleteMarkers();"><i class="fa fa-close"></i>
+            Eliminar Marker
+          </button>
+            <div style="width: 100% !important;" id="map2"></div>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0">
+          <button  type="button" class="btn  pull-left" data-dismiss="modal" >Cerrar</button>
+          <button type="button" ng-disabled="formActividad.$invalid" class="btn " data-dismiss="modal" ng-click="nuevoGenero()">{{button}}</button>
+      </div>
+     </form>    
+    </div>
+  </div>
+</div>
+<!--modal de eliminar-->
+<div class="modal fade" id="myModal6" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body" style="padding-top: 15px">
+        <div class="box" style="border: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="info">
+              <h3 class="title">Espere!</h3>
+              <p>
+                ¿Está seguro de que desea eliminar la Agrupación?
+              </p>
+            <br> <br>
+             <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="delete()">Aceptar</button>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal5" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-body">
+        <div class="box" style="border-top: none; box-shadow: none;">             
+          <div class="icon">
+            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="info">
+              <h3 class="title">Éxito!</h3>
+              <p>
+                Se ha realizado correctamente.
+              </p>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,843 @@
+
+<section class="content-header">
+      <h1>
+        Consumo
+        <small>Evento</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#/evento">Evento</a></li>
+        <li><a href="#/detalle">Detalle del evento</a></li>
+        <li><a href="#/consumo">Consumo</a></li>
+      </ol>
+</section>
+<!-- Main content -->
+<section ng-show="!ver" class="content">
+
+  <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
+  
+  </div>
+</section>
+<section ng-show="ver" class="content">
+
+  <div class="row">
+   <div class="col-md-15 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-recycle" style="font-size: 39px !important"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: small; color: black !important">${{reciclado[0].total2}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">ALUMINIO</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-15 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-recycle" style="font-size: 39px !important"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: small; color: black !important">${{reciclado[1].total2}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">VIDRIO</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-15 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-recycle" style="font-size: 39px !important"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: small; color: black !important">${{reciclado[2].total2}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">PLASTICO PET</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-15 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-recycle" style="font-size: 39px !important"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: small; color: black !important">${{reciclado[3].total2}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">CARTÓN</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-15 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-recycle" style="font-size: 39px !important"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: small; color: black !important">${{reciclado[4].total2}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">ORGÁNICO</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+
+  <div class="row" >
+    <div class="col-md-12" >
+      <div class="box " style="border:none !important;">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">CONSUMO POTENCIAL EN LOS PALCOS</h3>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <div class="mailbox-controls pull-right">
+            <!-- Check all button -->
+             <button ng-if="selectPalco[0]"  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;" ng-click="limpiarForm()" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" >NUEVO CONSUMO</button>
+          </div>
+          <div class="table mailbox-messages">
+            <div class="box" style="border:none !important;" ng-if="!consumoPalco[0]">             
+              <div class="icon">
+                <div class="image"><i class="ion ion-sad-outline"></i></div>
+                <div class="info">
+                  <h3 class="title">OPS!</h3>
+                  <p>
+                    Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
+                  </p>
+                </div>
+              </div>
+            </div> 
+            <div class="table mailbox-messages table-responsive" style="height: 250px; overflow-y: scroll;">
+              <table class="table table-hover table-striped" >
+                <tbody >
+                <tr>
+                  <th style="font-size: small; color: #B6BBC0 !important;">PRODUCTO</th>
+                  <th  style="font-size: small; color: #B6BBC0 !important;"> CONSUMO</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">COSTO</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">VENTA</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">TOTAL COSTO</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">TOTAL VENTA</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;"></th>
+                </tr>
+                  
+                <tr ng-repeat="consumo in consumoPalco" >
+                  <td class="mailbox-name"><a ng-click="verDetalle(evento)" style="color: #00a3ee !important;font-size: small">{{consumo.productoN}}</a></td>
+                  <td class="mailbox-subject" ng-if="evento.ciudad" style="font-size: small">{{consumo.consumo2}}
+                  </td>
+                  <td class="mailbox-subject" style="font-size: small"> {{consumo.costo2}}
+                  </td>
+                  <td class="mailbox-date" style="font-size: small">{{consumo.venta2}}</td>
+                  <td class="mailbox-subject" style="font-size: small">{{consumo.totalCosto2}}</td>
+                  <td class="mailbox-attachment" style="font-size: small">{{consumo.totalVenta2}}</td>
+                  <td class="mailbox-attachment" style="font-size: small">{{consumo.mc.toFixed(1)}}%</td>
+                  <td>            
+                    <div class="btn-group">
+                 
+                      <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actPalco(consumo)" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></button>
+                      <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal6" ng-click="cargarEliminar(consumo, 1)"><i class="fa fa-trash-o"></i></button>
+                    
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <!-- /.table -->
+            </div>
+            <!-- /.table -->
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+          </div>
+        </div>
+      </div>
+      <!-- /. box -->
+    </div>
+    <div class="col-md-12">
+      <div class="box " style="border:none !important;" >
+        <div class="box-header with-border">
+            <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">CONSUMO POTENCIAL EN LA CALLE</h3>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <div class="mailbox-controls pull-right">
+            <!-- Check all button -->
+            <button ng-if="selectCalle[0]"  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;" ng-click="limpiarForm()" data-toggle="modal" data-target="#myModal2" data-toggle="tooltip" >NUEVO CONSUMO</button> 
+          </div>
+          <div class="table mailbox-messages">
+            <div class="box" style="border:none !important;" ng-if="!consumoCalle[0]">             
+              <div class="icon">
+                <div class="image"><i class="ion ion-sad-outline"></i></div>
+                <div class="info">
+                  <h3 class="title">OPS!</h3>
+                  <p>
+                    Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
+                  </p>
+                </div>
+              </div>
+            </div> 
+            <div class="table mailbox-messages table-responsive" style="height: 250px; overflow-y: scroll;">
+              <table class="table table-hover table-striped">
+                <tbody>
+                <tr>
+                  <th style="font-size: small; color: #B6BBC0 !important;">PRODUCTO</th>
+                  <th  style="font-size: small; color: #B6BBC0 !important;"> CONSUMO</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">COSTO</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">VENTA</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">TOTAL COSTO</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">TOTAL VENTA</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">MC</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;"></th>
+                </tr>
+                  
+                <tr ng-repeat="consumo in consumoCalle">
+                  <td class="mailbox-name"><a ng-click="verDetalle(evento)" style="color: #00a3ee !important;font-size: small">{{consumo.productoN}}</a></td>
+                  <td class="mailbox-subject" style="font-size: small">{{consumo.consumo}}
+                  </td>
+                  <td class="mailbox-subject" style="font-size: small"> {{consumo.costo}}
+                  </td>
+                  <td class="mailbox-date" style="font-size: small">{{consumo.venta}}</td>
+                  <td class="mailbox-subject" style="font-size: small">{{consumo.totalCosto}}</td>
+                  <td class="mailbox-attachment" style="font-size: small">{{consumo.totalVenta}}</td>
+                  <td class="mailbox-attachment" style="font-size: small">{{consumo.mc.toFixed(1)}}%</td>
+                  <td>            
+                    <div class="btn-group">
+                 
+                      <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actCalle(consumo)" data-toggle="modal" data-target="#myModal2"><i class="fa fa-edit"></i></button>
+                      <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal6" ng-click="cargarEliminar(consumo, 2)"><i class="fa fa-trash-o"></i></button>
+                    
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <!-- /.table -->
+            </div>
+            
+            <!-- /.table -->
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+          </div>
+        </div>
+      </div>
+      <!-- /. box -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box " style="border:none !important;" >
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">POTENCIAL DE MATERIAL RECICLABLE</h3>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <div class="table mailbox-messages" style="height: 250px; overflow-y: scroll;">
+            <table class="table table-hover table-striped" style="font-size: smaller;">
+              <thead>
+              <tr>
+                  <th style="font-size: small; color: #B6BBC0 !important;">MATERIAL</th>
+                  <th  style="font-size: small; color: #B6BBC0 !important;">VALOR KG</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">CANTIDAD</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">KG</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">TONELADAS</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">TOTAL</th>
+                  <th></th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="r in reciclado">
+                  <td class="mailbox-name"><a ng-click="verDetalle(evento)" style="color: #00a3ee !important;font-size: small">{{r.material}}</a></td>
+                  <td class="mailbox-subject" style="font-size: small">
+                    <input ng-if="r.editar" ng-model="r.valor" class="form-control">
+                    <span ng-if="!r.editar" ><span style="font-size: smaller;"> {{r.valor}}</span></span>
+                  </td>
+                  <td class="mailbox-subject" style="font-size: small"> {{r.cantidad}}
+                  </td>
+                  <td class="mailbox-date" style="font-size: small">{{r.kg}}</td>
+                  <td class="mailbox-subject" style="font-size: small">{{r.tonelada.toFixed(1)}}</td>
+                  <td class="mailbox-attachment" style="font-size: small">{{r.total}}</td>
+                  <td>            
+                    <div class="btn-group">
+                 
+                      <button ng-if="!r.editar" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="r.editar=true; cambiarButton()"><i class="icon ion-edit"></i></button>
+                    
+                      <button ng-if="r.editar == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarMaterial(r, $index)"><i class="fa fa-check"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table -->
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+          </div>
+        </div>
+      </div>
+      <!-- /. box -->
+    </div>
+    <div class="col-md-12" >
+      <div class="box " style="border:none !important;">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">MATERIAL ORGÁNICO DETALLADO</h3>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <div class="mailbox-controls pull-right">
+            <!-- Check all button -->
+           <button ng-if="selectOrganico[0]" class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;" ng-click="limpiarForm()" data-toggle="modal" data-target="#myModal3" data-toggle="tooltip" >NUEVO MATERIAL</button>
+          </div>
+          <div class="table mailbox-messages">
+            <div class="box" style="border:none !important;" ng-if="!consumoorganico[0]">             
+              <div class="icon">
+                <div class="image"><i class="ion ion-sad-outline"></i></div>
+                <div class="info">
+                  <h3 class="title">OPS!</h3>
+                  <p>
+                    Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
+                  </p>
+                </div>
+              </div>
+            </div> 
+            <div class="table-responsive" style="height: 250px; overflow-y: scroll;">
+              <table class="table table-hover table-striped" ng-if="consumoorganico[0]" style="font-size: smaller;">
+                <thead>
+                  <tr>
+                    <th style="font-size: small; color: #B6BBC0 !important;">PRODUCTO</th>
+                    <th  style="font-size: small; color: #B6BBC0 !important;">CONSUMO INDIVIDUAL</th>
+                    <th style="font-size: small; color: #B6BBC0 !important;">PESO</th>
+                    <th style="font-size: small; color: #B6BBC0 !important;">CONSUMO TOTAL</th>
+                    <th style="font-size: small; color: #B6BBC0 !important;">COSTO</th>
+                    <th style="font-size: small; color: #B6BBC0 !important;">TOTAL COSTO</th>
+                    <th style="font-size: small; color: #B6BBC0 !important;">DESPERDICIO</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="consumo in consumoorganico">
+                  <td class="mailbox-name"><a  style="color: #00a3ee !important;font-size: small">{{consumo.productoN}}</a></td>
+                  <td class="mailbox-subject" style="font-size: small">
+                    <input ng-if="r.editar" ng-model="r.valor" class="form-control">
+                    <span ng-if="!r.editar" ><span style="font-size: smaller;"> {{consumo.consumo}}</span></span>
+                  </td>
+                  <td class="mailbox-subject" style="font-size: small"> {{consumo.cantidad}}
+                  </td>
+                  <td class="mailbox-date" style="font-size: small">{{consumo.consumoTotal}}</td>
+                  <td class="mailbox-subject" style="font-size: small">{{consumo.costo}}</td>
+                  <td class="mailbox-attachment" style="font-size: small">{{consumo.totalCosto}}</td>
+                  <td class="mailbox-attachment" style="font-size: small">{{consumo.desperdicio}}</td>
+                  <td>            
+                    <div class="btn-group">
+                 
+                      <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actOrganico(consumo)" data-toggle="modal" data-target="#myModal3"><i class="fa fa-edit"></i></button>
+                      <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal6" ng-click="cargarEliminar(consumo, 3)"><i class="fa fa-trash-o"></i></button>
+                    
+                    </div>
+                  </td>
+                </tr>
+               </tbody>
+              </table>
+            </div>
+            <!-- /.table -->
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+          </div>
+        </div>
+      </div>
+      <!-- /. box -->
+    </div>
+
+    <div class="col-md-12" >
+      <div class="box " style="border:none !important;">
+        <div class="box-header with-border">
+            <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">BENEFICIOS ECONÓMICOS Y MEDIOAMBIENTALES</h3>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <div class="mailbox-messages" style="height: 250px; overflow-y: scroll;">
+            <table class="table table-hover table-striped" ng-if="consumoorganico[0]" style="font-size: smaller;">
+              <thead>
+                <tr>
+                  <th style="font-size: small; color: #B6BBC0 !important;">IMPACTO</th>
+                  <th  style="font-size: small; color: #B6BBC0 !important;">COSTO</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">REDUCCIÓN</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">TOTAL</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td class="mailbox-subject"><a  style="color: #00a3ee !important;font-size: small">Arboles</a></td>
+                <td class="mailbox-subject">
+
+                  <input ng-if="impacto.editarArboles == true" ng-model="impacto.costoArboles" class="form-control">
+                  <span ng-if="impacto.editarArboles == false">{{impacto.costoArboles}}</span>
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionArboles}}</td>
+                <td class="mailbox-name">{{impacto.totalArboles}}</td>
+                <td class="mailbox-subject" style="font-size: small">
+                    <button ng-if="!impacto.editarArboles" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarArboles=true;"><i class="icon ion-edit"></i></button>
+                    
+                    <button ng-if="impacto.editarArboles == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoArboles, 0)"><i class="fa fa-check"></i></button>
+
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a  style="color: #00a3ee !important;font-size: small">Compostaje</a></td>
+                <td class="mailbox-subject">
+                   <input ng-if="impacto.editarCompo == true" ng-model="impacto.costoCompo" class="form-control">
+                   <span ng-if="impacto.editarCompo == false">{{impacto.costoCompo}}</span>
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionCompo}}</td>
+                <td class="mailbox-name">{{impacto.totalCompo}}</td>
+
+                <td class="mailbox-subject" style="font-size: small">
+                    <button ng-if="!impacto.editarCompo" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarCompo=true;"><i class="icon ion-edit"></i></button>
+                    
+                    <button ng-if="impacto.editarCompo == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoCompo, 1)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a  style="color: #00a3ee !important;font-size: small">Desechos orgánicos</a></td>
+                <td class="mailbox-subject">
+                <span ng-if="impacto.editarDese == false">{{impacto.costoDese}}</span>
+                <input ng-if="impacto.editarDese == true" ng-model="impacto.costoDese" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionDese}}</td>
+                <td class="mailbox-name">{{impacto.totalDese}}</td>
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarDese" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarDese=true;"><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarDese == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoDese, 2)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                 <td class="mailbox-subject"><a  style="color: #00a3ee !important;font-size: small">Kg de materias primas</a></td>
+                <td class="mailbox-subject">
+                <span ng-if="impacto.editarPrima == false">{{impacto.costoPrima}}</span>
+                <input ng-if="impacto.editarPrima == true" ng-model="impacto.costoPrima" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionPrima}}</td>
+                <td class="mailbox-name">{{impacto.totalPrima}}</td>
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarPrima" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarPrima=true;"><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarPrima == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoDese, 3)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a style="color: #00a3ee !important;font-size: small">Kg menos de basura al vertedero</a></td>
+                <td class="mailbox-subject">
+                  <span ng-if="impacto.editarVerte == false">{{impacto.costoVerte}}</span>
+                  <input ng-if="impacto.editarVerte == true" ng-model="impacto.costoVerte" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionVerte}}</td>
+                <td class="mailbox-name">{{impacto.totalVerte}}</td>
+
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarVerte" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarVerte=true;"><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarVerte == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoVerte, 4)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a style="color: #00a3ee !important;font-size: small">Kwh de electricidad ahorrados</a></td>
+                <td class="mailbox-subject">
+                  <span ng-if="impacto.editarKwh == false">{{impacto.costoKwh}}</span>
+                  <input ng-if="impacto.editarKwh == true" ng-model="impacto.costoKwh" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionKwh}}</td>
+                <td class="mailbox-name">{{impacto.totalKwh}}</td>
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarKwh" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarKwh=true;"><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarKwh == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoKwh, 5)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a style="color: #00a3ee !important;font-size: small">Litros de Agua</a></td>
+                <td class="mailbox-subject">
+                  <span ng-if="impacto.editarAgua == false">{{impacto.costoAgua}}</span>
+                  <input ng-if="impacto.editarAgua == true" ng-model="impacto.costoAgua" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionAgua}}</td>
+                <td class="mailbox-name">{{impacto.totalAgua}}</td>
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarAgua" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarAgua=true;"><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarAgua == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoAgua, 6)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a style="color: #00a3ee !important;font-size: small">Litros de petróleo</a></td>
+                <td class="mailbox-subject">
+                  <span ng-if="impacto.editarPetro == false">{{impacto.costoPetro}}</span>
+                  <input ng-if="impacto.editarPetro == true" ng-model="impacto.costoPetro" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionPetro}}</td>
+                <td class="mailbox-name">{{impacto.totalPetro}}</td>
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarPetro" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarPetro=true;"><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarPetro == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoPetro, 7)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a style="color: #00a3ee !important;font-size: small">Gas Natural M3</a></td>
+                <td class="mailbox-subject">
+                  <span ng-if="impacto.editarNatural == false">{{impacto.costoNatural}}</span>
+                  <input ng-if="impacto.editarNatural == true" ng-model="impacto.costoNatural" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionNatural}}</td>
+                <td class="mailbox-name">{{impacto.totalNatural}}</td>
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarNatural" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarNatural=true;"><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarNatural == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoNatural, 8)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a style="color: #00a3ee !important;font-size: small">Bio Gas M3</a></td>
+                <td class="mailbox-subject">
+                  <span ng-if="impacto.editarGas == false">{{impacto.costoGas}}</span>
+                  <input ng-if="impacto.editarGas == true" ng-model="impacto.costoGas" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionGas}}</td>
+                <td class="mailbox-name">{{impacto.totalGas}}</td>
+
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarGas" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarGas=true;"><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarGas == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoGas, 9)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a style="color: #00a3ee !important;font-size: small">Litros de Bio etanol o bio disel</a></td>
+                <td class="mailbox-subject">
+                  <span ng-if="impacto.editarBio == false">{{impacto.costoBio}}</span>
+                  <input ng-if="impacto.editarBio == true" ng-model="impacto.costoBio" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionBio}}</td>
+                <td class="mailbox-name">{{impacto.totalBio}}</td>
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarBio" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarBio=true;"><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarBio == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoBio, 10)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a style="color: #00a3ee !important;font-size: small">Toneladas de CO2</a></td>
+                <td class="mailbox-subject">
+                  <span ng-if="impacto.editarCo2 == false">{{impacto.costoCo2}}</span>
+                  <input ng-if="impacto.editarCo2 == true" ng-model="impacto.costoCo2" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionCo2}}</td>
+                <td class="mailbox-name">{{impacto.totalCo2}}</td>
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarCo2" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarCo2=true;""><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarCo2 == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoCo2, 11)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a style="color: #00a3ee !important;font-size: small">Toneladas de bauxita</a></td>
+                <td class="mailbox-subject">
+                  <span ng-if="impacto.editarBauxita == false">{{impacto.costoBauxita}}</span>
+                  <input ng-if="impacto.editarBauxita == true" ng-model="impacto.costoBauxita" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionBauxita}}</td>
+                <td class="mailbox-name">{{impacto.totalBauxita}}</td>
+
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarBauxita" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarBauxita=true;"><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarBauxita == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoBauxita, 12)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mailbox-subject"><a style="color: #00a3ee !important;font-size: small">Mineral de hierro</a></td>
+                <td class="mailbox-subject">
+                  <span ng-if="impacto.editarHierro == false">{{impacto.costoHierro}}</span>
+                  <input ng-if="impacto.editarHierro == true" ng-model="impacto.costoHierro" class="form-control">
+                </td>
+                <td class="mailbox-attachment">{{impacto.reduccionHierro}}</td>
+                <td class="mailbox-name">{{impacto.totalHierro}}</td>
+                <td class="mailbox-subject" style="font-size: small">
+                  <button ng-if="!impacto.editarHierro" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarHierro=true;"><i class="icon ion-edit"></i></button>
+                    
+                  <button ng-if="impacto.editarHierro == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoHierro, 13)"><i class="fa fa-check"></i></button>
+                </td>
+              </tr>
+             </tbody>
+            </table>
+            <!-- /.table -->
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+          </div>
+        </div>
+      </div>
+      <!-- /. box -->
+    </div>
+ </div>
+  <div class="row">
+    <div class="col-md-4 col-xs-12">
+      <div class="col-md-12 col-xs-12" style="padding: 0px">
+        <div class="box " style="border:none !important; background-color:white; font-size: small !important; ">
+          <div class="box-header with-border"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RECICLADO POR TONELADAS</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body ">
+            <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options"  >
+           </canvas> 
+                
+          </div>
+          <div class="box-footer no-padding" style="background-color: white;">
+              <ul class="nav nav-pills nav-stacked" >
+
+                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #ff6c00"></i> Orgánicos <span class="pull-right" style="color: #B6BBC0 !important">{{data[0]}}</span></a></li>
+
+                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #e0ca7f"></i> Aluminio <span class="pull-right" style="color: #B6BBC0 !important">{{data[1]}}</span></a></li>
+
+                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f1a64d"></i> Vidrio <span class="pull-right" style="color: #B6BBC0 !important">{{data[2]}}</span></a></li>
+
+                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00abf8"></i> Plástico PET <span class="pull-right" style="color: #B6BBC0 !important">{{data[3]}}</span></a></li>
+
+                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f24b45"></i>Cartón <span class="pull-right" style="color: #B6BBC0 !important">{{data[4]}}</span></a></li>
+             </ul>
+            
+          </div>
+          <!-- /.footer -->
+        </div>
+        <!-- /.box -->
+      </div>
+    </div>
+    <div class="col-md-4 col-xs-12">
+      <div class="col-md-12 col-xs-12" style="padding: 0px">
+        <div class="box " style="border:none !important; background-color:white; font-size: small !important; ">
+          <div class="box-header with-border"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RECICLADO POR PORCENTAJE</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body ">
+            <canvas id="pie" class="chart chart-pie" chart-data="data2" chart-labels="labels" chart-options="options">
+            </canvas> 
+          </div>
+          <div class="box-footer no-padding" style="background-color: white;">
+              <ul class="nav nav-pills nav-stacked" >
+
+                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #ff6c00"></i> Orgánicos <span class="pull-right" style="color: #B6BBC0 !important">{{data2[0]}}%</span></a></li>
+
+                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #e0ca7f"></i> Aluminio <span class="pull-right" style="color: #B6BBC0 !important">{{data2[1]}}%</span></a></li>
+
+                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f1a64d"></i> Vidrio <span class="pull-right" style="color: #B6BBC0 !important">{{data2[2]}}%</span></a></li>
+
+                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00abf8"></i> Plástico PET <span class="pull-right" style="color: #B6BBC0 !important">{{data2[3]}}%</span></a></li>
+
+                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f24b45"></i>Cartón <span class="pull-right" style="color: #B6BBC0 !important">{{data2[4]}}%</span></a></li>
+             </ul>
+            
+          </div>
+          <!-- /.footer -->
+        </div>
+        <!-- /.box -->
+      </div>
+    </div>
+</div>
+
+
+
+</section>
+<!-- /.content -->	
+
+
+
+<!-- Modal de insertar nuevo cosumo de los palcos-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Consumo potencial en los palcos</h4></center>
+      </div>
+      <form name="formConsumo">
+      <div class="modal-body">
+         <div class="row" >
+            <div ng-if="!actualizarPalco" class="col-md-3 col-xs-12 col-lg-3" >
+              <label>Producto:</label>
+              <select ng-model="consumo.producto" class="form-control">
+                  <option value="{{palco.idTipo}}" ng-repeat="palco in selectPalco" >{{palco.nombre}}</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-xs-12 col-lg-3">
+                <label>Consumo (Cantidad):</label>
+                <!--ng-model="consumo.consumo"-->
+                <input ng-model="consumo.consumo" type="number" class="form-control" >
+            </div>
+            <div class="col-md-3 col-xs-12 col-lg-3" >
+              <label>Costo:</label>
+              <!--ng-model="consumo.costo"-->
+              <input ng-model="consumo.costo" type="number" class="form-control" >
+            </div>
+            <div class="col-md-3 col-xs-12 col-lg-3">
+                <label>Venta:</label>
+                <!--ng-model="consumo.venta"-->
+                <input ng-model="consumo.venta" type="number" class="form-control" >
+            </div>     
+          </div>
+      </div>
+      <div class="modal-footer" style="margin: 0;">
+          <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
+          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="!actualizarPalco" ng-click="guardarConsumoPalco(consumo)">Guardar</button>
+
+          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="actualizarPalco" ng-click="editarConsumoPalco(consumo)">Actualizar</button>
+      </div>
+     </form>    
+    </div>
+  </div>
+</div>
+
+<!-- Modal de insertar nuevo consumo de la calle-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Consumo potencial en la calle</h4></center>
+      </div>
+      <form name="formConsumo">
+      <div class="modal-body">
+          <div class="row" >
+            <div ng-if="!actualizarCalle" class="col-md-3 col-xs-12 col-lg-3" >
+              <label>Producto:</label>
+              <select ng-model="consumo.producto" class="form-control">
+                  <option value="{{calle.idTipo}}" ng-repeat="calle in selectCalle" >{{calle.nombre}}</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-xs-12 col-lg-3">
+                <label>Consumo (Cantidad):</label>
+                <input ng-model="consumo.consumo" type="number" class="form-control" >
+            </div>
+            <div class="col-md-3 col-xs-12 col-lg-3" >
+              <label>Costo:</label>
+              <input ng-model="consumo.costo" type="number" class="form-control" >
+            </div>
+            <div class="col-md-3 col-xs-12 col-lg-3">
+                <label>Venta:</label>
+                <input ng-model="consumo.venta" type="number" class="form-control" >
+            </div>     
+          </div>
+      </div>
+      <div class="modal-footer" style="margin: 0;">
+          <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
+          <button type="button" ng-if="!actualizarCalle" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-click="guardarConsumoCalle(consumo)">Guardar</button>
+          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="actualizarCalle" ng-click="editarConsumoCalle(consumo)">Actualizar</button>
+      </div>
+     </form>    
+    </div>
+  </div>
+</div>
+
+<!-- Modal de insertar material organico-->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+    <div class="modal-content">
+      <div class="modal-header ">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h4 class="modal-title" id="myModalLabel">Material orgánico detallado</h4></center>
+      </div>
+      <form name="formConsumo">
+      <div class="modal-body">
+        
+      
+          <div class="row" >
+            <div ng-if="!actualizarOrganico" class="col-md-3 col-xs-12 col-lg-3" >
+              <label>Producto:</label>
+              <select ng-model="consumo.producto" class="form-control">
+                  <option value="{{organico.idTipo}}" ng-repeat="organico in selectOrganico" >{{organico.nombre}}</option>
+              </select>
+              
+            </div>
+            <div class="col-md-3 col-xs-12 col-lg-3">
+                <label>Consumo:</label>
+                <input ng-model="consumo.consumo" type="number" class="form-control" >
+            </div>
+            <div class="col-md-3 col-xs-12 col-lg-3" >
+              <label>Cantidad:</label>
+              <input ng-model="consumo.cantidad" type="number" class="form-control" >
+            </div>
+            <div class="col-md-3 col-xs-12 col-lg-3">
+                <label>costo:</label>
+                <input ng-model="consumo.costo" type="number" class="form-control" >
+            </div>     
+          </div>
+      </div>
+      <div class="modal-footer" style="margin: 0;">
+          <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
+          <button type="button" ng-if="!actualizarOrganico" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-click="guardarConsumoOrganico(consumo)">Guardar</button>
+          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="actualizarOrganico" ng-click="editarConsumoOrganico(consumo)">Actualizar</button>
+      </div>
+     </form>    
+    </div>
+  </div>
+</div>
+  <div class="modal fade" id="myModal5" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+       <div class="modal-body">
+          <div class="box" style="border-top: none; box-shadow: none;">             
+            <div class="icon">
+              <div class="image"><i class="ion ion-happy-outline"></i></div>
+              <div class="info">
+                <h3 class="title">Éxito!</h3>
+                <p>
+                  Se ha realizado correctamente.
+                </p>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal6" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body" style="padding-top: 15px">
+          <div class="box" style="border: none; box-shadow: none;">             
+            <div class="icon">
+              <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+              <div class="info">
+                <h3 class="title">Espere!</h3>
+                <p>
+                  ¿Está seguro de que desea eliminar?
+                </p>
+              <br> <br>
+               <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+              <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminarConsumo()">Aceptar</button>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
