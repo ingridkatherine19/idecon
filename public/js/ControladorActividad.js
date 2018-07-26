@@ -935,7 +935,8 @@ $routeProvider.when('/actividad', {
           };
           $scope.calen.push($scope.aux);
         });
-        $scope.cargarCalendario();
+        
+        setTimeout(function(){ $scope.cargarCalendario(); }, 500);
         //console.log($scope.calendario, $scope.calen);
         
       });
