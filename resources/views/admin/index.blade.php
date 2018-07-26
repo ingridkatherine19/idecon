@@ -222,13 +222,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="img/perfil.jpg" class="user-image" alt="User Image">
+                  <img src="img/perfil.png" class="user-image" alt="User Image">
                   <span class="hidden-xs">{{$user->nombre}}</span>
                 </a>
                 <ul class="dropdown-menu" >
                   <!-- User image -->
                   <li class="user-header" style="background-color: #00a3ee ! important">
-                    <img src="img/perfil.jpg" class="img-circle" alt="User Image">
+                    <img src="img/perfil.png" class="img-circle" alt="User Image">
 
                     <p>
                       {{$user->nombre}}

@@ -38,7 +38,7 @@
               <br>
              <div class="row">
                <div class="col-md-3 col-xs-6">
-                 <div class="avatar" style="background-image: url(../public/img/perfil.jpg)"></div>
+                 <div class="avatar" style="background-image: url(../public/img/perfil.png)"></div>
                 </div>
                <br>
                <div class="col-md-4 col-xs-6">
@@ -54,8 +54,9 @@
               <div class="col-md-5 col-xs-12" style="padding-right: 0px">
                  <label  style="font-size: small;"> Seleccionar Departamento:</label>
               </div>
-              <div class="col-md-4 col-xs-12" style="padding-left: 0px">
-                <select ng-model="departamento" class="form-control" ng-change="buscarDashboard(departamento)" required>
+              
+              <div class="col-md-4 col-xs-12" >
+                <select ng-model="departamento" class="form-control" ng-change="buscarDashboard(departamento)" >
                     <option value="0" selected>Todos los Eventos</option>
                     <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos" >{{departamento.nombre}}</option>
                 </select>
@@ -169,22 +170,22 @@
       <div class="nav-tabs-custom">
         <!-- Tabs within a box -->
         <ul class="nav nav-tabs pull-right">
-          <li class="active"><a ng-click="tab(0)" data-toggle="tab"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">Semanales</h3>
+          <li ><a ng-click="tab(0)" data-toggle="tab"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">Semanales</h3>
             </a></li>
-          <li ><a ng-click="tab(1)" data-toggle="tab"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">Mesuales</h3>
+          <li class="active"><a ng-click="tab(1)" data-toggle="tab"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">Mesuales</h3>
             </a></li>
           <li class="pull-left header"> <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">EVENTOS</h3>
           </li>
         </ul>
         <div class=" no-padding" style="height: 278px">
           <!-- Morris chart - Sales -->
-          <div ng-show="mostrarTab == 1" style="position: relative; ">
+          <div ng-show="mostrarTab == 1"  style="position: relative; ">
             <!--Mensuales-->
            <!-- <canvas id="base" class="chart-horizontal-bar"
               chart-data="data22" chart-labels="labels" style="height: 290px ! important" >
             </canvas> -->
             <div class="chart">
-              <canvas id="barChart" style="height:230px"></canvas>
+              <canvas id="barChart" style="height:280px ; "></canvas>
             </div>
           </div>
           <div ng-show="mostrarTab == 0" style="position: relative; ">
@@ -193,7 +194,7 @@
               chart-data="data23" chart-labels="labels2" style="height: 290px ! important">
             </canvas>-->
             <div class="chart">
-              <canvas id="barChart2" style="height:230px"></canvas>
+              <canvas id="barChart2" style="height:280px ;"></canvas>
             </div>
           </div>
         </div>
@@ -451,7 +452,7 @@
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">CONSUMO ESTIMADO</h3>
         </div>
         <!-- /.box-body -->
-        <div class="box-body no-padding" style="height: 173px">
+        <div class="box-body no-padding table-responsive" style="height: 173px">
           <table class="table table-hover table-striped">
               <tbody>
               <tr>

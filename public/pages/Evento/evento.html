@@ -76,20 +76,26 @@
       <div class="box " style="border:none !important;">
         <div class="box-header with-border">
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">LISTADO DE EVENTOS</h3>
-          <select class="btn btn-box-tool form-control"  ng-change="filtrar(seleccionado)" ng-model="seleccionado" >
-              <option value="0" selected>Todos los eventos</option>
-              <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in depEventos">{{departamento.nombre}}</option>
-          </select>
           <div class="box-tools pull-right">
-            <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  ng-if="mostrar" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" >NUEVO EVENTO</button>
+            <div class="row">
+              <div class="col-md-6" style="padding-top: 1%; padding-right: 0">
+                <select class="btn btn-box-tool form-control"  ng-change="filtrar(seleccionado)" ng-model="seleccionado" >
+                  <option value="0" selected>Todos los eventos</option>
+                  <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in depEventos">{{departamento.nombre}}</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  ng-if="mostrar" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" >NUEVO EVENTO</button>
+              </div>
+            </div>
           </div>
           
           <!-- /.box-tools -->
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
-
-          <div class="table mailbox-messages table-responsive">
+          <p ng-if="!eventos[0]"style="font-size: small; color: #B6BBC0 !important;text-align: center" >No se ha registrado ningun evento</p>
+          <div ng-if="eventos[0]" class="table mailbox-messages table-responsive">
             <table class="table table-hover table-striped">
               <tbody>
               <tr>
@@ -141,7 +147,7 @@
           <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options">
           </canvas> 
         </div>-->
-        <div class="box-footer no-padding" style="height: 340px; overflow-y: scroll;">
+        <div class="box-footer no-padding" style="height: 340px; overflow-y: scroll;" ng-if="totales.tipo0 !=0||totales.tipo1 !=0||totales.tipo2 !=0||totales.tipo3 !=0||totales.tipo4 !=0||totales.tipo5 !=0||totales.tipo6 !=0||totales.tipo7 !=0||totales.tipo8 !=0||totales.tipo9 !=0||totales.tipo10 !=0">
           <ul class="nav nav-pills nav-stacked">
             <li ng-if="totales.tipo0 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Encuentros y espectaculos religiosos <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo0}}</span></a></li>
             <li ng-if="totales.tipo1 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Eventos Religiosos<span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo1}}</span></a></li>
@@ -156,6 +162,9 @@
             <li ng-if="totales.tipo10 !=0" style="font-size: small;"><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Otros  <span class="pull-right" style="color: #B6BBC0 !important">{{totales.tipo10}}</span></a></li>
           </ul>
         </div>
+        <div class="box-footer no-padding" ng-if="totales.tipo0 ==0&&totales.tipo1 ==0&&totales.tipo2 ==0&&totales.tipo3 ==0&&totales.tipo4 ==0&&totales.tipo5 ==0&&totales.tipo6 ==0&&totales.tipo7 ==0&&totales.tipo8 ==0&&totales.tipo9 ==0&&totales.tipo10 ==0">
+          <p style="font-size: small; color: #B6BBC0 !important;text-align: center" >No se han registrados actividades con tipos</p>
+        </div
         <!-- /.footer -->
       </div>
       <!-- /.box -->

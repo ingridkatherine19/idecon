@@ -21,7 +21,8 @@ $routeProvider.when('/dashboard', {
   $scope.labelData =[];
   $scope.cantidadData=[];
   $scope.ruta = 'evento/all';
-  $scope.mostrarTab = 0;
+  $scope.mostrarTab = 1;
+  $scope.recarga = false;
   var interval;
   var interval2;
   var interval3;
@@ -57,7 +58,7 @@ $routeProvider.when('/dashboard', {
    /*Grafica de cantidades de usuarios */
 
    /*PRUEBAAAA DE GRAFICAAAA*/
-  
+ 
    /* FIN PRUEBAAAA*/
 
   $scope.labelUsuario = ["Empresas", "Participantes", "Agrupaciones"];
@@ -681,8 +682,20 @@ $routeProvider.when('/dashboard', {
    */
 
 
-  setTimeout(function(){ $scope.cargarBarChart(); }, 2000);
-  setTimeout(function(){ $scope.cargarBarChart2(); }, 2000);
+  setTimeout(function(){ $scope.cargarBarChart(); }, 1000);
+
+    //$scope.cargarBarChart();
+   //Cambiar tab
+  $scope.tab = function(seleccionado){
+  
+    $scope.mostrarTab = seleccionado;   
+    if ($scope.mostrarTab == 0) {
+      setTimeout(function(){ $scope.cargarBarChart2(); }, 300);
+    }else{
+   //   setTimeout(function(){ $scope.cargarBarChart(); }, 1000);
+    }
+  
+  }
   
   /*Inicio de BarChart*/
 
@@ -744,9 +757,8 @@ $routeProvider.when('/dashboard', {
   }
 
     $scope.cargarBarChart2 = function(){
-    //alert('2');
-    console.log($scope.graficaUsuario , $scope.data23);
-    var areaChartData = {
+    if ($scope.recarga == false) {
+      var areaChartData = {
       labels: $scope.graficaUsuario,
       datasets: [
         {
@@ -798,20 +810,11 @@ $routeProvider.when('/dashboard', {
 
     barChartOptions.datasetFill = false;
     barChart.Bar(barChartData, barChartOptions);
+    $scope.recarga = true;
+    }
+   
   }
 
-  //$scope.cargarBarChart();
-   //Cambiar tab
-  $scope.tab = function(seleccionado){
-    //alert(seleccionado);
-    $scope.mostrarTab = seleccionado;   
-    if ($scope.mostrarTab == 0) {
-      $scope.cargarBarChart();
-    }else{
-       $scope.cargarBarChart2();
-    }
-  
-  }
 
   /*--------------------Fin BarChart----------------------*/  
 
@@ -1207,8 +1210,8 @@ $routeProvider.when('/dashboard', {
         $scope.capacidad = response.capacidad;
         $scope.capacidad = $scope.numberFormat($scope.capacidad.toString());
         $scope.cantidadEmpleos = $scope.numberFormat($scope.cantidadEmpleos.toString());
-        $scope.sum.costos = $scope.numberFormat($scope.sum.costos.toString());
-        $scope.sum.ingresos = $scope.numberFormat($scope.sum.ingresos.toString());
+      //  $scope.sum.costos = $scope.numberFormat($scope.sum.costos.toString());
+     //   $scope.sum.ingresos = $scope.numberFormat($scope.sum.ingresos.toString());
         $scope.sum.nempleados = $scope.numberFormat($scope.sum.nempleados.toString());
         $scope.sum.cantMujeres = $scope.numberFormat($scope.sum.cantMujeres.toString());
         $scope.sum.cantHombres = $scope.numberFormat($scope.sum.cantHombres.toString());

@@ -148,7 +148,7 @@ $routeProvider.when('/evento', {
           $scope.evento.imagen = document.getElementById("file").files[0];
           $scope.imagen = document.getElementById("file").files[0];
           $scope.guardar();
-          $scope.all();
+          //$scope.all();
           //console.log($scope.evento);
 
         },
@@ -765,16 +765,17 @@ $routeProvider.when('/evento', {
               "Content-Type": "application/json"
           }
       }).success(function (response) {
+        $scope.all();
         $('#myModal2').modal('show'); // abrir
           setTimeout(function(){
             $('#myModal2').modal('hide');
         },2000);
-        $scope.all();
+        
       }); 
   }
 
   $scope.guardar = function(){
-        
+    //alert('g');
     console.log($scope.evento);
     var url = "";
     url = 'evento/create';
@@ -801,33 +802,32 @@ $routeProvider.when('/evento', {
       $http.post(path + url, fd, {
         transformRequest: angular.identity,
         headers: {'Content-Type': undefined}
-     }).success(function(response){
-      $scope.evento = response.evento;
-      //console.log($scope.evento);
-
+      }).success(function(response){
+      
+      //$scope.evento = response.evento;
+      //llamar a todos los eventos para que salga en la lista
+      $scope.all();
+      
       $('#myModal2').modal('show'); // abrir
       setTimeout(function(){
         $('#myModal2').modal('hide');
       },2000);
       
-      //llamar a todos los eventos para que salga en la lista
-      $scope.all();
       if (response.error == false) {
        // alert(response.mensaje);
         $scope.finish = true;
       }
      })
     .error(function(response){
-
+      //$scope.all();
     });
-    $scope.all();
+    //$scope.all();
   }
 
-  //trae todas las maquinas
   $scope.all = function(){
     //todos los departamentos
     //alert('d');
-    $scope.totales();
+    $scope.totalesFuncion();
 
     $http({
         url: path + 'departamento/all',
@@ -865,8 +865,9 @@ $routeProvider.when('/evento', {
     }).success(function (response) {
       $scope.eventos = response.eventos;
       //console.log($scope.eventos);
-      $scope.ver = true;  
+      $scope.ver = true;
     });
+    $scope.totalBox();
   }
   //Trae el total de los box
   $scope.totalBox = function(){
@@ -882,7 +883,7 @@ $routeProvider.when('/evento', {
   }
 
 //trae los totales de los tipos de actividad
-  $scope.totales = function(){
+  $scope.totalesFuncion = function(){
     $http({
         url: path + 'evento/reportetipo',
         method: 'get',
@@ -891,7 +892,7 @@ $routeProvider.when('/evento', {
         }
     }).success(function (response) {
       $scope.totales = response.totales;
-      console.log($scope.totales);
+      //console.log($scope.totales);
      // $scope.labels = ["Sin valor comercial", "Con boleta de ingreso", "Con valor comercial"];
      // $scope.data = [$scope.total.sinvalor, $scope.total.conboleta, $scope.total.convalor];
       //console.log($scope.total);

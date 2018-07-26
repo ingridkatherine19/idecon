@@ -333,8 +333,8 @@ class EventoController extends Controller {
 
    
     public function create(Request $request){
-      $even = json_decode($request->evento);
-   //  dd($request->file('file'));
+        $even = json_decode($request->evento);
+        
     	try {
 
     		$evento = new Evento();
@@ -635,7 +635,6 @@ class EventoController extends Controller {
     //Consulta de los tipos de actividades 
     public function Reportetipo(Request $request){
         $totales = new stdClass();
-        $subactividades = EventoActividad::all();
         $totales->tipo0 = 0;
         $totales->tipo1 = 0;
         $totales->tipo2 = 0;
@@ -647,31 +646,41 @@ class EventoController extends Controller {
         $totales->tipo8 = 0;
         $totales->tipo9 = 0;
         $totales->tipo10 = 0;
-        foreach ($subactividades as $sub) {
-            if ($sub->tipo == 0) {
-                $totales->tipo0 += 1; //Encuentros y espectaculos religiosos.
-            }elseif ($sub->tipo == 1) {
-                $totales->tipo1 += 1; //Eventos Religiosos
-            }elseif ($sub->tipo == 2) {
-                $totales->tipo2 += 1; //Congregaciones Políticas
-            }elseif ($sub->tipo == 3) {
-                $totales->tipo3 += 1; //Conciertos y presentaciones políticas
-            }elseif ($sub->tipo == 4) {
-                $totales->tipo4 += 1; //Ferias, Festivales, Rodeos y Corralejas
-            }elseif ($sub->tipo == 5) {
-                $totales->tipo5 += 1; //Concursos    
-            }elseif ($sub->tipo == 6) {
-                $totales->tipo6 += 1; //Congresos, Simposios, Seminarios o similares    
-            }elseif ($sub->tipo == 7) {
-                $totales->tipo7 += 1; //Teatro
-            }elseif ($sub->tipo == 8) {
-                $totales->tipo8 += 1; //Exhibiciones (Desfiles de Modas, Exposiciones, etc.)
-            }elseif ($sub->tipo == 9) {
-                $totales->tipo9 += 1; //Atracciones y Entretenimiento (Parques de Atracciones, Ciudades de Hierro, Circos, etc.)
-            }elseif ($sub->tipo == 10) {
-                $totales->tipo10 += 10; //Otros (Marchas, Ventas, etc.)
+        
+        $eventos = Evento::all();
+        foreach($eventos as $evento){
+            $actividades = Actividad::where('idEvento', $evento->idEvento)->get();
+            foreach($actividades as $actividad){
+                $subactividades = EventoActividad::where('idActividad', $actividad->idActividad)->get();
+                foreach ($subactividades as $sub) {
+                    if ($sub->tipo == 0) {
+                        $totales->tipo0 += 1; //Encuentros y espectaculos religiosos.
+                    }elseif ($sub->tipo == 1) {
+                        $totales->tipo1 += 1; //Eventos Religiosos
+                    }elseif ($sub->tipo == 2) {
+                        $totales->tipo2 += 1; //Congregaciones Políticas
+                    }elseif ($sub->tipo == 3) {
+                        $totales->tipo3 += 1; //Conciertos y presentaciones políticas
+                    }elseif ($sub->tipo == 4) {
+                        $totales->tipo4 += 1; //Ferias, Festivales, Rodeos y Corralejas
+                    }elseif ($sub->tipo == 5) {
+                        $totales->tipo5 += 1; //Concursos    
+                    }elseif ($sub->tipo == 6) {
+                        $totales->tipo6 += 1; //Congresos, Simposios, Seminarios o similares    
+                    }elseif ($sub->tipo == 7) {
+                        $totales->tipo7 += 1; //Teatro
+                    }elseif ($sub->tipo == 8) {
+                        $totales->tipo8 += 1; //Exhibiciones (Desfiles de Modas, Exposiciones, etc.)
+                    }elseif ($sub->tipo == 9) {
+                        $totales->tipo9 += 1; //Atracciones y Entretenimiento (Parques de Atracciones, Ciudades de Hierro, Circos, etc.)
+                    }elseif ($sub->tipo == 10) {
+                        $totales->tipo10 += 10; //Otros (Marchas, Ventas, etc.)
+                    }
+                }
             }
+            
         }
+        
         return response()->json(['error'=>false ,'totales' => $totales]);
     }
 }

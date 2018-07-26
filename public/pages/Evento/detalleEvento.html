@@ -27,7 +27,7 @@
       <div class="box" style="border:none !important;">    
         <!-- /.box-header -->
         <div class="box-body">
-          <img src="{{path+detalle.imagen}}"  style="width: 100% !important;">
+          <img src="{{path+detalle.imagen}}"  style="width: 100% !important; height: 233px;">
           <h3 style="margin-bottom: 1px">{{detalle.descripcion}}</h3>
           <p style="color: #B6BBC0; margin-top: 0">Creado : {{detalle.creado}}</p>
           <div class="row">
@@ -56,7 +56,7 @@
             </div>
           </div>
         </div>
-        <div class="box-footer no-padding">
+        <div class="box-footer no-padding" style="height: 286px;">
           <ul class="nav nav-pills nav-stacked">
             <li><a href=""><i class="fa fa-circle" style="color: #06A2EB"></i> Descripción <p style="padding-left: 8%;margin-top: 0px;color: #B6BBC0;margin-bottom: 0px;">{{detalle.descripcion}}</p>
              </a></li>
@@ -109,7 +109,7 @@
             </div>
             <div class="row" style="margin: 0px">
               <div class="col-md-12" style="padding: 0px ;  border-bottom:solid 1px #202e5894;">
-                   <a href="" class="text-center" ng-click="verReporte(detalle)"> <h4 class="letraBlanca"><i class="letraAzul fa fa-pie-chart "></i> Reporte</h4></a>
+                   <a href=""  ng-click="verReporte(detalle)"> <h4 class="letraBlanca"><i class="letraAzul fa fa-pie-chart "></i> Reporte</h4></a>
               </div>
             </div>
           </div>
@@ -154,63 +154,72 @@
       </div>
     </div>-->
     <!-- /.box -->
-    <div class="row" ng-show=" cambio == 0">
-      <div class="col-md-8">
-        <div class="box box-solid">
-          <div class="box-header with-border">
-            <h3 class="box-title">Resumen</h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <div class="row">
-              <div class="col-md-2 col-xs-4">
-                <button type="button" class="btn btn-default btn-circle btn-xl"><i class="fa fa-clock-o"></i></button>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon iconosPrincipal"><i class="fa fa-clock-o"></i></span>
+      
+              <div class="info-box-content">
+                <span class="info-box-text" style="font-size: large; color: black !important">{{totalActividades.horas}}</span>
+                <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">ENTRETENIMIENTO</span>
               </div>
-              <div class="col-md-4 col-xs-8">
-                 <h5 class="" style="font-size:x-large; margin-top: 10% ; font-weight: 100;">{{totalActividades.horas}} Horas</h5>
-              </div>
-              
-              <div class="col-md-2 col-xs-4">
-                <button type="button" class="btn btn-default btn-circle btn-xl"><i class=" fa fa-edit "></i></button>
-              </div>
-               <div class="col-md-4 col-xs-8">
-                 <h5 class="" style="font-size:x-large; margin-top: 10% ; font-weight: 100;">{{totalActividades.empleo}} Empleos</h5>
-              </div>
+              <!-- /.info-box-content -->
             </div>
-            <br>
-            <div class="row">
-              <div class="col-md-2 col-xs-4">
-                <button type="button" class="btn btn-default btn-circle btn-xl"><i class="fa fa-bar-chart"></i></button>
-              </div>
-               <div class="col-md-4 col-xs-8">
-                 <h5 class="" style="font-size:x-large; margin-top: 10% ; font-weight: 100;">{{totalActividades.cantidad}} Actividades</h5>
-              </div>
-              
-              <div class="col-md-2 col-xs-4">
-                <button type="button" class="btn btn-default btn-circle btn-xl"><i class=" fa fa-toggle-up "></i></button>
-              </div>
-              <div class="col-md-4 col-xs-8">
-                 <h5 class="" style="font-size:x-large; margin-top: 10% ; font-weight: 100;">{{totalActividades.aforo}} Aforo</h5>
-              </div>
-            </div>
+            <!-- /.info-box -->
           </div>
-          <!-- /.box-body -->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon iconosPrincipal"><i class="fa fa-users"></i></span>
+      
+              <div class="info-box-content">
+                <span class="info-box-text" style="font-size: large; color: black !important">{{totalActividades.empleo}}</span>
+                <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TOTAL EMPLEADOS</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon iconosPrincipal"><i class="fa fa-users"></i></span>
+      
+              <div class="info-box-content">
+                <span class="info-box-text" style="font-size: large; color: black !important">{{totalActividades.aforo}}</span>
+                <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">AFORO</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon iconosPrincipal"><i class="fa fa-bar-chart"></i></span>
+      
+              <div class="info-box-content">
+                <span class="info-box-text" style="font-size: large; color: black !important">{{totalActividades.cantidad}}</span>
+                <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">ACTIVIDADES</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
         </div>
-        <!-- /.box -->
       </div>
-       <div class="col-md-4 col-xs-12 col-lg-4">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="box " style="border:none !important;">
-          <div class="box-header with-border">
-            <h3 class="box-title">Mapa de actividades</h3>
-          </div>
           <div class="box-body" >
-            <div style="width: 97% !important; height: 200px !important" id="map3"></div>
+            <div style="width: 97% !important; height: 176px !important" id="map3"></div>
           </div>
         </div>
       </div>
+      
     </div>
-    <div ng-show="cambio == 0" class="row">
-      <!--<div class="col-md-4 col-xs-4 col-lg-4">
+    <!-- /.row -->
+    
+    <!--<div ng-show="cambio == 0" class="row">
+      <div class="col-md-4 col-xs-4 col-lg-4">
         <div class="box " style="border:none !important;">
           <div class="box-header with-border">
             <h3 class="box-title">Datos Básicos</h3>
@@ -283,9 +292,9 @@
             
           </div>
         </div>
-      </div>-->
+      </div>
       
-    </div>
+    </div>-->
 
     <div ng-show="cambio == 1" class="row">
       <div class="col-md-12 col-xs-12 col-lg-12">

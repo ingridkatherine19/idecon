@@ -20,25 +20,8 @@
   <br>
 
   <div class="row" style="padding-left: 2%; padding-right: 2% ;">
-    <div class="row" ng-if="costos.length == 0 && ingresos.length == 0">
-      <div class="col-md-3"></div>
-        <div class="col-xs-12 col-sm-6 col-lg-6" ng-if="costos.length == 0">
-        <div class="box">             
-          <div class="icon">
-            <div class="image"><i class="ion ion-sad-outline"></i></div>
-            <div class="info">
-              <h3 class="title">OPS!</h3>
-              <p>
-                Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
-              </p>
-            </div>
-          </div>
-          <div class="space"></div>
-        </div> 
-      </div>
-    </div>
     <div class="col-md-12" >
-      <div class="box " style="border:none !important;" ng-if="costos.length != 0">
+      <div class="box " style="border:none !important;" >
         <div class="box-header with-border">
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TABLERO DE EGRESOS</h3>
           <div class="box-tools pull-right">
@@ -56,8 +39,8 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
-          
-          <div style="height: 300px; overflow-y: scroll;">
+          <p ng-if="!costos[0]" style="font-size: small; color: #B6BBC0 !important;text-align: center" >No se ha registrado ningun evento</p>
+          <div style="height: 300px; overflow-y: scroll;" ng-if="costos.length != 0">
             <table class="table table-hover table-striped">
               <tbody>
               <tr>
@@ -67,8 +50,8 @@
                 <th style="font-size: small; color: #B6BBC0 !important;">TOTAL</th>
                 <th style="font-size: small; color: #B6BBC0 !important;"></th>
               </tr>
-                
-              <tr ng-repeat="costo in costos | filter:filtro" >
+             
+              <tr ng-repeat="costo in costos | filter:filtro" style="font-size: small" >
                 <td class="mailbox-name"><a  style="color: #00a3ee !important;">{{costo.nombre}}</a></td>
                 <td class="mailbox-subject">{{costo.cantidad2}} <span ng-if="costo.tipo==0">(SubAct)</span></td>
                 <td class="mailbox-attachment">
@@ -98,7 +81,7 @@
       <!-- /. box -->
     </div>
     <div class="col-md-12">
-      <div class="box " style="border:none !important;" ng-if="ingresos.length != 0">
+      <div class="box " style="border:none !important;" >
         <div class="box-header with-border">
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TABLERO DE INGRESOS</h3>
           <div class="box-tools pull-right">
@@ -118,8 +101,11 @@
 
         <!-- /.box-header -->
         <div class="box-body no-padding">
-          <div style="height: 300px; overflow-y: scroll;">
-            <table class="table table-hover table-striped">
+          <p ng-if="!ingresos[0]" style="font-size: small; color: #B6BBC0 !important;text-align: center" >No se ha registrado ningun evento</p>
+          
+          <div style="height: 300px; overflow-y: scroll;" ng-if="ingresos.length != 0">
+            
+            <table class="table table-hover table-striped" >
               <tbody>
               <tr>
                 <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
@@ -128,8 +114,7 @@
                 <th style="font-size: small; color: #B6BBC0 !important;">TOTAL</th>
                 <th style="font-size: small; color: #B6BBC0 !important;"></th>
               </tr>
-                
-              <tr ng-repeat="ingreso in ingresos | filter:filtro2" >
+              <tr ng-repeat="ingreso in ingresos | filter:filtro2" style="font-size: small">
                 <td class="mailbox-name"><a  style="color: #00a3ee !important;">{{ingreso.nombre}}</a></td>
                 <td class="mailbox-subject">{{ingreso.cantidad2}} <span ng-if="ingreso.tipo==0">(SubAct)</span></td>
                 <td class="mailbox-attachment">
@@ -169,20 +154,22 @@
 <section ng-show="ver">
 <div class="row" style="padding-left: 2%; padding-right: 2% ">
     <div class="col-md-4 col-xs-3">
-      <div class="box " style="border:none !important;" ng-if="costos.length != 0">
+      <div class="box " style="border:none !important;" >
         <div class="box-header with-border">
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TOTALES DE EGRESOS</h3>
         </div>
         <!-- /.box-header -->
-        <div class="box-body ">
+        
+        <p ng-if="!costos[0]" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%" >No se ha registrado egreso</p>
+        <div class="box-body " ng-if="costos.length != 0">
           <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options">
           </canvas> 
         </div>
         <div class="box-footer no-padding">
-          <ul class="nav nav-pills nav-stacked">
+          <ul class="nav nav-pills nav-stacked" style="font-size: small">
             <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i>Totales por actividades: <span class="pull-right" style="color: #B6BBC0 !important">${{costoxact2}}</span></a></li>
             <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i>Otros costos: <span class="pull-right" style="color: #B6BBC0 !important">${{otrosCostos2}} </span></a></li>
-            <li><a href="">Total: <span class="pull-right" style="color: #ff6c00 !important">${{subCosto2}} </span></a></li>
+            <li><a style="overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px;background-color: #c6c5c2d1" class="">Total: <span class="pull-right"  > ${{subCosto2}}</span></a></li>
           </ul>
         </div>
         <!-- /.footer -->
@@ -190,23 +177,24 @@
       <!-- /.box -->
     </div>
     <div class="col-md-4 col-xs-3">
-      <div class="box " style="border:none !important;" ng-if="ingresos.length != 0">
+      <div class="box " style="border:none !important;" >
         <div class="box-header with-border">
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TOTALES DE INGRESOS</h3>
           
         </div>
         <!-- /.box-header -->
-        <div class="box-body ">
+        <div class="box-body" ng-if="ingresos.length != 0">
           <canvas id="pie2" class="chart chart-pie" chart-data="data2" chart-labels="labels2" chart-options="options">
           </canvas> 
         </div>
+        <p ng-if="!ingresos[0]" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%" >No se ha registrado ingreso</p>
         <div class="box-footer no-padding">
-          <ul class="nav nav-pills nav-stacked">
+          <ul class="nav nav-pills nav-stacked" style="font-size: small">
             <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i>Totales por actividades: <span class="pull-right" style="color: #B6BBC0 !important">${{ingresoxact2}}</span></a>
               
             </li>
             <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i>Otros ingresos: <span class="pull-right" style="color: #B6BBC0 !important">${{otrosIngresos2}} </span></a></li>
-            <li><a href="">Total: <span class="pull-right" style="color: #00eab5; ">${{subIngreso2}}  </span></a></li>
+            <li><a style="overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px;background-color: #c6c5c2d1" class="">Total: <span class="pull-right"  > ${{subIngreso2}}</span></a></li>
           </ul>
         </div>
         <!-- /.footer -->
@@ -214,22 +202,23 @@
       <!-- /.box -->
     </div>
    <div class="col-md-4 col-xs-3">
-      <div class="box " style="border:none !important;" ng-show="costos.length != 0 && ingresos.length!= 0" >
+      <div class="box " style="border:none !important;"  >
         <div class="box-header with-border">
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TOTALES GENERALES</h3>
         </div>
         <!-- /.box-header -->
-        <div class="box-body ">
+        <div class="box-body " ng-show="costos.length != 0 && ingresos.length!= 0">
         <!--  <canvas id="bar3" class="chart chart-bar" chart-data="data3" chart-labels="labels3" chart-series="s"> 
           </canvas>-->
             <canvas id="barChart" style="height:230px"></canvas>
         </div>
+        <p ng-if="!ingresos[0]&&!costos[0]" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%" >No se ha registrado ingreso ni egresos</p>
         <div class="box-footer no-padding">
-          <ul class="nav nav-pills nav-stacked">
+          <ul class="nav nav-pills nav-stacked" style="font-size: small">
             <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Total de Egresos:<span class="pull-right" style="color: #B6BBC0 !important">${{subCosto2}} </span></a>
             </li>
             <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i>Total de Ingresos: <span class="pull-right" style="color: #B6BBC0 !important">${{subIngreso2}} </span></a></li>
-            <li><a href="">Margen: <span class="pull-right" style="color: #00eab5 ">{{neto2}}%  </span></a></li>
+            <li><a style="overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px;background-color: #c6c5c2d1" class="">Margen: <span class="pull-right"  > {{neto2}}%</span></a></li>
           </ul>
         </div>
         <!-- /.footer -->

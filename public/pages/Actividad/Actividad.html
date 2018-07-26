@@ -1,7 +1,6 @@
 <section class="content-header">
-      <h1>
-       {{evento.descripcion}}
-     <!--   <small>principal</small>-->
+      <h1 style="color: #ecf0f5">
+        I
       </h1>
       <ol class="breadcrumb">
         <li><a href="#/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -74,11 +73,8 @@
   </div>
   <!-- /.row -->
 
-  
-   
-  
   <div class="row">
-    <div class="col-md-7 col-xs-7">
+    <div class="col-md-7 col-sm-12 col-xs-12">
       <div class="box " style="border:none !important;">
         <div class="box-header with-border">
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TODAS LAS ACTIVIDADES</h3>
@@ -88,34 +84,19 @@
           <!-- /.box-tools -->
         </div>
         <!-- /.box-header -->
-        <div class="box-body no-padding">
-
-          <div class="box" ng-if="!actividades[0]" style="border: 0">             
-            <div class="icon">
-              <div class="image"><i class="ion ion-sad-outline"></i></div>
-              <div class="info">
-                <h3 class="title">OPS!</h3>
-                <p>
-                  Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
-                </p>
-              </div>
-            </div>
-          </div>
-          
-
-          <div class="table mailbox-messages" ng-if="actividades[0]">
+        <div class="box-body no-padding ">
+          <p ng-if="!actividades[0]" style="font-size: small; color: #B6BBC0 !important;text-align: center" >No se ha registrado ninguna Actividad</p>
+          <div class="table mailbox-messages " ng-if="actividades[0]">
             <table class="table table-hover table-striped">
               <tbody>
               <tr>
                 <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
                 <th style="font-size: small; color: #B6BBC0 !important;">RESPONSABLE</th>
                 <th style="font-size: small; color: #B6BBC0 !important;"></th>
-                
               </tr>
-                
               <tr ng-repeat="actividad in actividades">
-                <td class="mailbox-name"><a style="color: #00a3ee !important;">{{actividad.nombre}}</a></td>
-                <td class="mailbox-subject" >{{actividad.responsable}}
+                <td class="mailbox-name"><a style="color: #00a3ee !important;font-size: small">{{actividad.nombre}}</a></td>
+                <td class="mailbox-subject" style="font-size: small" >{{actividad.responsable}}
                 </td>
                 <td>            
                   <div class="btn-group">
@@ -304,7 +285,7 @@
     <div class="modal-content">
       <div class="modal-header">
        <button ng-click="cerrar()" type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #06a2eb !important;"><span aria-hidden="true">&times;</span></button>
-        <center><h3 class="modal-title" id="myModalLabel" style="color: #B6BBC0 !important;"><b>Sub actividades de  {{actSeleccionada.nombre}}</b></h3></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">SUB-ACTIVIDADES DE  {{actSeleccionada.nombre}}</h3></center>
       </div>
       <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
         <div ng-if="swichsub">
@@ -351,19 +332,9 @@
                   <select class="form-control pageList" name="modalidad" ng-model="sub.modalidad" required>
                       <option ng-repeat="modalidad in modalidadEvento" ng-selected ="sub.modalidad == modalidadSelect" value="{{modalidad.id}}">{{modalidad.name}}</option>
                   </select>
-                <!--  <select class="form-control" ng-model="sub.modalidad" >
-                    <option value="0">Sin valor comercial</option>
-                    <option value="1">Con boleta de ingreso</option>
-                    <option value="2">Con valor comercial</option>
-                  </select>-->
                 </div>
                 <div class="col-md-4 col-xs-12 col-lg-4" >
                   <label style="font-weight: 300;">Tipo de Participante:</label>
-                 <!-- <select class="form-control" ng-model="sub.tipoPoblacion" >
-                    <option value="0">Participante Natural</option>
-                    <option value="1">Participante Juridico</option>
-                    <option value="2">Grupos Artisticos</option>
-                  </select>-->
                   <select class="form-control pageList" name="tipo participante" ng-model="sub.tipoPoblacion" required>
                       <option ng-repeat="participante in participanteEvento" ng-selected ="sub.tipoPoblacion == participanteeventoSelect" value="{{participante.id}}">{{participante.name}}</option>
                   </select>
@@ -493,13 +464,13 @@
             </tr>
               
             <tr ng-repeat="actividad in subActividades | filter: filtro">
-              <td class="mailbox-name"><a style="color: #00a3ee !important;">{{actividad.nombre}}</a></td>
-              <td class="mailbox-subject" >
+              <td class="mailbox-name"><a style="color: #00a3ee !important;font-size: small">{{actividad.nombre}}</a></td>
+              <td class="mailbox-subject" style="font-size: small">
                 <span ng-if="actividad.tipoPoblacion ==0">Natural</span>
                 <span ng-if="actividad.tipoPoblacion ==1">Juridico</span>
                 <span ng-if="actividad.tipoPoblacion ==2">Grupos Artisticos</span>
               </td>
-              <td>{{actividad.cantidad}}</td>
+              <td style="font-size: small">{{actividad.cantidad}}</td>
               <td>            
                 <div class="btn-group">
                   <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="editarSub(actividad);"><i class="fa fa-edit"></i></button>
