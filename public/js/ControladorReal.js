@@ -2,7 +2,7 @@
  
 angular.module('myApp.PresupuestoReal', ['ngRoute'])
  
-// Declared route 
+// Declared route  
 .config(['$routeProvider', function($routeProvider) {
 $routeProvider.when('/real', {
         templateUrl: 'pages/Presupuesto/real.html',
@@ -407,7 +407,12 @@ $routeProvider.when('/real', {
       $scope.ingresoReal2 = $scope.numberFormat($scope.ingresoReal.toString());
       $scope.margenReal = $scope.ingresoReal - $scope.costoReal;
       $scope.margenReal = Math.round(($scope.margenReal/$scope.ingresoReal)*100);
-      $scope.margenReal = $scope.numberFormat($scope.margenReal.toString());
+      if ($scope.margenReal) {
+        $scope.margenReal = $scope.numberFormat($scope.margenReal.toString());
+      }else{
+        $scope.margenReal = 0;  
+      }
+      
       $scope.data = [
         [$scope.costoPresupuesto, $scope.costoReal],
         [$scope.ingresoPresupuesto, $scope.ingresoReal]

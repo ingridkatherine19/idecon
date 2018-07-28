@@ -280,9 +280,15 @@ $routeProvider.when('/consumo', {
       angular.forEach($scope.reciclado, function (value, key){
         value.porcentaje  = Math.round((value.total*100)/$scope.totalReciclado);
         $scope.labels.push(value.material);
-        $scope.data2.push(value.porcentaje);
+        if (value.porcentaje) {
+          $scope.data2.push(value.porcentaje);  
+        }else{
+          $scope.data2.push(0);
+        }
+        
         $scope.data.push(Math.round(value.tonelada));
       });
+      //console.log($scope.data2);
       //se agregan los puntos a la tabla Potencial de material Reciclable
       angular.forEach($scope.reciclado, function (value, key){
         value.kg = $scope.numberFormat(Math.round(value.kg).toString());

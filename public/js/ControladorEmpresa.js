@@ -13,12 +13,12 @@ $routeProvider.when('/empresa', {
 .controller('EmpresaCtrl', ['$http', '$scope', '$rootScope', function($http, $scope, $rootScope , DTOptionsBuilder, DTColumnDefBuilder) {
   localStorage.setItem("user", JSON.stringify(user));
   $rootScope.user = JSON.parse(localStorage.getItem('user')); 
-  console.log($rootScope.user);
   $scope.ver = false;
   $scope.empresas ={};
   $scope.empresa = {};
-  $scope.button = "Guardar";
+  $scope.button = "Guardar"; // Botón inicializado en guardar 
 
+  //Select de los tipos de empresas 
   $scope.tipoEmpresa = [
         { name: "Micro Empresa",  id: 0 },
         { name: "Pequeña Empresa", id: 1 },
@@ -42,12 +42,10 @@ $routeProvider.when('/empresa', {
       $scope.ver = true;
       $scope.labels = ["Micro", "Pequeña", "Mediana", "Grande"];;
       $scope.data = [];
-
       angular.forEach($scope.sectorR, function (value, key){
-        console.log(value);
         $scope.data.push(value.cantidad);
     });
-      console.log($scope.sectorR);
+
   });
  }
 
@@ -61,7 +59,6 @@ $routeProvider.when('/empresa', {
 
     }).success(function (response) {
        $scope.empresas = response.empresa;
-       console.log($scope.empresas);
     });
   }
 
@@ -79,7 +76,7 @@ $routeProvider.when('/empresa', {
    }
    $scope.empresa.lat = $scope.lat;
    $scope.empresa.lng = $scope.lng;
- //  $scope.empresa.nit = $scope.empresa.nit.replace(/\,/g,'');
+
 
     $http({
         url: path + route,
@@ -129,7 +126,7 @@ $routeProvider.when('/empresa', {
       
       if (response.error == false) {
         $scope.empresas.splice($scope.index,  1);
-      $('#myModal5').modal('show'); // abrir
+      $('#myModal5').modal('show'); // abrir modal
         setTimeout(function(){
           $('#myModal5').modal('hide');
         },2000);
@@ -149,16 +146,13 @@ $routeProvider.when('/empresa', {
         url: path + 'ciudad/all',
         method: 'get',
         params:{
-          idDepartamento: idDepartamento //PRUEBA
+          idDepartamento: idDepartamento 
         },
         headers: {
             "Content-Type": "application/json"
         }
     }).success(function (response) {
       $scope.ciudades = response.ciudades;
-      console.log($scope.ciudades);
-      
-      
     });
   }
 
@@ -171,7 +165,6 @@ $routeProvider.when('/empresa', {
         }
     }).success(function (response) {
       $scope.departamentos = response.departamentos;
-      console.log($scope.departamentos);
     });
 
  /*----------------------MAPA-------------------------*/
@@ -179,8 +172,6 @@ $routeProvider.when('/empresa', {
   $scope.markers = [];
   $scope.initMap = function() {
       var haightAshbury = {lat: 10.4742449, lng: -73.2436335};
-
-      //var haightAshbury = {lat: 37.769, lng: -122.446};
 
        $scope.map = new google.maps.Map(document.getElementById('map2'), {
           zoom: 16,
@@ -289,8 +280,8 @@ $routeProvider.when('/empresa', {
   }
 
 
-    /*---------------------------FIN DE SEPARADOR DE MILES-------------------------*/
-  //$scope.initMap();
+  /*---------------------------FIN DE SEPARADOR DE MILES-------------------------*/
+ 
 //LLAMADAS
   $scope.all();
   $scope.reporteE();

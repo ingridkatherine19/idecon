@@ -78,13 +78,13 @@
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">LISTADO DE EVENTOS</h3>
           <div class="box-tools pull-right">
             <div class="row">
-              <div class="col-md-6" style="padding-top: 1%; padding-right: 0">
+              <div class="col-md-6 col-xs-6" style="padding-top: 1%; padding-right: 0">
                 <select class="btn btn-box-tool form-control"  ng-change="filtrar(seleccionado)" ng-model="seleccionado" >
                   <option value="0" selected>Todos los eventos</option>
                   <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in depEventos">{{departamento.nombre}}</option>
                 </select>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 col-xs-6">
                 <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  ng-if="mostrar" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" >NUEVO EVENTO</button>
               </div>
             </div>
@@ -119,7 +119,6 @@
                   </div>
                 </td>
               </tr>
-              
               </tbody>
             </table>
             <!-- /.table -->

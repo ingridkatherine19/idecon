@@ -770,9 +770,9 @@ class EncuestaController extends Controller {
     public function reporteEncuesta2(Request $request){
       
         $reporteTipo = array();
-        $total = Encuesta2::count();
+        $total = 0;
         $pregunta = Pregunta::where('idEvento' , $request->idEvento)->get();
-
+        
         if (count($pregunta) != 0) {
           
            foreach ($pregunta as $p) {
@@ -782,6 +782,7 @@ class EncuestaController extends Controller {
                 $obj->tipoParticipante = 0;
                 $obj->tipoPublico = 0;
                 $encuesta = Encuesta2::where('idPregunta' , $p->idPregunta)->get();
+                $total += Encuesta2::where('idPregunta' , $p->idPregunta)->count();
                 if (count($encuesta) != 0) {
                     foreach ($encuesta as $e) {
                         $usuario = User::find($e->idUsuario);
@@ -818,17 +819,13 @@ class EncuestaController extends Controller {
                   $p->si = $si;
                   $p->no = $no;
                 }
-           
            }
-
-        }
           if(!isset($reporteTipo[0])){
             array_push($reporteTipo, $obj);
           }
           $reporteTipo[0]->total = $total;
-          
-
-         return response()->json(['error'=>false, 'pregunta' => $pregunta , 'reporteTipo' => $reporteTipo]); 
+        }
+        return response()->json(['error'=>false, 'pregunta' => $pregunta , 'reporteTipo' => $reporteTipo]); 
     }
   
     

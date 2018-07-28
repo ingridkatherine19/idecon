@@ -146,7 +146,11 @@ $routeProvider.when('/presupuesto', {
       //calculo el total ingresos - costos (Margen)
       $scope.neto =  $scope.subIngreso - $scope.subCosto;
       $scope.neto =  Math.round(($scope.neto/$scope.subIngreso)*100);
-      $scope.neto2 = $scope.numberFormat($scope.neto.toString());
+      if ($scope.neto && $scope.neto != -Infinity) {
+        $scope.neto2 = $scope.numberFormat($scope.neto.toString());
+      }else{
+        $scope.neto2 = 0;  
+      }
       //el calculo del total sin los impuestos
       $scope.resta = $scope.subCosto - $scope.subImpuesto;
       $scope.sinImpuesto = $scope.subIngreso - $scope.resta;
@@ -154,7 +158,7 @@ $routeProvider.when('/presupuesto', {
       $scope.ver = true;
           
     });
-     
+       
   }
 
   setTimeout(function(){ $scope.cargarBarChart(); }, 3000);

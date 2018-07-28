@@ -53,11 +53,12 @@
                 <th></th>
               </tr>
               <tr ng-if="valor == 1 && noinvitadas[0]">
+                <th style="font-size: small; color: #B6BBC0 !important;"></th>
                 <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
                 <th style="font-size: small; color: #B6BBC0 !important;">CORREO</th>
                 <th></th>
               </tr>
-              <tr ng-repeat="i in noinvitadas" ng-if="valor == 1 "> <!--NO iINVITADAS-->
+              <tr ng-repeat="i in noinvitadas" ng-if="valor == 1 " style="font-size: small"> <!--NO iINVITADAS-->
                 <td class="mailbox-name">
                   <input type="checkbox" class="minimal" ng-model="listado" ng-change="listaSeleccionada(i)">
                 </td>
@@ -67,30 +68,15 @@
                 <th></th>
               </tr>
               <!--BOX DE VACIO EN NO INVITADOS-->
-              <div class="box" ng-if="!invitados[0] && valor == 0 " style="border: none !important; background-color:#fafafb">  
-                <div class="icon">
-                  <div class="image"><i class="ion ion-sad-outline"></i></div>
-                  <div class="info" style="background-color:#fafafb !important">
-                    <h3 class="title">OPS!</h3>
-                    <p ng-if="tipoSelect == 0" >
-                      Aún no ha invitado a ninguna empresa
-                    </p>
-                    <p ng-if="tipoSelect == 1" >
-                      Aún no ha invitado a ninguna agrupación
-                    </p>
-                    <p ng-if="tipoSelect == 2" >
-                      Aún no ha invitado a ningún participante
-                    </p>
-                    <p ng-if="tipoSelect == 3" >
-                      Aún no ha invitado a ningún hotel
-                    </p>
-                    <p ng-if="tipoSelect == 4">
-                      Aún no ha invitado a ningún restaurante
-                    </p>
-                  </div>
-                </div>
+              
+              <div ng-if="!invitados[0] && valor == 0 " >  
+                  <p ng-if="tipoSelect == 0" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;margin-top: 6%;text-align: center" >Aún no ha invitado a ninguna empresa</p>   
+                  <p ng-if="tipoSelect == 1" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;margin-top: 6%;text-align: center" >Aún no ha invitado a ninguna agrupación</p>   
+                  <p ng-if="tipoSelect == 2" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;margin-top: 6%;text-align: center" >Aún no ha invitado a ningún participante</p>   
+                  <p ng-if="tipoSelect == 3" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;margin-top: 6%;text-align: center" >Aún no ha invitado a ningún hotel</p>   
+                  <p ng-if="tipoSelect == 4" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;margin-top: 6%;text-align: center" >Aún no ha invitado a ningún restaurante</p>   
               </div>
-              <tr ng-repeat="i in invitados" ng-if="valor == 0 "> <!-- INVITADOS-->
+              <tr ng-repeat="i in invitados" ng-if="valor == 0 " style="font-size: small"> <!-- INVITADOS-->
                 <td class="mailbox-subject" style="color: #00a3ee !important;">{{i.nombre}}
                 </td>
                 <td ng-if="i.estado == 0" class="mailbox-subject" >
@@ -109,28 +95,12 @@
                 </td>
                </tr>
                <!--BOX DE NO INVITADOS-->
-              <div class="box" ng-if="!noinvitadas[0] && valor == 1 " style="border: none !important; background-color:#fafafb">  
-                  <div class="icon">
-                    <div class="image"><i class="ion ion-sad-outline"></i></div>
-                    <div class="info" style="background-color:#fafafb !important">
-                      <h3 class="title">OPS!</h3>
-                      <p ng-if="tipoSelect == 0" >
-                        No hay más empresas que invitar.
-                      </p>
-                      <p ng-if="tipoSelect == 1" >
-                        No hay más agrupaciones que invitar.
-                      </p>
-                      <p ng-if="tipoSelect == 2" >
-                        No hay más participantes que invitar.
-                      </p>
-                      <p ng-if="tipoSelect == 3" >
-                        No hay más hoteles que invitar
-                      </p>
-                      <p ng-if="tipoSelect == 4">
-                        No hay más restaurantes que invitar.
-                      </p>
-                    </div>
-                  </div>
+              <div  ng-if="!noinvitadas[0] && valor == 1 " >  
+                  <p ng-if="tipoSelect == 0" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;margin-top: 6%;text-align: center" >No hay más empresas que invitar.</p>   
+                  <p ng-if="tipoSelect == 1" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;margin-top: 6%;text-align: center" >No hay más agrupaciones que invitar.</p>   
+                  <p ng-if="tipoSelect == 2" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;margin-top: 6%;text-align: center" >No hay más participantes que invitar.</p>   
+                  <p ng-if="tipoSelect == 3" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;margin-top: 6%;text-align: center" >No hay más hoteles que invitar.</p>   
+                  <p ng-if="tipoSelect == 4" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;margin-top: 6%;text-align: center" >No hay más restaurantes que invitar.</p>     
                 </div>
                  <!---->
               </tbody>
@@ -320,8 +290,10 @@
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">MENSAJES CREADOS</h3>
         </div>
         <div class="box-body">
-          <div class="table mailbox-messages">
-            <table class="table table-hover table-striped">
+          <p ng-if="!mensajes[0]" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;margin-top: 6%;text-align: center" >No tiene ningún mensaje personalizado</p>   
+                  
+          <div ng-if="mensajes[0]" class="table mailbox-messages">
+            <table class="table table-hover table-striped" style="font-size: small">
               <tbody>
               <tr>
                 <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
@@ -329,8 +301,7 @@
                 <th style="font-size: small; color: #B6BBC0 !important;"></th>
               </tr>
               <tr ng-repeat="mensaje in mensajes">
-                <td ng-if="mensajes.lenght == 0" style="color:gray"> No tiene ningún mensaje personalizado</td>
-                <td class="mailbox-name">{{mensaje.texto}}</td>
+                <td class="mailbox-name"><a style="color: #00a3ee !important;">{{mensaje.texto}}</a></td>
                 <td class="mailbox-subject" ng-if="mensaje.tipo == 0" >Empresa</td>
                 <td class="mailbox-subject" ng-if="mensaje.tipo == 1" >Agrupaciones</td>
                 <td class="mailbox-subject" ng-if="mensaje.tipo == 2" >Participantes</td>

@@ -1,7 +1,7 @@
 'use strict';
 
 //var path="http://maintsoft.siasolutions.com.co/maintSoft/public/";
-var path="http://localhost/ideconNuevo/public/";
+var path="http://192.168.100.238/ideconNuevo/public/";
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [

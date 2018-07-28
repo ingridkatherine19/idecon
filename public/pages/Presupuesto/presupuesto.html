@@ -23,16 +23,16 @@
     <div class="col-md-12" >
       <div class="box " style="border:none !important;" >
         <div class="box-header with-border">
-          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TABLERO DE EGRESOS</h3>
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">EGRESOS</h3>
           <div class="box-tools pull-right">
             <div class="row">
-              <div class="col-md-6" style="padding-top: 1%; padding-right: 0">
+              <div class="col-md-6 col-xs-6" style="padding-top: 1%; padding-right: 0">
                 <div class="has-feedback ">
                   <input type="text" class="form-control input-sm" placeholder="Search" ng-model="filtro">
                 </div>
               </div>
-              <div class="col-md-6">
-                <button  class="btn  btn-lg buttonLogin pull-right" style="text-align: center ;  font-size: 10px ;"   data-toggle="modal" data-target="#myModal" >NUEVO COSTO</button>
+              <div class="col-md-6 col-xs-6">
+                <button  class="btn  btn-lg buttonLogin pull-right" style="text-align: center ;  font-size: 10px ;"   data-toggle="modal" data-target="#myModal" >NUEVO EGRESO</button>
               </div>
             </div> 
           </div>
@@ -83,22 +83,20 @@
     <div class="col-md-12">
       <div class="box " style="border:none !important;" >
         <div class="box-header with-border">
-          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TABLERO DE INGRESOS</h3>
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">INGRESOS</h3>
           <div class="box-tools pull-right">
             <div class="row">
-              <div class="col-md-6" style="padding-top: 1%; padding-right: 0">
+              <div class="col-md-6 col-xs-6" style="padding-top: 1%; padding-right: 0">
                 <div class="has-feedback ">
                   <input type="text" class="form-control input-sm" placeholder="Search" ng-model="filtro2">
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 col-xs-6">
                 <button  class="btn  btn-lg buttonLogin pull-right" style="text-align: center ;  font-size: 10px ;"   data-toggle="modal" data-target="#myModal2" >NUEVO INGRESO</button>
               </div>
             </div> 
           </div>
         </div>
-        
-
         <!-- /.box-header -->
         <div class="box-body no-padding">
           <p ng-if="!ingresos[0]" style="font-size: small; color: #B6BBC0 !important;text-align: center" >No se ha registrado ningun evento</p>
@@ -153,10 +151,10 @@
 
 <section ng-show="ver">
 <div class="row" style="padding-left: 2%; padding-right: 2% ">
-    <div class="col-md-4 col-xs-3">
+    <div class="col-md-4 col-xs-12">
       <div class="box " style="border:none !important;" >
         <div class="box-header with-border">
-          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TOTALES DE EGRESOS</h3>
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">EGRESOS</h3>
         </div>
         <!-- /.box-header -->
         
@@ -176,11 +174,10 @@
       </div>
       <!-- /.box -->
     </div>
-    <div class="col-md-4 col-xs-3">
+    <div class="col-md-4 col-xs-12">
       <div class="box " style="border:none !important;" >
         <div class="box-header with-border">
-          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TOTALES DE INGRESOS</h3>
-          
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">INGRESOS</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body" ng-if="ingresos.length != 0">
@@ -201,10 +198,10 @@
       </div>
       <!-- /.box -->
     </div>
-   <div class="col-md-4 col-xs-3">
+   <div class="col-md-4 col-xs-12">
       <div class="box " style="border:none !important;"  >
         <div class="box-header with-border">
-          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TOTALES GENERALES</h3>
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TOTALES</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body " ng-show="costos.length != 0 && ingresos.length!= 0">
@@ -493,7 +490,7 @@
             <label>Nombre:</label>
             <input  ng-model="costoa.nombre" type="text" class="form-control" placeholder="sillas">
         </div>
-        <div class="col-md-4 col-xs-12">
+        <div class="col-md-4 col-xs-12 ">
             <label>Cantidad:</label>
             <input  ng-model="costoa.cantidad"  type="number" class="form-control" placeholder="130">
         </div>

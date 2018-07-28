@@ -88,26 +88,16 @@
         <div class="box-header with-border">
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">CONSUMO POTENCIAL EN LOS PALCOS</h3>
           <!-- /.box-tools -->
+          <div class="box-tools pull-right">
+            <button ng-if="selectPalco[0]" class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;" ng-click="limpiarForm()" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" >NUEVO CONSUMO</button> 
+          </div>
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
-          <div class="mailbox-controls pull-right">
-            <!-- Check all button -->
-             <button ng-if="selectPalco[0]"  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;" ng-click="limpiarForm()" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" >NUEVO CONSUMO</button>
-          </div>
+          
           <div class="table mailbox-messages">
-            <div class="box" style="border:none !important;" ng-if="!consumoPalco[0]">             
-              <div class="icon">
-                <div class="image"><i class="ion ion-sad-outline"></i></div>
-                <div class="info">
-                  <h3 class="title">OPS!</h3>
-                  <p>
-                    Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
-                  </p>
-                </div>
-              </div>
-            </div> 
-            <div class="table mailbox-messages table-responsive" style="height: 250px; overflow-y: scroll;">
+            <p ng-if="!consumoPalco[0]" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;text-align: center" >No se ha ingresado consumo en los palcos</p>
+            <div ng-if="consumoPalco[0]" class="table mailbox-messages table-responsive" style="height: 250px; overflow-y: scroll;">
               <table class="table table-hover table-striped" >
                 <tbody >
                 <tr>
@@ -159,27 +149,16 @@
       <div class="box " style="border:none !important;" >
         <div class="box-header with-border">
             <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">CONSUMO POTENCIAL EN LA CALLE</h3>
-          <!-- /.box-tools -->
+            <!-- /.box-tools -->
+            <div class="box-tools pull-right">
+              <button ng-if="selectCalle[0]"  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;" ng-click="limpiarForm()" data-toggle="modal" data-target="#myModal2" data-toggle="tooltip" >NUEVO CONSUMO</button>  
+            </div>
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
-          <div class="mailbox-controls pull-right">
-            <!-- Check all button -->
-            <button ng-if="selectCalle[0]"  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;" ng-click="limpiarForm()" data-toggle="modal" data-target="#myModal2" data-toggle="tooltip" >NUEVO CONSUMO</button> 
-          </div>
           <div class="table mailbox-messages">
-            <div class="box" style="border:none !important;" ng-if="!consumoCalle[0]">             
-              <div class="icon">
-                <div class="image"><i class="ion ion-sad-outline"></i></div>
-                <div class="info">
-                  <h3 class="title">OPS!</h3>
-                  <p>
-                    Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
-                  </p>
-                </div>
-              </div>
-            </div> 
-            <div class="table mailbox-messages table-responsive" style="height: 250px; overflow-y: scroll;">
+            <p ng-if="!consumoCalle[0]" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;text-align: center" >No se ha ingresado consumo en los palcos</p>
+            <div ng-if="consumoCalle[0]" class="table mailbox-messages table-responsive" style="height: 250px; overflow-y: scroll;">
               <table class="table table-hover table-striped">
                 <tbody>
                 <tr>
@@ -292,27 +271,16 @@
         <div class="box-header with-border">
           <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">MATERIAL ORGÁNICO DETALLADO</h3>
           <!-- /.box-tools -->
+          <div class="box-tools pull-right">
+              <button ng-if="selectOrganico[0]" class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;" ng-click="limpiarForm()" data-toggle="modal" data-target="#myModal3" data-toggle="tooltip" >NUEVO MATERIAL</button>  
+          </div>
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
-          <div class="mailbox-controls pull-right">
-            <!-- Check all button -->
-           <button ng-if="selectOrganico[0]" class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;" ng-click="limpiarForm()" data-toggle="modal" data-target="#myModal3" data-toggle="tooltip" >NUEVO MATERIAL</button>
-          </div>
           <div class="table mailbox-messages">
-            <div class="box" style="border:none !important;" ng-if="!consumoorganico[0]">             
-              <div class="icon">
-                <div class="image"><i class="ion ion-sad-outline"></i></div>
-                <div class="info">
-                  <h3 class="title">OPS!</h3>
-                  <p>
-                    Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
-                  </p>
-                </div>
-              </div>
-            </div> 
-            <div class="table-responsive" style="height: 250px; overflow-y: scroll;">
-              <table class="table table-hover table-striped" ng-if="consumoorganico[0]" style="font-size: smaller;">
+            <p ng-if="!consumoorganico[0]" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;text-align: center" >No se ha ingresado consumo en los palcos</p>
+            <div ng-if="consumoorganico[0]" class="table-responsive" style="height: 250px; overflow-y: scroll;">
+              <table class="table table-hover table-striped"  style="font-size: smaller;">
                 <thead>
                   <tr>
                     <th style="font-size: small; color: #B6BBC0 !important;">PRODUCTO</th>
@@ -371,8 +339,9 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
-          <div class="mailbox-messages" style="height: 250px; overflow-y: scroll;">
-            <table class="table table-hover table-striped" ng-if="consumoorganico[0]" style="font-size: smaller;">
+          <p ng-if="!consumoorganico[0]" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%;text-align: center" >No se ha ingresado consumo en los palcos</p>
+          <div ng-if="consumoorganico[0]" class="mailbox-messages" style="height: 250px; overflow-y: scroll;">
+            <table class="table table-hover table-striped" style="font-size: smaller;">
               <thead>
                 <tr>
                   <th style="font-size: small; color: #B6BBC0 !important;">IMPACTO</th>
@@ -551,8 +520,7 @@
                 <td class="mailbox-attachment">{{impacto.reduccionCo2}}</td>
                 <td class="mailbox-name">{{impacto.totalCo2}}</td>
                 <td class="mailbox-subject" style="font-size: small">
-                  <button ng-if="!impacto.editarCo2" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarCo2=true;""><i class="icon ion-edit"></i></button>
-                    
+                  <button ng-if="!impacto.editarCo2" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="impacto.editarCo2=true;"><i class="icon ion-edit"></i></button>
                   <button ng-if="impacto.editarCo2 == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarBeneficio(impacto.costoCo2, 11)"><i class="fa fa-check"></i></button>
                 </td>
               </tr>
@@ -607,7 +575,8 @@
           <div class="box-header with-border"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RECICLADO POR TONELADAS</h3>
           </div>
           <!-- /.box-header -->
-          <div class="box-body ">
+          <p ng-if="data[0] == 0&&data[1] == 0&&data[2] == 0&&data[3] == 0&&data[4] == 0" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%; " >Aun no hay calculos de reciclaje</p>
+          <div ng-if="data[0] != 0||data[1] != 0||data[2] != 0||data[3] != 0||data[4] != 0" class="box-body ">
             <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options"  >
            </canvas> 
                 
@@ -638,7 +607,8 @@
           <div class="box-header with-border"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RECICLADO POR PORCENTAJE</h3>
           </div>
           <!-- /.box-header -->
-          <div class="box-body ">
+          <p ng-if="data2[0] == 0&&data2[1] == 0&&data2[2] == 0&&data2[3] == 0&&data2[4] == 0" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%; " >Aun no hay calculos de reciclaje</p>
+          <div ng-if="data2[0] != 0||data2[1] != 0||data2[2] != 0||data2[3] != 0||data2[4] != 0" class="box-body ">
             <canvas id="pie" class="chart chart-pie" chart-data="data2" chart-labels="labels" chart-options="options">
             </canvas> 
           </div>

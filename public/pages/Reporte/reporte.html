@@ -48,11 +48,11 @@
           <!-- /.box-header -->
           <div class="box-body " style="height: 173px">
             <div class="row">
-              <div class="col-md-6 col-xs-12" style="padding-top: 5%">
+              <div class="col-md-6 col-xs-6" style="padding-top: 5%">
                 <canvas id="pie" class="chart chart-pie" chart-data="data2" chart-labels="labels2" chart-options="options" >
                 </canvas>    
               </div>
-              <div class="col-md-6 col-xs-12">
+              <div class="col-md-6 col-xs-6">
                 <ul class="nav nav-pills nav-stacked" style="height: 110px">
                   <li ng-repeat="nivel in dataNivel"><a style="font-size: x-small;">{{nivel.label}}:<span style="font-size: x-small;" class="pull-right" ng-style="nivel">{{nivel.porcentaje.toFixed(0)}}%</span></a></li>
                 </ul>  
@@ -481,11 +481,11 @@
         <!-- /.box-body -->
         <div class="box-footer no-padding" >
           <ul style="font-size: x-small;" class="nav nav-pills nav-stacked">
-            <li><a href=""> Arboles <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalArboles}} Unds</span></span></a></li>
-            <li><a href=""> Desechos orgánicos <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalDese}} Kg</span></span></a></li>
-            <li><a href=""> Materia prima <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalPrima}} Kg</span></span></a></li>
-            <li><a href=""> Basura al vertedero <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalVerte}} Kg</span></span></a></li>
-            <li><a href=""> Kwh de electricidad <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalKwh}}  Kwh</span></span></a></li>
+            <li><a href=""> Arboles <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalArboles}}</span></span></a></li>
+            <li><a href=""> Desechos orgánicos <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalDese}}</span></span></a></li>
+            <li><a href=""> Materia prima <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalPrima}}</span></span></a></li>
+            <li><a href=""> Basura al vertedero <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalVerte}}</span></span></a></li>
+            <li><a href=""> Electricidad <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalKwh}}</span></span></a></li>
           </ul>
         </div>
       </div>
@@ -500,9 +500,9 @@
         <!-- /.box-body -->
         <div class="box-footer no-padding" style="height: 186px">
           <ul style="font-size: x-small;" class="nav nav-pills nav-stacked">
-            <li><a href=""> Litros de Agua <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalAgua}} Lts</span></span></a></li>
-            <li><a href=""> Litros de petróleo <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalPetro}} Lts</span></span></a></li>
-            <li><a href=""> Toneladas de bauxita <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalBauxita}} Tn</span></span></a></li>
+            <li><a href=""> Agua <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalAgua}} Lts</span></span></a></li>
+            <li><a href=""> Petróleo <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalPetro}} Lts</span></span></a></li>
+            <li><a href=""> Bauxita <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalBauxita}} Tn</span></span></a></li>
             <li><a href=""> Mineral de hierro <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalHierro}} Tn</span></span></a></li>
           </ul>
         </div>
@@ -613,10 +613,10 @@
             <li><a href=""> Desechos orgánicos <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionDese}} Kg </span></span></a></li>
             <li><a href=""> Materia prima <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionPrima}} Kg </span></span></a></li>
             <li><a href=""> Basura al vertedero <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionVerte}} Kg</span></span></a></li>
-            <li><a href=""> Kwh de electricidad <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionKwh}} Kwh </span></span></a></li>
-            <li><a href=""> Litros de Agua <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionAgua}}Lts </span></a></li>
-            <li><a href=""> Litros de petróleo <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionPetro}} Lts </span></span></a></li>
-            <li><a href=""> Toneladas de bauxita <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionBauxita}} Kg </span></span></a></li>
+            <li><a href=""> Electricidad <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionKwh}} Kwh </span></span></a></li>
+            <li><a href=""> Agua <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionAgua}}Lts </span></a></li>
+            <li><a href=""> Petróleo <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionPetro}} Lts </span></span></a></li>
+            <li><a href=""> Bauxita <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionBauxita}} Kg </span></span></a></li>
             <li><a href=""> Mineral de hierro <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionHierro}} Kg</span></span></a></li>
           </ul>
         </div>
@@ -633,9 +633,9 @@
         <div class="box-footer no-padding" style="height: 186px" >
           <ul style="font-size: x-small;" class="nav nav-pills nav-stacked">
             <li><a href=""> Compostaje <span class="pull-right" style="color: #B6BBC0 !important">{{organico.compostaje}} kg</span></a></li>
-            <li><a href=""> Gas Natural M3 <span class="pull-right" style="color: #B6BBC0 !important">{{organico.natural}} m<sup>2</sup></span></span></span></a></li>
-            <li><a href=""> Bio Gas M3 <span class="pull-right" style="color: #B6BBC0 !important">{{organico.gas}} m<sup>2</sup></span></a></li>
-            <li><a href=""> Bio Etanol <span class="pull-right" style="color: #B6BBC0 !important">{{organico.bio}} m<sup>2</sup></span></span></a></li>
+            <li><a href=""> Gas Natural <span class="pull-right" style="color: #B6BBC0 !important">{{organico.natural}} m<sup>3</sup></span></span></span></a></li>
+            <li><a href=""> Bio Gas <span class="pull-right" style="color: #B6BBC0 !important">{{organico.gas}} m<sup>3</sup></span></a></li>
+            <li><a href=""> Bio Etanol <span class="pull-right" style="color: #B6BBC0 !important">{{organico.bio}} m<sup>3</sup></span></span></a></li>
           </ul>
         </div>
       </div>
@@ -702,11 +702,11 @@
         <div class="box-footer no-padding" >
           <ul  class="nav nav-pills nav-stacked" style=" margin-top: 0px; height:200px;overflow-y: auto; font-size: x-small;">
             <li><a href=""> Menos basura vertedero  <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.basura}}</span></a></li>
-            <li><a href=""> Kwh electricidad <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.kwh}}</span></span></span></a></li>
-            <li><a href=""> Litros de Agua <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.agua}}</span></a></li>
-            <li><a href=""> Litros de Petróleo <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.petroleo}}</span></span></a></li>
-            <li><a href=""> Toneladas de CO2 <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.co2}}</span></span></a></li>
-            <li><a href=""> Toneladas de bauxita <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.bauxita}}</span></span></a></li>
+            <li><a href=""> Electricidad <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.kwh}}</span></span></span></a></li>
+            <li><a href=""> Agua <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.agua}}</span></a></li>
+            <li><a href=""> Petróleo <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.petroleo}}</span></span></a></li>
+            <li><a href=""> CO2 <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.co2}}</span></span></a></li>
+            <li><a href=""> Bauxita <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.bauxita}}</span></span></a></li>
             <li><a href=""> Mineral de hierro <span class="pull-right" style="color: #B6BBC0 !important">{{aluminio.hierro}}</span></span></a></li>
           </ul>
         </div>
@@ -724,15 +724,15 @@
         <div class="box-footer no-padding" >
           <ul  class="nav nav-pills nav-stacked" style=" margin-top: 0px; height:200px;overflow-y: auto">
             
-              <li style="font-size: x-small;"><a>Kg Materias Primas 
+              <li style="font-size: x-small;"><a>Materias Primas 
                 <span class="pull-right"><span style="color: #B6BBC0; font-size: x-small;" >{{vidrio.prima}}</span></span></a></li>
               <li style="font-size: x-small;"><a >Menos basura vertedero <span class="pull-right"><span style="color:#B6BBC0; font-size: x-small;">{{vidrio.basura}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Kwh electricidad <span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{vidrio.kwh}}</span></span></a>
+              <li style="font-size: x-small;"><a>Electricidad <span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{vidrio.kwh}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Litros de Petróleo <span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{vidrio.petroleo}}</span></span></a>
+              <li style="font-size: x-small;"><a>Petróleo <span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{vidrio.petroleo}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Toneladas de CO2<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{vidrio.co2}}</span></span></a>
+              <li style="font-size: x-small;"><a>CO2<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{vidrio.co2}}</span></span></a>
               </li>
           </ul>
         </div>
@@ -749,13 +749,13 @@
             <ul class="nav nav-pills nav-stacked"  style=" margin-top: 0px; height:200px;overflow-y: auto">
               <li style="font-size: x-small;"><a >Menos basura vertedero <span class="pull-right"><span style="color:#B6BBC0; font-size: x-small;">{{plastico.basura}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Kwh electricidad <span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{plastico.kwh}}</span></span></a>
+              <li style="font-size: x-small;"><a>Electricidad <span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{plastico.kwh}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Litros de Agua <span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{plastico.agua}}</span></span></a>
+              <li style="font-size: x-small;"><a>Agua <span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{plastico.agua}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Litros de Petróleo<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{plastico.petroleo}}</span></span></a>
+              <li style="font-size: x-small;"><a>Petróleo<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{plastico.petroleo}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Toneladas de CO2<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{plastico.co2}}</span></span></a>
+              <li style="font-size: x-small;"><a>CO2<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{plastico.co2}}</span></span></a>
               </li>
             </ul>
           <!-- /.row -->
@@ -776,13 +776,13 @@
               </li>
               <li style="font-size: x-small;"><a>Menos basura vertedero <span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{carton.basura}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Kwh electricidad <span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{carton.kwh}}</span></span></a>
+              <li style="font-size: x-small;"><a>Electricidad <span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{carton.kwh}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Litros de Agua<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{carton.agua}}</span></span></a>
+              <li style="font-size: x-small;"><a>Agua<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{carton.agua}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Litros de Petróleo<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{carton.petroleo}}</span></span></a>
+              <li style="font-size: x-small;"><a>Petróleo<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{carton.petroleo}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Toneladas de CO2<span class="pull-right"><span  style="font-size: x-small; colox-r:#B6BBC0">{{carton.co2}}</span></span></a>
+              <li style="font-size: x-small;"><a>CO2<span class="pull-right"><span  style="font-size: x-small; colox-r:#B6BBC0">{{carton.co2}}</span></span></a>
               </li>
             </ul>
           <!-- /.row -->
@@ -803,7 +803,7 @@
               </li>
               <li style="font-size: x-small;"><a>Menos basura vertedero <span class="pull-right"><span style="font-size: x-small; color:#B6BBC0">{{organico.basura}}</span></span></a>
               </li>
-              <li style="font-size: x-small;"><a>Toneladas de CO2<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{organico.co2}}</span></span></a>
+              <li style="font-size: x-small;"><a>CO2<span class="pull-right"><span  style="font-size: x-small; color:#B6BBC0">{{organico.co2}}</span></span></a>
               </li>
             </ul>
           <!-- /.row -->

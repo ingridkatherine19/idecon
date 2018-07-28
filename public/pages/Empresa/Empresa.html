@@ -94,16 +94,16 @@
                 <th style="font-size: small; color: #B6BBC0 !important;">CORREO</th>
                 <th style="font-size: small; color: #B6BBC0 !important;"></th>
               </tr>
-              <tr ng-repeat="empresa in empresas | filter:filtro">
-                <td class="mailbox-name"><a ng-click="verDetalle(evento)" style="color: #00a3ee !important;">{{empresa.nombre}}</a></td>
+              <tr ng-repeat="empresa in empresas">
+                <td class="mailbox-name"><a ng-click="verDetalle(evento)" style="color: #00a3ee !important; font-size: small">{{empresa.nombre}}</a></td>
                 <td class="mailbox-subject" ng-if="evento.ciudad">{{evento.ciudad}}
                 </td>
-                <td class="mailbox-subject" ng-if="empresa.sector == 0">Microempresa</td>
-                <td class="mailbox-subject" ng-if="empresa.sector == 1">Pequeña</td>
-                <td class="mailbox-subject" ng-if="empresa.sector == 2">Mediana</td>
-                <td class="mailbox-subject" ng-if="empresa.sector == 3">Grande</td>
-                <td class="mailbox-subject"> {{empresa.telefono1}}</td>
-                <td class="mailbox-subject">{{empresa.correo}}</td>
+                <td class="mailbox-subject" ng-if="empresa.sector == 0" style="font-size: small">Microempresa</td>
+                <td class="mailbox-subject" ng-if="empresa.sector == 1" style="font-size: small">Pequeña</td>
+                <td class="mailbox-subject" ng-if="empresa.sector == 2" style="font-size: small">Mediana</td>
+                <td class="mailbox-subject" ng-if="empresa.sector == 3" style="font-size: small">Grande</td>
+                <td class="mailbox-subject" style="font-size: small"> {{empresa.telefono1}}</td>
+                <td class="mailbox-subject" style="font-size: small">{{empresa.correo}}</td>
                 <td>            
                   <div class="btn-group">
                     <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="cargarEmpresa(empresa)" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></button>
@@ -138,22 +138,20 @@
         </div>
         <div class="box-footer no-padding">
           <ul class="nav nav-pills nav-stacked">
-            <li ng-if="sectorR[0].cantidad != 0"><a href=""><i class="fa fa-circle" style="color: #00EAB5"></i> Micro <span class="pull-right" style="color: #B6BBC0 !important">{{sectorR[0].promedio.toFixed(1)}} %</span></a></li>
-            <li ng-if="sectorR[1].cantidad != 0"><a href=""><i class="fa fa-circle" style="color: #FF6C00"></i> Pequeña <span class="pull-right" style="color: #B6BBC0 !important">{{sectorR[1].promedio.toFixed(1)}} %</span></a></li>
-            <li ng-if="sectorR[2].cantidad != 0"><a href=""><i class="fa fa-circle" style="color: #00ABF8"></i> Mediana <span class="pull-right" style="color: #B6BBC0 ">{{sectorR[2].promedio.toFixed(1)}} %</span></a></li>
+            <li ng-if="sectorR[0].cantidad != 0"><a style="font-size: small"><i class="fa fa-circle" style="color: #00EAB5 ;"></i> Micro <span class="pull-right" style="color: #B6BBC0 !important">{{sectorR[0].promedio.toFixed(1)}} %</span></a></li>
+            <li ng-if="sectorR[1].cantidad != 0"><a style="font-size: small"><i class="fa fa-circle" style="color: #FF6C00"></i> Pequeña <span class="pull-right" style="color: #B6BBC0 !important">{{sectorR[1].promedio.toFixed(1)}} %</span></a></li>
+            <li ng-if="sectorR[2].cantidad != 0"><a style="font-size: small"><i class="fa fa-circle" style="color: #00ABF8"></i> Mediana <span class="pull-right" style="color: #B6BBC0 ">{{sectorR[2].promedio.toFixed(1)}} %</span></a></li>
           </ul>
         </div>
         <!-- /.box-body -->
       </div>
       <!-- /.box -->
     </div>
-
-
   </div>
 </section>
-<!-- Modal de insertar evento-->
+<!-- Modal de insertar empresa-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-lg" role="document" >
     <div class="modal-content">
       <div class="modal-header ">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -283,13 +281,13 @@
 </div>
 <!--modal de eliminar-->
 <div class="modal fade" id="myModal6" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body" style="padding-top: 15px">
+  <div class="modal-dialog modal-sm" >
+    <div class="modal-content" style="background-color: #00abf8 !important;">
+      <div class="modal-body" style="padding-top: 15px ">
         <div class="box" style="border: none; box-shadow: none;">             
-          <div class="icon">
-            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
-            <div class="info">
+          <div class="icon" style="background-color:#00abf8 !important">
+            <div class="image" style="background-color: 00abf8 ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="info" style="background-color:#00abf8 !important">
               <h3 class="title">Espere!</h3>
               <p>
                 ¿Está seguro de que desea eliminar la empresa?

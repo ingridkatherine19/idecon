@@ -17,20 +17,18 @@
 <!-- Main content -->
 <section ng-show="ver" class="content">
 	 <div class="row" style="margin-right: 0px; margin-left: 0px">
-      <div class="col-md-8   col-sm-12 ">
+      <div class="col-md-8 col-sm-12 ">
         <div class="box " style="border:none !important;">
           <div class="box-header with-border">
             <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">PREGUNTAS REALIZADAS</h3>
-              <p  ng-if="preguntas.length == 0" class="text-center" style="color:red">
-                No posee preguntas para encuestar, por favor presione en "agregar"
-              </p>
+              <p ng-if="preguntas.length == 0" style="font-size: small; color: #B6BBC0 !important;text-align: center" >No se ha registrado ningun evento</p>
             <div class="box-tools pull-right">
               <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  data-toggle="modal" data-target="#myModal" ng-click="cambiarButton(0)" data-toggle="tooltip" >NUEVA PREGUNTA</button>
             </div>
           </div>
           <div class="box-body no-padding">
             <div class="table mailbox-messages">
-              <table class="table table-hover table-striped">
+              <table class="table table-hover table-striped" ng-if="preguntas.length != 0">
                 <tbody>
                 <tr>
                   <th style="font-size: small; color: #B6BBC0 !important;">DESCRIPCIÓN</th>
