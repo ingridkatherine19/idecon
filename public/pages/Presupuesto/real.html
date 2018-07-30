@@ -61,7 +61,6 @@
         <tr ng-repeat="act in actividades | filter:filtro">
           <td class="mailbox-name"><a  style="color: #00a3ee !important;">{{act.nombre}}</a></td>
           <td style="color: #ff6c00;font-size: smaller;">${{act.costo2}}</td>
-          
           <td>
             <input ng-if="act.editar" id="idcostoreal" ng-model="act.costoReal" class="form-control">
             <span ng-if="!act.editar"  style="color: #ff6c00"><span style="font-size: smaller;"> ${{act.costoReal2}}</span></span>
@@ -422,7 +421,6 @@
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <center><h4 class="modal-title" id="myModalLabel">Datos de los palcos de la actividad {{actividadSeleccionada.nombre}}</h4></center>
       </div>
-      
       <div class="modal-body">
         <div ng-if="actPalco.lugar==1" class="row">
           <div class="col-md-4 col-xs-12" ng-repeat="palco in actPalco.palcos" >
@@ -442,7 +440,6 @@
           </div>
         </div>
       </div>
-
       <!--<div class="modal-footer colorModal modalBorde" style="margin: 0">
         <button type="button" class="btn  btn-outline pull-left" data-dismiss="modal" aria-label="Close">Cancelar</button>
         <button type="button" ng-click="guardarPalco(actPalco)" class="btn btn-outline" ng-click="">Guardar</button>
@@ -451,7 +448,6 @@
            <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
           <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="guardarPalco(actPalco)">Guardar</button>
       </div>
-     
      </div>
   </div>
 </div>

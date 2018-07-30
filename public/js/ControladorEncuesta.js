@@ -28,6 +28,8 @@ $routeProvider.when('/encuesta', {
   $scope.titulo = 'Agregar Pregunta';
   $scope.button = 'Guardar';
   $scope.cambio = 0;
+
+
   
   //$scope.labels = ['', ''];
   $scope.labels = ['Agrupación', 'Empresa', 'Participante', 'Público'];
@@ -94,6 +96,7 @@ $routeProvider.when('/encuesta', {
           $('#myModal5').modal('hide');
         },2000);
         $scope.preguntaAll();
+        $scope.buscarReporte();
      
     });
   }
@@ -117,6 +120,7 @@ $routeProvider.when('/encuesta', {
           $('#myModal5').modal('hide');
         },2000);
         $scope.preguntaAll();
+        $scope.buscarReporte();
 
     });
   }
@@ -159,12 +163,12 @@ $routeProvider.when('/encuesta', {
       }).success(function (response) {
         $scope.reporte = response.pregunta;
         $scope.reporteTipo = response.reporteTipo;
-        //console.log($scope.reporte);
+        console.log($scope.reporte);
         $scope.ver = true;
         if ($scope.reporteTipo.length != 0) {
           $scope.data = [
             $scope.reporteTipo[0].tipoAgrupacion,
-            $scope.reporteTipo[0].tipoEmpresa,
+            $scope.reporteTipo[0].tipoEmpresa,  
             $scope.reporteTipo[0].tipoParticipante,
             $scope.reporteTipo[0].tipoPublico
           ];

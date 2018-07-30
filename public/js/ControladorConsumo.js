@@ -26,9 +26,29 @@ $routeProvider.when('/consumo', {
   $scope.actualizarCalle = false;
   $scope.actualizarOrganico = false;
   $scope.actualizarBen = false;
+  // input de consumo potencial en los palcos
+  $scope.consumoconsumo = "";
+  $scope.consumoventa = "";
+  $scope.consumocosto = "";
+  // input de consumo potencial en la calle
+  $scope.consumoconsumo2 = "";
+  $scope.consumoventa2 = "";
+  $scope.consumocosto2 = "";
+  // input de potencial material reciclable
+  $scope.valorR = "";
+  //input de material orgánico detallado
+  $scope.consumoconsumo3 = "";
+  $scope.consumocantidad3 = "";
+  $scope.consumocosto3 = "";
 
   $scope.limpiarForm = function(){
     $scope.consumo = {};
+    $scope.consumoconsumo = "";
+    $scope.consumoventa = "";
+    $scope.consumocosto = "";
+    $scope.consumoconsumo2 = "";
+    $scope.consumoventa2 = "";
+    $scope.consumocosto2 = "";
     $scope.actualizarPalco = false;
     $scope.actualizarCalle = false;
     $scope.actualizarOrganico = false;
@@ -40,13 +60,23 @@ $routeProvider.when('/consumo', {
 
   //llenar la variable de lo que se va a actualizar
   $scope.actPalco = function(consumo){
-    
+    console.log(consumo);
     $scope.consumo = consumo;
+    $scope.consumoconsumo = $scope.numberFormat(consumo.consumo.toString());
+    $scope.consumoventa = $scope.numberFormat(consumo.venta.toString());
+    $scope.consumocosto = $scope.numberFormat(consumo.costo.toString());
     $scope.actualizarPalco = true;
   }
 
   $scope.editarConsumoPalco = function(consumo){
- 
+     
+    consumo.costo = $scope.consumocosto.replace(/\./g,'');
+    consumo.costo = parseInt(consumo.costo);
+    consumo.venta = $scope.consumoventa.replace(/\./g,'');
+    consumo.venta = parseInt(consumo.venta);
+    consumo.consumo = $scope.consumoconsumo.replace(/\./g,'');
+    consumo.consumo = parseInt(consumo.consumo);
+
     $http({
         url: path + 'consumo/actpalco',
         method: 'get',
@@ -116,9 +146,16 @@ $routeProvider.when('/consumo', {
     }
   }
     
-  $scope.guardarConsumoPalco = function(consumo){
+  $scope.guardarConsumoPalco = function(consumo, consumoconsumo, consumocosto, consumoventa){
     consumo.idEvento = $rootScope.evento.idEvento;
-    $http({
+    consumo.costo = consumocosto.replace(/\./g,'');
+    consumo.costo = parseInt(consumo.costo);
+    consumo.venta = consumoventa.replace(/\./g,'');
+    consumo.venta = parseInt(consumo.venta);
+    consumo.consumo = consumoconsumo.replace(/\./g,'');
+    consumo.consumo = parseInt(consumo.consumo);
+
+   $http({
         url: path + 'consumo/insertpalco',
         method: 'get',
         params: consumo,
@@ -142,18 +179,32 @@ $routeProvider.when('/consumo', {
 
   //llenar la variable de lo que se va a actualizar
   $scope.actCalle = function(consumo){
-    $scope.consumo = consumo; 
+    $scope.consumoSelect = {};
+  //  console.log(consumo);
+    $scope.consumoSelect.idConsumo = consumo.idConsumo;
+    $scope.consumoconsumo2 = $scope.numberFormat(consumo.consumo.toString());
+    $scope.consumoventa2 = $scope.numberFormat(consumo.venta.toString());
+    $scope.consumocosto2 = $scope.numberFormat(consumo.costo.toString());
 
+ //   $scope.consumo = consumo;
     $scope.actualizarPalco = true;
     $scope.actualizarCalle = true;
   }
 
   $scope.editarConsumoCalle = function(consumo){
-    //console.log(consumo);
+    
+
+    $scope.consumoSelect.consumo = $scope.consumoconsumo2.replace(/\./g,'');
+    $scope.consumoSelect.consumo = parseInt($scope.consumoSelect.consumo);
+    $scope.consumoSelect.venta =  $scope.consumoventa2.replace(/\./g,'');
+    $scope.consumoSelect.venta = parseInt($scope.consumoSelect.venta);
+    $scope.consumoSelect.costo = $scope.consumocosto2.replace(/\./g,'');
+    $scope.consumoSelect.costo = parseInt($scope.consumoSelect.costo);
+   // console.log($scope.consumo);
     $http({
         url: path + 'consumo/actcalle',
         method: 'get',
-        params: consumo,
+        params: $scope.consumoSelect  ,
         headers: {
             "Content-Type": "application/json"
         }
@@ -169,8 +220,15 @@ $routeProvider.when('/consumo', {
     });
   }
 
-  $scope.guardarConsumoCalle = function(consumo ){
+  $scope.guardarConsumoCalle = function(consumo , consumoconsumo2, consumocosto2, consumoventa2){
     consumo.idEvento = $rootScope.evento.idEvento;
+    consumo.costo = consumoconsumo2.replace(/\./g,'');
+    consumo.costo = parseInt(consumo.costo);
+    consumo.venta = consumocosto2.replace(/\./g,'');
+    consumo.venta = parseInt(consumo.venta);
+    consumo.consumo = consumoventa2.replace(/\./g,'');
+    consumo.consumo = parseInt(consumo.consumo);
+
     $http({
         url: path + 'consumo/insertcalle',
         method: 'get',
@@ -194,16 +252,25 @@ $routeProvider.when('/consumo', {
 
   //llenar la variable de lo que se va a actualizar
   $scope.actOrganico = function(consumo){
-    $scope.consumo = consumo; 
+    $scope.consumoOrg = {};
+    $scope.consumoconsumo3 = $scope.numberFormat(consumo.consumo.toString());
+    $scope.consumocantidad3 = $scope.numberFormat(consumo.cantidad.toString());
+    $scope.consumocosto3 = $scope.numberFormat(consumo.costo.toString());
+    $scope.consumoOrg = consumo; 
     $scope.actualizarOrganico = true;
   }
 
   $scope.editarConsumoOrganico = function(consumo){
-    //console.log(consumo);
+    $scope.consumoOrg.consumo = $scope.consumoconsumo3.replace(/\./g,'');
+    $scope.consumoOrg.consumo = parseInt($scope.consumoOrg.consumo);
+    $scope.consumoOrg.cantidad = $scope.consumocantidad3.replace(/\./g,'');
+    $scope.consumoOrg.cantidad = parseInt($scope.consumoOrg.cantidad);
+    $scope.consumoOrg.costo = $scope.consumocosto3.replace(/\./g,'');
+    $scope.consumoOrg.costo = parseInt($scope.consumoOrg.costo);
     $http({
         url: path + 'consumo/actorganico',
         method: 'get',
-        params: consumo,
+        params: $scope.consumoOrg,
         headers: {
             "Content-Type": "application/json"
         }
@@ -219,9 +286,15 @@ $routeProvider.when('/consumo', {
     });
   }
 
-  $scope.guardarConsumoOrganico = function(consumo){
-    console.log(consumo);
+  $scope.guardarConsumoOrganico = function(consumo, consumoconsumo3 , consumocantidad3 , consumocosto3){
+  
     consumo.idEvento = $rootScope.evento.idEvento;
+    consumo.consumo = consumoconsumo3.replace(/\./g,'');
+    consumo.consumo = parseInt(consumo.consumo);
+    consumo.cantidad = consumocantidad3.replace(/\./g,'');
+    consumo.cantidad = parseInt(consumo.cantidad);
+    consumo.costo = consumocosto3.replace(/\./g,'');
+    consumo.costo = parseInt(consumo.costo);
     $http({
         url: path + 'consumo/insertorganico',
         method: 'get',
@@ -452,6 +525,7 @@ $routeProvider.when('/consumo', {
       },2000);
     });
   }
+
   $scope.all();
   
 
@@ -493,7 +567,119 @@ $routeProvider.when('/consumo', {
             return resultado;
         }
     }
-
+    // Input de consumo potencial en los palcos
+    $("#consumoconsumo").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
+    $("#consumocosto").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
+    $("#consumoventa").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    }); 
+    // Input Consumo potencial en la calle
+     $("#consumoconsumo2").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
+    $("#consumocosto2").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
+    $("#consumoventa2").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
+    // Material orgánico detallado
+    $("#consumoconsumo3").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
+    $("#consumocantidad3").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
+    $("#consumocosto3").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
+    $("#valorselect").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
 
 
 }]).filter('startFromGrid', function() {

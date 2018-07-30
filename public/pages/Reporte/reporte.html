@@ -11,7 +11,6 @@
 </section>
 <section ng-show="!ver" class="content">
   <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
-  
   </div>
 </section>
 <!-- Main content -->
@@ -43,7 +42,7 @@
     <div class="col-md-4 col-xs-12">
       <div class="col-md-12 col-xs-12" style="padding: 0px">
         <div class="box " style="border:none !important; background-color:white; font-size: small !important; ">
-          <div class="box-header with-border"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">NIVELES ACADEMICOS</h3>
+          <div class="box-header with-border"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">NIVELES ACADÉMICOS</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body " style="height: 173px">
@@ -54,7 +53,7 @@
               </div>
               <div class="col-md-6 col-xs-6">
                 <ul class="nav nav-pills nav-stacked" style="height: 110px">
-                  <li ng-repeat="nivel in dataNivel"><a style="font-size: x-small;">{{nivel.label}}:<span style="font-size: x-small;" class="pull-right" ng-style="nivel">{{nivel.porcentaje.toFixed(0)}}%</span></a></li>
+                  <li ng-repeat="nivel in dataNivel"><a style="font-size: x-small; ">{{nivel.label}}:<span style="font-size: x-small;" class="pull-right" ng-style="nivel">{{nivel.porcentaje.toFixed(0)}}%</span></a></li>
                 </ul>  
               </div>
             </div>
@@ -80,7 +79,7 @@
               </div>
               <div class="col-md-6 col-xs-12">
                 <ul class="nav nav-pills nav-stacked">
-                  <li ng-repeat="cargo in dataCargo"><a style="font-size: x-small;">{{cargo.label}}: <span style="font-size: x-small;" class="pull-right" ng-style="cargo">{{cargo.porcentaje.toFixed(1)}}%</span></a></li>
+                  <li ng-repeat="cargo in dataCargo"><a style="font-size: x-small; text-transform: capitalize ! important;">{{cargo.label}}: <span style="font-size: x-small; text-transform: lowercase;" class="pull-right" ng-style="cargo">{{cargo.porcentaje.toFixed(1)}}%</span></a></li>
                 </ul>
               </div>              
             </div>

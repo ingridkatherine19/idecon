@@ -21,7 +21,7 @@
         <div class="box " style="border:none !important;">
           <div class="box-header with-border">
             <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">PREGUNTAS REALIZADAS</h3>
-              <p ng-if="preguntas.length == 0" style="font-size: small; color: #B6BBC0 !important;text-align: center" >No se ha registrado ningun evento</p>
+              <p ng-if="preguntas.length == 0" style="font-size: small; color: #B6BBC0 !important;text-align: center" >No se ha registrado ninguna pregunta</p>
             <div class="box-tools pull-right">
               <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  data-toggle="modal" data-target="#myModal" ng-click="cambiarButton(0)" data-toggle="tooltip" >NUEVA PREGUNTA</button>
             </div>
@@ -58,20 +58,6 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-md-4 col-lg-6" ng-if="preguntas.length == 0">
-        <div class="box" style="height: 300px; background-color:#fafafb ! important ">             
-          <div class="icon">
-            <div class="image"><i class="ion ion-sad-outline"></i></div>
-            <div class="info" style=" background-color:#fafafb ! important">
-              <h3 class="title">OPS!</h3>
-              <p>
-                Aún no ha ingresado actividades, por lo tanto no posee un presupuesto inicial, por favor diríjase al área de configuraciones del evento.
-              </p>
-            </div>
-          </div>
-          <div class="space"></div>
-        </div> 
-      </div>
     <div class="col-md-4">
       <div class="box" style="border: none !important;">
         <div class="box-header with-border">
@@ -89,10 +75,26 @@
           <div class="row">
             <div class="col-md-12">
               <ul class="nav nav-pills nav-stacked" style="margin-top: 0px">
-                <li><a style="font-size: small;"><i class="fa fa-circle iconBlue"></i>Participante:<span class="pull-right letraGris" ng-style="nivel">{{reporteTipo[0].tipoParticipante}}</span></a></li>
-                <li><a style="font-size: small;"><i class="fa fa-circle" style="color:#00eab5"></i>Agrupación:<span class="pull-right letraGris" ng-style="nivel">{{reporteTipo[0].tipoAgrupacion}}</span></a></li>
-                <li><a style="font-size: small;"><i class="fa fa-circle" style="color: #ff6c00"></i>Empresa:<span class="pull-right letraGris" ng-style="nivel">{{reporteTipo[0].tipoEmpresa}}</span></a></li>
-                <li><a style="font-size: small;"><i class="fa fa-circle iconOrange"></i>Total de Respuestas:<span class="pull-right letraGris" ng-style="nivel">{{reporteTipo[0].total}}</span></a></li>
+                <li>
+                  <a style="font-size: small;"><i class="fa fa-circle iconBlue"></i>Participante:
+                    <span class="pull-right letraGris" ng-if="reporteTipo[0].tipoParticipante" ng-style="nivel">{{reporteTipo[0].tipoParticipante}}</span>
+                    <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoParticipante" ng-style="nivel">0</span>
+                  </a>
+                </li>
+                <li>
+                  <a style="font-size: small;"><i class="fa fa-circle" style="color:#00eab5"></i>Agrupación:<span class="pull-right letraGris" ng-if="reporteTipo[0].tipoAgrupacion" ng-style="nivel">{{reporteTipo[0].tipoAgrupacion}}</span>
+                    <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoAgrupacion" ng-style="nivel">0</span>
+                  </a>
+                </li>
+                <li><a style="font-size: small;"><i class="fa fa-circle" style="color: #ff6c00"></i>Empresa:
+                  <span class="pull-right letraGris" ng-if="reporteTipo[0].tipoEmpresa" ng-style="nivel">{{reporteTipo[0].tipoEmpresa}}</span>
+                  <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoEmpresa" ng-style="nivel">0</span>
+                </a>
+                </li>
+                <li><a style="font-size: small;"><i class="fa fa-circle iconOrange"></i>Total de Respuestas:<span class="pull-right letraGris" ng-if="reporteTipo[0].total" ng-style="nivel">{{reporteTipo[0].total}}</span>
+                <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoEmpresa" ng-style="nivel">0</span>
+                </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -190,15 +192,15 @@
 
 
   <br>
-    <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 2px;" class="row">
+    <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 2px;" ng-if="!preguntas" class="row" >
     <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: medium; color: #B6BBC0 !important">RECEPCIÓN DE RESPUESTAS</h3>  
   </div> 
   <br>
-<div class="row" ng-if="preguntas[0] " >
+<div class="row" ng-if="preguntas[0]">
   <div class="col-md-4" ng-repeat="r in reporte">
       <div class="box" style="background-color: #fafafb;border:none !important;">
         <div class="box-header with-border">
-          <h3 class="box-title">{{r.pregunta}} </h3>
+          <p style="font-size: small; color: #B6BBC0 !important;">{{r.pregunta}}</p>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -208,20 +210,22 @@
               <canvas id="bar" class="chart chart-bar" chart-data="data2[$index]" chart-labels="labels2"> 
               </canvas>
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
               <div class="chart-responsive" ng-if="r.tipo == 0">
               <canvas id="bar" class="chart chart-bar" chart-data="data2[$index]" chart-labels="labels3"> 
               </canvas>
               </div>
-              <!-- ./chart-responsive -->
             </div>
-            <!-- /.col -->
           </div>
+            <!-- /.col -->
           <!-- /.row -->
         </div>
         <!-- /.box-body -->
       </div>
       <!-- /.box -->
-
     </div>
   </div>
 </section>

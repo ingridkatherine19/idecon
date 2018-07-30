@@ -246,7 +246,7 @@
                   <td>            
                     <div class="btn-group">
                  
-                      <button ng-if="!r.editar" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="r.editar=true; cambiarButton()"><i class="icon ion-edit"></i></button>
+                      <button ng-if="!r.editar" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="r.editar=true; cambiarButton(r)"><i class="icon ion-edit"></i></button>
                     
                       <button ng-if="r.editar == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarMaterial(r, $index)"><i class="fa fa-check"></i></button>
                     </div>
@@ -330,7 +330,6 @@
       </div>
       <!-- /. box -->
     </div>
-
     <div class="col-md-12" >
       <div class="box " style="border:none !important;">
         <div class="box-header with-border">
@@ -660,24 +659,24 @@
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
                 <label>Consumo (Cantidad):</label>
-                <!--ng-model="consumo.consumo"-->
-                <input ng-model="consumo.consumo" type="number" class="form-control" >
+           <!--  <input ng-model="consumo.consumo" type="number" class="form-control" >-->
+                <input ng-model="consumoconsumo" id="consumoconsumo" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3" >
               <label>Costo:</label>
-              <!--ng-model="consumo.costo"-->
-              <input ng-model="consumo.costo" type="number" class="form-control" >
+           <!--   <input ng-model="consumo.costo" type="number" class="form-control" >-->
+              <input ng-model="consumocosto" id="consumocosto" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
                 <label>Venta:</label>
-                <!--ng-model="consumo.venta"-->
-                <input ng-model="consumo.venta" type="number" class="form-control" >
+              <!-- <input ng-model="consumo.venta" type="number" class="form-control" >-->
+                <input ng-model="consumoventa" id="consumoventa" class="form-control" >
             </div>     
           </div>
       </div>
       <div class="modal-footer" style="margin: 0;">
           <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
-          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="!actualizarPalco" ng-click="guardarConsumoPalco(consumo)">Guardar</button>
+          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="!actualizarPalco" ng-click="guardarConsumoPalco(consumo, consumoconsumo, consumocosto, consumoventa)">Guardar</button>
 
           <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="actualizarPalco" ng-click="editarConsumoPalco(consumo)">Actualizar</button>
       </div>
@@ -705,22 +704,25 @@
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
                 <label>Consumo (Cantidad):</label>
-                <input ng-model="consumo.consumo" type="number" class="form-control" >
+             <!--<input ng-model="consumo.consumo" type="number" class="form-control" >-->
+              <input ng-model="consumoconsumo2" id="consumoconsumo2" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3" >
               <label>Costo:</label>
-              <input ng-model="consumo.costo" type="number" class="form-control" >
+             <!--<input ng-model="consumo.costo" type="number" class="form-control" >-->
+              <input ng-model="consumocosto2" id="consumocosto2" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
                 <label>Venta:</label>
-                <input ng-model="consumo.venta" type="number" class="form-control" >
+              <!--<input ng-model="consumo.venta" type="number" class="form-control" >-->
+                <input ng-model="consumoventa2" id="consumoventa2" class="form-control" >
             </div>     
           </div>
       </div>
       <div class="modal-footer" style="margin: 0;">
           <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
-          <button type="button" ng-if="!actualizarCalle" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-click="guardarConsumoCalle(consumo)">Guardar</button>
-          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="actualizarCalle" ng-click="editarConsumoCalle(consumo)">Actualizar</button>
+          <button type="button" ng-if="!actualizarCalle" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-click="guardarConsumoCalle(consumo , consumoconsumo2, consumocosto2, consumoventa2)">Guardar</button>
+          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="actualizarCalle" ng-click="editarConsumoCalle(consumo , consumoconsumo2, consumocosto2, consumoventa2)">Actualizar</button>
       </div>
      </form>    
     </div>
@@ -737,8 +739,6 @@
       </div>
       <form name="formConsumo">
       <div class="modal-body">
-        
-      
           <div class="row" >
             <div ng-if="!actualizarOrganico" class="col-md-3 col-xs-12 col-lg-3" >
               <label>Producto:</label>
@@ -749,21 +749,24 @@
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
                 <label>Consumo:</label>
-                <input ng-model="consumo.consumo" type="number" class="form-control" >
+               <!-- <input ng-model="consumo.consumo" type="number" class="form-control" >-->
+                <input ng-model="consumoconsumo3" id="consumoconsumo3" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3" >
               <label>Cantidad:</label>
-              <input ng-model="consumo.cantidad" type="number" class="form-control" >
+           <!-- <input ng-model="consumo.cantidad" type="number" class="form-control">-->
+              <input ng-model="consumocantidad3" id="consumocantidad3" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
                 <label>costo:</label>
-                <input ng-model="consumo.costo" type="number" class="form-control" >
+             <!--<input ng-model="consumo.costo" type="number" class="form-control">-->
+                <input ng-model="consumocosto3" id="consumocosto3" class="form-control" > 
             </div>     
           </div>
       </div>
       <div class="modal-footer" style="margin: 0;">
           <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
-          <button type="button" ng-if="!actualizarOrganico" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-click="guardarConsumoOrganico(consumo)">Guardar</button>
+          <button type="button" ng-if="!actualizarOrganico" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-click="guardarConsumoOrganico(consumo , consumoconsumo3 , consumocantidad3 , consumocosto3)">Guardar</button>
           <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="actualizarOrganico" ng-click="editarConsumoOrganico(consumo)">Actualizar</button>
       </div>
      </form>    

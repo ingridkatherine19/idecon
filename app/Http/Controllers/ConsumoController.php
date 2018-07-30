@@ -1246,7 +1246,7 @@ class ConsumoController extends Controller {
     }
 
     public function updatePalco(Request $request){
-        dd($request);
+       
         $consumo = Consumopalco::find($request->idConsumo);
         $consumo->consumo = $request->consumo;
         $consumo->costo = $request->costo;

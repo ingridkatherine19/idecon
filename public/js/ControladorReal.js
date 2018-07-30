@@ -567,6 +567,17 @@ $routeProvider.when('/real', {
             });
         }
     }); 
+    $("#idcostoreal").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    }); 
 
 
   //llamadas por defecto
