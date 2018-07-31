@@ -107,12 +107,13 @@
                   <th style="font-size: small; color: #B6BBC0 !important;">VENTA</th>
                   <th style="font-size: small; color: #B6BBC0 !important;">TOTAL COSTO</th>
                   <th style="font-size: small; color: #B6BBC0 !important;">TOTAL VENTA</th>
+                  <th style="font-size: small; color: #B6BBC0 !important;">MC</th>
                   <th style="font-size: small; color: #B6BBC0 !important;"></th>
                 </tr>
                   
                 <tr ng-repeat="consumo in consumoPalco" >
                   <td class="mailbox-name"><a ng-click="verDetalle(evento)" style="color: #00a3ee !important;font-size: small">{{consumo.productoN}}</a></td>
-                  <td class="mailbox-subject" ng-if="evento.ciudad" style="font-size: small">{{consumo.consumo2}}
+                  <td class="mailbox-subject" style="font-size: small">{{consumo.consumo2}}
                   </td>
                   <td class="mailbox-subject" style="font-size: small"> {{consumo.costo2}}
                   </td>

@@ -121,7 +121,7 @@ $routeProvider
         }
     }).success(function (response) {
       $scope.ciudades = response.ciudades;
-      console.log($scope.ciudades);
+  
     });
   }
 

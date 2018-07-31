@@ -29,6 +29,9 @@ use App\Modelos\Genero;
 use App\Modelos\Participante;
 use App\Modelos\Consumopalco;
 use App\Modelos\Consumocalle;
+use App\Modelos\Actividadagrupacion;
+use App\Modelos\Actividadparticipante;
+use App\Modelos\Actividadempresa;
 use DB;
 use stdClass;
 use Carbon\Carbon;
@@ -714,6 +717,32 @@ class ReporteController extends Controller {
     
     //trae todos los datos de poblacion 
     public function allCultural(Request $request){
+        //buscar los participantes del evento de los diferentes tipos, agrupaciones. participantes y empresas
+        $agrupacionesAsociadas = array();
+        $participantesAsociados = array();
+        $empresasAsociadas = array();
+        $actividades = Actividad::where('idEvento', $request->idEvento)->get();
+        foreach ($actividades as $act) {
+            //las agrupaciones asociadas a la actividad 
+            $aa = Actividadagrupacion::where('idActividad', $act->idActividad)->get();
+            foreach ($aa as $a) {
+                # code...
+                array_push($agrupacionesAsociadas, $a);
+            }
+            //los participantes asociados a la actividad 
+            $pa = Actividadparticipante::where('idActividad', $act->idActividad)->get();
+            foreach ($pa as $p) {
+                # code...
+                array_push($participantesAsociados, $p);
+            }
+            //las empresas asociadas a la actividad 
+            $ea = Actividadempresa::where('idActividad', $act->idActividad)->get();
+            foreach ($ea as $e) {
+                # code...
+                array_push($empresasAsociadas, $e);
+            }
+        }
+        //dd($agrupacionesAsociadas, $empresasAsociadas, $participantesAsociados);
         //capacidad hotelera
         $cantHoteles = Hotel::count();//se debe filtrar por localidad
         $cantCama = Hotel::sum('capacidadMax');
@@ -730,8 +759,13 @@ class ReporteController extends Controller {
         $cantGenero = Genero::count();
         
         foreach ($genero as $g) {
-
-            $cant = Agrupacion::where('genero' , $g->idGenero)->count();
+            $cant = 0;
+            foreach ($agrupacionesAsociadas as $a) {
+                $agrupacion = Agrupacion::find($a->idAgrupacion);
+                if ($agrupacion->genero == $g->idGenero) {
+                    $cant ++;
+                }
+            }
             if ($cant != 0) {
                 $g->cant = $cant; 
                 $g->prom = ($cant*100)/$cantGenero;
@@ -742,16 +776,17 @@ class ReporteController extends Controller {
         }
 
         //grupos artisticos
-        $agrupaciones = Agrupacion::all();
-        $cantGrupos = Agrupacion::count();//se debe filtrar por localidad
+        //$agrupaciones = Agrupacion::all();
+        $cantGrupos = count($agrupacionesAsociadas);//se debe filtrar por localidad
         $cantArtistas = 0;
         $cantArtistasM = 0;
         $cantArtistasH = 0;
         //cantidad de artistas
-        foreach ($agrupaciones as $a) {
-            $cantArtistas += $a->nempleados;
-            $cantArtistasM += $a->cantMujeres;
-            $cantArtistasH += $a->cantHombres;
+        foreach ($agrupacionesAsociadas as $a) {
+            $agrupacion = Agrupacion::find($a->idAgrupacion);
+            $cantArtistas += $agrupacion->nempleados;
+            $cantArtistasM += $agrupacion->cantMujeres;
+            $cantArtistasH += $agrupacion->cantHombres;
         }
         //horas de entretenimiento generada por los grupos artisticos 
         $actividades = Actividad::where('idEvento', $request->idEvento)->get();
@@ -791,28 +826,41 @@ class ReporteController extends Controller {
 
         //calcular la oferta de participantes naturales, juridicos, grupos artisticos , hombres, mujeres, locales y externos
         $evento = Evento::find($request->idEvento);
-        $participantes = Participante::count();
-        $participantesM = Participante::where('sexo', 0)->count();
-        $participantesH = Participante::where('sexo', 1)->count();
-        $participantesN = Participante::where('tipo', 0)->count();
-        $participantesJ = Participante::where('tipo', 1)->count();
-        $parti = Participante::all();
-        //dd($parti);
-        
-        foreach ($parti as $p) {
-            if ($p->departamento == $evento->idDepartamento) {
+        $participantes = count($participantesAsociados);
+        foreach ($participantesAsociados as $p) {
+            //busca el participantes
+            $participante = Participante::find($p->idParticipante);
+            //calcula participantes por sexo
+            if ($participante->sexo == 0) {
+                # code...
+                $participantesM ++;
+            }else{
+                $participantesH ++;
+            }
+            //calcula participantes naturales y juridicos
+            if ($participante->tipo == 0) {
+                # code...
+                $participantesN ++;
+            }else{
+                $participantesJ ++;
+            }
+            //calcula participantes locales y externos
+            if ($participante->departamento == $evento->idDepartamento) {
                 $participantesL++;       
             }else{
                 $participantesE++;       
             }
+            
         }
-        $gruposArtisticos = Agrupacion::count();
-        $agru = Agrupacion::all();
-        foreach ($agru as $a) {{
-
-            if ($a->departamento == $evento->idDepartamento) {
+        
+        $gruposArtisticos = count($agrupacionesAsociadas);
+        //$agru = Agrupacion::all();
+        foreach ($agrupacionesAsociadas as $a) {
+            $agrupacion = Agrupacion::find($a->idAgrupacion);
+            if ($agrupacion->departamento == $evento->idDepartamento) {
                 $gruposArtisticosL++;       
-            }else                $gruposArtisticosE++;       
+            }else{
+                $gruposArtisticosE++;                       
             }
         }
 
@@ -841,7 +889,7 @@ class ReporteController extends Controller {
         $totalcultural->participantesE = $participantesE;
         $totalcultural->gruposArtisticos = $gruposArtisticos;
         $totalcultural->gruposArtisticosL = $gruposArtisticosL;
-        $totalcultural->gruposArtisticoE = $gruposArtisticosE;
+        $totalcultural->gruposArtisticosE = $gruposArtisticosE;
         $totalcultural->interpretaciones = $interpretaciones;
         $totalcultural->staff = $staff;
         $totalcultural->rtn = $rtn;

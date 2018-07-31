@@ -15,7 +15,7 @@ $routeProvider.when('/reporte', {
   localStorage.setItem("user", JSON.stringify(user));
   $rootScope.user = JSON.parse(localStorage.getItem('user')); 
   if (!$rootScope.evento) {
-    window.location.href = '#/evento';
+    window.location.href = '#/evento'; 
   }
   $scope.ver = false;
   //console.log($rootScope.evento.idEvento);
@@ -659,10 +659,13 @@ $routeProvider.when('/reporte', {
         $scope.dataGenero = [];
 
         angular.forEach($scope.reporteGenero, function (value, key){
-          $scope.labelsGenero.push(value.nombre);
-          $scope.dataGenero.push(value.cant);
+          if(value.cant != 0){
+            $scope.labelsGenero.push(value.nombre);
+            $scope.dataGenero.push(value.cant);
+          }
         });
-        //console.log($scope.cultural);
+
+        console.log( $scope.labelsGenero, $scope.dataGenero);
     });
   }
 

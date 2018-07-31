@@ -187,7 +187,7 @@ $routeProvider.when('/evento', {
     $rootScope.detalle.fundado = new Date($rootScope.detalle.fundado);
     $rootScope.detalle.fechaInicio = new Date($rootScope.detalle.fechaInicio);
     $rootScope.detalle.fechaFin = new Date($rootScope.detalle.fechaFin);
-    console.log($rootScope.detalle);
+  //  console.log($rootScope.detalle);
     window.location.href = '#/detalle';
 
     $scope.buscarActividades();
@@ -224,7 +224,7 @@ $routeProvider.when('/evento', {
         }
     }).success(function (response) {
       $scope.totalActividades = response.total;
-      console.log($scope.totalActividades);
+    // console.log($scope.totalActividades);
       
     });
     
@@ -586,7 +586,7 @@ $routeProvider.when('/evento', {
 
   //editar un integrante de la junta directiva
   $scope.editarIJ =  function(integrante){
-    console.log(integrante);
+ // console.log(integrante);
     integrante.fechaNac = new Date(integrante.fechaNac);
     integrante.telefono = parseInt(integrante.telefono);
     $scope.sexoS = integrante.sexo;
@@ -726,7 +726,7 @@ $routeProvider.when('/evento', {
   $scope.filtrarCiudades = function(){
     
     $scope.depar = JSON.parse(document.getElementById("departamento").value);
-    console.log($scope.depar);
+    //console.log($scope.depar);
     $http({
         url: path + 'ciudad/all',
         method: 'get',
@@ -776,7 +776,7 @@ $routeProvider.when('/evento', {
 
   $scope.guardar = function(){
     //alert('g');
-    console.log($scope.evento);
+    //console.log($scope.evento);
     var url = "";
     url = 'evento/create';
     //convertir formato de fecha para el servidor
@@ -917,7 +917,7 @@ $routeProvider.when('/evento', {
         $scope.total = response.total;
         $scope.labels = ["Sin valor comercial", "Con boleta de ingreso", "Con valor comercial"];
         $scope.data = [$scope.total.sinvalor, $scope.total.conboleta, $scope.total.convalor];
-        console.log($scope.eventos);
+      //  console.log($scope.eventos);
       });
     }
   }

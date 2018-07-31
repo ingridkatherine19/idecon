@@ -440,7 +440,7 @@ $routeProvider.when('/dashboard', {
         
         //trae todo el reporte semanal de la cantidad de actividades realizadas
         $scope.semanal = response.semanal;
-        console.log($scope.semanal);
+    //    console.log($scope.semanal);
         var index = 0;
         angular.forEach($scope.eventos, function (value, key){
           $scope.color = $scope.colores[index].color;
@@ -550,7 +550,7 @@ $routeProvider.when('/dashboard', {
         });
 
         $scope.data23.push($scope.aux2);
-        console.log($scope.graficaUsuario);
+      //  console.log($scope.graficaUsuario);
     //  $scope.cargarGrafica();
       /* initialize the external events
      -----------------------------------------------------------------*/
@@ -701,7 +701,7 @@ $routeProvider.when('/dashboard', {
 
   $scope.cargarBarChart = function(){
     //alert('2');
-    console.log($scope.labels , $scope.data22);
+   // console.log($scope.labels , $scope.data22);
     var areaChartData = {
       labels: $scope.labels,
       datasets: [
@@ -848,7 +848,7 @@ $routeProvider.when('/dashboard', {
       }).success(function (response) {
         $scope.reciclado = response.reciclado;
         $scope.impacto = response.impacto;
-        console.log($scope.impacto);
+   //     console.log($scope.impacto);
         angular.forEach($scope.reciclado, function (value, key){
           value.kg2 = $scope.numberFormat(Math.round(value.kg).toString()); 
           value.total2 = $scope.numberFormat(Math.round(value.total).toString());
@@ -898,7 +898,7 @@ $routeProvider.when('/dashboard', {
       }).success(function (response) {
         $scope.reciclado = response.reciclado;
         $scope.impacto = response.impacto;
-        console.log($scope.impacto);
+      //  console.log($scope.impacto);
         angular.forEach($scope.reciclado, function (value, key){
           value.kg2 = $scope.numberFormat(Math.round(value.kg).toString()); 
           value.total2 = $scope.numberFormat(Math.round(value.total).toString());
@@ -978,7 +978,7 @@ $routeProvider.when('/dashboard', {
       $scope.totalTipo = response.total;
       $scope.labelsTipo = ["Sin valor comercial", "Con boleta de ingreso", "Con valor comercial"];
       $scope.dataTipo = [$scope.totalTipo.sinvalor, $scope.totalTipo.conboleta, $scope.totalTipo.convalor];
-      console.log($scope.totalTipo);
+  //    console.log($scope.totalTipo);
     }); 
   }
   $scope.actTipoDepartamento = function(){
@@ -995,7 +995,7 @@ $routeProvider.when('/dashboard', {
       $scope.totalTipo = response.total;
       $scope.labelsTipo = ["Sin valor comercial", "Con boleta de ingreso", "Con valor comercial"];
       $scope.dataTipo = [$scope.totalTipo.sinvalor, $scope.totalTipo.conboleta, $scope.totalTipo.convalor];
-      console.log($scope.totalTipo);
+   //   console.log($scope.totalTipo);
     }); 
   }
 /*----------------------FIN GRAFICA TIPO DE ACTIVIDADES-------------------*/
@@ -1053,7 +1053,7 @@ $routeProvider.when('/dashboard', {
         $scope.totales.palco = $scope.numberFormat($scope.totales.palco.toString());
         $scope.totales.calle = $scope.numberFormat($scope.totales.calle.toString());
         $scope.totalModalidad = response.modalidad;
-        console.log(response.horas);
+    //    console.log(response.horas);
         $scope.horas = response.horas;
         $scope.minutos = $scope.horas*60;
 
@@ -1131,7 +1131,7 @@ $routeProvider.when('/dashboard', {
         $scope.totalEmpresa.promConsumo = Math.round($scope.totalEmpresa.promConsumo);
         $scope.cantEmpresas = [ $scope.totalEmpresa.cantPatrocinio, $scope.totalEmpresa.cantProvee , $scope.totalEmpresa.cantConsumo
         ];
-        console.log($scope.totalEmpresa);
+      //  console.log($scope.totalEmpresa);
         if (!$scope.totalEmpresa.promConsumo) {
           $scope.totalEmpresa.promConsumo = 0;
         }
@@ -1144,7 +1144,7 @@ $routeProvider.when('/dashboard', {
         $scope.dataUsuario = [$scope.totales.empresas, $scope.totales.participantes, $scope.totales.agrupaciones];
      	
      //   $scope.cargarSkills();
-        console.log($scope.totales);
+     //   console.log($scope.totales);
         $scope.tipo = 1;
         $scope.initMap(1);
       //  $scope.graficaEmpresa();
@@ -1197,7 +1197,7 @@ $routeProvider.when('/dashboard', {
         $scope.totalConsumo.totalSnacks = $scope.numberFormat($scope.totalConsumo.totalSnacks.toString()); 
         $scope.totalConsumo.totalComidas = $scope.numberFormat($scope.totalConsumo.totalComidas.toString()); 
         
-        console.log($scope.totalConsumo);
+       // console.log($scope.totalConsumo);
 
         $scope.totalEmpresa = response.totalEmpresa;
         
@@ -1228,7 +1228,7 @@ $routeProvider.when('/dashboard', {
         ];
         $scope.dataUsuario = [$scope.totales.empresas, $scope.totales.participantes, $scope.totales.agrupaciones];
      //   $scope.cargarSkills();
-        console.log($scope.totales);
+     //   console.log($scope.totales);
         $scope.tipo = 1;
         $scope.initMap(1);
       //  $scope.graficaEmpresa();
