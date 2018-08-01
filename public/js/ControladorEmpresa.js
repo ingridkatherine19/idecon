@@ -77,7 +77,6 @@ $routeProvider.when('/empresa', {
    $scope.empresa.lat = $scope.lat;
    $scope.empresa.lng = $scope.lng;
 
-
     $http({
         url: path + route,
         method: 'get',
@@ -88,6 +87,7 @@ $routeProvider.when('/empresa', {
 
     }).success(function (response) {
        $scope.all();
+       $scope.reporteE();
       $('#myModal5').modal('show'); // abrir
       setTimeout(function(){
         $('#myModal5').modal('hide');
@@ -126,6 +126,7 @@ $routeProvider.when('/empresa', {
       
       if (response.error == false) {
         $scope.empresas.splice($scope.index,  1);
+        $scope.reporteE();
       $('#myModal5').modal('show'); // abrir modal
         setTimeout(function(){
           $('#myModal5').modal('hide');
@@ -141,7 +142,7 @@ $routeProvider.when('/empresa', {
   }
   
   $scope.buscarCiudad = function(idDepartamento){
-    console.log(idDepartamento);
+    
     $http({
         url: path + 'ciudad/all',
         method: 'get',
@@ -194,12 +195,11 @@ $routeProvider.when('/empresa', {
       $scope.addMarker = function(location) {
         $scope.lat = location.lat();
         $scope.lng = location.lng();
-        console.log(location.lat(), location.lng());
+
         var marker = new google.maps.Marker({
           position: location,
           map: $scope.map
         });
-        console.log(marker.getPosition());
         $scope.markers.push(marker);
         //console.log($scope.markers);
       }

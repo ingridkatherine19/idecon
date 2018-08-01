@@ -98,10 +98,10 @@
                 </tr>
                   
                 <tr ng-repeat="agrupacion in agrupaciones">
-                  <td class="mailbox-name"><a style="color: #00a3ee !important;">{{agrupacion.nombre}}</a></td>
-                  <td>{{agrupacion.telefono}}</td>   
-                  <td>{{agrupacion.correo}}</td>
-                  <td>{{agrupacion.nombreGenero}}</td>
+                  <td class="mailbox-name"><a style="color: #00a3ee !important; font-size: small;">{{agrupacion.nombre}}</a></td>
+                  <td style="font-size: small">{{agrupacion.telefono}}</td>   
+                  <td style="font-size: small">{{agrupacion.correo}}</td>
+                  <td style="font-size: small">{{agrupacion.nombreGenero}}</td>
                   <td>            
                     <div class="btn-group">
                       <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="cargarAgrupacion(agrupacion)" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></button>
@@ -129,7 +129,7 @@
         </div>
         <div class="box-footer no-padding">
           <ul class="nav nav-pills nav-stacked">
-            <li ng-repeat="l in labels"><a href=""><i class="fa fa-circle" ng-style="colores[$index]"></i> {{l}} <span class="pull-right" style="color: #B6BBC0 !important">{{data[$index]}}</span></a></li>
+            <li ng-repeat="l in labels"><a style="font-size: small"><i class="fa fa-circle" ng-style="colores[$index]"></i> {{l}} <span class="pull-right" style="color: #B6BBC0 !important">{{data[$index]}}</span></a></li>
             
           </ul>
         </div>
@@ -146,128 +146,127 @@
 
 <!-- Modal DE INSERTAR AGRUPACIONES-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-lg" role="document" >
     <div class="modal-content">
-      <div class="modal-header">
+       <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <center><h4 class="modal-title"><b>Datos de las Agrupaciones </b></h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">NUEVA AGRUPACIÓN</h3></center>
       </div>
-      <form name="formCosto">
+      <form name="formAgrupacion">
       <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
-        <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-          <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos básicos</h3>
+         <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+            <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">DATOS BÁSICOS</h3>  
+          </div><br>
+        <div class="row" style="font-size: smaller">
+          <div class="col-md-4 col-xs-12" >
+              <label style="font-weight: 300;">Nombre:</label>
+              <input style="border-radius: 9px"  ng-model="agrupacion.nombre" type="text" class="form-control" required>
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label style="font-weight: 300;">Representante:</label>
+              <input style="border-radius: 9px"  ng-model="agrupacion.representante" type="text" class="form-control" required>
+          </div>
+          <div class="col-md-4 col-xs-12">
+              <label style="font-weight: 300;">Nit:</label>
+              <input style="border-radius: 9px" ng-model="agrupacion.nit" type="number" class="form-control" required>
+          </div>
         </div><br>
-        <div class="row">
+        <div class="row" style="font-size: smaller">
           <div class="col-md-4 col-xs-12">
-              <label>Nombre:</label>
-              <input  ng-model="agrupacion.nombre" type="text" class="form-control" required>
-          </div>
-          <div class="col-md-4 col-xs-12">
-              <label>Representante:</label>
-              <input  ng-model="agrupacion.representante" type="text" class="form-control" required>
-          </div>
-          <div class="col-md-4 col-xs-12">
-              <label>Nit:</label>
-              <input  ng-model="agrupacion.nit" type="number" class="form-control" required>
-          </div>
-        </div><br>
-        <div class="row">
-          <div class="col-md-4 col-xs-12">
-              <label>Departamento:</label>
-               <select ng-model="agrupacion.departamento" class="form-control" ng-change="buscarCiudad(agrupacion.departamento)" required>
+              <label style="font-weight: 300;">Departamento:</label>
+               <select style="border-radius: 9px" ng-model="agrupacion.departamento" class="form-control" ng-change="buscarCiudad(agrupacion.departamento)" required>
                 <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos" ng-selected ="departamento.idDepartamento == departamentoSelect">{{departamento.nombre}}</option>
             </select>
           </div>
           <div class="col-md-4 col-xs-12">
-              <label>Ciudad:</label>
-              <select ng-model="agrupacion.ciudad" class="form-control" required>
+              <label style="font-weight: 300;">Ciudad:</label>
+              <select style="border-radius: 9px" ng-model="agrupacion.ciudad" class="form-control" required>
                 <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-selected ="ciudad.idCiudad == ciudadSelect">{{ciudad.nombre}}</option>
               </select>
           </div>
            <div class="col-md-4 col-xs-12">
-              <label>Región:</label>
-              <select ng-model="agrupacion.region" class="form-control" required>
+              <label style="font-weight: 300;">Región:</label>
+              <select style="border-radius: 9px" ng-model="agrupacion.region" class="form-control" required>
                 <option value="{{region.idRegion}}" ng-repeat="region in regiones" ng-selected ="region.idRegion == regionSelect">{{region.nombre}}</option>
               </select>
           </div>
         </div><br>
-        <div class="row">
+        <div class="row" style="font-size: smaller">
           <div class="col-md-4 col-xs-12">
-              <label>Dirección:</label>
-              <input id="direccion" ng-model="agrupacion.direccion" type="text" class="form-control" required>
+              <label style="font-weight: 300;">Dirección:</label>
+              <input style="border-radius: 9px" id="direccion" ng-model="agrupacion.direccion" type="text" class="form-control" required>
           </div>
           <div class="col-md-4 col-xs-12">
-              <label>telefono:</label>
-             <input ng-model="agrupacion.telefono" type="number" class="form-control" required>
+              <label style="font-weight: 300;">telefono:</label>
+             <input style="border-radius: 9px" ng-model="agrupacion.telefono" type="number" class="form-control" required>
           </div>
          <div class="col-md-4 col-xs-12">
-              <label>telefono 2:</label>
-             <input ng-model="agrupacion.telefono2" type="number" class="form-control">
+              <label style="font-weight: 300;">telefono 2:</label>
+             <input style="border-radius: 9px" ng-model="agrupacion.telefono2" type="number" class="form-control">
           </div>
         </div><br>
-        <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-          <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Detalles</h3>
+        <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+          <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">DETALLES</h3>  
         </div><br>
-        <div class="row">
+        <div class="row" style="font-size: smaller">
          <div class="col-md-4 col-xs-12">
-              <label>Número Empleados:</label>
-             <input ng-model="agrupacion.nempleados" type="number" class="form-control" required>
+              <label style="font-weight: 300;">Número Empleados:</label>
+             <input style="border-radius: 9px" ng-model="agrupacion.nempleados" type="number" class="form-control" required>
           </div>
           <div class="col-md-4 col-xs-12">
-              <label>Cantidad de Mujeres:</label>
-              <input ng-model="agrupacion.cantMujeres" type="number" class="form-control" required>
+              <label style="font-weight: 300;">Cantidad de Mujeres:</label>
+              <input style="border-radius: 9px" ng-model="agrupacion.cantMujeres" type="number" class="form-control" required>
            </div>
           <div class="col-md-4 col-xs-12">
-              <label>Cantidad de Hombres:</label>
-             <input ng-model="agrupacion.cantHombres" type="number" class="form-control" required>
+              <label style="font-weight: 300;">Cantidad de Hombres:</label>
+             <input style="border-radius: 9px" ng-model="agrupacion.cantHombres" type="number" class="form-control" required>
           </div>
         </div><br>
-        <div class="row">
+        <div class="row" style="font-size: smaller">
           <div class="col-md-4 col-xs-12">
-              <label>Email:</label>
-             <input ng-model="agrupacion.email" type="email" class="form-control" required>
+              <label style="font-weight: 300;">Email:</label>
+             <input style="border-radius: 9px" ng-model="agrupacion.email" type="email" class="form-control" required>
           </div>
           <div class="col-md-4 col-xs-12">
-            <label><span ng-if="swichCargo==0" class="fa fa-plus " style="color:#3c8dbc" ng-click="cambiaCargo()" ></span><span ng-if="swichCargo==1" class="fa  fa-list-ul " style="color:#3c8dbc" ng-click="cambiaCargo()" ></span> <span ng-if="swichCargo==0">Seleccione un Género:</span><span ng-if="swichCargo==1||swichCargo==2">Nuevo Género:</span></label>
-            <input ng-if="swichCargo==1||swichCargo==2" id="cargo" ng-model="agrupacion.genero" type="text" class="form-control" placeholder="">
+            <label style="font-weight: 300;"><span ng-if="swichCargo==0" class="fa fa-plus " style="color:#3c8dbc" ng-click="cambiaCargo()" ></span><span ng-if="swichCargo==1" class="fa  fa-list-ul " style="color:#3c8dbc" ng-click="cambiaCargo()" ></span> <span ng-if="swichCargo==0" >Seleccione un Género:</span><span ng-if="swichCargo==1||swichCargo==2">Nuevo Género:</span></label>
+            <input style="border-radius: 9px" ng-if="swichCargo==1||swichCargo==2" id="cargo" ng-model="agrupacion.genero" type="text" class="form-control" placeholder="">
 
-            <select ng-if="swichCargo==0" ng-model="agrupacion.genero" class="form-control" required>
+            <select style="border-radius: 9px" ng-if="swichCargo==0" ng-model="agrupacion.genero" class="form-control" required>
                <option value="{{g.idGenero}}" ng-repeat="g in genero" ng-selected ="g.idGenero == generoSelect">{{g.nombre}}</option>
             </select>
 
           </div>
           <div class="col-md-4 col-xs-12">
-              <label>Facebook (opcional):</label>
-             <input ng-model="agrupacion.facebook" type="text" class="form-control">
+              <label style="font-weight: 300;">Facebook (opcional):</label>
+             <input style="border-radius: 9px" ng-model="agrupacion.facebook" type="text" class="form-control">
           </div>
         </div><br>
-        <div class="row">
+        <div class="row" style="font-size: smaller">
           <div class="col-md-4 col-xs-12">
-              <label>Instagram (opcional):</label>
-             <input ng-model="agrupacion.instagram" type="text" class="form-control">
+              <label style="font-weight: 300;">Instagram (opcional):</label>
+             <input style="border-radius: 9px" ng-model="agrupacion.instagram" type="text" class="form-control">
           </div>
           <div class="col-md-4 col-xs-12">
-              <label>Youtube (opcional):</label>
-             <input ng-model="agrupacion.youtube" type="text" class="form-control">
+              <label style="font-weight: 300;">Youtube (opcional):</label>
+             <input style="border-radius: 9px" ng-model="agrupacion.youtube" type="text" class="form-control">
           </div>
           <div class="col-md-4 col-xs-12">
-              <label>Twitter (opcional):</label>
-             <input ng-model="agrupacion.twitter" type="text" class="form-control">
+              <label style="font-weight: 300;">Twitter (opcional):</label>
+             <input style="border-radius: 9px" ng-model="agrupacion.twitter" type="text" class="form-control">
           </div>          
-        </div><br>
-        <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-          <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Ubicación</h3>
-        </div>
+        </div><br>  
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+            <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">UBICACIÓN</h3>  
+          </div><br>
         <div class="row"  ng-init="initMap()">
-           <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="deleteMarkers();"><i class="fa fa-close"></i>
-            Eliminar Marker
-          </button>
+           <button  class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  ng-click="deleteMarkers();" >ELIMINAR MARKER
+            </button>
             <div style="width: 100% !important;" id="map2"></div>
         </div>
       </div>
       <div class="modal-footer" style="margin: 0">
-          <button  type="button" class="btn  pull-left" data-dismiss="modal" >Cerrar</button>
-          <button type="button" ng-disabled="formActividad.$invalid" class="btn " data-dismiss="modal" ng-click="nuevoGenero()">{{button}}</button>
+         <!-- <button type="button" ng-disabled="formActividad.$invalid" class="btn " data-dismiss="modal" ng-click="nuevoGenero()">{{button}}</button>-->
+         <button ng-disabled="formAgrupacion.$invalid" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardarAgrupacion()">{{button}}</button>
       </div>
      </form>    
     </div>
@@ -280,15 +279,15 @@
       <div class="modal-body" style="padding-top: 15px">
         <div class="box" style="border: none; box-shadow: none;">             
           <div class="icon">
-            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="image" ><i  class="fa fa-trash-o" style="color: #00a3ee ! important"></i></div>
             <div class="info">
-              <h3 class="title">Espere!</h3>
+              <h3 class="title" style="font-size: small ; margin-top: 10%">ESPERE!</h3>
               <p>
                 ¿Está seguro de que desea eliminar la Agrupación?
               </p>
             <br> <br>
-             <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
-            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="delete()">Aceptar</button>
+             <button  type="button" class="btn pull-left buttonModal" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right buttonModal" data-dismiss="modal" ng-click="delete()">Aceptar</button>
             </div>
           </div>
         </div> 
@@ -302,9 +301,9 @@
      <div class="modal-body">
         <div class="box" style="border-top: none; box-shadow: none;">             
           <div class="icon">
-            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="image"><i style="color: #00a3ee ! important" class="ion ion-happy-outline"></i></div>
             <div class="info">
-              <h3 class="title">Éxito!</h3>
+              <h3 class="title" style="font-size: small ; margin-top: 10%">ÉXITO!</h3>
               <p>
                 Se ha realizado correctamente.
               </p>

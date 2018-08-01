@@ -82,10 +82,10 @@
                 <th style="font-size: small; color: #B6BBC0 !important;">CORREO</th>
                 <th style="font-size: small; color: #B6BBC0 !important;"></th>
               </tr>
-              <tr ng-repeat="restaurante in restaurantes | filter:filtro">
-                <td class="mailbox-name">{{restaurante.nombre}}</td>
-                <td class="mailbox-subject">{{restaurante.telefono}}</td>
-                <td class="mailbox-subject">{{restaurante.correo}}</td>
+              <tr ng-repeat="restaurante in restaurantes">
+                <td class="mailbox-name" style="font-size: small;">{{restaurante.nombre}}</td>
+                <td class="mailbox-subject" style="font-size: small;">{{restaurante.telefono}}</td>
+                <td class="mailbox-subject" style="font-size: small;">{{restaurante.correo}}</td>
                 <td>            
                   <div class="btn-group">
                     <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="cargarRestaurante(restaurante)" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></button>
@@ -125,7 +125,7 @@
         </div>
         <div class="box-footer no-padding">
           <ul class="nav nav-pills nav-stacked">
-            <li ng-repeat="l in labels"><a href=""><i class="fa fa-circle" ng-style="colores[$index]"></i> {{l}} <span class="pull-right" style="color: #B6BBC0 !important">{{data[$index]}}</span></a></li>
+            <li style="font-size: small;" ng-repeat="l in labels"><a href=""><i class="fa fa-circle" ng-style="colores[$index]"></i> {{l}} <span class="pull-right" style="color: #B6BBC0 !important">{{data[$index]}}</span></a></li>
           </ul>
         </div>
         <!-- /.box-body -->
@@ -136,83 +136,84 @@
 </section>
 <!-- Modal de insertar restaurante-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-lg" role="document" >
     <div class="modal-content">
-      <div class="modal-header">
-       <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="limpiar()"><span aria-hidden="true">&times;</span></button>
-        <center><h4 class="modal-title" id="myModalLabel">Nuevo Restaurante</h4></center>
+      <div class="modal-header " style="padding-bottom: 0">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">NUEVO RESTAURANTE</h3></center>
       </div>
+
       <div class="modal-body " style="background-color:rgb(255, 255, 255) !important; ">
         <form name="formRestaurante">
           
-          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos básicos</h3>
+           <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+            <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">DATOS BÁSICOS</h3>  
           </div><br>
-            <div class="row">
+            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
-                    <label>Nombre:</label>
-                    <input ng-model="restaurante.nombre" type="text" class="form-control" required>
+                    <label style="font-weight: 300;">Nombre:</label>
+                    <input style="border-radius: 9px" ng-model="restaurante.nombre" type="text" class="form-control" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <label>Gerente:</label>
-                    <input ng-model="restaurante.gerente" type="text" class="form-control" required>
+                    <label style="font-weight: 300;">Gerente:</label>
+                    <input style="border-radius: 9px" ng-model="restaurante.gerente" type="text" class="form-control" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <label>Dirección:</label>
-                  <input type="text" class="form-control" ng-model="restaurante.direccion" required>
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-md-4 col-xs-12">
-                <label>Teléfono:</label>
-                  <input type="number" class="form-control"  ng-model="restaurante.telefono" required>
-                </div>
-                <div class="col-md-4 col-xs-12">
-                <label>Correo:</label>
-                  <input type="email" class="form-control"  ng-model="restaurante.correo" required> 
-                </div>
-                <div class="col-md-4 col-xs-12">
-                <label>Facebook: (Opcional)</label>
-                  <input type="text" class="form-control"  ng-model="restaurante.facebook" required> 
+                <label style="font-weight: 300;">Dirección:</label>
+                  <input style="border-radius: 9px" type="text" class="form-control" ng-model="restaurante.direccion" required>
                 </div>
             </div><br>
-            <div class="row">
+            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
-                <label>Twitter:  (Opcional)</label>
-                  <input type="text" class="form-control"  ng-model="restaurante.twitter" required>
+                <label style="font-weight: 300;">Teléfono:</label>
+                  <input style="border-radius: 9px" type="number" class="form-control"  ng-model="restaurante.telefono" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <label>Instagram:  (Opcional)</label>
+                <label style="font-weight: 300;">Correo:</label>
+                  <input style="border-radius: 9px" type="email" class="form-control"  ng-model="restaurante.correo" required> 
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Facebook: (Opcional)</label>
+                  <input style="border-radius: 9px" type="text" class="form-control"  ng-model="restaurante.facebook" required> 
+                </div>
+            </div><br>
+            <div class="row" style="font-size: smaller">
+                <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Twitter:  (Opcional)</label>
+                  <input style="border-radius: 9px" type="text" class="form-control"  ng-model="restaurante.twitter" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Instagram: (Opcional)</label>
                   <input type="text" class="form-control"  ng-model="restaurante.instagram" required> 
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <label>Youtube:  (Opcional)</label>
-                  <input type="text" class="form-control"  ng-model="restaurante.youtube" required> 
+                <label style="font-weight: 300;">Youtube:  (Opcional)</label>
+                  <input style="border-radius: 9px" type="text" class="form-control"  ng-model="restaurante.youtube" required> 
                 </div>
             </div><br>
-            <div class="row">
+            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
-                <label>Detalle:</label>
-                  <select ng-model="restaurante.detalle" class="form-control" required>
+                <label style="font-weight: 300;">Detalle:</label>
+                  <select style="border-radius: 9px" ng-model="restaurante.detalle" class="form-control" required>
                     <option ng-repeat="detalle in detalleComida" ng-selected ="detalle.id == detalleSelect" value="{{detalle.id}}">{{detalle.name}}</option>
                   </select>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <label>Tipo de Restaurantes:</label>
-                  <select ng-model="restaurante.tipoRestaurante" class="form-control" required>
+                <label style="font-weight: 300;">Tipo de Restaurantes:</label>
+                  <select style="border-radius: 9px" ng-model="restaurante.tipoRestaurante" class="form-control" required>
                     <option ng-repeat="tipo in tipodeRestaurante" ng-selected ="tipo.id == tipoSelect" value="{{tipo.id}}">{{tipo.name}}</option>
                   </select>
                </div>
             </div><br>
             
-          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Especificaciones</h3>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+            <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">ESPECIFICACIONES</h3>  
           </div><br>
-           <div class="row">
+           <div class="row" style="font-size: smaller">
             <div class="col-md-4 col-xs-12">
-              <label >Seleccione los atributos de su restaurante:</label>
+              <label style="font-weight: 300;">Seleccione los atributos de su restaurante:</label>
             </div>
-              <div class="col-md-6 col-xs-12"   
+              <div style="border-radius: 9px" class="col-md-6 col-xs-12"   
                   isteven-multi-select
                   input-model="modernBrowsers"
                   output-model="outputBrowsers"
@@ -223,11 +224,11 @@
               >
               </div>
            </div> <br>
-            <div class="row">
+            <div class="row" style="font-size: smaller">
             <div class="col-md-4 col-xs-12">
-              <label >Seleccione las proteinas de su restaurante:</label>
+              <label style="font-weight: 300;">Seleccione las proteinas de su restaurante:</label>
             </div>
-              <div class="col-md-6 col-xs-12"   
+              <div style="border-radius: 9px" class="col-md-6 col-xs-12"   
                   isteven-multi-select
                   input-model="modernBrowsers2"
                   output-model="outputBrowsers2"
@@ -237,11 +238,10 @@
                 >
               </div>
            </div> 
-          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Ubicación</h3>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+            <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">UBICACIÓN</h3>  
           </div><br>
-          <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="deleteMarkers();"><i class="fa fa-close"></i>
-              Eliminar Marker
+          <button  class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  ng-click="deleteMarkers();" >ELIMINAR MARKER
           </button>
           <div class="row"  ng-init="initMap()">
              <div style="width: 100% !important;" id="map2"></div>
@@ -249,8 +249,8 @@
         </form>
       </div>
       <div class="modal-footer" style="margin: 0">
-          <button  type="button" class="btn  btn-outline pull-left" data-dismiss="modal" >Cerrar</button>
-          <button type="button" ng-disabled="formHotel.$invalid" class="btn " data-dismiss="modal" ng-click="guardar(); limpiar()">{{button}}</button>
+         <!-- <button type="button" ng-disabled="formHotel.$invalid" class="btn " data-dismiss="modal" ng-click="guardar(); limpiar()">{{button}}</button>-->
+          <button ng-disabled="formEmpresa.$invalid" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardar(); limpiar()">{{button}}</button>
       </div>
     </div>
   </div>
@@ -261,9 +261,9 @@
      <div class="modal-body">
         <div class="box" style="border-top: none; box-shadow: none;">             
           <div class="icon">
-            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="image"><i style="color: #00a3ee ! important" class="ion ion-happy-outline"></i></div>
             <div class="info">
-              <h3 class="title">Éxito!</h3>
+              <h3 class="title" style="font-size: small ; margin-top: 10%">ÉXITO!</h3>
               <p>
                 Se ha realizado correctamente.
               </p>
@@ -280,15 +280,15 @@
       <div class="modal-body" style="padding-top: 15px">
         <div class="box" style="border: none; box-shadow: none;">             
           <div class="icon">
-            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="image" ><i  class="fa fa-trash-o" style="color: #00a3ee ! important"></i></div>
             <div class="info">
-              <h3 class="title">Espere!</h3>
+            <h3 class="title" style="font-size: small ; margin-top: 10%">ESPERE!</h3>
               <p>
                 ¿Está seguro de que desea eliminar la actividad?
               </p>
             <br> <br>
-             <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
-            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="delete()">Aceptar</button>
+             <button  type="button" class="btn pull-left buttonModal" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right buttonModal" data-dismiss="modal" ng-click="delete()">Aceptar</button>
             </div>
           </div>
         </div> 

@@ -335,7 +335,7 @@ table.dataTable tbody th, table.dataTable tbody td {
 }*/
 
 .box > .icon { text-align: center; position: relative; }
-.box > .icon > .image { position: relative; z-index: 2; margin: auto; width: 88px; height: 88px; border: 8px solid white; line-height: 88px; border-radius: 50%; background: #f1a64d; vertical-align: middle; }
+.box > .icon > .image { position: relative; z-index: 2; margin: auto; width: 88px; height: 88px; border: 2px solid #00a3ee; line-height: 97px; border-radius: 50%; background: white; vertical-align: middle; }
 .box > .icon > .image > i { font-size: 36px !important; color: #fff !important; }
 .box > .icon:hover > .image > i { color: white !important; }
 .box > .icon > .info { margin-top: -24px; background: #ffffff; border: none; padding: 15px 0 10px 0; }
@@ -496,8 +496,17 @@ div.avatar {
 .letraBlanca {
   color:white;
 }
+.letraNegra {
+  color:black;
+}
 .letraAzul {
   color:#202e5894;
+}
+.iconAzul {
+  color:#00a3ee;
+}
+.letraGris {
+  color: #333336;
 }
 
 .bgBlue {
@@ -517,7 +526,11 @@ div.avatar {
   background-color: #9E9E9E  ! important;
 }
 
-
+.buttonModal {
+  border-radius: 5px ;
+  border: 2px solid #00A3EE; 
+  background-color: white;
+}
 
 
 

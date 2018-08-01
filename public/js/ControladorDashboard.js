@@ -440,7 +440,124 @@ $routeProvider.when('/dashboard', {
         
         //trae todo el reporte semanal de la cantidad de actividades realizadas
         $scope.semanal = response.semanal;
-    //    console.log($scope.semanal);
+        console.log($scope.semanal);
+        //agregando los meses
+        $scope.nuevo = {
+          codigo: 1,
+          cantidad:0,
+          mes: 'Ene'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 2,
+          cantidad:0,
+          mes: 'Feb'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 3,
+          cantidad:0,
+          mes: 'Mar'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 4,
+          cantidad:0,
+          mes: 'Abr'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 5,
+          cantidad:0,
+          mes: 'May'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 6,
+          cantidad:0,
+          mes: 'Jun'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 7,
+          cantidad:0,
+          mes: 'Jul'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 8,
+          cantidad:0,
+          mes: 'Ago'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 9,
+          cantidad:0,
+          mes: 'Sep'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 10,
+          cantidad:0,
+          mes: 'Oct'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 11,
+          cantidad:0,
+          mes: 'Nov'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 12,
+          cantidad:0,
+          mes: 'dic'
+        }
+        $scope.dataGrafica.push($scope.nuevo);
+        //semanales
+        $scope.graficaSemanal = [];
+        $scope.nuevo = {
+          codigo: 1,
+          cantidad:0,
+          dia: 'Lun'
+        }
+        $scope.graficaSemanal.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 2,
+          cantidad:0,
+          dia: 'Mar'
+        }
+        $scope.graficaSemanal.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 3,
+          cantidad:0,
+          dia: 'Mie'
+        }
+        $scope.graficaSemanal.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 4,
+          cantidad:0,
+          dia: 'Juv'
+        }
+        $scope.graficaSemanal.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 5,
+          cantidad:0,
+          dia: 'Vie'
+        }
+        $scope.graficaSemanal.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 6,
+          cantidad:0,
+          dia: 'Sab'
+        }
+        $scope.graficaSemanal.push($scope.nuevo);
+        $scope.nuevo = {
+          codigo: 7,
+          cantidad:0,
+          dia: 'Dom'
+        }
+        $scope.graficaSemanal.push($scope.nuevo);
         var index = 0;
         angular.forEach($scope.eventos, function (value, key){
           $scope.color = $scope.colores[index].color;
@@ -448,7 +565,7 @@ $routeProvider.when('/dashboard', {
           if (index == 4 ) {
             index = 0;
           }
-        /*calendario*/
+          /*calendario*/
           $scope.prueba = {
             title: value.descripcion,
             start: new Date(value.fechaInicio),
@@ -465,16 +582,16 @@ $routeProvider.when('/dashboard', {
           /*grafica*/
           var dia = new Date(value.fechaInicio);
           var mes = dia.getMonth()+1;
-          var esta=0;
+          //var esta=0;
           for (var i = $scope.dataGrafica.length - 1; i >= 0; i--) {
             if($scope.dataGrafica[i].codigo == mes){
-              esta=1;
+              //esta=1;
               $scope.dataGrafica[i].cantidad++;
             }
             
           }
 
-          if (esta==0) {
+          /*if (esta==0) {
 
             $scope.nuevo = {
               codigo: mes,
@@ -518,7 +635,7 @@ $routeProvider.when('/dashboard', {
             }
 
             $scope.dataGrafica.push($scope.nuevo);
-          }
+          }*/
 
 
         });
@@ -542,8 +659,14 @@ $routeProvider.when('/dashboard', {
         
         $scope.data22.push($scope.aux);
         //recorre el re´porte semanal para llenar la grafica
-        angular.forEach($scope.semanal, function (value, key){
-
+        angular.forEach($scope.graficaSemanal, function (value, key){
+          
+          angular.forEach($scope.semanal, function (value2, key2){
+            if(value2.id == value.codigo){
+              value.cantidad = value2.cantidad; 
+            }
+            
+          });
           $scope.graficaUsuario.push(value.dia);
           $scope.aux2.push(value.cantidad); 
           
@@ -682,7 +805,7 @@ $routeProvider.when('/dashboard', {
    */
 
 
-  setTimeout(function(){ $scope.cargarBarChart(); }, 1000);
+  setTimeout(function(){ $scope.cargarBarChart(); }, 1500);
 
     //$scope.cargarBarChart();
    //Cambiar tab
@@ -690,7 +813,7 @@ $routeProvider.when('/dashboard', {
   
     $scope.mostrarTab = seleccionado;   
     if ($scope.mostrarTab == 0) {
-      setTimeout(function(){ $scope.cargarBarChart2(); }, 300);
+      setTimeout(function(){ $scope.cargarBarChart2(); }, 1000);
     }else{
    //   setTimeout(function(){ $scope.cargarBarChart(); }, 1000);
     }
@@ -701,7 +824,7 @@ $routeProvider.when('/dashboard', {
 
   $scope.cargarBarChart = function(){
     //alert('2');
-   // console.log($scope.labels , $scope.data22);
+    console.log($scope.labels , $scope.data22);
     var areaChartData = {
       labels: $scope.labels,
       datasets: [

@@ -115,7 +115,6 @@ $scope.All = function(){
       $scope.hoteles = response.hotel;
       $scope.reporte = response.reporte;
       $scope.categoria = response.categoria;
-      console.log( $scope.categoria);
       $scope.ver = true;
 
       
@@ -197,6 +196,7 @@ $scope.All = function(){
               "Content-Type": "application/json"
           }
       }).success(function (response) {
+        $scope.All();
           $('#myModal5').modal('show'); // abrir
           setTimeout(function(){
             $('#myModal5').modal('hide');
@@ -257,7 +257,7 @@ $scope.All = function(){
     $scope.buscarCiudad($scope.departamentoSelect);
     $scope.ciudadSelect = hotel.ciudad;
     $scope.button ="Actualizar";
-    console.log($scope.hotel);
+ 
   }
 
 
@@ -266,14 +266,14 @@ $scope.All = function(){
         url: path + 'ciudad/all',
         method: 'get',
         params:{
-          idDepartamento: 11 //PRUEBA
+          idDepartamento: idDepartamento //PRUEBA
         },
         headers: {
             "Content-Type": "application/json"
         }
     }).success(function (response) {
       $scope.ciudades = response.ciudades;
-      console.log($scope.ciudades);
+    //  console.log($scope.ciudades);
       
     });
   }
@@ -287,7 +287,7 @@ $scope.All = function(){
         }
     }).success(function (response) {
       $scope.departamentos = response.departamentos;
-      console.log($scope.departamentos);
+      
     });
 
 
@@ -323,12 +323,11 @@ $scope.All = function(){
       $scope.addMarker = function(location) {
         $scope.lat = location.lat();
         $scope.lng = location.lng();
-        console.log(location.lat(), location.lng());
         var marker = new google.maps.Marker({
           position: location,
           map: $scope.map
         });
-        console.log(marker.getPosition());
+    //    console.log(marker.getPosition());
         $scope.markers.push(marker);
         //console.log($scope.markers);
       }

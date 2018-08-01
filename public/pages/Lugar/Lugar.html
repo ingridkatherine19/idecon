@@ -10,7 +10,6 @@
 <section ng-show="!ver" class="content">
 
   <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
-  
   </div>
 </section>
 <!-- Main content -->
@@ -94,34 +93,34 @@
               </tr>
                 
               <tr ng-repeat="lugar in lugares">
-                <td class="mailbox-name"><a style="color: #00a3ee !important;">{{lugar.nombre}}</a></td>
-                <td ng-if="lugar.tipo == 0">Edificaciones</td>
-                <td ng-if="lugar.tipo == 1">Edificios y Expresiones Religiosas</td>
-                <td ng-if="lugar.tipo == 2">Realizaciones técnico cientificas</td>
-                <td ng-if="lugar.tipo == 3">Parque Natural</td>
-                <td ng-if="lugar.tipo == 4">Monumentos</td>
-                <td ng-if="lugar.tipo == 5">Ríos</td>
-                <td ng-if="lugar.tipo == 6">Arroyos</td>
-                <td ng-if="lugar.tipo == 7">Actividad Turística</td>
-                <td ng-if="lugar.tipo == 8">Festivales y Fiestas</td>
-                <td ng-if="lugar.tipo == 10">Ferias y Exposiciones</td>
-                <td ng-if="lugar.tipo == 11">Gastronomía</td>
-                <td ng-if="lugar.tipo == 12">Grupos Culturales</td>
-                <td ng-if="lugar.tipo == 13">Pueblos Indígenas</td>
-                <td ng-if="lugar.tipo == 14">Balneario</td>
-                <td ng-if="lugar.tipo == 15">Artesanía </td>
-                <td ng-if="lugar.tipo == 16">Museos</td>
-                <td ng-if="lugar.tipo == 17">Tradiciones-Cuentos-Bailes</td>
-                <td ng-if="lugar.tipo == 18">Eco-turismo</td>
-                <td ng-if="lugar.tipo == 19">Acequía</td>
-                <td ng-if="lugar.tipo == 20">Humedades</td>
-                <td ng-if="lugar.tipo == 21">Quebradas</td>
-                <td ng-if="lugar.tipo == 22">Ciénagas</td>
-                <td ng-if="lugar.tipo == 23">Biblioteca</td>
-                <td ng-if="lugar.tipo == 24">Escuelas</td>
-                <td ng-if="lugar.recurso == 0"> Recursos Naturales</td>
-                <td ng-if="lugar.recurso == 1">Destinos Naturales y Turísticos</td>
-                <td ng-if="lugar.recurso == 2">Festividades y Eventos</td>
+                <td class="mailbox-name"><a style="color: #00a3ee !important; font-size: small;">{{lugar.nombre}}</a></td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 0">Edificaciones</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 1">Edificios y Expresiones Religiosas</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 2">Realizaciones técnico cientificas</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 3">Parque Natural</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 4">Monumentos</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 5">Ríos</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 6">Arroyos</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 7">Actividad Turística</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 8">Festivales y Fiestas</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 10">Ferias y Exposiciones</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 11">Gastronomía</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 12">Grupos Culturales</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 13">Pueblos Indígenas</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 14">Balneario</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 15">Artesanía </td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 16">Museos</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 17">Tradiciones-Cuentos-Bailes</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 18">Eco-turismo</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 19">Acequía</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 20">Humedades</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 21">Quebradas</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 22">Ciénagas</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 23">Biblioteca</td>
+                <td style="font-size: small;" ng-if="lugar.tipo == 24">Escuelas</td>
+                <td style="font-size: small;" ng-if="lugar.recurso == 0"> Recursos Naturales</td>
+                <td style="font-size: small;" ng-if="lugar.recurso == 1">Destinos Naturales y Turísticos</td>
+                <td style="font-size: small;" ng-if="lugar.recurso == 2">Festividades y Eventos</td>
 
                 <td>            
                   <div class="btn-group">
@@ -147,19 +146,18 @@
             <!-- /.box-body -->
             <div class="box-footer no-padding" style="height: 500px; overflow-y: scroll;">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Edificaciones <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[0].cantidad}}</span></a></li>
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Edf. y Exp. Religiosos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[1].cantidad}}</span></a></li>
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Técnico científicos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[2].cantidad}}</span></a></li>
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[3]"></i> Parques Naturales <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[3].cantidad}}</span></a></li>
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Monumentos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[4].cantidad}}</span></a></li>
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Ríos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[5].cantidad}}</span></a></li>
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Arroyos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[6].cantidad}}</span></a></li>
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[3]"></i> Act. Turísticas <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[7].cantidad}}</span></a></li>
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[0]"></i> Festividades <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[8].cantidad}}</span></a></li>
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[1]"></i> Exp. Religiosas <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[9].cantidad}}</span></a></li>
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[2]"></i> Ferias <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[10].cantidad}}</span></a></li>
-                <li><a href=""><i class="fa fa-circle" ng-style="colores[3]"></i> Gastronomía <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[11].cantidad}}</span></a></li>
-                
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[0]"></i> Edificaciones <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[0].cantidad}}</span></a></li>
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[1]"></i> Edf. y Exp. Religiosos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[1].cantidad}}</span></a></li>
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[2]"></i> Técnico científicos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[2].cantidad}}</span></a></li>
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[3]"></i> Parques Naturales <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[3].cantidad}}</span></a></li>
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[0]"></i> Monumentos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[4].cantidad}}</span></a></li>
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[1]"></i> Ríos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[5].cantidad}}</span></a></li>
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[2]"></i> Arroyos <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[6].cantidad}}</span></a></li>
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[3]"></i> Act. Turísticas <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[7].cantidad}}</span></a></li>
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[0]"></i> Festividades <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[8].cantidad}}</span></a></li>
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[1]"></i> Exp. Religiosas <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[9].cantidad}}</span></a></li>
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[2]"></i> Ferias <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[10].cantidad}}</span></a></li>
+                <li><a href="" style="font-size: small;"><i class="fa fa-circle" ng-style="colores[3]"></i> Gastronomía <span class="pull-right" style="color: #B6BBC0 !important">{{reporte[11].cantidad}}</span></a></li>
               </ul>
             </div>
           </div>
@@ -173,85 +171,84 @@
 </section>
 <!-- Modal de insertar evento-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-lg" role="document"   Y>
     <div class="modal-content">
-      <div class="modal-header ">
+      <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center><h4 class="modal-title" id="myModalLabel">Nuevo Lugar</h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">NUEVO LUGAR</h3></center>
       </div>
       <div class="modal-body " style="background-color:rgb(255, 255, 255) !important; color: black !important;">
         <form name="formEmpresa">
-          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos básicos</h3>
-          </div>
+           <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+            <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">DATOS BÁSICOS</h3>  
+          </div><br>
           <br>
-            <div class="row">
+            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
-                    <label>Nombre:</label>
-                    <input ng-model="lugar.nombre" type="text" class="form-control" required>
+                    <label style="font-weight: 300;">Nombre:</label>
+                    <input style="border-radius: 9px" ng-model="lugar.nombre" type="text" class="form-control" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <label>Descripción:</label>
-                    <input ng-model="lugar.descripcion" type="text" class="form-control" required>
+                    <label style="font-weight: 300;">Descripción:</label>
+                    <input style="border-radius: 9px" ng-model="lugar.descripcion" type="text" class="form-control" required>
                 </div>
                  <div class="col-md-4 col-xs-12">
-                    <label>Capacidad:</label>
-                    <input ng-model="lugar.capacidad" type="number" class="form-control" required>
+                    <label style="font-weight: 300;">Capacidad:</label>
+                    <input style="border-radius: 9px" ng-model="lugar.capacidad" type="number" class="form-control" required>
                 </div>
             </div><br>
-            <div class="row">
+            <div class="row" style="font-size: smaller">
               <div class="col-md-4 col-xs-12">
-                <label>Tipo:</label>
-                <select ng-model="lugar.tipo" class="form-control" required>
+                <label style="font-weight: 300;">Tipo:</label>
+                <select style="border-radius: 9px" ng-model="lugar.tipo" class="form-control" required>
                     <option ng-repeat="tipo in tipos" ng-selected ="tipo.id == tipoSelect" value="{{tipo.id}}">{{tipo.name}}</option>
                 </select>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <label>Recursos</label>
-                <select ng-model="lugar.recurso" class="form-control" required>
+                <label style="font-weight: 300;">Recursos</label>
+                <select style="border-radius: 9px" ng-model="lugar.recurso" class="form-control" required>
                     <option ng-repeat="recurso in recursos" ng-selected ="recurso.id == recursoSelect" value="{{recurso.id}}">{{recurso.name}}</option>
                 </select>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <label>Categoría de Recursos</label>
-                <select ng-model="lugar.categoriaderecurso" class="form-control" required>
+                <label style="font-weight: 300;">Categoría de Recursos</label>
+                <select style="border-radius: 9px" ng-model="lugar.categoriaderecurso" class="form-control" required>
                     <option ng-repeat="categoria in categorias" ng-selected ="categoria.id == categoriaSelect" value="{{categoria.id}}">{{categoria.name}}</option>
                 </select>
                 </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
-                   <label>Dirección:</label>
-                  <input type="text" class="form-control"  ng-model="lugar.direccion" required>
+                   <label style="font-weight: 300;">Dirección:</label>
+                  <input style="border-radius: 9px" type="text" class="form-control"  ng-model="lugar.direccion" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <label>Departamento:</label>
-                  <select ng-model="lugar.departamento" class="form-control" required>
+                <label style="font-weight: 300;">Departamento:</label>
+                  <select style="border-radius: 9px" ng-model="lugar.departamento" class="form-control" required>
                      <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos" ng-selected ="departamento.idDepartamento == departamentoSelect">{{departamento.nombre}}</option>
                   </select>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <label>Región:</label>
-                    <select ng-model="lugar.region" class="form-control" required>
+                    <label style="font-weight: 300;">Región:</label>
+                    <select style="border-radius: 9px" ng-model="lugar.region" class="form-control" required>
                       <option value="{{region}}" ng-repeat="region in regiones" ng-selected="region.idRegion == regionSelect">{{region.nombre}}</option>
                     </select>
                 </div>
               </div>
               <br>
-            <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Ubicación</h3>
-          </div> <br>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+            <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">UBICACIÓN</h3>  
+          </div><br>
           <div class="row"  ng-init="initMap()">
-             <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="deleteMarkers();"><i class="fa fa-close"></i>
-              Eliminar Marker
-          </button>
+             <button  class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  ng-click="deleteMarkers();" >ELIMINAR MARKER
+            </button>
               <div style="width: 100% !important;" id="map2"></div>
           </div><br>
             </div><br>
         <div class="modal-footer" style="margin: 0">
-          <button  type="button" class="btn  btn-outline pull-left" data-dismiss="modal" >Cerrar</button>
-          <button type="button" ng-disabled="formHotel.$invalid" class="btn " data-dismiss="modal" ng-click="guardar();">{{button}}</button>
+       <!--   <button type="button" ng-disabled="formHotel.$invalid" class="btn " data-dismiss="modal" ng-click="guardar();">{{button}}</button>-->
+          <button ng-disabled="formHotel.$invalid" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardar()">{{button}}</button>
         </div>
      </form>
     </div>
@@ -263,9 +260,9 @@
      <div class="modal-body">
         <div class="box" style="border-top: none; box-shadow: none;">             
           <div class="icon">
-            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="image"><i style="color: #00a3ee ! important" class="ion ion-happy-outline"></i></div>
             <div class="info">
-              <h3 class="title">Éxito!</h3>
+              <h3 class="title" style="font-size: small ; margin-top: 10%">ÉXITO!</h3>
               <p>
                 Se ha realizado correctamente.
               </p>
@@ -282,15 +279,15 @@
       <div class="modal-body" style="padding-top: 15px">
         <div class="box" style="border: none; box-shadow: none;">             
           <div class="icon">
-            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="image" ><i  class="fa fa-trash-o" style="color: #00a3ee ! important"></i></div>
             <div class="info">
-              <h3 class="title">Espere!</h3>
+              <h3 class="title" style="font-size: small ; margin-top: 10%">ESPERE!</h3>
               <p>
                 ¿Está seguro de que desea eliminar el lugar?
               </p>
             <br> <br>
-             <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
-            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminar()">Aceptar</button>
+             <button  type="button" class="btn pull-left buttonModal" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right buttonModal" data-dismiss="modal" ng-click="eliminar()">Aceptar</button>
             </div>
           </div>
         </div> 

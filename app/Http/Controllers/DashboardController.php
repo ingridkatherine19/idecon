@@ -21,6 +21,10 @@ use App\Modelos\CostoProvee;
 use App\Modelos\IngresoConsume;
 use App\Modelos\Consumopalco;
 use App\Modelos\Consumocalle;
+use App\Modelos\Junta;
+use App\Modelos\Actividadagrupacion;
+use App\Modelos\Actividadparticipante;
+use App\Modelos\Actividadempresa;
 use DB;
 use stdClass;
 use Carbon\Carbon;
@@ -52,6 +56,10 @@ class DashboardController extends Controller {
         $eventoPasado = Evento::where('fechaFin' ,'<', $date)->count();
         $eventoProximo = Evento::where('fechaFin' ,'>', $date)->count();
         $eventos = Evento::all();
+        //buscar los participantes del evento de los diferentes tipos, agrupaciones. participantes y empresas
+        $agrupacionesAsociadas = array();
+        $participantesAsociados = array();
+        $empresasAsociadas = array();
         foreach ($eventos as $evento) {
             //costos del evento contiene otros costos agregados
             $costo = CostoEvento::where('idEvento', $evento->idEvento)->get();
@@ -72,6 +80,18 @@ class DashboardController extends Controller {
             $consumocalleEvento = Consumocalle::where('idEvento', $evento->idEvento)->get();
             foreach ($consumocalleEvento as $c) {
                 array_push($consumocalle, $c);
+            }
+            //sumar los empleos de los organizadores
+            $organizadores = Junta::where('idEvento', $evento->idEvento)->get();
+            //dd($organizadores);
+            $sum->nempleados += count($organizadores);
+            foreach ($organizadores as $o) {
+                if($o->sexo == 0){
+                    $sum->cantHombres ++;
+                }else{
+                    $sum->cantMujeres ++;
+                }
+                    
             }
         
             //buscando las actividades
@@ -98,6 +118,25 @@ class DashboardController extends Controller {
                         $palcoSub += PalcoSub::where('idActividad', $s->idEventoActividad)->sum('capacidad');
                     }
                 }
+
+                //las agrupaciones asociadas a la actividad 
+                $aa = Actividadagrupacion::where('idActividad', $a->idActividad)->get();
+                foreach ($aa as $a) {
+                    # code...
+                    array_push($agrupacionesAsociadas, $a);
+                }
+                //los participantes asociados a la actividad 
+                $pa = Actividadparticipante::where('idActividad', $a->idActividad)->get();
+                foreach ($pa as $p) {
+                    # code...
+                    array_push($participantesAsociados, $p);
+                }
+                //las empresas asociadas a la actividad 
+                $ea = Actividadempresa::where('idActividad', $a->idActividad)->get();
+                foreach ($ea as $e) {
+                    # code...
+                    array_push($empresasAsociadas, $e);
+                }
                       
             }
             
@@ -114,17 +153,45 @@ class DashboardController extends Controller {
         }
 
         /*Totales de las agrupaciones */
-        $totalAgrupacion->cantidad = Agrupacion::count();
-        $totalAgrupacion->miembros = Agrupacion::sum('nempleados');
-        $totalAgrupacion->mujeres = Agrupacion::sum('cantMujeres');
-        $totalAgrupacion->hombres = Agrupacion::sum('cantHombres');
-        /*Totales participantes */
-        $totalParticipante->cantidad = Participante::count();
-        $totalParticipante->mujeres = Participante::where('sexo' , 0)->count();
-        $totalParticipante->hombres = Participante::where('sexo' , 1)->count();
-        $totalParticipante->natural = Participante::where('tipo' , 0)->count();
-        $totalParticipante->juridico = Participante::where('tipo' , 1)->count();
+        $totalAgrupacion->cantidad = count($agrupacionesAsociadas);//se debe filtrar por localidad
+        $totalAgrupacion->miembros = 0;
+        $totalAgrupacion->mujeres = 0;
+        $totalAgrupacion->hombres = 0;
+        //cantidad de artistas
+        //dd($agrupacionesAsociadas );
+        foreach ($agrupacionesAsociadas as $a) {
+            $agrupacion = Agrupacion::find($a->idAgrupacion);
+            //dd($agrupacion);
+            $totalAgrupacion->miembros += $agrupacion->nempleados;
+            $totalAgrupacion->mujeres += $agrupacion->cantMujeres;
+            $totalAgrupacion->hombres += $agrupacion->cantHombres;
+        }
 
+        /*Totales participantes */
+        $totalParticipante->cantidad = count($participantesAsociados);
+        $totalParticipante->mujeres = 0;
+        $totalParticipante->hombres = 0;
+        $totalParticipante->natural = 0;
+        $totalParticipante->juridico = 0;
+        foreach ($participantesAsociados as $p) {
+            //busca el participantes
+            $participante = Participante::find($p->idParticipante);
+            //calcula participantes por sexo
+            if ($participante->sexo == 0) {
+                # code...
+                $totalParticipante->mujeres++;
+            }else{
+                $totalParticipante->hombres ++;
+            }
+            //calcula participantes naturales y juridicos
+            if ($participante->tipo == 0) {
+                # code...
+                $totalParticipante->natural ++;
+            }else{
+                $totalParticipante->juridico ++;
+            }
+            
+        }
         /*Suma de ingresos y egresos de los eventos , y de la cantidad de empleados*/
         //$sum->costos = CostoEvento::sum('costo');
         //$sum->ingresos = IngresoEvento::sum('costo');
@@ -257,8 +324,16 @@ class DashboardController extends Controller {
                 foreach ($palco as $p) {
                     $aforoAct += $p->capacidad;
                 }
+                //calcula modalidad
+                foreach ($modalidad as $m) {
+                    if ($act->modalidad == $m->idModalidad) {
+                        $m->cantidad++;
+                        $m->horas += $inicio->diffInHours($fin);
+                        $m->aforo += $aforoAct;
+                    }
+                }
                 //buscar las subactividades para calcular la cantidad de horas por modalidad
-                $sub = EventoActividad::where('idActividad', $act->idActividad)->get();
+                /*$sub = EventoActividad::where('idActividad', $act->idActividad)->get();
                 foreach ($sub as $s) {
                     //calcula modalidad
                     foreach ($modalidad as $m) {
@@ -268,7 +343,7 @@ class DashboardController extends Controller {
                             $m->aforo += $aforoAct;
                         }
                     }
-                }
+                }*/
 
             }else{
                 $sub = EventoActividad::where('idActividad', $act->idActividad)->get();
@@ -451,7 +526,19 @@ class DashboardController extends Controller {
             $consumopalco = Consumopalco::where('idEvento' , $e->idEvento)->get();
             //Busca los consumos en la calle segun el idEvento
             $consumocalle = Consumocalle::where('idEvento' , $e->idEvento)->get();
-
+            //sumar los empleos de los organizadores
+            $organizadores = Junta::where('idEvento', $e->idEvento)->get();
+            $sum->nempleados += count($organizadores);
+            foreach ($organizadores as $o) {
+                if($o->sexo == 0){
+                    $sum->cantHombres ++;
+                }else{
+                    $sum->cantMujeres ++;
+                }
+                    
+            }
+            
+            
 
             foreach ($actividades as $act) {
 
@@ -474,6 +561,7 @@ class DashboardController extends Controller {
                     $sum->nempleados += $act->empleo;
                     $sum->cantMujeres += $act->cantMujeres;
                     $sum->cantHombres += $act->cantHombres;
+                    
 
                 if ($act->lugar == 1) {//mismo lugar
                     $direccion = DireccionActividad::where('idActividad', $act->idActividad)->get();

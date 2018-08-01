@@ -104,13 +104,13 @@ $routeProvider.when('/lugar', {
 
       });
 
-      $scope.dataIngreso = {//BAR CHART ?????????????
+      $scope.dataIngreso = {
         labels: [""],
         datasets: $scope.data
       };
 
       // $scope.cargarGrafica();
-       $scope.graficaSector();
+//       $scope.graficaSector();
     });
  
   }
@@ -150,6 +150,7 @@ $routeProvider.when('/lugar', {
 
     }).success(function (response) {
        $scope.lugares = response.lugares;
+       $scope.reporteE();
         $('#myModal5').modal('show'); // abrir
         setTimeout(function(){
           $('#myModal5').modal('hide');
@@ -162,7 +163,6 @@ $routeProvider.when('/lugar', {
   $scope.cargarLugar = function (lugar){
     $scope.lugar = lugar;
     $scope.button ="Actualizar";
-    console.log($scope.lugar);
     $scope.tipoSelect = lugar.tipo;
     $scope.categoriaSelect  =lugar.categoriaderecurso;
     $scope.recursoSelect = lugar.recurso;
@@ -187,6 +187,7 @@ $routeProvider.when('/lugar', {
     }).success(function (response) {
         if (response.error == false) {
           $scope.lugares.splice($scope.indexSelect,  1);
+          $scope.reporteE();
           $('#myModal5').modal('show'); // abrir
             setTimeout(function(){
               $('#myModal5').modal('hide');
@@ -205,8 +206,6 @@ $routeProvider.when('/lugar', {
         }
     }).success(function (response) {
       $scope.regiones = response.regiones;
-      console.log($scope.regiones);
-      
     });
   }
 
@@ -253,7 +252,7 @@ $routeProvider.when('/lugar', {
       $scope.addMarker = function(location) {
         $scope.lat = location.lat();
         $scope.lng = location.lng();
-        console.log(location.lat(), location.lng());
+      //  console.log(location.lat(), location.lng());
         var marker = new google.maps.Marker({
           position: location,
           map: $scope.map

@@ -65,9 +65,21 @@ class EmpresaController extends Controller {
         $empresa->nit = $request->nit;
         $empresa->sector = $request->sector;
         $empresa->gerente = $request->gerente;
+        $empresa->departamento = $request->departamento;
+        $empresa->ciudad = $request->ciudad;
+        $empresa->direccion = $request->direccion;
         $empresa->telefono1 = $request->telefono1;
         $empresa->telefono2 = $request->telefono2;
+        $empresa->nempleados = $request->nempleados;
+        $empresa->cantMujeres = $request->cantMujeres;
+        $empresa->cantHombres = $request->cantHombres;
         $empresa->correo = $request->correo;
+        $empresa->facebook = $request->facebook;
+        $empresa->twitter = $request->twitter;
+        $empresa->youtube = $request->youtube;
+        $empresa->instagram = $request->instagram;
+        $empresa->lat = $request->lat;
+        $empresa->lng = $request->lng;
         $empresa->save();
         return response()->json(['error'=>false,'empresa' => $empresa , 'mensaje' =>'La empresa fue actualizada exitosamente']);
     }

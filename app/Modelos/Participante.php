@@ -10,6 +10,5 @@ class Participante extends Model
     
     public $primaryKey='idParticipante';
     protected $table = 'participante';
-    public $timestamps = false;
-
+	use SoftDeletes;
 }

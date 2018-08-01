@@ -308,12 +308,12 @@ $routeProvider.when('/restaurante', {
       $scope.addMarker = function(location) {
         $scope.lat = location.lat();
         $scope.lng = location.lng();
-        console.log(location.lat(), location.lng());
+     // console.log(location.lat(), location.lng());
         var marker = new google.maps.Marker({
           position: location,
           map: $scope.map
         });
-        console.log(marker.getPosition());
+      // console.log(marker.getPosition());
         
         //console.log($scope.markers);
       }

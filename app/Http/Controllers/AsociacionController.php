@@ -89,7 +89,6 @@ class AsociacionController extends Controller {
     }
 
     public function all2 (Request $request){//Esta función busca a los participantes o a las empresas o a las agrupaciones que ya están asociadas a la actividad.
-     //   dd($request->actividad , $request->tipo);
         $mensaje = '';
         $act = json_decode($request->actividad);
         $participantesArray = array();
@@ -97,61 +96,27 @@ class AsociacionController extends Controller {
         $agrupacionesArray = array();
         
         $participantes = Actividadparticipante::where('idActividad', $act->idActividad)->get();//Busca a los participantes que esten asociados
-            if (isset($participantes[0])) {//Verifica que traiga algo
-               if(count($participantes) == 1){//Si hay uno sólo
-                    $participante = Participante::where('idParticipante' , $participantes[0]->idParticipante)->get();//Se busca el participante en la tabla de participante para devolverlo
-                    $participante[0]->idAsociacion = $participantes[0]->id;
-                   array_push($participantesArray , $participante[0]);  //Se asigna la asociacion
-               }else{
-                foreach ($participantes as $p) {//Si hay varios registros
-                    $participante = Participante::where('idParticipante' , $p->idParticipante)->get();//Se busca a los participantes y se asigna en la asociacion
-                    $participante[0]->idAsociacion = $p->id; 
-                    array_push($participantesArray , $participante[0]);               
-                }
-               }
-            
-            }else{
-                $mensaje = '"No hay Participantes asociados"';
-
-            }
-
-            $empresas = Actividadempresa::where('idActividad', $act->idActividad)->get();
-            if (isset($empresas[0])) {
-                if(count($empresas) == 1){
-                    $empresa = Empresa::where('idEmpresa' , $empresas[0]->idEmpresa)->get();
-                    $empresa[0]->idAsociacion = $empresas[0]->id;
-                    array_push($empresasArray , $empresa[0]);
-               }else{
-                foreach ($empresas as $e) {
-                    $empresa = Empresa::where('idEmpresa' , $e->idEmpresa)->get();
-                    $empresa[0]->idAsociacion = $e->id;
-                    array_push($empresasArray , $empresa[0]);                   
-                }
-               }
-            }else{
-                $mensaje = '"No hay Empresas asociadas"';
-            }
-            $agrupaciones = Actividadagrupacion::where('idActividad', $act->idActividad)->get();
-            if (isset($agrupaciones[0])) {
-                if(count($agrupaciones) == 1){
-
-                    $agrupacion = Agrupacion::where('idAgrupacion' , $agrupaciones[0]->idAgrupacion)->get();
-                    $agrupacion[0]->idAsociacion = $agrupaciones[0]->id;
-                    array_push($agrupacionesArray , $agrupacion[0]);
-               }else{
-                foreach ($agrupaciones as $a) {
-                    $agrupacion = Agrupacion::where('idAgrupacion' , $a->idAgrupacion)->get();
-                    $agrupacion[0]->idAsociacion = $a->id;
-                    array_push($agrupacionesArray , $agrupacion[0]);                 
-                }
-               }
-            }else{
-                $mensaje = '"No hay Agrupaciones asociadas"';
-            }
-        
+        foreach ($participantes as $p) {//Si hay varios registros
+            $participante = Participante::find($p->idParticipante);//Se busca a los participantes y se asigna en la asociacion
+            $participante->idAsociacion = $p->id; 
+            array_push($participantesArray , $participante);               
+        }
+        $empresas = Actividadempresa::where('idActividad', $act->idActividad)->get();
+        foreach ($empresas as $e) {
+            $empresa = Empresa::find($e->idEmpresa);
+            $empresa->idAsociacion = $e->id;
+            array_push($empresasArray , $empresa);                   
+        }
+        $agrupaciones = Actividadagrupacion::where('idActividad', $act->idActividad)->get();
+        foreach ($agrupaciones as $a) {
+            $agrupacion = Agrupacion::find($a->idAgrupacion);
+            $agrupacion->idAsociacion = $a->id;
+            array_push($agrupacionesArray , $agrupacion);                 
+        }
   
         return response()->json(['error'=>false,'participantes' => $participantesArray , 'empresas' => $empresasArray ,  'agrupaciones' => $agrupacionesArray , 'mensaje' => $mensaje]);
     }
+    
     public function buscarPremio (Request $request){
         
         $premios = Premio::where('idActividad' , $request->idActividad)->get();

@@ -157,14 +157,15 @@ $routeProvider.when('/participante', {
   }
 
   $scope.guardar = function() {
-    console.log($scope.participante);
+
    var route;
    if ($scope.button == "Guardar") {
     route = 'participante/create';
    }else{
     route = 'participante/update';
    }
-
+    $scope.participante.lat = $scope.lat;
+    $scope.participante.lng = $scope.lng;
     $http({
         url: path + route,
         method: 'get',
@@ -194,7 +195,7 @@ $routeProvider.when('/participante', {
         url: path + 'ciudad/all',
         method: 'get',
         params:{
-          idDepartamento: 11 //PRUEBA
+          idDepartamento: idDepartamento //PRUEBA
         },
         headers: {
             "Content-Type": "application/json"
@@ -215,8 +216,52 @@ $routeProvider.when('/participante', {
         }
     }).success(function (response) {
       $scope.departamentos = response.departamentos;
-      console.log($scope.departamentos);
+   
     });
+/* Mapa */
+  $scope.map;
+  $scope.markers = [];
+  $scope.initMap = function() {
+      var haightAshbury = {lat: 10.4742449, lng: -73.2436335};
+
+      //var haightAshbury = {lat: 37.769, lng: -122.446};
+
+       $scope.map = new google.maps.Map(document.getElementById('map2'), {
+          zoom: 16,
+          center: haightAshbury,
+          mapTypeId: 'terrain'
+        });
+
+        // This event listener will call addMarker() when the map is clicked.
+        $scope.map.addListener('click', function(event) {
+          //alert();
+          if ($scope.markers.length == 0) {
+            $scope.addMarker(event.latLng);  
+          }
+        });
+
+        // Adds a marker at the center of the map.
+        //$scope.addMarker(haightAshbury);
+    
+  }
+
+   // Adds a marker to the map and push to the array.
+    $scope.addMarker = function(location) {
+      $scope.lat = location.lat();
+      $scope.lng = location.lng();
+      var marker = new google.maps.Marker({
+        position: location,
+        map: $scope.map
+      });
+      $scope.markers.push(marker);
+      //console.log($scope.markers);
+    }
+  // Deletes all markers in the array by removing references to them.
+  $scope.deleteMarkers = function() {
+    $scope.clearMarkers();
+    $scope.markers = [];
+  }
+
 //LLAMADAS
 $scope.All();
 $scope.reporteParticipante();

@@ -47,6 +47,8 @@ class ParticipanteController extends Controller {
         $participante->twitter = $request->twitter;
         $participante->instagram = $request->instagram;
         $participante->youtube = $request->youtube;
+        $participante->lat = $request->lat;
+        $participante->lng = $request->lng;
         $participante->save();
 
         return response()->json(['error'=>false,'participante' => $participante, 'mensaje' => 'El participante fue registrado con éxito' ]);
@@ -75,6 +77,8 @@ class ParticipanteController extends Controller {
         $participante->twitter = $request->twitter;
         $participante->instagram = $request->instagram;
         $participante->youtube = $request->youtube;
+        $participante->lat = $request->lat;
+        $participante->lng = $request->lng;
         $participante->save();
 
         $participante->save();

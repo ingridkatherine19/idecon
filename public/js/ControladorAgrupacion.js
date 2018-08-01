@@ -65,8 +65,7 @@ $routeProvider.when('/agrupacion', {
 
   //Ver si hay un nuevo genero
   $scope.nuevoGenero  = function(){
-    $scope.agrupacion.lat = $scope.lat;
-    $scope.agrupacion.lng = $scope.lng;
+
     if ($scope.swichCargo == 1) {
       $http({
           url: path + 'genero/create',
@@ -78,8 +77,7 @@ $routeProvider.when('/agrupacion', {
               "Content-Type": "application/json"
           }
       }).success(function (response) {
-        console.log(response.genero);
-        $scope.agrupacion.genero = response.genero.idGenero;
+          $scope.agrupacion.genero = response.genero.idGenero;
           $scope.allGenero();
           $scope.guardarAgrupacion();
       });
@@ -119,8 +117,6 @@ $routeProvider.when('/agrupacion', {
         $scope.ver = true;
       });
 
-      console.log($scope.labels);
-
     });
   }
 
@@ -143,7 +139,6 @@ $routeProvider.when('/agrupacion', {
           if ($scope.markers.length == 0) {
             $scope.addMarker(event.latLng);  
           }
-          
         });
 
         // Adds a marker at the center of the map.
@@ -155,12 +150,10 @@ $routeProvider.when('/agrupacion', {
     $scope.addMarker = function(location) {
       $scope.lat = location.lat();
       $scope.lng = location.lng();
-      console.log(location.lat(), location.lng());
       var marker = new google.maps.Marker({
         position: location,
         map: $scope.map
       });
-      console.log(marker.getPosition());
       $scope.markers.push(marker);
       //console.log($scope.markers);
     }
@@ -179,7 +172,6 @@ $routeProvider.when('/agrupacion', {
         }
     }).success(function (response) {
       $scope.departamentos = response.departamentos;
-      console.log($scope.departamentos);
     });
 
 
@@ -204,7 +196,6 @@ $routeProvider.when('/agrupacion', {
       }
   }).success(function (response) {
     $scope.regiones = response.regiones;
-    console.log($scope.regiones);
   });
 
   $scope.guardarAgrupacion = function(agrupacion){
@@ -214,7 +205,8 @@ $routeProvider.when('/agrupacion', {
    }else{
     route = 'agrupacion/update';
    }
-
+    $scope.agrupacion.lat = $scope.lat;
+    $scope.agrupacion.lng = $scope.lng;
     $http({
         url: path + route,
         method: 'get',
@@ -237,10 +229,8 @@ $routeProvider.when('/agrupacion', {
   }
 
   $scope.eliminar = function(agrupacion , index){
-
     $scope.agrupacionSeleccionada = agrupacion;
     $scope.index = index;
-
   }
 
   $scope.delete = function(){
@@ -283,7 +273,7 @@ $routeProvider.when('/agrupacion', {
         }
     }).success(function (response) {
       $scope.ciudades = response.ciudades;
-      console.log($scope.ciudades);
+    // console.log($scope.ciudades);
       
     });
   }

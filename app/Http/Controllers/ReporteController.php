@@ -485,16 +485,22 @@ class ReporteController extends Controller {
                 $inicio = new Carbon($direccion[0]->fechaInicio);
                 $fin = new Carbon($direccion[0]->fechaFin);
                 $horas += $inicio->diffInHours($fin); 
-
+                foreach ($modalidad as $m) {
+                    if ($act->modalidad == $m->idModalidad) {
+                        $m->cantidad++;
+                        $m->horas += $inicio->diffInHours($fin);
+                        $m->aforo += $aforoAct;
+                    }
+                }
                 foreach ($sub as $s) {
                     //calcula modalidad
-                    foreach ($modalidad as $m) {
+                    /*foreach ($modalidad as $m) {
                         if ($act->modalidad == $m->idModalidad) {
                             $m->cantidad++;
                             $m->horas += $inicio->diffInHours($fin);
                             $m->aforo += $aforoAct;
                         }
-                    }
+                    }*/
 
                     //calcula los tipo de actividad
                     $esta = 0;
@@ -546,9 +552,10 @@ class ReporteController extends Controller {
                     //calcula aforo
                     $aforoAct = 0;
                     $palco = PalcoSub::where('idActividad', $s->idEventoActividad)->get();
+                    
                     foreach ($palco as $p) {
                         $aforo += $p->capacidad;
-                        $aforoAct = $p->capacidad;
+                        $aforoAct += $p->capacidad;
                     }
 
                     //calcula horas
@@ -558,6 +565,7 @@ class ReporteController extends Controller {
                     $horas += $inicio->diffInHours($fin);
 
                     //calcula modalidad
+                    //dd($s);
                     foreach ($modalidad as $m) {
                         if ($s->modalidad == $m->idModalidad) {
                             $m->cantidad++;
@@ -853,7 +861,7 @@ class ReporteController extends Controller {
             
         }
         
-        $gruposArtisticos = count($agrupacionesAsociadas);
+        $gruposArtisticos = count($agrupacionesAsociadas); 
         //$agru = Agrupacion::all();
         foreach ($agrupacionesAsociadas as $a) {
             $agrupacion = Agrupacion::find($a->idAgrupacion);

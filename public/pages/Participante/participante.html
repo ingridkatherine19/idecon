@@ -98,15 +98,15 @@
                 </tr>
                   
                 <tr ng-repeat="participante in participantes">
-                  <td class="mailbox-name"><a style="color: #00a3ee !important;">{{participante.nombre}}</a></td>
+                  <td class="mailbox-name"><a style="color: #00a3ee !important; font-size: small">{{participante.nombre}}</a></td>
 
-                  <td>
+                  <td style="font-size: small">
                     <span ng-if="participante.tipo==0" >Natural</span>
                     <span ng-if="!participante.tipo==0">Jurídico</span>
                   </td>
 
-                  <td>{{participante.telefono}}</td>
-                  <td>{{participante.correo}}</td>
+                  <td style="font-size: small">{{participante.telefono}}</td>
+                  <td style="font-size: small">{{participante.correo}}</td>
                   
 
                   <td>            
@@ -139,8 +139,7 @@
         <!-- /.box-body -->
         <div class="box-footer no-padding">
           <ul class="nav nav-pills nav-stacked">
-            <li ng-repeat="l in labels"><a href=""><i class="fa fa-circle" ng-style="colores[$index]"></i> {{l}} <span class="pull-right" style="color: #B6BBC0 !important">{{data[$index]}}</span></a></li>
-            
+            <li ng-repeat="l in labels"><a style="font-size: small;"><i class="fa fa-circle" ng-style="colores[$index]"></i> {{l}} <span class="pull-right" style="color: #B6BBC0 !important">{{data[$index]}}</span></a></li>
           </ul>
         </div>
       </div>
@@ -222,135 +221,141 @@
 
 <!-- Modal DE INSERTAR AGRUPACIONES-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-lg" role="document" >
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <center><h4 class="modal-title"><b>Datos de los Participantes </b></h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">NUEVO PARTICIPANTE</h3></center>
       </div>
-      <form name="formCosto">
-      <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
-          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos básicos</h3>
-          </div><br>
-        <div class="row">
-          <div class="col-md-4 col-xs-12">
-              <label>Tipo</label>
-              <select class="form-control" name="tipo" ng-model="participante.tipo" required>
-                <option ng-repeat="tipo in tipoUsuario" ng-selected ="tipo.id == tipoSelect" value="{{tipo.id}}">{{tipo.name}}</option>
-              </select>
-          </div>
-          <div class="col-md-4 col-xs-12">
-              <label>Nombre Completo:</label>
-              <input id="nombre" ng-model="participante.nombre" type="text" class="form-control" >
-          </div>
-          <div class="col-md-4 col-xs-12">
-              <label>Documento de Identidad:</label>
-              <input id="cedula" ng-model="participante.cedula" type="number" class="form-control" >
-          </div>
-        </div><br>
-        <div class="row">
-          <div class="col-md-4 col-xs-12">
-              <label>Edad:</label>
-              <input id="edad" ng-model="participante.edad" type="number" class="form-control">
-          </div>
-          <div class="col-md-4 col-xs-12">
-              <label>Fecha de Nacimiento:</label>
-              <input id="edad" ng-model="participante.fechaNac" type="date" class="form-control">
-          </div>
-          <div class="col-md-4 col-xs-12">
-              <label>Sexo:</label>
-              <select class="form-control" name="sexo" ng-model="participante.sexo" required>
-                <option ng-repeat="sexo in sexoUsuario" ng-selected ="sexo.id == sexoSelect" value="{{sexo.id}}">{{sexo.name}}</option>
-              </select>
-          </div>
-        </div><br>
-        <div class="row">
-          <div class="col-md-4 col-xs-12">
-              <label>Departamento:</label>
-               <select ng-model="participante.departamento" class="form-control" ng-change="buscarCiudad(departamento)" required>
-                <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos" ng-selected ="departamento.idDepartamento == departamentoSelect">{{departamento.nombre}}</option>
-            </select>
-          </div>
-          <div class="col-md-4 col-xs-12">
-              <label>Ciudad:</label>
-              <select ng-model="participante.ciudad" class="form-control" required>
-                <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-selected ="ciudad.idCiudad == ciudadSelect">{{ciudad.nombre}}</option>
-              </select>
-          </div>
-          <div class="col-md-4 col-xs-12">
-            <label>Dirección:</label>
-            <input id="direccion" ng-model="participante.direccion" type="text" class="form-control" required>
-          </div>
-        </div><br>
-        <div class="row">
-         <div class="col-md-4 col-xs-12">
-              <label>telefono:</label>
-             <input ng-model="participante.telefono" type="number" class="form-control" required>
-          </div>
-         <div class="col-md-4 col-xs-12">
-              <label>telefono 2:</label>
-             <input ng-model="participante.telefono2" type="number" class="form-control">
-          </div>
-          <div class="col-md-4 col-xs-12">
-            <label>Correo</label>
-           <input ng-model="participante.correo" type="email" class="form-control">
-        </div>
-        </div><br>
-        <div class="row">
-         <div class="col-md-4 col-xs-12">
-              <label>Habilidad:</label>
-             <input ng-model="participante.habilidad" type="text" class="form-control" required>
-          </div>
-           <div class="col-md-4 col-xs-12">
-              <label>Nivel Académico:</label>
-                <select class="form-control" name="nivel" ng-model="participante.nivel" required>
-                  <option ng-repeat="nivel in nivelUsuario" ng-selected ="nivel.id == nivelSelect" value="{{nivel.id}}">{{nivel.name}}</option>
+      <form name="formParticipante">
+        <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
+            <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+              <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">DATOS BÁSICOS</h3>  
+            </div><br>
+          <div class="row" style="font-size: smaller">
+            <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Tipo</label>
+                <select style="border-radius: 9px" class="form-control" name="tipo" ng-model="participante.tipo" required>
+                  <option ng-repeat="tipo in tipoUsuario" ng-selected ="tipo.id == tipoSelect" value="{{tipo.id}}">{{tipo.name}}</option>
                 </select>
-          </div>
-          <div class="col-md-4 col-xs-12">
-            <label>Profesión</label>
-           <input ng-model="participante.profesion" type="text" class="form-control">
-        </div>
-        </div><br>
-
-          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Detalles</h3>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Nombre Completo:</label>
+                <input style="border-radius: 9px"   ng-model="participante.nombre" type="text" class="form-control" required>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Documento de Identidad:</label>
+                <input style="border-radius: 9px" ng-model="participante.cedula" type="number" class="form-control" required>
+            </div>
           </div><br>
-
-        <div class="row">
-          <div class="col-md-4 col-xs-12">
-            <label>Estado Civil:</label>
-              <select class="form-control" name="nivel" ng-model="participante.estadoC" required>
-                <option ng-repeat="estado in estadoCivil" ng-selected ="estado.id == estadoSelect" value="{{estado.id}}">{{estado.name}}</option>
+          <div class="row" style="font-size: smaller">
+            <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Edad:</label>
+                <input style="border-radius: 9px" ng-model="participante.edad" type="number" class="form-control" required>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Fecha de Nacimiento:</label>
+                <input style="border-radius: 9px" ng-model="participante.fechaNac" type="date" class="form-control" required>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Sexo:</label>
+                <select style="border-radius: 9px" class="form-control" name="sexo" ng-model="participante.sexo" required>
+                  <option ng-repeat="sexo in sexoUsuario" ng-selected ="sexo.id == sexoSelect" value="{{sexo.id}}">{{sexo.name}}</option>
+                </select>
+            </div>
+          </div><br>
+          <div class="row" style="font-size: smaller">
+            <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Departamento:</label>
+                 <select style="border-radius: 9px" ng-model="participante.departamento" class="form-control" ng-change="buscarCiudad(participante.departamento)" required>
+                  <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos" ng-selected ="departamento.idDepartamento == departamentoSelect">{{departamento.nombre}}</option>
               </select>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Ciudad:</label>
+                <select style="border-radius: 9px" ng-model="participante.ciudad" class="form-control" required>
+                  <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-selected ="ciudad.idCiudad == ciudadSelect">{{ciudad.nombre}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <label style="font-weight: 300;">Dirección:</label>
+              <input style="border-radius: 9px" ng-model="participante.direccion" type="text" class="form-control" required>
+            </div>
+          </div><br>
+          <div class="row" style="font-size: smaller">
+           <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">telefono:</label>
+               <input style="border-radius: 9px" ng-model="participante.telefono" type="number" class="form-control" required>
+            </div>
+           <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">telefono 2:</label>
+               <input style="border-radius: 9px" ng-model="participante.telefono2" type="number" class="form-control">
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <label style="font-weight: 300;">Correo</label>
+             <input style="border-radius: 9px" ng-model="participante.correo" type="email" class="form-control" required>
           </div>
-          <div class="col-md-4 col-xs-12">
-            <label>Facebook (opcional):</label>
-            <input ng-model="participante.facebook" type="text" class="form-control">
+          </div><br>
+          <div class="row" style="font-size: smaller">
+           <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Habilidad:</label>
+               <input style="border-radius: 9px" ng-model="participante.habilidad" type="text" class="form-control" required>
+            </div>
+             <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Nivel Académico:</label>
+                  <select style="border-radius: 9px" class="form-control" name="nivel" ng-model="participante.nivel" required>
+                    <option ng-repeat="nivel in nivelUsuario" ng-selected ="nivel.id == nivelSelect" value="{{nivel.id}}">{{nivel.name}}</option>
+                  </select>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <label style="font-weight: 300;">Profesión</label>
+             <input style="border-radius: 9px" ng-model="participante.profesion" type="text" class="form-control" required>
           </div>
-          <div class="col-md-4 col-xs-12">
-            <label>Twitter  (opcional):</label>
-            <input ng-model="participante.twitter" type="text" class="form-control">
+          </div><br>
+            <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+              <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">DETALLES</h3>  
+            </div><br>
+          <div class="row" style="font-size: smaller">
+            <div class="col-md-4 col-xs-12">
+              <label style="font-weight: 300;">Estado Civil:</label>
+                <select style="border-radius: 9px" class="form-control" name="nivel" ng-model="participante.estadoC" required>
+                  <option ng-repeat="estado in estadoCivil" ng-selected ="estado.id == estadoSelect" value="{{estado.id}}">{{estado.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <label style="font-weight: 300;">Facebook (opcional):</label>
+              <input style="border-radius: 9px" ng-model="participante.facebook" type="text" class="form-control">
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <label style="font-weight: 300;">Twitter  (opcional):</label>
+              <input style="border-radius: 9px" ng-model="participante.twitter" type="text" class="form-control">
+            </div>
+          </div><br>
+          <div class="row" style="font-size: smaller">
+            <div class="col-md-4 col-xs-12">
+              <label style="font-weight: 300;">Instagram (opcional):</label>
+              <input style="border-radius: 9px" ng-model="participante.instagram" type="text" class="form-control">
+            </div>
+           <div class="col-md-4 col-xs-12">
+              <label style="font-weight: 300;">Youtube (opcional):</label>
+              <input style="border-radius: 9px" ng-model="participante.youtube" type="text" class="form-control">
+            </div>
+          </div><br>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+            <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">UBICACIÓN</h3>  
+          </div><br>
+          <div class="row"  ng-init="initMap()">
+             <button  class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  ng-click="deleteMarkers();" >ELIMINAR MARKER
+              </button>
+              <div style="width: 100% !important;" id="map2"></div>
           </div>
-        </div><br>
-        <div class="row">
-          <div class="col-md-4 col-xs-12">
-            <label>Instagram (opcional):</label>
-            <input ng-model="participante.instagram" type="text" class="form-control">
-          </div>
-         <div class="col-md-4 col-xs-12">
-            <label>Youtube (opcional):</label>
-            <input ng-model="participante.youtube" type="text" class="form-control">
-          </div>
-        </div><br>
-      </div>
-      <div class="modal-footer" style="margin: 0">
-          <button  type="button" class="btn  btn-outline pull-left" data-dismiss="modal" >Cerrar</button>
-          <button type="button" ng-disabled="formActividad.$invalid" class="btn " data-dismiss="modal" ng-click="guardar()">{{button}}</button>
-      </div>
-
-    </form>    
+        </div>
+        <div class="modal-footer" style="margin: 0">
+            <!--<button type="button" ng-disabled="formActividad.$invalid" class="btn " data-dismiss="modal" ng-click="guardar()">{{button}}</button>-->
+            <button ng-if="button == 'Guardar'" ng-disabled="formParticipante.$invalid" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardar()">{{button}}</button>
+            <button ng-if="button != 'Guardar'" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardar()">{{button}}</button>
+        </div>
+      </form>    
     </div>
   </div>
 </div>
@@ -361,9 +366,9 @@
      <div class="modal-body">
         <div class="box" style="border-top: none; box-shadow: none;">             
           <div class="icon">
-            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="image"><i style="color: #00a3ee ! important" class="ion ion-happy-outline"></i></div>
             <div class="info">
-              <h3 class="title">Éxito!</h3>
+              <h3 class="title" style="font-size: small ; margin-top: 10%">ÉXITO!</h3>
               <p>
                 Se ha realizado correctamente.
               </p>
@@ -381,15 +386,15 @@
       <div class="modal-body" style="padding-top: 15px">
         <div class="box" style="border: none; box-shadow: none;">             
           <div class="icon">
-            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="image" ><i  class="fa fa-trash-o" style="color: #00a3ee ! important"></i></div>
             <div class="info">
-              <h3 class="title">Espere!</h3>
+             <h3 class="title" style="font-size: small ; margin-top: 10%">ESPERE!</h3>
               <p>
                 ¿Está seguro de que desea eliminar la actividad?
               </p>
             <br> <br>
-             <button  type="button" class="btn pull-left"  data-dismiss="modal" >Cerrar</button>
-            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="delete()">Aceptar</button>
+             <button  type="button" class="btn pull-left buttonModal"  data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right buttonModal" data-dismiss="modal" ng-click="delete()">Aceptar</button>
             </div>
           </div>
         </div> 

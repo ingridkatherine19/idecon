@@ -54,7 +54,11 @@ $routeProvider.when('/actividad', {
     cu:''
   }];
 
-  $scope.palcoActividadAct = [];
+  $scope.palcoActividadAct = [{
+    detalle: '',
+    capacidad: '',
+    cu:''
+  }];
 
   //los premios y subsidio de la actividad d tipo concurso
   $scope.premioActividad = [{
@@ -110,6 +114,12 @@ $routeProvider.when('/actividad', {
     }else{
       $scope.swichsub = true;
     }
+    $scope.sub = {};
+    $scope.palcoActividadAct = [{
+      detalle: '',
+      capacidad: '',
+      cu:''
+    }];
     
   };
 
@@ -679,10 +689,10 @@ $routeProvider.when('/actividad', {
 
     //GUARDAR SUB ACRITIVIDAD
     $scope.guardarSub = function(){
-
+      
       $scope.swichsub = false;
       if ($scope.actSeleccionada.lugar == 0) {//osea que si tiene dierccion
-        $scope.sub.palco = JSON.stringify($scope.palcoActividad);
+        $scope.sub.palco = JSON.stringify($scope.palcoActividadAct);
       }
       
       //ejemplo mientras pongo el mapa :D

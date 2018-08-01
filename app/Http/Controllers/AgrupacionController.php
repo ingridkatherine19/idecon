@@ -48,7 +48,7 @@ class AgrupacionController extends Controller {
     }
     
     public function Create(Request $request) {
-
+        
         $agrupacion = new Agrupacion();
         $agrupacion->nombre = $request->nombre;
         $agrupacion->representante = $request->representante;

@@ -88,6 +88,7 @@ class ActividadController extends Controller {
     
    // dd($request->fechaInicio , $request->fechaFin , $request->actividad);
     $actividadN = json_decode($request->actividad);
+    
    // dd($actividadN , $request->fechaInicio , $request->fechaFin);
         $actividad = new Actividad();
         $actividad->idEvento = $actividadN->idEvento;
@@ -101,6 +102,7 @@ class ActividadController extends Controller {
         $actividad->empleo = $actividadN->empleo;
         $actividad->cantHombres = $actividadN->cantHombres;
         $actividad->cantMujeres = $actividadN->cantMujeres;
+        $actividad->modalidad = (int)$actividadN->modalidad;
         //$actividad->poblacion = $actividadN->poblacion;
         //$actividad->tipoPoblacion = $actividadN->tipoPoblacion;
         $actividad->save();

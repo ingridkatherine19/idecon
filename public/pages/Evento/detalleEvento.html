@@ -10,18 +10,12 @@
         <li><a href="#/detalle">Detalles del evento</a></li>
       </ol>
 </section>
-
 <section ng-show="!ver" class="content">
-
   <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
-  
   </div>
 </section> 
-
 <!-- Main content -->
 <section ng-show="ver" class="content" ng-init="verificaLugar()">
-  
-
   <div class="row">
     <div class="col-md-4 col-xs-12">
       <div class="box" style="border:none !important;">    
@@ -38,12 +32,9 @@
             <div class="col-md-5 col-xs-6">
                <button class="btn btn-lg" style="text-align: center ; color: #B6BBC0;background-color: #fff; border: 1px solid #B6BBC0;font-size: 10px ;" ng-click="limpiarForm();" data-toggle="modal" data-target="#myModal8">CAMBIAR IMAGEN</button>  
             </div>
-            
           </div>
-           
         </div>
       </div>
-
     </div>
     <div class="col-md-4 col-xs-12">
       <div class="box" style="border:none !important;">    
@@ -68,8 +59,8 @@
         </div>
       </div> 
     </div>
-    <div class="col-md-4 col-xs-12 letraBlanca">
-      <div class="box box-solid " style="background-color: #00a3ee">
+    <div class="col-md-4 col-xs-12 letraNegra">
+      <div class="box box-solid " >
         <div class="box-header letraAzul" >
           <h3 class="box-title" style="font-size: 15px">Configuración del Evento</h3>
         </div>
@@ -78,38 +69,38 @@
           <div class="row">
               <div class="col-md-6 col-xs-6" style="padding-right: 0px">
                 <div class="row" ng-click="editarJunta(detalle)" data-toggle="modal" data-target="#myModal2" ng-click="paso(detalle)" style="margin: 0px ; border-top: solid 1px #202e5894; border-bottom:solid 1px #202e5894;  ">
-                  <h4 class="letraBlanca"><i class="letraAzul fa fa-th"></i> Organizadores</h4>
+                  <h4 class="letraGris"><i class="iconAzul fa fa-th"></i> Organizadores</h4>
                 </div>  
-                <div class="row" style="margin: 0px ;  border-bottom:solid 1px #202e5894;  ">
-                  <a href="#/actividad" ng-click="paso(detalle)"><h4 class="letraBlanca"><i class="letraAzul fa fa-list"></i> Actividades</h4></a>
+                <div class="row" style="margin: 0px ;  border-bottom:solid 1px #202e5894;">
+                  <a href="#/actividad" ng-click="paso(detalle)"><h4 class="letraGris"><i class="iconAzul fa fa-list"></i> Actividades</h4></a>
                 </div>  
                 <div data-toggle="modal" data-target="#myModal4" class="row" style="margin: 0px ;  border-bottom:solid 1px #202e5894;  ">
                   <a ng-click="allInteres()">
-                    <h4 class="letraBlanca"><i class="letraAzul fa fa-compass"></i> S. de Interés</h4>
+                    <h4 class="letraGris"><i class="iconAzul fa fa-compass"></i> S. de Interés</h4>
                   </a>
                 </div>  
                 <div class="row" style="margin: 0px ;  border-bottom:solid 1px #202e5894;  ">
-                  <a href="#/real" ng-click="paso(detalle)"><h4 class="letraBlanca"><i class="letraAzul fa fa-bar-chart"></i> Presupuesto R</h4></a>
+                  <a href="#/real" ng-click="paso(detalle)"><h4 class="letraGris"><i class="iconAzul fa fa-bar-chart"></i> Presupuesto R</h4></a>
                 </div>  
               </div>
               <div class="col-md-6 col-xs-6" style="padding-left: 0px">
                 <div class="row" style="margin: 0px ; border-top: solid 1px #202e5894; border-bottom:solid 1px #202e5894; ">
-                    <a href="#/presupuesto" ng-click="paso(detalle)"> <h4 class="letraBlanca"><i class="letraAzul fa fa-bar-chart"></i> Presupuesto</h4></a>
+                    <a href="#/presupuesto" ng-click="paso(detalle)"> <h4 class="letraGris"><i class="iconAzul fa fa-bar-chart"></i> Presupuesto</h4></a>
                 </div>  
                 <div class="row" style="margin: 0px ;  border-bottom:solid 1px #202e5894;  ">
-                 <a href="#/consumo" ng-click="paso(detalle)"> <h4 class="letraBlanca"><i class="letraAzul fa fa-recycle"></i> Consumo</h4></a>
+                 <a href="#/consumo" ng-click="paso(detalle)"> <h4 class="letraGris"><i class="iconAzul fa fa-recycle"></i> Consumo</h4></a>
                 </div>  
                 <div class="row" style="margin: 0px ;  border-bottom:solid 1px #202e5894;  ">
-                 <a href="#/encuesta" ng-click="paso(detalle)"> <h4 class="letraBlanca"><i class="letraAzul fa fa-edit"></i> Encuesta</h4></a>
+                 <a href="#/encuesta" ng-click="paso(detalle)"> <h4 class="letraGris"><i class="iconAzul fa fa-edit"></i> Encuesta</h4></a>
                 </div>  
                 <div class="row" style="margin: 0px ;  border-bottom:solid 1px #202e5894;  ">
-                 <a href="#/invitacion" ng-click="paso(detalle)"> <h4 class="letraBlanca"><i class="letraAzul fa fa-envelope-o"></i> Invitaciones </h4></a>
+                 <a href="#/invitacion" ng-click="paso(detalle)"> <h4 class="letraGris"><i class="iconAzul fa fa-envelope-o"></i> Invitaciones </h4></a>
                 </div>
               </div>
             </div>
             <div class="row" style="margin: 0px">
               <div class="col-md-12" style="padding: 0px ;  border-bottom:solid 1px #202e5894;">
-                   <a href=""  ng-click="verReporte(detalle)"> <h4 class="letraBlanca"><i class="letraAzul fa fa-pie-chart "></i> Reporte</h4></a>
+                   <a href=""  ng-click="verReporte(detalle)"> <h4 class="letraGris"><i class="iconAzul fa fa-pie-chart "></i> Reporte</h4></a>
               </div>
             </div>
           </div>
@@ -300,14 +291,23 @@
       <div class="col-md-12 col-xs-12 col-lg-12">
         <div class="box " style="border:none !important;">
             <div class="box-header with-border">
-              <h3 class="box-title">Editar los datos del evento</h3>
-              <div class="box-tools pull-right">
-                <button  type="button" class="btn btn-default btn-sm checkbox-toggle" ng-click="editar()"> <i class="fa fa-close"></i>
+              <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">EDITAR LOS DATOS DEL EVENTO</h3></center>
+              <div class="box-tools pull-right" style="right: 5%">
+             <!--   <button  type="button" class="btn btn-default btn-sm checkbox-toggle" ng-click="editar()"> <i class="fa fa-close"></i>
                   Cancelar
                 </button>
+
                 <button ng-if="formEvento.$dirty" type="button" class="btn btn-default btn-sm checkbox-toggle" ng-click="editar();actualizardetalle()"> <i class="fa fa-save"></i>
                   Guardar cambios
-                </button>
+                </button>-->
+                <div class="row">
+                  <div class="col-md-6">
+                     <button class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;" ng-click="editar()">CANCELAR</button>
+                  </div>
+                  <div class="col-md-6">
+                      <button ng-if="formEvento.$dirty" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="editar();actualizardetalle();">GUARDAR CAMBIOS</button>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="box-body" >

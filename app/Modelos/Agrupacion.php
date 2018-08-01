@@ -10,6 +10,6 @@ class Agrupacion extends Model
     
     public $primaryKey='idAgrupacion';
     protected $table = 'agrupaciones';
-    public $timestamps = false;
+    use SoftDeletes;
 
 }

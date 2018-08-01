@@ -151,127 +151,118 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
   <div class="modal-dialog  modal-lg" role="document" >
     <div class="modal-content">
-      <div class="modal-header ">
+      <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center><h4 class="modal-title" id="myModalLabel">Nueva Empresa</h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">NUEVA EMPRESA</h3></center>
       </div>
       <div class="modal-body " style="background-color:rgb(255, 255, 255) !important; color: black !important;">
         <form name="formEmpresa">
-          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Datos básicos</h3>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+            <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">DATOS BÁSICOS</h3>  
           </div><br>
-
-            <div class="row">
+            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
-                    <label>Nombre:</label>
-                    <input ng-model="empresa.nombre" type="text" class="form-control" required>
+                    <label style="font-weight: 300;">Nombre:</label>
+                    <input ng-model="empresa.nombre" type="text" class="form-control" style="border-radius: 9px" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <label>Nit:</label>
+                    <label style="font-weight: 300;">Nit:</label>
                     <!-- Para la prueba de los puntitos id="empresanit"-->
-                    <input  ng-model="empresa.nit"  class="form-control" required>
+                    <input ng-model="empresa.nit" class="form-control" style="border-radius: 9px" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <label>Tipo de Empresa:</label>
-                 <!-- <select class="form-control" ng-model="empresa.sector" required>
-                    <option value="0">Microempresa</option>
-                    <option value="1">Pequeña Empresa</option>
-                    <option value="2">Mediana Empresa</option>
-                    <option value="3">Grande Empresa</option>
-                  </select>-->
-
-                  <select class="form-control pageList" name="tipo empresa" ng-model="empresa.sector" required>
+                <label style="font-weight: 300;">Tipo de Empresa:</label>
+                  <select class="form-control pageList" name="tipo empresa" ng-model="empresa.sector" style="border-radius: 9px" required>
                       <option ng-repeat="tipo in tipoEmpresa" ng-selected ="tipo.id == tipoSelect" value="{{tipo.id}}">{{tipo.name}}</option>
                   </select>
                 </div>
             </div><br>
-            <div class="row">
+            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
-                <label>Gerente:</label>
-                  <input type="text" class="form-control"  ng-model="empresa.gerente" required>
+                <label style="font-weight: 300;">Gerente:</label>
+                  <input type="text" class="form-control" ng-model="empresa.gerente" style="border-radius: 9px" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <label>Departamento:</label>
-                  <select ng-model="empresa.departamento" class="form-control" ng-change="buscarCiudad(empresa.departamento)" required>
+                <label style="font-weight: 300;">Departamento:</label>
+                  <select ng-model="empresa.departamento" class="form-control" ng-change="buscarCiudad(empresa.departamento)" style="border-radius: 9px" required>
                      <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos" ng-selected ="departamento.idDepartamento == departamentoSelect">{{departamento.nombre}}</option>
                   </select>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <label>Ciudad:</label>
-                    <select ng-model="empresa.ciudad" class="form-control" required>
+                    <label style="font-weight: 300;">Ciudad:</label>
+                    <select ng-model="empresa.ciudad" class="form-control" style="border-radius: 9px" required>
                       <option ng-repeat="ciudad in ciudades" ng-selected ="ciudad.idCiudad == ciudadSelect" value="{{ciudad.idCiudad}}">{{ciudad.nombre}}</option>
                     </select>
                 </div>
             </div><br>
 
-            <div class="row">
+            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
-                  <label>Dirección:</label>
-                  <input id="direccion" ng-model="empresa.direccion" type="text" class="form-control" required>
+                  <label style="font-weight: 300;">Dirección:</label>
+                  <input id="direccion" ng-model="empresa.direccion" type="text" style="border-radius: 9px" class="form-control" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <label>Telefono1:</label>
-                  <input class="form-control" type="number" ng-model="empresa.telefono1" required> 
+                <label style="font-weight: 300;">Telefono1:</label>
+                  <input class="form-control" type="number" ng-model="empresa.telefono1" style="border-radius: 9px" required> 
                 </div>
                 <div class="col-md-4 col-xs-12">
-                <label>Telefono2:</label>
-                  <input class="form-control" type="number" ng-model="empresa.telefono2" >
+                <label style="font-weight: 300;">Telefono2:</label>
+                  <input class="form-control" type="number" ng-model="empresa.telefono2" style="border-radius: 9px">
                 </div>
             </div><br>
-          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Detalles</h3>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+            <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">DETALLES</h3>  
           </div><br>
-            <div class="row">
+            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
-                  <label>Número de Empleados:</label>
-                  <input ng-model="empresa.nempleados" type="number" class="form-control" required>
+                  <label style="font-weight: 300;">Número de Empleados:</label>
+                  <input style="border-radius: 9px" ng-model="empresa.nempleados" type="number" class="form-control" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                  <label>Cantidad de Mujeres:</label>
-                  <input id="direccion" ng-model="empresa.cantMujeres" type="number" class="form-control" required>
+                  <label style="font-weight: 300;">Cantidad de Mujeres:</label>
+                  <input style="border-radius: 9px" id="direccion" ng-model="empresa.cantMujeres" type="number" class="form-control" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                  <label>Cantidad de Hombres:</label>
-                  <input id="direccion" ng-model="empresa.cantHombres" type="number" class="form-control" required>
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-md-4 col-xs-12">
-                  <label>Correo:</label>
-                  <input type="email" class="form-control"  ng-model="empresa.correo" required>
-                </div>
-                <div class="col-md-4 col-xs-12">
-                  <label>Facebook (opcional):</label>
-                  <input type="text" class="form-control"  ng-model="empresa.facebook">
-                </div>
-                <div class="col-md-4 col-xs-12">
-                  <label>Twitter (opcional):</label>
-                  <input type="text" class="form-control"  ng-model="empresa.twitter">
+                  <label style="font-weight: 300;"<>Cantidad de Hombres:</label>
+                  <input style="border-radius: 9px" id="direccion" ng-model="empresa.cantHombres" type="number" class="form-control" required>
                 </div>
             </div><br>
-              <div class="row">
+            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
-                  <label>Youtube (opcional):</label>
-                  <input type="text" class="form-control"  ng-model="empresa.youtube">
+                  <label style="font-weight: 300;">Correo:</label>
+                  <input style="border-radius: 9px" type="email" class="form-control"  ng-model="empresa.correo" required>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                  <label>Instagram (opcional):</label>
-                  <input type="text" class="form-control"  ng-model="empresa.instagram">
+                  <label style="font-weight: 300;">Facebook (opcional):</label>
+                  <input style="border-radius: 9px" type="text" class="form-control"  ng-model="empresa.facebook">
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <label style="font-weight: 300;">Twitter (opcional):</label>
+                  <input style="border-radius: 9px" type="text" class="form-control"  ng-model="empresa.twitter">
                 </div>
             </div><br>
-          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #f1a64d solid 2px;" class="row" >
-            <h3 style="color:#f1a64d; margin-bottom: 1%;margin-left: 1%; margin-top: 0">Ubicación</h3>
-          </div>
+              <div class="row" style="font-size: smaller">
+                <div class="col-md-4 col-xs-12">
+                  <label style="font-weight: 300;">Youtube (opcional):</label>
+                  <input style="border-radius: 9px" type="text" class="form-control"  ng-model="empresa.youtube">
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <label style="font-weight: 300;">Instagram (opcional):</label>
+                  <input style="border-radius: 9px" type="text" class="form-control"  ng-model="empresa.instagram">
+                </div>
+            </div><br>
+          <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+            <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">UBICACIÓN</h3>  
+          </div><br>
           <div class="row"  ng-init="initMap()">
-             <button style="margin: 1%;" type="button" class="btn btn-default btn-sm" ng-click="deleteMarkers();"><i class="fa fa-close"></i>
-              Eliminar Marker
+            <button  class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  ng-click="deleteMarkers();" >ELIMINAR MARKER
             </button>
               <div style="width: 100% !important;" id="map2"></div>
           </div>
       </div>
-      <div class="modal-footer" style="margin: 0">
-          <button  type="button" class="btn  pull-left" data-dismiss="modal" >Cerrar</button>
-          <button type="button" ng-disabled="formEmpresa.$invalid" class="btn " data-dismiss="modal" ng-click="guardar()">{{button}}</button>
+      <div class="modal-footer" style="margin: 0; padding-bottom: 0; padding-top: 0">
+          <!--<button type="button" ng-disabled="formEmpresa.$invalid" class="btn " data-dismiss="modal" ng-click="guardar()">{{button}}</button>-->
+          <button ng-disabled="formEmpresa.$invalid" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardar()">{{button}}</button>
       </div>
     </form>
     </div>
@@ -280,19 +271,19 @@
 <!--modal de eliminar-->
 <div class="modal fade" id="myModal6" role="dialog">
   <div class="modal-dialog modal-sm" >
-    <div class="modal-content" style="background-color: #00abf8 !important;">
+    <div class="modal-content" >
       <div class="modal-body" style="padding-top: 15px ">
         <div class="box" style="border: none; box-shadow: none;">             
-          <div class="icon" style="background-color:#00abf8 !important">
-            <div class="image" style="background-color: 00abf8 ! important"><i  class="fa fa-trash-o"></i></div>
-            <div class="info" style="background-color:#00abf8 !important">
-              <h3 class="title">Espere!</h3>
+          <div class="icon" >
+            <div class="image" ><i  class="fa fa-trash-o" style="color: #00a3ee ! important"></i></div>
+            <div class="info" >
+            <h3 class="title" style="font-size: small ; margin-top: 10%">ESPERE!</h3>
               <p>
                 ¿Está seguro de que desea eliminar la empresa?
               </p>
             <br> <br>
-             <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
-            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="delete()">Aceptar</button>
+            <button style="font-size: small ! important" type="button" class="btn pull-left buttonModal " data-dismiss="modal" >Cerrar</button>
+            <button style="border-radius: 5px" type="button" class="btn pull-right buttonModal" data-dismiss="modal" ng-click="delete()">Aceptar</button>
             </div>
           </div>
         </div> 
@@ -306,9 +297,9 @@
      <div class="modal-body">
         <div class="box" style="border-top: none; box-shadow: none;">             
           <div class="icon">
-            <div class="image"><i class="ion ion-happy-outline"></i></div>
+            <div class="image"><i style="color: #00a3ee ! important" class="ion ion-happy-outline"></i></div>
             <div class="info">
-              <h3 class="title">Éxito!</h3>
+              <h3 class="title" style="font-size: small ; margin-top: 10%">ÉXITO!</h3>
               <p>
                 Se ha realizado correctamente.
               </p>
