@@ -11,9 +11,7 @@
 </section>
 <!-- Main content -->
 <section ng-show="!ver" class="">
-
   <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
-  
   </div>
 </section>
 <br>
@@ -259,173 +257,132 @@
 
 <!-- Modal de insertar nuevo costo al evento-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-md" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-md" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center><h4 class="modal-title" id="myModalLabel">Proveedores del costo {{costoSeleccionado.nombre}}</h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important; text-transform: uppercase ! important;">Proveedores del costo {{costoSeleccionado.nombre}}</h3></center>
       </div>
-      
       <div class="modal-body">
-        
-      <div class="row" style="padding-left: 1%">
-                        
-        <div class="col-md-3 col-xs-12">
-            <label>Empresas:</label>
-            <select ng-model="empresaSeleccionada" class="form-control">
-                <option value="{{empresa.idEmpresa}}" ng-repeat="empresa in empresas">{{empresa.nombre}}</option>
-            </select>
+        <div class="row" style="padding-left: 1% ; font-size: smaller">
+          <div class="col-md-3 col-xs-12">
+              <label style="font-weight: 300;">Empresas:</label>
+              <select style="border-radius: 9px" ng-model="empresaSeleccionada" class="form-control">
+                  <option value="{{empresa.idEmpresa}}" ng-repeat="empresa in empresas">{{empresa.nombre}}</option>
+              </select>
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="font-weight: 300;">Costo:</label>
+              <input style="border-radius: 9px" ng-model="costoProvee" id="costoprovee" type="text" class="form-control" placeholder="130000">
+          </div>
+          <div class="col-md-6 col-xs-12 " style="padding-top: 2%">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" class="minimal" ng-change="chequea()" ng-model="subo" >
+              </label>
+              <label style="color: #b7adad ; font-weight: 300;">
+                ¿Patrocinio?
+              </label>
+                <!--<button  type="button" ng-click="guardarCosto()" class="btn btn-flat margin"><i class="fa fa-plus"></i> Agregar</button>-->
+                <button class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  ng-click="guardarCosto()">AGREGAR</button>
+            </div>
+          </div>
+          
         </div>
-        <div class="col-md-3 col-xs-12">
-            <label>Costo:</label>
-            <input  ng-model="costoProvee" id="costoprovee" type="text" class="form-control" placeholder="130000">
-        </div>
-        <div class="col-md-6 col-xs-12 " style="padding-top: 2%">
-          <div class="form-group">
-            <label>
-              <input type="checkbox" class="minimal" ng-change="chequea()" ng-model="subo" >
-            </label>
-            <label style="color: #b7adad">
-              ¿Patrocinio?
-            </label>
-            <button  type="button" ng-click="guardarCosto()" class="btn btn-flat margin"><i class="fa fa-plus"></i> Agregar</button>
+        <br>
+        <div class="row" style="padding-left: 3%;padding-right: 3%">
+          <p ng-if="!costosprovee[0]" style="font-size: small; color: #B6BBC0 !important;text-align: center" >No posee Proveedores, debe insertarlos en el boton "agregar"</p>
+          <div class="table mailbox-messages table-responsive">
+            <table ng-if="costosprovee[0]" class="table table-hover table-striped">
+              <thead>
+                <th style="font-size: small; color: #B6BBC0 !important;">EMPRESA</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">COSTO</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">SUBSIDIO</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="costo in costosprovee">
+                  <td class="mailbox-name" style="color: #00a3ee !important;font-size: small">{{costo.empresa}}</td>
+                  <td style=" font-size: small">${{costo.costo2}} </td>
+                  <td style="font-size: small;" =""><span ng-if="costo.subsidio == 1">Si</span><span ng-if="costo.subsidio == 0">No</span></td>
+                  <td>
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm"  data-toggle="modal" data-target="#myModal6" ng-click="seleccionEliminar(costo.idProvee , 1)"><i class="fa fa-trash-o"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>  
           </div>
         </div>
-        
       </div>
-      <br>
-      <div class="row" style="padding-left: 3%;padding-right: 3%">
-          <div class="row" ng-if="!costosprovee[0]">
-          <div class="col-md-3"></div>
-            <div class="col-xs-12 col-sm-6 col-lg-6">
-            <div class="box" style="border: none; box-shadow: none">             
-              <div class="icon">
-                 <i style="font-size: medium; color: #00eab5" class="fa fa-plus"></i>
-                <div class="info">
-                  <p>
-                    No posee Proveedores debe insertarlos en el boton "agregar"
-                  </p>
-                </div>
-              </div>
-              <div class="space"></div>
-            </div> 
-          </div>
-       </div>
-        <table ng-if="costosprovee[0]" class="table table-striped">
-          <thead>
-            <th>#</th>
-            <th>Empresa</th>
-            <th>Costo</th>
-            <th>Subsidio</th>
-            <th></th>
-          </thead>
-          <tbody>
-            <tr ng-repeat="costo in costosprovee">
-              <td>{{$index + 1}}</td>
-              <td>{{costo.empresa}}</td>
-              <td style="color: #ff6c00">${{costo.costo2}} </td>
-              <td><span ng-if="costo.subsidio == 1">Si</span><span ng-if="costo.subsidio == 0">No</span></td>
-              <td>
-                <button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#myModal6" ng-click="seleccionEliminar(costo.idProvee , 1)"><i class="fa fa-trash-o"></i></button>
-                <!--ng-click="eliminarCosto(costo.idProvee)"-->
-              </td>
-            </tr>
-          </tbody>
-        </table>  
-      </div>
-
-      </div>
-
-     </div>
+    </div>
   </div>
 </div>
 <!-- Modal de insertar nuevo consumidor al ingreso-->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-md" role="document"  style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-md" role="document" >
     <div class="modal-content">
-      <div class="modal-header ">
+      <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center><h4 class="modal-title" id="myModalLabel">Consumidores del ingreso {{ingresoSeleccionado.nombre}}</h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important; text-transform: uppercase ! important;">Consumidores del ingreso {{ingresoSeleccionado.nombre}}</h3></center>
       </div>
-      
       <div class="modal-body">
-        
-      <div class="row" style="padding-left: 1%">
-                        
-        <div class="col-md-3 col-xs-12">
-            <label>Empresas:</label>
-            <select ng-model="empresaSeleccionada" class="form-control">
-                <option value="{{empresa.idEmpresa}}" ng-repeat="empresa in empresas">{{empresa.nombre}}</option>
-            </select>
-        </div>
-        <div class="col-md-3 col-xs-12">
-            <label>Ingreso:</label>
-            <input  ng-model="costoConsume" id="costoconsume" type="text" class="form-control" placeholder="130000">
-        </div>
-        <div class="col-md-6 col-xs-12 " style="padding-top: 2%">
-          <div class="form-group">
-            <button  type="button" ng-click="guardarIngreso()" class="btn btn-flat margin"><i class="fa fa-plus"></i> Agregar</button>
+        <div class="row" style="padding-left: 1% ; font-size: smaller">
+          <div class="col-md-3 col-xs-12">
+              <label style="font-weight: 300;">Empresas:</label>
+              <select style="border-radius: 9px" ng-model="empresaSeleccionada" class="form-control">
+                  <option value="{{empresa.idEmpresa}}" ng-repeat="empresa in empresas">{{empresa.nombre}}</option>
+              </select>
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="font-weight: 300;">Ingreso:</label>
+              <input style="border-radius: 9px" ng-model="costoConsume" id="costoconsume" type="text" class="form-control" placeholder="130000">
+          </div>
+          <div class="col-md-6 col-xs-12 " style="padding-top: 2%">
+            <div class="form-group">
+              <button class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardarIngreso()">AGREGAR</button>
+            </div>
           </div>
         </div>
-        
-      </div>
-      <br>
-      <div class="row" style="padding-left: 3%;padding-right: 3%">
-        <div class="row" ng-if="!ingresosConsumidores[0]">
-          <div class="col-md-3"></div>
-            <div class="col-xs-12 col-sm-6 col-lg-6">
-            <div class="box" style="border: none; box-shadow: none">             
-              <div class="icon">
-                 <i style="font-size: medium; color: #00eab5" class="fa fa-plus"></i>
-                <div class="info">
-                  <p>
-                    No posee Consumidores debe insertarlos en el boton "agregar"
-                  </p>
-                </div>
-              </div>
-              <div class="space"></div>
-            </div> 
+        <br>
+        <div class="row" style="padding-left: 3%;padding-right: 3%">
+          <p ng-if="!ingresosConsumidores[0]" style="font-size: small; color: #B6BBC0 !important;text-align: center" >No posee Consumidores debe insertarlos en el boton "agregar"</p>
+          <div class="table mailbox-messages table-responsive">
+             <table ng-if="ingresosConsumidores[0]" class="table table-hover table-striped">
+              <thead>
+                <th style="font-size: small; color: #B6BBC0 !important;">EMPRESA</th>
+                <th style="font-size: small; color: #B6BBC0 !important;">INGRESO</th>
+                <th style="font-size: small; color: #B6BBC0 !important;"></th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="ingreso in ingresosConsumidores">
+                  <td class="mailbox-name" style="color: #00a3ee !important; font-size: small">{{ingreso.empresa}}</td>
+                  <td style="font-size: small">${{ingreso.costo2}} </td>
+                  <td>
+                   <!-- <button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#myModal6" ng-click="seleccionEliminar(ingreso.idConsume , 2)" ><i class="fa fa-trash-o"></i></button>-->
+                    <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" data-toggle="modal" data-target="#myModal6" class="btn btn-clean btn-sm"ng-click="seleccionEliminar(ingreso.idConsume , 2)"><i class="fa fa-trash-o"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>  
           </div>
-       </div>
-        <!--<p ng-if="!ingresosConsumidores[0]" align="center" style="color:red;">No posee Consumidores debe insertarlos en el boton "agregar" <i class="fa fa-hand-o-up"></i></p>-->
-        <table ng-if="ingresosConsumidores[0]" class="table table-striped">
-          <thead>
-            <th>#</th>
-            <th>Empresa</th>
-            <th>Ingreso</th>
-            <th></th>
-          </thead>
-          <tbody>
-            <tr ng-repeat="ingreso in ingresosConsumidores">
-              <td>{{$index + 1}}</td>
-              <td>{{ingreso.empresa}}</td>
-              <td style="color: #00eab5">${{ingreso.costo2}} </td>
-              <td>
-                <button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#myModal6" ng-click="seleccionEliminar(ingreso.idConsume , 2)" ><i class="fa fa-trash-o"></i></button>
-                <!--ng-click="eliminarIngreso(ingreso.idConsume)"-->
-              </td>
-            </tr>
-          </tbody>
-        </table>  
-      </div>
-
+        </div>
       </div>
      </div>
   </div>
 </div>
 <!-- Modal de insertar gastos e ingresos reales a las actividades -->
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center><h4 class="modal-title" id="myModalLabel">Datos de los palcos de la actividad {{actividadSeleccionada.nombre}}</h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important; text-transform: uppercase ! important;">Datos de los palcos de la actividad {{actividadSeleccionada.nombre}}</h3></center>
       </div>
       <div class="modal-body">
-        <div ng-if="actPalco.lugar==1" class="row">
+        <div ng-if="actPalco.lugar==1" class="row" style="font-size: smaller">
           <div class="col-md-4 col-xs-12" ng-repeat="palco in actPalco.palcos" >
-            <label>{{palco.detalle}}</label>
-            <input  ng-model="palco.cantidadReal"  type="number" class="form-control" placeholder="130000">
+            <label style="font-weight: 300;">{{palco.detalle}}</label>
+            <input style="border-radius: 9px" ng-model="palco.cantidadReal"  type="number" class="form-control" placeholder="130000">
           </div>
         </div>
         <div ng-if="actPalco.lugar==0">
@@ -433,8 +390,8 @@
             <h2 class="separador">Palco(s) de la SubActividad {{sub.nombre}}</h2>
             <div class="row">
               <div ng-repeat="palco in sub.palcos" class="col-md-4 col-xs-12">
-                <label>{{palco.detalle}}</label>
-                <input  ng-model="palco.cantidadReal" type="number" class="form-control" placeholder="130000">
+                <label style="font-weight: 300;">{{palco.detalle}}</label>
+                <input style="border-radius: 9px" ng-model="palco.cantidadReal" type="number" class="form-control" placeholder="130000">
               </div>
             </div>  
           </div>
@@ -445,8 +402,7 @@
         <button type="button" ng-click="guardarPalco(actPalco)" class="btn btn-outline" ng-click="">Guardar</button>
       </div>-->
         <div class="modal-footer" style="margin: 0;">
-           <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
-          <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="guardarPalco(actPalco)">Guardar</button>
+          <button class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardarPalco(actPalco)">GUARDAR</button>
       </div>
      </div>
   </div>
@@ -457,9 +413,9 @@
        <div class="modal-body">
           <div class="box" style="border-top: none; box-shadow: none;">             
             <div class="icon">
-              <div class="image"><i class="ion ion-happy-outline"></i></div>
+              <div class="image"><i style="color: #00a3ee ! important" class="ion ion-happy-outline"></i></div>
               <div class="info">
-                <h3 class="title">Éxito!</h3>
+              <h3 class="title" style="font-size: small ; margin-top: 10%">ÉXITO!</h3>
                 <p>
                   Se ha realizado correctamente.
                 </p>
@@ -476,15 +432,15 @@
         <div class="modal-body" style="padding-top: 15px">
           <div class="box" style="border: none; box-shadow: none;">             
             <div class="icon">
-              <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+              <div class="image" ><i  class="fa fa-trash-o" style="color: #00a3ee ! important"></i></div>
               <div class="info">
-                <h3 class="title">Espere!</h3>
+                <h3 class="title" style="font-size: small ; margin-top: 10%">ESPERE!</h3>
                 <p>
                   ¿Está seguro de que desea eliminar?
                 </p>
               <br> <br>
-               <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
-              <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminarCoI()">Aceptar</button>
+               <button  type="button" class="btn pull-left buttonModal" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+              <button type="button" class="btn pull-right buttonModal" data-dismiss="modal" ng-click="eliminarCoI()">Aceptar</button>
               </div>
             </div>
           </div> 

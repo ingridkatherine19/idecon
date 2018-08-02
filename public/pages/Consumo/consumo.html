@@ -569,63 +569,64 @@
     </div>
  </div>
   <div class="row">
-    <div class="col-md-4 col-xs-12">
+    <div class="col-md-6 col-xs-12">
       <div class="col-md-12 col-xs-12" style="padding: 0px">
         <div class="box " style="border:none !important; background-color:white; font-size: small !important; ">
-          <div class="box-header with-border"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RECICLADO POR TONELADAS</h3>
+          <div class="box-header with-border">
+              <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RECICLADO POR TONELADAS</h3></center>
           </div>
           <!-- /.box-header -->
-          <p ng-if="data[0] == 0&&data[1] == 0&&data[2] == 0&&data[3] == 0&&data[4] == 0" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%; " >Aun no hay calculos de reciclaje</p>
+          <p ng-if="data[0] == 0&&data[1] == 0&&data[2] == 0&&data[3] == 0&&data[4] == 0" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%; " >Aun no hay cálculos de reciclaje</p>
           <div ng-if="data[0] != 0||data[1] != 0||data[2] != 0||data[3] != 0||data[4] != 0" class="box-body ">
-            <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options"  >
-           </canvas> 
-                
+            <div class="row">
+              <div class="col-md-6" style="top: 30px ! important">
+                <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options"></canvas> 
+              </div>
+              <div class="col-md-6">
+                <ul class="nav nav-pills nav-stacked" >
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #ff6c00"></i> Orgánicos <span class="pull-right" style="color: #B6BBC0 !important">{{data[0]}}</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #e0ca7f"></i> Aluminio <span class="pull-right" style="color: #B6BBC0 !important">{{data[1]}}</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f1a64d"></i> Vidrio <span class="pull-right" style="color: #B6BBC0 !important">{{data[2]}}</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00abf8"></i> Plástico PET <span class="pull-right" style="color: #B6BBC0 !important">{{data[3]}}</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f24b45"></i>Cartón <span class="pull-right" style="color: #B6BBC0 !important">{{data[4]}}</span></a></li>
+                </ul>
+              </div>
+            </div>
           </div>
           <div class="box-footer no-padding" style="background-color: white;">
-              <ul class="nav nav-pills nav-stacked" >
-
-                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #ff6c00"></i> Orgánicos <span class="pull-right" style="color: #B6BBC0 !important">{{data[0]}}</span></a></li>
-
-                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #e0ca7f"></i> Aluminio <span class="pull-right" style="color: #B6BBC0 !important">{{data[1]}}</span></a></li>
-
-                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f1a64d"></i> Vidrio <span class="pull-right" style="color: #B6BBC0 !important">{{data[2]}}</span></a></li>
-
-                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00abf8"></i> Plástico PET <span class="pull-right" style="color: #B6BBC0 !important">{{data[3]}}</span></a></li>
-
-                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f24b45"></i>Cartón <span class="pull-right" style="color: #B6BBC0 !important">{{data[4]}}</span></a></li>
-             </ul>
-            
           </div>
           <!-- /.footer -->
         </div>
         <!-- /.box -->
       </div>
     </div>
-    <div class="col-md-4 col-xs-12">
+    <div class="col-md-6 col-xs-12">
       <div class="col-md-12 col-xs-12" style="padding: 0px">
         <div class="box " style="border:none !important; background-color:white; font-size: small !important; ">
-          <div class="box-header with-border"><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RECICLADO POR PORCENTAJE</h3>
+          <div class="box-header with-border">
+            <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RECICLADO POR PORCENTAJE</h3></center>
           </div>
           <!-- /.box-header -->
           <p ng-if="data2[0] == 0&&data2[1] == 0&&data2[2] == 0&&data2[3] == 0&&data2[4] == 0" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%; " >Aun no hay calculos de reciclaje</p>
           <div ng-if="data2[0] != 0||data2[1] != 0||data2[2] != 0||data2[3] != 0||data2[4] != 0" class="box-body ">
-            <canvas id="pie" class="chart chart-pie" chart-data="data2" chart-labels="labels" chart-options="options">
-            </canvas> 
+            <div>
+              <div class="col-md-6 col-xs-12" style="top: 30px ! important">
+                <canvas id="pie" class="chart chart-pie" chart-data="data2" chart-labels="labels" chart-options="options">
+                </canvas>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <ul class="nav nav-pills nav-stacked" >
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #ff6c00"></i> Orgánicos <span class="pull-right" style="color: #B6BBC0 !important">{{data2[0]}}%</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #e0ca7f"></i> Aluminio <span class="pull-right" style="color: #B6BBC0 !important">{{data2[1]}}%</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f1a64d"></i> Vidrio <span class="pull-right" style="color: #B6BBC0 !important">{{data2[2]}}%</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00abf8"></i> Plástico PET <span class="pull-right" style="color: #B6BBC0 !important">{{data2[3]}}%</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f24b45"></i>Cartón <span class="pull-right" style="color: #B6BBC0 !important">{{data2[4]}}%</span></a></li>
+                </ul>
+              </div>
+            </div>
+ 
           </div>
           <div class="box-footer no-padding" style="background-color: white;">
-              <ul class="nav nav-pills nav-stacked" >
-
-                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #ff6c00"></i> Orgánicos <span class="pull-right" style="color: #B6BBC0 !important">{{data2[0]}}%</span></a></li>
-
-                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #e0ca7f"></i> Aluminio <span class="pull-right" style="color: #B6BBC0 !important">{{data2[1]}}%</span></a></li>
-
-                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f1a64d"></i> Vidrio <span class="pull-right" style="color: #B6BBC0 !important">{{data2[2]}}%</span></a></li>
-
-                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00abf8"></i> Plástico PET <span class="pull-right" style="color: #B6BBC0 !important">{{data2[3]}}%</span></a></li>
-
-                <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f24b45"></i>Cartón <span class="pull-right" style="color: #B6BBC0 !important">{{data2[4]}}%</span></a></li>
-             </ul>
-            
           </div>
           <!-- /.footer -->
         </div>
@@ -633,53 +634,45 @@
       </div>
     </div>
 </div>
-
-
-
 </section>
 <!-- /.content -->	
-
-
-
 <!-- Modal de insertar nuevo cosumo de los palcos-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header ">
+      <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center><h4 class="modal-title" id="myModalLabel">Consumo potencial en los palcos</h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">CONSUMO POTENCIAL EN LOS PALCOS</h3></center>
       </div>
       <form name="formConsumo">
       <div class="modal-body">
-         <div class="row" >
+         <div class="row" style="font-size: smaller">
             <div ng-if="!actualizarPalco" class="col-md-3 col-xs-12 col-lg-3" >
-              <label>Producto:</label>
-              <select ng-model="consumo.producto" class="form-control">
+              <label style="font-weight: 300;">Producto:</label>
+              <select style="border-radius: 9px" ng-model="consumo.producto" class="form-control">
                   <option value="{{palco.idTipo}}" ng-repeat="palco in selectPalco" >{{palco.nombre}}</option>
               </select>
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
-                <label>Consumo (Cantidad):</label>
+                <label style="font-weight: 300;">Consumo (Cantidad):</label>
            <!--  <input ng-model="consumo.consumo" type="number" class="form-control" >-->
-                <input ng-model="consumoconsumo" id="consumoconsumo" class="form-control" >
+                <input style="border-radius: 9px" ng-model="consumoconsumo" id="consumoconsumo" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3" >
-              <label>Costo:</label>
+              <label style="font-weight: 300;">Costo:</label>
            <!--   <input ng-model="consumo.costo" type="number" class="form-control" >-->
-              <input ng-model="consumocosto" id="consumocosto" class="form-control" >
+              <input style="border-radius: 9px" ng-model="consumocosto" id="consumocosto" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
-                <label>Venta:</label>
+                <label style="font-weight: 300;">Venta:</label>
               <!-- <input ng-model="consumo.venta" type="number" class="form-control" >-->
-                <input ng-model="consumoventa" id="consumoventa" class="form-control" >
+                <input style="border-radius: 9px" ng-model="consumoventa" id="consumoventa" class="form-control" >
             </div>     
           </div>
       </div>
       <div class="modal-footer" style="margin: 0;">
-          <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
-          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="!actualizarPalco" ng-click="guardarConsumoPalco(consumo, consumoconsumo, consumocosto, consumoventa)">Guardar</button>
-
-          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="actualizarPalco" ng-click="editarConsumoPalco(consumo)">Actualizar</button>
+        <button ng-disabled="formConsumo.$invalid" data-dismiss="modal" ng-if="!actualizarPalco" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  ng-click="guardarConsumoPalco(consumo, consumoconsumo, consumocosto, consumoventa)">GUARDAR</button>
+        <button ng-disabled="formConsumo.$invalid" data-dismiss="modal" ng-if="actualizarPalco" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  ng-click="editarConsumoPalco(consumo)">ACTUALIZAR</button>
       </div>
      </form>    
     </div>
@@ -688,15 +681,15 @@
 
 <!-- Modal de insertar nuevo consumo de la calle-->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header ">
+      <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center><h4 class="modal-title" id="myModalLabel">Consumo potencial en la calle</h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">CONSUMO POTENCIAL EN LA CALLE</h3></center>
       </div>
       <form name="formConsumo">
       <div class="modal-body">
-          <div class="row" >
+          <div class="row" style="font-size: smaller">
             <div ng-if="!actualizarCalle" class="col-md-3 col-xs-12 col-lg-3" >
               <label>Producto:</label>
               <select ng-model="consumo.producto" class="form-control">
@@ -704,26 +697,25 @@
               </select>
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
-                <label>Consumo (Cantidad):</label>
+                <label style="font-weight: 300;">Consumo (Cantidad):</label>
              <!--<input ng-model="consumo.consumo" type="number" class="form-control" >-->
-              <input ng-model="consumoconsumo2" id="consumoconsumo2" class="form-control" >
+              <input style="border-radius: 9px" ng-model="consumoconsumo2" id="consumoconsumo2" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3" >
-              <label>Costo:</label>
+              <label style="font-weight: 300;">Costo:</label>
              <!--<input ng-model="consumo.costo" type="number" class="form-control" >-->
-              <input ng-model="consumocosto2" id="consumocosto2" class="form-control" >
+              <input style="border-radius: 9px" ng-model="consumocosto2" id="consumocosto2" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
-                <label>Venta:</label>
+                <label style="font-weight: 300;">Venta:</label>
               <!--<input ng-model="consumo.venta" type="number" class="form-control" >-->
-                <input ng-model="consumoventa2" id="consumoventa2" class="form-control" >
+                <input style="border-radius: 9px" ng-model="consumoventa2" id="consumoventa2" class="form-control" >
             </div>     
           </div>
       </div>
       <div class="modal-footer" style="margin: 0;">
-          <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
-          <button type="button" ng-if="!actualizarCalle" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-click="guardarConsumoCalle(consumo , consumoconsumo2, consumocosto2, consumoventa2)">Guardar</button>
-          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="actualizarCalle" ng-click="editarConsumoCalle(consumo , consumoconsumo2, consumocosto2, consumoventa2)">Actualizar</button>
+          <button ng-disabled="formConsumo.$invalid" ng-if="!actualizarCalle" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardarConsumoCalle(consumo , consumoconsumo2, consumocosto2, consumoventa2)">GUARDAR</button>
+          <button ng-disabled="formConsumo.$invalid" ng-if="actualizarCalle" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardarConsumoCalle(consumo , consumoconsumo2, consumocosto2, consumoventa2)">ACTUALIZAR</button>
       </div>
      </form>    
     </div>
@@ -732,43 +724,41 @@
 
 <!-- Modal de insertar material organico-->
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header ">
+      <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center><h4 class="modal-title" id="myModalLabel">Material orgánico detallado</h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">MATERIAL ORGÁNICO DETALLADO</h3></center>
       </div>
       <form name="formConsumo">
       <div class="modal-body">
-          <div class="row" >
+          <div class="row" style="font-size: smaller">
             <div ng-if="!actualizarOrganico" class="col-md-3 col-xs-12 col-lg-3" >
-              <label>Producto:</label>
-              <select ng-model="consumo.producto" class="form-control">
+              <label style="font-weight: 300;">Producto:</label>
+              <select style="border-radius: 9px" ng-model="consumo.producto" class="form-control">
                   <option value="{{organico.idTipo}}" ng-repeat="organico in selectOrganico" >{{organico.nombre}}</option>
               </select>
-              
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
-                <label>Consumo:</label>
+                <label style="font-weight: 300;">Consumo:</label>
                <!-- <input ng-model="consumo.consumo" type="number" class="form-control" >-->
-                <input ng-model="consumoconsumo3" id="consumoconsumo3" class="form-control" >
+                <input style="border-radius: 9px" ng-model="consumoconsumo3" id="consumoconsumo3" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3" >
-              <label>Cantidad:</label>
+              <label style="font-weight: 300;">Cantidad:</label>
            <!-- <input ng-model="consumo.cantidad" type="number" class="form-control">-->
-              <input ng-model="consumocantidad3" id="consumocantidad3" class="form-control" >
+              <input style="border-radius: 9px" ng-model="consumocantidad3" id="consumocantidad3" class="form-control" >
             </div>
             <div class="col-md-3 col-xs-12 col-lg-3">
-                <label>costo:</label>
+                <label style="font-weight: 300;">costo:</label>
              <!--<input ng-model="consumo.costo" type="number" class="form-control">-->
-                <input ng-model="consumocosto3" id="consumocosto3" class="form-control" > 
+                <input style="border-radius: 9px" ng-model="consumocosto3" id="consumocosto3" class="form-control" > 
             </div>     
           </div>
       </div>
       <div class="modal-footer" style="margin: 0;">
-          <button  type="button" class="btn pull-left" data-dismiss="modal" >Cerrar</button>
-          <button type="button" ng-if="!actualizarOrganico" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-click="guardarConsumoOrganico(consumo , consumoconsumo3 , consumocantidad3 , consumocosto3)">Guardar</button>
-          <button type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formConsumo.$invalid" ng-if="actualizarOrganico" ng-click="editarConsumoOrganico(consumo)">Actualizar</button>
+        <button ng-disabled="formConsumo.$invalid" ng-if="!actualizarOrganico" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardarConsumoOrganico(consumo , consumoconsumo3 , consumocantidad3 , consumocosto3)">GUARDAR</button>
+        <button ng-disabled="formConsumo.$invalid" ng-if="actualizarOrganico" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="editarConsumoOrganico(consumo)">ACTUALIZAR</button>
       </div>
      </form>    
     </div>
@@ -780,9 +770,9 @@
        <div class="modal-body">
           <div class="box" style="border-top: none; box-shadow: none;">             
             <div class="icon">
-              <div class="image"><i class="ion ion-happy-outline"></i></div>
+              <div class="image"><i style="color: #00a3ee ! important" class="ion ion-happy-outline"></i></div>
               <div class="info">
-                <h3 class="title">Éxito!</h3>
+                <h3 class="title" style="font-size: small ; margin-top: 10%">ÉXITO!</h3>
                 <p>
                   Se ha realizado correctamente.
                 </p>
@@ -799,15 +789,15 @@
         <div class="modal-body" style="padding-top: 15px">
           <div class="box" style="border: none; box-shadow: none;">             
             <div class="icon">
-              <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+              <div class="image" ><i  class="fa fa-trash-o" style="color: #00a3ee ! important"></i></div>
               <div class="info">
-                <h3 class="title">Espere!</h3>
+                <h3 class="title" style="font-size: small ; margin-top: 10%">ESPERE!</h3>
                 <p>
                   ¿Está seguro de que desea eliminar?
                 </p>
               <br> <br>
-               <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
-              <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminarConsumo()">Aceptar</button>
+               <button  type="button" class="btn pull-left buttonModal" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+              <button type="button" class="btn pull-right buttonModal" data-dismiss="modal" ng-click="eliminarConsumo()">Aceptar</button>
               </div>
             </div>
           </div> 

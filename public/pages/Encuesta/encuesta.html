@@ -36,9 +36,9 @@
                   <th style="font-size: small; color: #B6BBC0 !important;"></th>
                 </tr>
                 <tr ng-repeat="pregunta in preguntas">
-                  <td class="mailbox-name"><a ng-click="verDetalle(evento)" style="color: #00a3ee !important;font-size: medium;">{{pregunta.pregunta}}</a>
+                  <td class="mailbox-name"><a ng-click="verDetalle(evento)" style="color: #00a3ee !important;font-size: small;">{{pregunta.pregunta}}</a>
                   </td>
-                  <td class="mailbox-subject" style="font-size: medium">
+                  <td class="mailbox-subject" style="font-size: small;">
                     <span ng-if="pregunta.tipo == 0"> (Si o no)</span><span ng-if="pregunta.tipo == 1">(Escala 1-5)</span>
                   </td>
                   <td>            
@@ -77,22 +77,27 @@
               <ul class="nav nav-pills nav-stacked" style="margin-top: 0px">
                 <li>
                   <a style="font-size: small;"><i class="fa fa-circle iconBlue"></i>Participante:
-                    <span class="pull-right letraGris" ng-if="reporteTipo[0].tipoParticipante" ng-style="nivel">{{reporteTipo[0].tipoParticipante}}</span>
-                    <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoParticipante" ng-style="nivel">0</span>
+                    <span class="pull-right letraGris" ng-if="reporteTipo[0].tipoParticipante" style="color: #B6BBC0 !important">{{reporteTipo[0].tipoParticipante}}</span>
+                    <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoParticipante" style="color: #B6BBC0 !important">0</span>
                   </a>
                 </li>
                 <li>
-                  <a style="font-size: small;"><i class="fa fa-circle" style="color:#00eab5"></i>Agrupación:<span class="pull-right letraGris" ng-if="reporteTipo[0].tipoAgrupacion" ng-style="nivel">{{reporteTipo[0].tipoAgrupacion}}</span>
-                    <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoAgrupacion" ng-style="nivel">0</span>
+                  <a style="font-size: small;"><i class="fa fa-circle" style="color:#00eab5"></i>Agrupación:<span class="pull-right letraGris" ng-if="reporteTipo[0].tipoAgrupacion"  style="color: #B6BBC0 !important">{{reporteTipo[0].tipoAgrupacion}}</span>
+                    <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoAgrupacion" style="color: #B6BBC0 !important">0</span>
                   </a>
                 </li>
                 <li><a style="font-size: small;"><i class="fa fa-circle" style="color: #ff6c00"></i>Empresa:
-                  <span class="pull-right letraGris" ng-if="reporteTipo[0].tipoEmpresa" ng-style="nivel">{{reporteTipo[0].tipoEmpresa}}</span>
-                  <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoEmpresa" ng-style="nivel">0</span>
+                  <span class="pull-right letraGris" ng-if="reporteTipo[0].tipoEmpresa" style="color: #B6BBC0 !important">{{reporteTipo[0].tipoEmpresa}}</span>
+                  <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoEmpresa" style="color: #B6BBC0 !important">0</span>
                 </a>
                 </li>
-                <li><a style="font-size: small;"><i class="fa fa-circle iconOrange"></i>Total de Respuestas:<span class="pull-right letraGris" ng-if="reporteTipo[0].total" ng-style="nivel">{{reporteTipo[0].total}}</span>
-                <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoEmpresa" ng-style="nivel">0</span>
+                <li><a style="font-size: small;"><i class="fa fa-circle" style="color: #f24b45"></i>Público:
+                  <span class="pull-right letraGris" ng-if="reporteTipo[0].tipoPublico" style="color: #B6BBC0 !important">{{reporteTipo[0].tipoPublico}}</span>
+                  <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoPublico" style="color: #B6BBC0 !important">0</span>
+                </a>
+                </li>
+                <li><a style="font-size: small;"><i class="fa fa-circle iconOrange"></i>Total de Respuestas:<span class="pull-right letraGris" ng-if="reporteTipo[0].total" style="color: #B6BBC0 !important">{{reporteTipo[0].total}}</span>
+                <span class="pull-right letraGris" ng-if="!reporteTipo[0].tipoEmpresa" style="color: #B6BBC0 !important">0</span>
                 </a>
                 </li>
               </ul>
@@ -230,34 +235,33 @@
   </div>
 </section>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog  modal-sm" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog  modal-sm" role="document" >
     <div class="modal-content">
-      <div class="modal-header ">
+      <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center><h4 class="modal-title" id="myModalLabel">{{titulo}}</h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important; text-transform: uppercase ! important;">{{titulo}}</h3></center>
       </div>
-      <form name="formCosto">
-      <div class="modal-body">
-          <div class="row">
+      <form name="formEncuesta">
+        <div class="modal-body">
+          <div class="row" style="font-size: smaller">
             <div class="col-md-12 col-xs-12 col-lg-12" ng-if="cambio == 0" >
-              <label>Selecciona el Tipo:</label>
-              <select ng-model="pregunta.tipo" class="form-control">
+              <label style="font-weight: 300;">Selecciona el Tipo:</label>
+              <select style="border-radius: 9px" ng-model="pregunta.tipo" class="form-control" required>
                   <option value="0"> Si o No</option>
                   <option value="1" >Escala 1-5</option>
               </select>
             </div>
             <div class="col-md-12 col-xs-12 col-lg-12" >
-              <label >Pregunta:</label>
-              <textarea ng-model="pregunta.pregunta" type="text" class="form-control" >
+              <label style="font-weight: 300;">Pregunta:</label>
+              <textarea style="border-radius: 9px" ng-model="pregunta.pregunta" type="text" class="form-control" required>
               </textarea>
             </div>
             </div>
         </div>
-      <div class="modal-footer" style="margin: 0;">
-           <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
-          <button ng-if="cambio == 0" type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formActividad.$invalid" ng-click="agregarPregunta(pregunta)">Guardar</button>
-          <button ng-if="cambio == 1" type="button" class="btn pull-right" data-dismiss="modal" ng-disabled="formActividad.$invalid" ng-click="editarPregunta(pregunta)">Actualizar</button>
-      </div>
+        <div class="modal-footer" style="margin: 0;">
+             <button ng-if="cambio == 0" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;" data-dismiss="modal" ng-disabled="formEncuesta.$invalid" ng-click="agregarPregunta(pregunta)">GUARDAR</button>
+            <button ng-if="cambio == 1" class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;" data-dismiss="modal" ng-click="editarPregunta(pregunta)">ACTUALIZAR</button>
+        </div>
      </form>    
     </div>
   </div>
@@ -268,9 +272,9 @@
        <div class="modal-body">
           <div class="box" style="border-top: none; box-shadow: none;">             
             <div class="icon">
-              <div class="image"><i class="ion ion-happy-outline"></i></div>
+              <div class="image"><i style="color: #00a3ee ! important" class="ion ion-happy-outline"></i></div>
               <div class="info">
-                <h3 class="title">Éxito!</h3>
+                <h3 class="title" style="font-size: small ; margin-top: 10%">ÉXITO!</h3>
                 <p>
                   Se ha realizado correctamente.
                 </p>
@@ -287,15 +291,15 @@
         <div class="modal-body" style="padding-top: 15px">
           <div class="box" style="border: none; box-shadow: none;">             
             <div class="icon">
-              <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+              <div class="image" ><i  class="fa fa-trash-o" style="color: #00a3ee ! important"></i></div>
               <div class="info">
-                <h3 class="title">Espere!</h3>
+               <h3 class="title" style="font-size: small ; margin-top: 10%">ESPERE!</h3>
                 <p>
                   ¿Está seguro de que desea eliminar?
                 </p>
               <br> <br>
-               <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
-              <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminarPregunta()">Aceptar</button>
+               <button  type="button" class="btn pull-left buttonModal" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+              <button type="button" class="btn pull-right buttonModal" data-dismiss="modal" ng-click="eliminarPregunta()">Aceptar</button>
               </div>
             </div>
           </div> 

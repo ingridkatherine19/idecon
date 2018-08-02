@@ -401,15 +401,15 @@
       <div class="modal-body" style="padding-top: 15px">
         <div class="box" style="border: none; box-shadow: none;">             
           <div class="icon">
-            <div class="image" style="background-color: red ! important"><i  class="fa fa-trash-o"></i></div>
+            <div class="image" ><i  class="fa fa-trash-o" style="color: #00a3ee ! important"></i></div>
             <div class="info">
-              <h3 class="title">Espere!</h3>
+            <h3 class="title" style="font-size: small ; margin-top: 10%">ESPERE!</h3>
               <p>
                 ¿Está seguro de que desea eliminar?
               </p>
             <br> <br>
-             <button  type="button" class="btn pull-left" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
-            <button type="button" class="btn pull-right" data-dismiss="modal" ng-click="eliminarMensaje()" >Aceptar</button>
+             <button  type="button" class="btn pull-left buttonModal" ng-click="atras()" data-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn pull-right buttonModal" data-dismiss="modal" ng-click="eliminarMensaje()" >Aceptar</button>
             </div>
           </div>
         </div> 
@@ -438,9 +438,9 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
   <div class="modal-dialog  modal-sm" role="document" >
     <div class="modal-content">
-      <div class="modal-header">
-       <button ng-click="cerrar()" type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #06a2eb !important;"><span aria-hidden="true">&times;</span></button>
-        <center><h3 class="modal-title" id="myModalLabel" style="color: #B6BBC0 !important;"><b>Cambiar Estado</b></h3></center>
+      <div class="modal-header " style="padding-bottom: 0">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">CAMBIAR ESTADO</h3></center>
       </div>
       <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
         <div class="modal-body">
@@ -467,9 +467,9 @@
 <div class="modal fade" id="myModal5" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
   <div class="modal-dialog  modal-md" role="document" >
     <div class="modal-content">
-      <div class="modal-header">
-       <button ng-click="cerrar()" type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #06a2eb !important;"><span aria-hidden="true">&times;</span></button>
-        <center><h3 class="modal-title" id="myModalLabel" style="color: #B6BBC0 !important;"><b>Editar Mensaje</b></h3></center>
+      <div class="modal-header " style="padding-bottom: 0">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">EDITAR MENSAJE</h3></center>
       </div>
       <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
         <div class="modal-body">

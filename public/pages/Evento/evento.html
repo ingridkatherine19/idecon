@@ -10,7 +10,7 @@
 <section ng-show="!ver" class="content">
 
   <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
-  
+   
   </div>
 </section>
 <!-- Main content -->
@@ -85,7 +85,7 @@
                 </select>
               </div>
               <div class="col-md-6 col-xs-6">
-                <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"  ng-if="mostrar" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" >NUEVO EVENTO</button>
+                <button  class="btn btn-lg buttonLogin " style="text-align: center ;  font-size: 10px ;"   data-toggle="modal" data-target="#myModal" data-toggle="tooltip" >NUEVO EVENTO</button>
               </div>
             </div>
           </div>
@@ -177,155 +177,145 @@
 </section>
 <!-- Modal de insertar evento-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document" style="border-top: 2px solid #f1a64d">
+  <div class="modal-dialog modal-lg" role="document" >
     <div class="modal-content">
-      <div class="modal-header ">
+      <div class="modal-header " style="padding-bottom: 0">
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center><h4 class="modal-title" id="myModalLabel">Nuevo Evento</h4></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">NUEVO EVENTO</h3></center>
       </div>
-      <div class="modal-body" style="background-color:rgba(255, 255, 255, 1) !important; margin-top: 2%; padding-bottom: 0px;">
+      <div class="modal-body" style="background-color:rgba(255, 255, 255, 1) !important; padding-bottom: 0px;">
+        <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+          <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">DATOS BASICOS</h3>  
+        </div><br>
+        <div class="row">
+          <div class="col-md-3 col-xs-12">
+            <label style="color:black;font-weight: 300;">imagen</label>
+            <input style="border-radius: 9px" type="file" file-model="imagen" id="file" accept="image/x-png,image/gif,image/jpeg" class="file-input">
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Nombre:</label>
+              <input style="border-radius: 9px" id="nombre" ng-model="evento.nombre" type="text" class="form-control" placeholder="Festival nombre">
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Departamento:</label>
+              <select style="border-radius: 9px" id="departamento" class="form-control">
+                  <option value="{{departamento}}" ng-repeat="departamento in departamentos">{{departamento.nombre}}</option>
+              </select>
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Ciudad:</label>
+              <select style="border-radius: 9px" id="ciudad" class="form-control" ng-model="evento.ciudad">
+                  <option value="{{ciudad}}" ng-repeat="ciudad in ciudades" >{{ciudad.nombre}}</option>
+              </select>
+          </div>
           
-          <div id="wizard" onload="" style="padding: 0px !important; margin: 0px !important;" ng-if="!finish">
-            
-              <h2>Datos</h2>
-              <section>
-                  <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                      <label style="color:black">imagen</label>
-                      <input type="file" file-model="imagen" id="file" accept="image/x-png,image/gif,image/jpeg" class="file-input">
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Nombre:</label>
-                        <input id="nombre" ng-model="evento.nombre" type="text" class="form-control" placeholder="Festival nombre">
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Departamento:</label>
-                        <select id="departamento" class="form-control">
-                            <option value="{{departamento}}" ng-repeat="departamento in departamentos">{{departamento.nombre}}</option>
-                        </select>
-                    </div>
-                    
-                </div><br>
-                <div class="row">
-                    
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Región:</label>
-                        <select id="region" class="form-control" ng-model="evento.region">
-                            <option value="{{region}}" ng-repeat="region in regiones" >{{region.nombre}}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Nit:</label>
-                        <input id="nit" ng-model="evento.nit" type="number" class="form-control" placeholder="1111111">
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Código Postal:</label>
-                        <input id="codigo" ng-model="evento.codigo" type="number" class="form-control" placeholder="200001">
-                    </div>
-                </div>
-              </section>
-
-              <h2>Dirección y Contacto</h2>
-              <section>
-                <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Ciudad:</label>
-                        <select id="ciudad" class="form-control" ng-model="evento.ciudad">
-                            <option value="{{ciudad}}" ng-repeat="ciudad in ciudades" >{{ciudad.nombre}}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Dirección:</label>
-                        <textarea id="direccion" ng-model="evento.direccion" type="text" class="form-control" placeholder=" carrera x # 24c3 - 08 Mayales"> </textarea>
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Teléfono:</label>
-                        <input id="telefono" ng-model="evento.telefono" type="number" class="form-control" placeholder="301 1234569">
-                    </div>
-                    
-                </div><br>
-                <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Teléfono 2:</label>
-                        <input id="telefono2" ng-model="evento.telefono2" type="number" class="form-control" placeholder="310 3265487">
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Correo:</label>
-                        <input id="correo" ng-model="evento.correo" type="email" class="form-control" placeholder="ejemplo@domain.com">
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Correo 2:</label>
-                        <input id="correo2" ng-model="evento.correo2" type="email" class="form-control" placeholder="ejemplo@domain.com">
-                    </div>
-                    
-                </div>
-              </section>
-            <h2>Fechas</h2>
-              <section>
-                <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Fecha de Fundado:</label>
-                        <input id="fundado" ng-model="evento.fundado" type="date" class="form-control" placeholder="">
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Versión:</label>
-                        <input id="version" ng-model="evento.version" type="text" class="form-control" placeholder="50">
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Población Objetivo:</label>
-                        <input id="poblacion" ng-model="evento.poblacion" type="number" class="form-control" placeholder="200">
-                    </div>
-                </div><br>
-                <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Fecha de Inicio:</label>
-                        <input id="inicio" ng-model="evento.fechaInicio" type="datetime-local" class="form-control" placeholder="">
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Fecha de Finalización:</label>
-                        <input id="fin" ng-model="evento.fechaFin" type="datetime-local" class="form-control" placeholder="">
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Población Circulante:</label>
-                        <input id="poblacionCirculante" ng-model="evento.poblacionCirculante" type="number" class="form-control" placeholder="">
-                    </div>
-                </div><br>
-              </section>
-              <h2>Redes Sociales</h2>
-              <section>
-                  <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <label style="color:black">Web Site:</label>
-                        <input id="web" ng-model="evento.web" type="text" class="form-control" placeholder="www.example.com">
-                    </div>
-                     <div class="col-md-4 col-xs-12">
-                          <label style="color:black">Facebook:</label>
-                          <input id="facebook" ng-model="evento.facebook" type="text" class="form-control" placeholder="facebook.com/ejemplo3">
-                      </div>
-                      <div class="col-md-4 col-xs-12">
-                          <label style="color:black">Instagram:</label>
-                          <input id="instagram" ng-model="evento.instagram" type="text" class="form-control" placeholder="ejemplo32">
-                      </div>
-                  </div><br>
-                  <div class="row">
-                      <div class="col-md-4 col-xs-12">
-                          <label style="color:black">Twitter:</label>
-                          <input id="twitter" ng-model="evento.twitter" type="text" class="form-control" placeholder="twitter.com/ejemplo3">
-                      </div>
-                      <div class="col-md-4 col-xs-12">
-                          <label style="color:black">Otro:</label>
-                          <input id="otro" ng-model="evento.instagram" type="text" class="form-control" placeholder="">
-                      </div>
-                      <div class="col-md-4 col-xs-12">
-                          <label style="color:black">contraseña de usuario:</label>
-                          <input id="pass" ng-model="evento.facebook" type="password" class="form-control" placeholder="">
-                      </div>
-                  </div>
-              </section>
-           </div>
-        <!-- FALTA
-        <form name="formEvento">
-        </form>-->
+        </div><br>
+        <div class="row">
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Región:</label>
+              <select style="border-radius: 9px" id="region" class="form-control" ng-model="evento.region">
+                  <option value="{{region}}" ng-repeat="region in regiones" >{{region.nombre}}</option>
+              </select>
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Nit:</label>
+              <input style="border-radius: 9px" id="nit" ng-model="evento.nit" type="number" class="form-control" placeholder="1111111">
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Código Postal:</label>
+              <input style="border-radius: 9px" id="codigo" ng-model="evento.codigo" type="number" class="form-control" placeholder="200001">
+          </div>
+          <div class="col-md-3 col-xs-12">
+            <label style="color:black;font-weight: 300;">Dirección:</label>
+            <textarea style="border-radius: 9px" id="direccion" ng-model="evento.direccion" type="text" class="form-control" placeholder=" carrera x # 24c3 - 08 Mayales"> </textarea>
+          </div>
+        </div>
+        <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+          <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">CONTACTO</h3>  
+        </div><br>
+        <div class="row">
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Teléfono:</label>
+              <input style="border-radius: 9px" id="telefono" ng-model="evento.telefono" type="number" class="form-control" placeholder="301 1234569">
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Teléfono 2:</label>
+              <input style="border-radius: 9px" id="telefono2" ng-model="evento.telefono2" type="number" class="form-control" placeholder="310 3265487">
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Correo:</label>
+              <input style="border-radius: 9px" id="correo" ng-model="evento.correo" type="email" class="form-control" placeholder="ejemplo@domain.com">
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Correo 2:</label>
+              <input style="border-radius: 9px" id="correo2" ng-model="evento.correo2" type="email" class="form-control" placeholder="ejemplo@domain.com">
+          </div>
+        </div>
+        <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+          <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">FECHA</h3>  
+        </div><br>
+        <div class="row">
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Fecha de Fundado:</label>
+              <input style="border-radius: 9px" id="fundado" ng-model="evento.fundado" type="date" class="form-control" placeholder="">
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Versión:</label>
+              <input style="border-radius: 9px" id="version" ng-model="evento.version" type="text" class="form-control" placeholder="50">
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Fecha de Inicio:</label>
+              <input style="border-radius: 9px" id="inicio" ng-model="evento.fechaInicio" type="datetime-local" class="form-control" placeholder="">
+          </div>
+          <div class="col-md-3 col-xs-12">
+            <label style="color:black;font-weight: 300;">Fecha de Finalización:</label>
+            <input style="border-radius: 9px" id="fin" ng-model="evento.fechaFin" type="datetime-local" class="form-control" placeholder="">
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-md-3 col-xs-12">
+            <label style="color:black;font-weight: 300;">Población Objetivo:</label>
+            <input style="border-radius: 9px" id="poblacion" ng-model="evento.poblacion" type="number" class="form-control" placeholder="200">
+          </div>
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Población Circulante:</label>
+              <input style="border-radius: 9px" id="poblacionCirculante" ng-model="evento.poblacionCirculante" type="number" class="form-control" placeholder="">
+          </div>
+        </div>
+        <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
+          <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">REDES SOCIALES</h3>  
+        </div><br>
+        <div class="row">
+          <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Web Site:</label>
+              <input style="border-radius: 9px" id="web" ng-model="evento.web" type="text" class="form-control" placeholder="www.example.com">
+          </div>
+           <div class="col-md-3 col-xs-12">
+                <label style="color:black;font-weight: 300;">Facebook:</label>
+                <input style="border-radius: 9px" id="facebook" ng-model="evento.facebook" type="text" class="form-control" placeholder="facebook.com/ejemplo3">
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <label style="color:black;font-weight: 300;">Instagram:</label>
+                <input style="border-radius: 9px" id="instagram" ng-model="evento.instagram" type="text" class="form-control" placeholder="ejemplo32">
+            </div>
+            <div class="col-md-3 col-xs-12">
+              <label style="color:black;font-weight: 300;">Twitter:</label>
+              <input style="border-radius: 9px" id="twitter" ng-model="evento.twitter" type="text" class="form-control" placeholder="twitter.com/ejemplo3">
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-3 col-xs-12">
+                <label style="color:black;font-weight: 300;">Otro:</label>
+                <input style="border-radius: 9px" id="otro" ng-model="evento.instagram" type="text" class="form-control" placeholder="">
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <label style="color:black;font-weight: 300;">contraseña de usuario:</label>
+                <input style="border-radius: 9px" id="pass" ng-model="evento.pass" type="password" class="form-control" placeholder="">
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0; padding-bottom: 0; padding-top: 0">
+        <button class="btn btn-lg buttonLogin " style="margin: 1%;text-align: center ;  font-size: 10px ;"  data-dismiss="modal" ng-click="guardar();">GUARDAR</button>
       </div>
     </div>
   </div>

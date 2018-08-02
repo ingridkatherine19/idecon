@@ -17,7 +17,7 @@ $routeProvider.when('/consumo', {
   if (!$rootScope.evento) {
     window.location.href = '#/evento';
   }
-  console.log($rootScope.evento);
+  //console.log($rootScope.evento);
   $scope.ver = false;
   $scope.consumoCalle = [];
   $scope.consumoPalco = [];
@@ -60,7 +60,7 @@ $routeProvider.when('/consumo', {
 
   //llenar la variable de lo que se va a actualizar
   $scope.actPalco = function(consumo){
-    console.log(consumo);
+  //  console.log(consumo);
     $scope.consumo = consumo;
     $scope.consumoconsumo = $scope.numberFormat(consumo.consumo.toString());
     $scope.consumoventa = $scope.numberFormat(consumo.venta.toString());
@@ -372,7 +372,7 @@ $routeProvider.when('/consumo', {
       });
 
             
-      console.log($scope.reciclado);
+    //  console.log($scope.reciclado);
 
 
       //se agregan los puntos a los consumos de los palcos
@@ -404,7 +404,7 @@ $routeProvider.when('/consumo', {
        
       });
       //puntos a el impacto
-      console.log($scope.impacto);
+   //   console.log($scope.impacto);
 
       $scope.impacto.costoArboles = $scope.numberFormat(Math.round($scope.impacto.costoArboles).toString());
       $scope.impacto.reduccionArboles = $scope.numberFormat(Math.round($scope.impacto.reduccionArboles).toString());

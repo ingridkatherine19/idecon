@@ -769,34 +769,35 @@ class EncuestaController extends Controller {
         
     public function reporteEncuesta2(Request $request){
       
-        $reporteTipo = array();
+        $reporteTipo = array(); //Este reporte guarda las cantidades de personas que han respondido la encuesta
         $total = 0;
-        $pregunta = Pregunta::where('idEvento' , $request->idEvento)->get();
-        
+        $pregunta = Pregunta::where('idEvento' , $request->idEvento)->get();//Busco las preguntas de un evento determinado
+        $obj =  new stdClass();
+        $obj->tipoEmpresa = 0;
+        $obj->tipoAgrupacion = 0;
+        $obj->tipoParticipante = 0;
+        $obj->tipoPublico = 0;
         if (count($pregunta) != 0) {
-          
            foreach ($pregunta as $p) {
-                $obj =  new stdClass();
-                $obj->tipoEmpresa = 0;
-                $obj->tipoAgrupacion = 0;
-                $obj->tipoParticipante = 0;
-                $obj->tipoPublico = 0;
+
                 $encuesta = Encuesta2::where('idPregunta' , $p->idPregunta)->get();
                 $total += Encuesta2::where('idPregunta' , $p->idPregunta)->count();
-                if (count($encuesta) != 0) {
-                    foreach ($encuesta as $e) {
-                        $usuario = User::find($e->idUsuario);
-                        if ($usuario->tipo == 1) {
-                            $obj->tipoEmpresa +=1;
-                        }elseif ($usuario->tipo == 2) {
-                            $obj->tipoAgrupacion +=1;
-                        }elseif ($usuario->tipo == 3) {
-                            $obj->tipoParticipante +=1;
-                        }elseif ($usuario->tipo == 4) {
-                            $obj->tipoPublico +=1;
-                        } 
-                     }  
-                }
+               
+                foreach ($encuesta as $e) {
+                 // dd($e);
+                    $usuario = User::find($e->idUsuario);
+               
+                    if ($usuario->tipo == 1) {
+                        $obj->tipoEmpresa +=1;
+                    }elseif ($usuario->tipo == 2) {
+                        $obj->tipoAgrupacion +=1;
+                    }elseif ($usuario->tipo == 3) {
+                        $obj->tipoParticipante +=1;
+                    }elseif ($usuario->tipo == 4) { 
+                        $obj->tipoPublico +=1;
+                    } 
+                 }  
+               
                 if ($p->tipo == 1) {
               
                   $pesimo = Encuesta2::where('idPregunta' , $p->idPregunta)->where('respuesta' , 1)->count();

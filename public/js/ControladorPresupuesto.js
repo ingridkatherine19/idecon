@@ -18,7 +18,7 @@ $routeProvider.when('/presupuesto', {
   }
   $scope.ver = false;
   $scope.colores = [{'color': '#00EAB5'}, {'color' : '#FF6C00'}, {'color' : '#00ABF8'}, {'color' : '#F24B45'}, {'color' : '#D03B43'}, {'color' : '#AB313E'}, {'color' : '#503140'}, {'color' : '#322E3F'}];
-  console.log($rootScope.evento);
+  //console.log($rootScope.evento);
   //declaracion de variables
   $scope.costos ={};
   $scope.ingresos = {};
@@ -83,7 +83,7 @@ $routeProvider.when('/presupuesto', {
     }).success(function (response) {
       $scope.costos = response.presupuestoCosto;
       $scope.ingresos = response.presupuestoIngreso;
-      console.log($scope.costos.length, $scope.ingresos.length);
+     // console.log($scope.costos.length, $scope.ingresos.length);
       //sumo el total de costos e impuestos
       angular.forEach($scope.costos, function (value, key){
           $scope.subCosto += value.costo;
@@ -165,7 +165,7 @@ $routeProvider.when('/presupuesto', {
 
   $scope.cargarBarChart = function(){
     //alert('2');
-    console.log($scope.subCosto , $scope.subIngreso);
+   // console.log($scope.subCosto , $scope.subIngreso);
     var areaChartData = {
       labels: ['Totales'],
       datasets: [
@@ -256,7 +256,10 @@ $routeProvider.when('/presupuesto', {
   $scope.createCostoActividad = function(){
     $scope.costoa.app = $scope.appCosto;
     $scope.costoa.idActividad = $scope.idactividadSeleccionada;    
-    console.log($scope.costoa);
+    $scope.costoa.cantidad = $scope.costoa.cantidad.replace(/\./g,'');
+    $scope.costoa.cantidad = parseInt($scope.costoa.cantidad); 
+    $scope.costoa.costo = $scope.costoa.costo.replace(/\./g,'');
+    $scope.costoa.costo = parseInt($scope.costoa.costo); 
     $http({
         url: path + 'costoa/create',
         method: 'get',
@@ -269,7 +272,7 @@ $routeProvider.when('/presupuesto', {
      //buscar todos los costos de la app
      $scope.allCostoActividad();
      $scope.all();           
-    });  
+    });
   }
 
   //buscar todos los costos de la actividad seleccionada
@@ -284,7 +287,11 @@ $routeProvider.when('/presupuesto', {
             "Content-Type": "application/json"
         }
     }).success(function (response) {
-      $scope.costosActividad = response.costos;           
+      $scope.costosActividad = response.costos; 
+    //  console.log($scope.costosActividad);    
+      angular.forEach($scope.costosActividad, function (value, key){
+            value.costo = $scope.numberFormat(value.costo.toString());
+      });      
     }); 
   }
 
@@ -336,13 +343,16 @@ $routeProvider.when('/presupuesto', {
               $scope.tipoIngreso.push(value);
             }
       });
-      console.log($scope.tipoCosto, $scope.tipoIngreso);          
+     // console.log($scope.tipoCosto, $scope.tipoIngreso);          
     });  
   }
 
   $scope.actCosto = function(costo){
-    console.log(costo);
+  //  console.log(costo);
     $scope.costo = costo;
+    $scope.costo.costo = $scope.costo.costo2;
+    $scope.costo.cantidad = $scope.costo.cantidad2; 
+
   }
 
   $scope.actualizarCosto = function(){
@@ -352,7 +362,11 @@ $routeProvider.when('/presupuesto', {
     }else{//no mostrar en la app
       $scope.costo.app = 0;
     }
-    console.log($scope.costo);
+
+    $scope.costo.cantidad = $scope.costo.cantidad.replace(/\./g,'');
+    $scope.costo.cantidad = parseInt($scope.costo.cantidad); 
+    $scope.costo.costo = $scope.costo.costo.replace(/\./g,'');
+    $scope.costo.costo = parseInt($scope.costo.costo); 
     $http({
         url: path + 'costo/update',
         method: 'get',
@@ -367,8 +381,6 @@ $routeProvider.when('/presupuesto', {
       },2000);
       //llamar para recargar la vista 
       $scope.all();    
-
-
     });
   }
   //modifica el swich si quiere agregar un tipo nuevo
@@ -423,7 +435,7 @@ $routeProvider.when('/presupuesto', {
   $scope.creaCosto = function(){
     $scope.costo.costo = parseInt($scope.costo.costo); 
     $scope.costo.cantidad = parseInt($scope.costo.cantidad);
-    console.log($scope.costo);
+    // console.log($scope.costo);
     $http({
         url: path + 'costo/create',
         method: 'get',
@@ -432,7 +444,7 @@ $routeProvider.when('/presupuesto', {
             "Content-Type": "application/json"
         }
     }).success(function (response) {
-      console.log(response.costo);
+   //   console.log(response.costo);
       //inicializar variables
       $scope.costo = {};
       $scope.tipoNuevo = false;
@@ -458,7 +470,7 @@ $routeProvider.when('/presupuesto', {
     $scope.ingreso.costo = parseInt($scope.ingreso.costo); 
     $scope.ingreso.cantidad = $scope.ingreso.cantidad.replace(/\./g,'');
     $scope.ingreso.cantidad = parseInt($scope.ingreso.cantidad); 
-    console.log($scope.ingreso, $scope.tipoNuevo);
+  //  console.log($scope.ingreso, $scope.tipoNuevo);
     if ($scope.tipoNuevo) {
       $http({
           url: path + 'presupuesto/tipocreate',
@@ -495,7 +507,7 @@ $routeProvider.when('/presupuesto', {
             "Content-Type": "application/json"
         }
     }).success(function (response) {
-      console.log(response.ingreso);
+   //   console.log(response.ingreso);
       //inicializar variables
       $scope.ingreso = {};
       $scope.tipoNuevo = false;
@@ -512,12 +524,18 @@ $routeProvider.when('/presupuesto', {
   }
 
   $scope.actIngreso = function(ingreso){
-    console.log(ingreso);
+  //  console.log(ingreso);
     $scope.ingreso = ingreso;
+    $scope.ingreso.costo = $scope.ingreso.costo2;
+    $scope.ingreso.cantidad = $scope.ingreso.cantidad2; 
   }
 
   $scope.actualizarIngreso = function(){
-    console.log($scope.ingreso);
+    $scope.ingreso.cantidad = $scope.ingreso.cantidad.replace(/\./g,'');
+    $scope.ingreso.cantidad = parseInt($scope.ingreso.cantidad); 
+    $scope.ingreso.costo = $scope.ingreso.costo.replace(/\./g,'');
+    $scope.ingreso.costo = parseInt($scope.ingreso.costo); 
+  //  console.log($scope.ingreso);
     $http({
         url: path + 'ingreso/update',
         method: 'get',
@@ -532,8 +550,6 @@ $routeProvider.when('/presupuesto', {
       },2000);
       //llamar para recargar la vista 
       $scope.all();    
-
-
     });
   }
 
@@ -551,7 +567,7 @@ $routeProvider.when('/presupuesto', {
     }else{
       ruta = 'ingreso/delete';
     }
-    console.log(ruta , $scope.idSeleccionado);
+    //console.log(ruta , $scope.idSeleccionado);
       $http({
           url: path + ruta,
           method: 'get',
@@ -660,6 +676,29 @@ $routeProvider.when('/presupuesto', {
             });
         }
     }); 
+    /*INPUT DE LOS ACTUALIZAR*/
+    $("#costodecosto2").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    }); 
+    $("#cantidadcosto2").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
 
     $("#costodeingreso").on({
         "focus": function (event) {
@@ -673,6 +712,29 @@ $routeProvider.when('/presupuesto', {
         }
     }); 
     $("#cantidadingreso").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    }); 
+    /*INPUT DE ACTUALIZAR*/
+    $("#cantidadingreso2").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    }); 
+    $("#costodeingreso2").on({
         "focus": function (event) {
             $(event.target).select();
         },

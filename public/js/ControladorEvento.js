@@ -13,7 +13,7 @@ $routeProvider.when('/evento', {
         controller: 'EventoCtrl'
     });
 }])
-
+ 
 // Home controller
 .controller('EventoCtrl', ['$http', '$scope', '$rootScope', '$timeout', function($http, $scope, $rootScope, $timeout) {
   localStorage.setItem("user", JSON.stringify(user));
@@ -67,7 +67,7 @@ $routeProvider.when('/evento', {
     ];
     /*----------------------FIN SELECT'S-------------------------*/
   /*----------------WIZARD--------------------------------------------------*/
-  $timeout(function () {
+  /*$timeout(function () {
       $("#wizard").steps({
         onInit: function (event, currentIndex) { 
           //alert('onInit');
@@ -156,7 +156,7 @@ $routeProvider.when('/evento', {
         bodyTag: "section",
         transitionEffect: "slideLeft"
       });
-  }, 2000);
+  }, 2000);*/
 
   /*---------------------------------------REPORTE------------------------------*/
 
@@ -776,7 +776,7 @@ $routeProvider.when('/evento', {
 
   $scope.guardar = function(){
     //alert('g');
-    //console.log($scope.evento);
+    console.log($scope.evento);
     var url = "";
     url = 'evento/create';
     //convertir formato de fecha para el servidor
@@ -821,7 +821,6 @@ $routeProvider.when('/evento', {
     .error(function(response){
       //$scope.all();
     });
-    //$scope.all();
   }
 
   $scope.all = function(){
