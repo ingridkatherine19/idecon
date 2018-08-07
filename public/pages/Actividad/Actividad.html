@@ -133,7 +133,7 @@
     </div>
   </div>
 </section>
-<!-- Modal de insertar evento-->
+<!-- Modal de nueva-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
   <div class="modal-dialog  modal-lg" role="document" >
     <div class="modal-content">
@@ -159,8 +159,9 @@
                 <div class="col-md-3 col-xs-12 col-lg-3" >
                   <label style="font-weight: 300;">Modalidad:</label>
                   <select style="border-radius: 9px" class="form-control pageList" name="modalidad" ng-model="actividad.modalidad" required>
-                      <option ng-repeat="modalidad in modalidadEvento" ng-selected ="actividad.modalidad == modalidadSelect" value="{{modalidad.id}}">{{modalidad.name}}</option>
+                      <option ng-repeat="modalidad in modalidadEvento"  value="{{modalidad.id}}">{{modalidad.name}}</option>
                   </select>
+                  <!--ng-selected ="actividad.modalidad == modalidadSelect"-->
                 </div>
                 <div style="margin-top: 3%;" class="col-md-3 col-xs-12 col-lg-3">
                   <div class="form-group">
@@ -256,7 +257,7 @@
     <div class="modal-content">
       <div class="modal-header" style="padding-bottom: 0">
        <button ng-click="cerrar()" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">SUB-ACTIVIDADES DE  {{actSeleccionada.nombre}}</h3></center>
+        <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important; text-transform: uppercase ! important;">SUB-ACTIVIDADES DE  {{actSeleccionada.nombre}}</h3></center>
       </div>
       <div class="modal-body" style="background-color:rgb(255, 255, 255) !important; color: black !important;">
         <div ng-if="swichsub">

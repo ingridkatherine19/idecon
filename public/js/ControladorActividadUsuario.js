@@ -21,7 +21,11 @@ $routeProvider.when('/miactividad', {
   $scope.swichPalco = false;
   $scope.swichsub = false;
   $scope.ver = false;
-
+  $scope.modalidadSelect = 0;
+  $scope.tipoeventoSelect = 0;
+  $scope.participanteeventoSelect = 0;
+  $scope.tipousuarioSelect = 0
+  $scope.buttonNuevo = 0;
 
   $scope.prueba = [];
   $scope.swichActividad = false;
@@ -54,6 +58,35 @@ $routeProvider.when('/miactividad', {
     detalle: '',
     costo: ''
   }];
+   $scope.tipoUsuario = [
+        { name: "Participantes",  id: 0 },
+        { name: "Empresas", id: 1 },
+        { name: "Agrupaciones",  id: 2 }
+  ];
+
+    $scope.tipoEvento = [
+        { name: "Encuentros y Espectáculos Deportivos",  id: 0 },
+        { name: "Eventos Religiosos", id: 1 },
+        { name: "Congregaciones Políticas",  id: 2 },
+        { name: "Conciertos y Presentaciones Musicales", id: 3 },
+        { name: "Ferias, Festivales, Rodeos y Corralejas", id: 4 },
+        { name: "Concursos", id: 10 },
+        { name: "Congresos, Simposios, Seminarios o similares", id: 5 },
+        { name: "Teatro",  id: 6 },
+        { name: "Exhibiciones (Desfiles de Modas, Exposiciones, etc.)", id: 7 },
+        { name: "Atracciones y Entretenimiento (Parques de Atracciones, Ciudades de Hierro, Circos, etc.)", id: 8 },
+        { name: "Otros (Marchas, Ventas, etc.)", id: 9 }
+  ];
+  $scope.modalidadEvento = [
+        { name: "Sin valor comercial",  id: 0 },
+        { name: "Con boleta de ingreso", id: 1 },
+        { name: "Con valor comercial",  id: 2 }
+  ];
+    $scope.participanteEvento = [
+        { name: "Participante Natural",  id: 0 },
+        { name: "Participante Juridico", id: 1 },
+        { name: "Grupos Artísticos",  id: 2 }
+  ];
 
   $scope.traeCheck = function(tipo){
     if (tipo == 1) {//tiene palcos
@@ -122,7 +155,7 @@ $routeProvider.when('/miactividad', {
       $scope.actividad.direccion[0].fechaInicio = document.getElementById("myDate1U").value;
       $scope.actividad.direccion[0].fechaFin =document.getElementById("myDate2U").value;
     }*/
-    console.log($scope.sub);
+//    console.log($scope.sub);
     $http({
         url: path + 'sub/update',
         method: 'get',
@@ -143,36 +176,6 @@ $routeProvider.when('/miactividad', {
 
   }
 
-  $scope.buscarAsociar = function(actividad) {//Esta función busca a los participantes o a las empresas o a las agrupaciones que ya están asociadas a la actividad.
-      
-     $scope.actividadSelect = actividad;
-     console.log($scope.actividadSelect);
-      $http({
-          url: path + 'asociar/all2',
-          method: 'get',
-          params:{
-            actividad: $scope.actividadSelect //aqui se manda la actividad con el tipo seleccionado 
-          },
-          headers: {
-              "Content-Type": "application/json"
-          }
-      }).success(function (response) {
-        if (response.error == false) {
-          $scope.asociacion = response.asociacion;  
-          console.log($scope.asociacion);
-        }
-        if (response.mensaje != '') {
-          $scope.mensajeAsociacion = response.mensaje;
-        }
-      });
-    }
-
-    $scope.limpiarAsociar = function(){
-      $scope.asociacion = {};
-      $scope.nuevo = {};
-      $scope.buttonNuevo = 0;
-    }
-
 
   //sleccionar una actividad
   $scope.seleccionarAct = function(act){
@@ -189,7 +192,7 @@ $routeProvider.when('/miactividad', {
           }
       }).success(function (response) {
         $scope.subActividades = response.actividad;
-        console.log($scope.subActividades);
+    //    console.log($scope.subActividades);
       });
   }
 
@@ -298,7 +301,7 @@ $routeProvider.when('/miactividad', {
   $scope.cargarCalendario = function(){
     /* initialize the external events
      -----------------------------------------------------------------*/
-    console.log($scope.calen);
+  //  console.log($scope.calen);
     function ini_events(ele) {
       ele.each(function () {
               // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
@@ -425,7 +428,7 @@ $routeProvider.when('/miactividad', {
           }
       }).success(function (response) {
         $scope.ciudades = response.ciudades;
-        console.log($scope.ciudades);
+      //  console.log($scope.ciudades);
         
       });
     }
@@ -452,22 +455,49 @@ $routeProvider.when('/miactividad', {
 
     }
 
-    $scope.editarAct = function(act){
+   $scope.editarAct = function(act){
       $scope.actividad = act;
       if ($scope.actividad.direccion) {
         //formatear la fecha
         $scope.actividad.direccion[0].fechaInicio = new Date($scope.actividad.direccion[0].fechaInicio);
         $scope.actividad.direccion[0].fechaFin = new Date($scope.actividad.direccion[0].fechaFin); 
       }
-      console.log($scope.actividad);
+      $scope.tipoSelect = $scope.actividad.tipo;
+      $scope.modalidadSelect = $scope.actividad.modalidad;
+      $scope.participanteSelect = $scope.actividad.tipoPoblacion;
+    //  console.log( $scope.actividad);
     }
 
     $scope.actualizarAct = function(){
+
+      if ($scope.palcoActividadAct[0]) {
+        //si agrego un nuevo palco
+        $http({
+            url: path + 'act/palco',
+            method: 'get',
+            params: {
+              idActividad: $scope.actividad.idActividad,
+              palco: JSON.stringify($scope.palcoActividadAct)
+            },
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).success(function (response) {
+          $scope.palcoActividadAct =[];
+           $('#myModal5').modal('show'); // abrir
+            setTimeout(function(){
+              $('#myModal5').modal('hide');
+            },2000);
+          $scope.All();
+        });
+
+      }
+
       if ($scope.actividad.direccion) {
         $scope.actividad.direccion[0].fechaInicio = document.getElementById("myDate1U").value;
         $scope.actividad.direccion[0].fechaFin =document.getElementById("myDate2U").value;
       }
-      console.log($scope.actividad);
+   //   console.log($scope.actividad);
       $http({
           url: path + 'act/update',
           method: 'get',
@@ -480,6 +510,12 @@ $routeProvider.when('/miactividad', {
       }).success(function (response) {
         
       });
+       $('#myModal5').modal('show'); // abrir
+        setTimeout(function(){
+          $('#myModal5').modal('hide');
+        },2000);
+      $scope.All();
+
     }
 
     $scope.eliminarPalco = function(idPalco, index){
@@ -538,7 +574,7 @@ $routeProvider.when('/miactividad', {
       $scope.actividad.lng = $scope.lng;
     //  var value = element(by.binding( $scope.actividad.fechaInicio | date: "yyyy-MM-ddTHH:mm:ss"));
       $scope.actividad.idEvento = $rootScope.user.idEvento; //id del evento al cual pertecen las actividades 
-      console.log($scope.actividad);
+     // console.log($scope.actividad);
 
     if ( $("#myDate1").length > 0 && $("#myDate2").length) {
       $scope.fechaInicio = document.getElementById("myDate1").value;
@@ -557,7 +593,7 @@ $routeProvider.when('/miactividad', {
           }
       }).success(function (response) {
         $scope.actividad = response.actividad;
-        console.log($scope.actividad);
+       // console.log($scope.actividad);
         $scope.swichPremio = false;
         $scope.swichPalco = false;
 
@@ -602,7 +638,7 @@ $routeProvider.when('/miactividad', {
     //llenar los datos de la sub actividad que se va a actualizar
     $scope.editarSub = function(actividad){
       $scope.swichsub = true;
-      console.log(actividad);
+    //  console.log(actividad);
       $scope.sub = actividad;
       $scope.tipoeventoSelect = actividad.tipo;
       $scope.modalidadSelect = actividad.modalidad;
@@ -630,7 +666,7 @@ $routeProvider.when('/miactividad', {
       $scope.sub.lugar = $scope.actSeleccionada.lugar;
      
       $scope.sub.idActividad = $scope.actSeleccionada.idActividad; //id del evento al cual pertecen las actividades 
-      console.log($scope.sub);
+     // console.log($scope.sub);
 
       if ( $("#myDate3").length > 0 && $("#myDate4").length) {
         $scope.fechaInicio2 = document.getElementById("myDate3").value;
@@ -670,7 +706,7 @@ $routeProvider.when('/miactividad', {
             }
         }).success(function (response) {
           $scope.subActividades = response.actividad;
-          console.log($scope.subActividades);
+       //   console.log($scope.subActividades);
           //limpiar variables   
           $scope.sub ={};
           $scope.markers = [];
@@ -829,7 +865,7 @@ $routeProvider.when('/miactividad', {
           }
       }).success(function (response) {
         $scope.total = response.total;
-        console.log(response.total);
+       // console.log(response.total);
         
       });
     }
@@ -849,7 +885,7 @@ $routeProvider.when('/miactividad', {
           }
       }).success(function (response) {
         $scope.actividades = response.actividad;
-        console.log($scope.actividades);
+       // console.log($scope.actividades);
         $scope.ver = true;
       });
       
@@ -867,7 +903,7 @@ $routeProvider.when('/miactividad', {
         $scope.calendario = response.calendario;
         $scope.calen = []; 
         angular.forEach($scope.calendario, function (value, key){
-          console.log(value);
+      //    console.log(value);
           $scope.aux = {
             title: value.nombre,
             start: value.direccion[0].fechaInicio,
@@ -877,16 +913,210 @@ $routeProvider.when('/miactividad', {
           };
           $scope.calen.push($scope.aux);
         });
-        $scope.cargarCalendario();
-        
+     //   $scope.cargarCalendario();
+        setTimeout(function(){ $scope.cargarCalendario(); }, 500);
         //console.log($scope.calendario, $scope.calen);
         
       });
     }
+    /*ASOCIAR*/
     $scope.asociar = function(actividad) {
-      console.log(actividad);
+  //    console.log(actividad);
 
     }
+    
+
+/*-----------------------AREA DEL ASIGNAR----------------------------*/
+
+    $scope.funcionAtras = function () {
+      if ($scope.buttonNuevo == 0) {
+        $scope.buttonNuevo = 1;
+      }else{
+        $scope.buttonNuevo = 0;
+      }
+
+    }
+
+    $scope.cambiarUsuarios = function (tipousuario) {
+      $scope.tipousuarioSelect = tipousuario; //Asigna el tipo de usuario que trae el select
+    }
+    $scope.buscarAsociar = function(actividad) {//Esta función busca a los participantes o a las empresas o a las agrupaciones que ya están asociadas a la actividad.
+     $scope.actividadSelect = actividad;
+     //console.log($scope.tipousuarioSelect);
+      /*
+        0: Participantes
+        1: Empresas
+        2: Agrupaciones
+      */
+      $http({
+          url: path + 'asociar/all2',
+          method: 'get',
+          params:{
+            actividad: actividad
+          },
+          headers: {
+              "Content-Type": "application/json"
+          }
+      }).success(function (response) {
+        if (response.error == false) {
+          $scope.agrupaciones = response.agrupaciones;
+          $scope.empresas = response.empresas;
+          $scope.participantes = response.participantes;  
+      //    console.log($scope.agrupaciones , $scope.empresas , $scope.participantes);
+        }
+
+        if ($scope.empresas == []) {
+          $scope.mensajeAsociacion = 'No hay empresas asociadas';
+        }
+        if ($scope.participantes == []) {
+          $scope.mensajeAsociacion = 'No hay participantes asociados';
+        }
+        if ($scope.agrupaciones == []) {
+          $scope.mensajeAsociacion = 'No hay agrupaciones asociados';
+        }
+        
+      });
+    }
+
+    $scope.limpiarAsociar = function(){
+      $scope.asociacion = {};
+      $scope.nuevo = {};
+      $scope.buttonNuevo = 0;
+    }
+
+    $scope.selectActividad = function(actividad){
+      
+      $scope.actividadSelect = actividad;
+    }
+    $scope.buscarPremiado = function(premio){
+      $scope.premioSelect = premio;
+    //  console.log($scope.premioSelect);
+        $http({
+          url: path + 'buscar/premiado',
+          method: 'get',
+          params:{
+            actividad: $scope.actividadSelect //aqui se manda la actividad con el tipo seleccionado 
+          },
+          headers: {
+              "Content-Type": "application/json"
+          }
+      }).success(function (response) {
+        $scope.resultado = response.resultado;
+     //   console.log($scope.resultado);
+        $scope.buttonPremio = 1;
+    
+      });
+    }
+
+    $scope.guardarPremiado = function(r){
+   //   console.log(r);
+        $http({
+          url: path + 'guardar/premiado',
+          method: 'get',
+          params:{
+            actividad: $scope.actividadSelect, //aqui se manda la actividad con el tipo seleccionado 
+            premio : $scope.premioSelect,
+            persona: r
+          },
+          headers: {
+              "Content-Type": "application/json"
+          }
+      }).success(function (response) {
+    //    alert(response.mensaje);
+    //    console.log($scope.resultado);
+        $scope.buttonPremio = 1;
+    
+      });
+    }   
+    $scope.cambiarButton = function(idActividad){
+      if ($scope.buttonPremio == 0) {
+        $scope.buttonPremio = 1;
+      }else{
+        $scope.buttonPremio = 0;
+      }
+    }
+   $scope.buscarPremio = function(idActividad){
+      $http({
+          url: path + 'buscar/premio',
+          method: 'get',
+          params:{
+            idActividad: idActividad //aqui se manda la actividad con el tipo seleccionado 
+          },
+          headers: {
+              "Content-Type": "application/json"
+          }
+      }).success(function (response) {
+        $scope.premios = response.premios;
+     //   console.log($scope.premios);
+      });
+    }
+
+    $scope.nuevoAsociar = function() { //Busca dependiendo del tipo de actividad a los a los participantes, a las empresas o agrupaciones
+      
+     $http({
+          url: path + 'buscar/asociar',
+          method: 'get',
+          params:{
+            actividad: $scope.actividadSelect //aqui se manda la actividad con el tipo seleccionado 
+          },
+          headers: {
+              "Content-Type": "application/json"
+          }
+      }).success(function (response) {
+        $scope.agrupacionesN = response.agrupaciones;
+        $scope.empresasN = response.empresas;
+        $scope.participantesN = response.participantes;  
+    //    $scope.tipousuarioSelect = 0;
+    //    $scope.buttonNuevo = 1;
+      });
+
+    }
+    $scope.desAsociar = function(asociada , index){
+   //   console.log(asociada);
+  //    console.log($scope.tipousuarioSelect);
+        $http({
+          url: path + 'nuevo/desasociar',
+          method: 'get',
+          params:{
+            id: asociada.idAsociacion, //aqui se manda la actividad con el tipo seleccionado 
+            tipo : $scope.tipousuarioSelect
+          },
+          headers: {
+              "Content-Type": "application/json"
+          }
+      }).success(function (response) {
+        //$scope.nuevo = response.nuevo;
+        $scope.nuevoAsociar();
+        $scope.buscarAsociar($scope.actividadSelect);
+    //    $scope.buttonNuevo = 0;
+
+      });
+    }
+    $scope.Asociar = function(nuevo){
+      $http({
+          url: path + 'nuevo/asociar',
+          method: 'get',
+          params:{
+            actividad: $scope.actividadSelect, //aqui se manda la actividad con el tipo seleccionado 
+            nuevo: nuevo,
+            tipo : $scope.tipousuarioSelect
+          },
+          headers: {
+              "Content-Type": "application/json"
+          }
+      }).success(function (response) {
+        //$scope.nuevo = response.nuevo;
+        $scope.nuevoAsociar();
+        $scope.buscarAsociar($scope.actividadSelect);
+        $scope.buttonNuevo = 0;
+       
+      });
+
+    }
+
+
+    /*FIN ASOCIAR*/
+
   $scope.All();
 
 }]).filter('startFromGrid', function() {

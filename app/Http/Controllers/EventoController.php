@@ -257,7 +257,7 @@ class EventoController extends Controller {
 
     public function find(Request $request){
         $evento = Evento::find($request->idEvento);
-
+        $evento->creado = $evento->created_at->toFormattedDateString();
         return response()->json(['error'=>false,'evento' => $evento]);
     }
 
@@ -334,7 +334,7 @@ class EventoController extends Controller {
    
     public function create(Request $request){
         $even = json_decode($request->evento);
-        
+        //dd($even);
     	try {
 
     		$evento = new Evento();
@@ -347,23 +347,36 @@ class EventoController extends Controller {
     		$evento->codigoPostal = $even->codigo;
     		$evento->direccion = $even->direccion;
     		$evento->telefono = $even->telefono;
-    		$evento->telefono2 = $even->telefono2;
-    		$evento->correo2 = $even->correo2;
-    		$evento->correo = $even->correo;
+            if (isset($even->telefono2)) {
+                $evento->telefono2 = $even->telefono2;
+            }
+            if (isset($even->correo2)) {
+                $evento->correo2 = $even->correo2;
+            }
+        	$evento->correo = $even->correo;
     		$evento->fundado = $even->fundado;
     		$evento->version = $even->version;
-    		$evento->fechaInicio = $even->inicio;
-    		$evento->fechaFin = $even->fin;
+    		$evento->fechaInicio = $even->fechaInicio;
+    		$evento->fechaFin = $even->fechaFin;
     		$evento->poblacion = $even->poblacion;
             $evento->poblacionCirculante = $even->poblacionCirculante;
-    		$evento->website = $even->web;
-    		$evento->facebook = $even->facebook;
-    		$evento->instagram = $even->instagram;
-    		$evento->twitter = $even->twitter;
-            $evento->otro = $even->otro;
+            if (isset($even->web)) {
+                $evento->website = $even->web;
+            }
+            if (isset($even->facebook)) {
+                $evento->facebook = $even->facebook;
+            }
+            if (isset($even->instagram)) {
+                $evento->instagram = $even->instagram; 
+            }
+            if (isset($even->twitter)) {
+                $evento->twitter = $even->twitter;
+            }
+            if (isset($even->otro)) {
+                $evento->otro = $even->otro;
+            }
             $evento->save();
     		
-
             if ($request->file('file') != null){
             
               $request->file('file')->move('img/evento/', $evento->idEvento . '.' . $request->file('file')->getClientOriginalExtension());

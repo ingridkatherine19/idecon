@@ -107,6 +107,7 @@
         <!-- /.box-body -->
       </div>
     </div>
+  </div>
     <!-- /.col -->
    <!-- <div class="col-md-4 col-xs-12">
       <div class="box" style="background-color: #fafafb;border:none !important; height: 300px ! important; overflow: scroll; padding: 0px">
@@ -194,8 +195,6 @@
     </div> 
    </div>
   --> 
-
-
   <br>
     <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 2px;" ng-if="!preguntas" class="row" >
     <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: medium; color: #B6BBC0 !important">RECEPCIÓN DE RESPUESTAS</h3>  
@@ -203,11 +202,10 @@
   <br>
 <div class="row" ng-if="preguntas[0]">
   <div class="col-md-4" ng-repeat="r in reporte">
-      <div class="box" style="background-color: #fafafb;border:none !important;">
-        <div class="box-header with-border">
+      <div class="box" style="background-color: #fafafb;border:none !important; ">
+        <div class="box-header with-border" style="height: 100px ! important">
           <p style="font-size: small; color: #B6BBC0 !important;">{{r.pregunta}}</p>
         </div>
-        <!-- /.box-header -->
         <div class="box-body">
           <div class="row">
             <div class="col-md-12">
@@ -225,14 +223,10 @@
               </div>
             </div>
           </div>
-            <!-- /.col -->
-          <!-- /.row -->
         </div>
-        <!-- /.box-body -->
       </div>
-      <!-- /.box -->
-    </div>
   </div>
+</div>
 </section>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
   <div class="modal-dialog  modal-sm" role="document" >

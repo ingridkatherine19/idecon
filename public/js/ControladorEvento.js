@@ -921,14 +921,14 @@ $routeProvider.when('/evento', {
     }
   }
 
-  $scope.buscarCiudades = function(){
+  $scope.buscarCiudades = function(idDepartamento){
     //alert('jhdgd');
-    //console.log($scope.evento.idDepartamento);
+   // console.log(idDepartamento);
     $http({
         url: path + 'ciudad/all',
         method: 'get',
         params:{
-          idDepartamento: 11
+          idDepartamento: idDepartamento
         },
         headers: {
             "Content-Type": "application/json"

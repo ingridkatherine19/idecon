@@ -17,7 +17,7 @@ $routeProvider.when('/dashboard', {
   //console.log($rootScope.user);
   $scope.ver = false;
   $scope.data = []; 
-  $scope.dataGrafica = [];
+  $scope.dataGrafica = []; 
   $scope.labelData =[];
   $scope.cantidadData=[];
   $scope.ruta = 'evento/all';
@@ -160,8 +160,7 @@ $routeProvider.when('/dashboard', {
 
   /*-------------------FIN DE SECCIÓN GENERAL---------------------------*/
   /*PARTE MEDIOAMBIENTAL*/
-  /*$scope.medioambiental = function(){
-
+  $scope.medioambiental = function(){
     $http({
         url: path + 'consumo/all',
         method: 'get',
@@ -307,7 +306,7 @@ $routeProvider.when('/dashboard', {
       
       $scope.ver = true;
     });
-  }*/
+  }
 
   /*------------------INICIO DE SECCIÓN POR DEPARTAMENTO---------------*/
   $scope.empresasAllDepartamento = function() {
@@ -436,11 +435,12 @@ $routeProvider.when('/dashboard', {
         }
 
     }).success(function (response) {
+
+        console.log(response.eventos);
         $scope.eventos = response.eventos;
         
         //trae todo el reporte semanal de la cantidad de actividades realizadas
         $scope.semanal = response.semanal;
-        console.log($scope.semanal);
         //agregando los meses
         $scope.nuevo = {
           codigo: 1,
@@ -1171,12 +1171,12 @@ $routeProvider.when('/dashboard', {
               "Content-Type": "application/json"
           }
       }).success(function (response) {
+
         $scope.actividades = response.actividad;
         $scope.totales = response.totales;
         $scope.totales.palco = $scope.numberFormat($scope.totales.palco.toString());
         $scope.totales.calle = $scope.numberFormat($scope.totales.calle.toString());
         $scope.totalModalidad = response.modalidad;
-    //    console.log(response.horas);
         $scope.horas = response.horas;
         $scope.minutos = $scope.horas*60;
 
@@ -1196,20 +1196,20 @@ $routeProvider.when('/dashboard', {
         $scope.totalIngCos.otrosIngresos = $scope.numberFormat($scope.totalIngCos.otrosIngresos.toString());
         $scope.totalIngCos.totalCostos = $scope.numberFormat($scope.totalIngCos.totalCostos.toString());
         $scope.totalIngCos.totalIngresos = $scope.numberFormat($scope.totalIngCos.totalIngresos.toString());
-     
-        if ($scope.totalIngCos.costosxhora) {
+        
+        if (!$scope.totalIngCos.costosxhora) {
           $scope.totalIngCos.costosxhora = 0;
         }
-        if ($scope.totalIngCos.costosxminuto) {
+        if (!$scope.totalIngCos.costosxminuto) {
           $scope.totalIngCos.costosxminuto = 0;
         }
-        if ($scope.totalIngCos.ingresosxhora) {
+        if (!$scope.totalIngCos.ingresosxhora) {
           $scope.totalIngCos.ingresosxhora = 0;
         }
-        if ($scope.totalIngCos.ingresosxminuto) {
+        if (!$scope.totalIngCos.ingresosxminuto) {
           $scope.totalIngCos.ingresosxminuto = 0;
         }
-        
+
         //consumo de bebidas, snacks y comidas en palcos y calle
         $scope.totalConsumo = response.consumo;
         $scope.totalConsumo.bebidasPalco = $scope.numberFormat($scope.totalConsumo.bebidasPalco.toString());
@@ -1224,7 +1224,7 @@ $routeProvider.when('/dashboard', {
         $scope.totalConsumo.totalSnacks = $scope.numberFormat($scope.totalConsumo.totalSnacks.toString()); 
         $scope.totalConsumo.totalComidas = $scope.numberFormat($scope.totalConsumo.totalComidas.toString()); 
         
-      //  console.log($scope.totalConsumo);
+        console.log($scope.totalConsumo);
 
         $scope.totalEmpresa = response.totalEmpresa;
         
@@ -1288,6 +1288,7 @@ $routeProvider.when('/dashboard', {
         $scope.totales.calle = $scope.numberFormat($scope.totales.calle.toString());
         $scope.totalModalidad = response.modalidad;
         $scope.horas = response.horas;
+
         $scope.minutos = $scope.horas*60;
         //total de ingresos y egresos
         $scope.totalIngCos = response.ingCos;
@@ -1495,7 +1496,8 @@ $routeProvider.when('/dashboard', {
         }
     }).success(function (response) {
       $scope.totalActividades = response.total;
-   //   console.log($scope.totalActividades);
+      $scope.allPresupuesto();
+      //console.log($scope.totalActividades);
     });
   }
   var map2;
@@ -1607,9 +1609,27 @@ $routeProvider.when('/dashboard', {
             $scope.otrosIngresos += value.costo;
           }
       });
-       $scope.data2 = [$scope.ingresoxact, $scope.otrosIngresos];
-       $scope.data3 = [[$scope.subCosto], [$scope.subIngreso]];
+      $scope.data2 = [$scope.ingresoxact, $scope.otrosIngresos];
+      $scope.data3 = [[$scope.subCosto], [$scope.subIngreso]];
 
+      if ($scope.totalActividades.horas !=0) {
+        $scope.minutos = $scope.totalActividades.horas *60;
+        $scope.ingresoxhoras = $scope.subIngreso/$scope.totalActividades.horas;
+        $scope.ingresoxminutos = $scope.subIngreso/$scope.minutos;
+        $scope.costoxhoras = $scope.subCosto/$scope.totalActividades.horas;
+        $scope.costoxminutos = $scope.subCosto/$scope.minutos;
+        //redondear y colocarle los puntos
+        $scope.ingresoxhoras = $scope.numberFormat(Math.round($scope.ingresoxhoras).toString());
+        $scope.ingresoxminutos = $scope.numberFormat(Math.round($scope.ingresoxminutos).toString());
+        $scope.costoxhoras = $scope.numberFormat(Math.round($scope.costoxhoras).toString());
+        $scope.costoxminutos = $scope.numberFormat(Math.round($scope.costoxminutos).toString());  
+      }else{
+        $scope.ingresoxhoras = 0;
+        $scope.ingresoxminutos = 0;
+        $scope.costoxhoras = 0;
+        $scope.costoxminutos = 0;
+      }
+      
       $scope.subCosto2 = $scope.numberFormat($scope.subCosto.toString());
       $scope.ingresoxact2 = $scope.numberFormat($scope.ingresoxact.toString());
       $scope.otrosIngresos2 = $scope.numberFormat($scope.otrosIngresos.toString());
@@ -1639,6 +1659,7 @@ $routeProvider.when('/dashboard', {
       $scope.sinImpuesto = $scope.subIngreso - $scope.resta;
     //  $scope.cargarGrafica();      
     });
+    //$scope.porTiempo();
   }
 
   $scope.numberFormat = function (numero){
@@ -1697,6 +1718,71 @@ $routeProvider.when('/dashboard', {
     });
   }
 
+  //trae todo el connsumo del evento seleccionado
+  $scope.allConsumo = function(){
+    
+    $http({
+        url: path + 'consumo/reporte',
+        method: 'get',
+        params:{
+          idEvento: $rootScope.user.idEvento
+        },
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).success(function (response) {
+        $scope.totalConsumo = response.consumo;
+         console.log($scope.totalConsumo); 
+        $scope.totalConsumo.bebidasPalco = $scope.numberFormat($scope.totalConsumo.bebidasPalco.toString());
+        $scope.totalConsumo.bebidascalle = $scope.numberFormat($scope.totalConsumo.bebidascalle.toString());
+        $scope.totalConsumo.comidasPalco = $scope.numberFormat($scope.totalConsumo.comidasPalco.toString());
+        $scope.totalConsumo.comidascalle = $scope.numberFormat($scope.totalConsumo.comidascalle.toString());
+        $scope.totalConsumo.snacksPalco = $scope.numberFormat($scope.totalConsumo.snacksPalco.toString());
+        $scope.totalConsumo.snackscalle = $scope.numberFormat($scope.totalConsumo.snackscalle.toString());
+        $scope.totalConsumo.totalBebidas = $scope.numberFormat($scope.totalConsumo.totalBebidas.toString());
+        $scope.totalConsumo.totalCalle = $scope.numberFormat($scope.totalConsumo.totalCalle.toString());
+        $scope.totalConsumo.totalPalco = $scope.numberFormat($scope.totalConsumo.totalPalco.toString());      
+        $scope.totalConsumo.totalSnacks = $scope.numberFormat($scope.totalConsumo.totalSnacks.toString()); 
+        $scope.totalConsumo.totalComidas = $scope.numberFormat($scope.totalConsumo.totalComidas.toString()); 
+         
+    });
+  }
+  //trae todo el presupuesto del evento seleccionado
+  $scope.allCultural = function(){
+    
+    $http({
+        url: path + 'cultural/reporte',
+        method: 'get',
+        params:{
+          idEvento: $rootScope.user.idEvento
+        },
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).success(function (response) {
+        $scope.cultural = response.cultural;
+        console.log( $scope.cultural);
+    });
+  }
+
+  $scope.allActividad = function(){
+    $http({
+        url: path + 'actividad/reporte',
+        method: 'get',
+        params: {
+          idEvento: $rootScope.user.idEvento
+        },
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).success(function (response) {
+      $scope.modalidad = response.modalidad;
+      console.log($scope.modalidad);
+    });
+    
+  }
+
+
   /*---------------fin del usuario del evento----------------------*/
 
   if ($rootScope.user.tipo != 5) {
@@ -1715,11 +1801,14 @@ $routeProvider.when('/dashboard', {
   
   }else{
     $scope.allUser();
-    $scope.allPresupuesto();
+    //$scope.allPresupuesto();
+    $scope.allCultural();
     $scope.junta();
+    $scope.allActividad();
     //$scope.medioambientalAll();
     $scope.medioambiental();
-    $scope.actTipo();    
+    $scope.actTipo();
+    $scope.allConsumo();    
   }
   
  

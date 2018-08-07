@@ -380,6 +380,7 @@ class DashboardController extends Controller {
          }
         //calcular el consumo en la calle  y en los palcos
         //$consumopalco = Consumopalco::all();
+
         $totalPalco = 0;
         foreach ($consumopalco as $consumo) {
             $totalPalco += $consumo->consumo * $consumo->venta;
@@ -473,6 +474,9 @@ class DashboardController extends Controller {
         $cantP = 0;
         $cantProvee = 0;
         $cantC = 0;
+        $capacidad = 0;
+        $palco = 0;
+        $palcoSub = 0;
 
         $totalAgrupacion = new stdClass();
         $totalParticipante = new stdClass();
@@ -538,26 +542,17 @@ class DashboardController extends Controller {
                     
             }
             
-            
-
             foreach ($actividades as $act) {
-
+                    $aforoAct = 0;
                     $costosxact += $act->costo;
                     $sub = EventoActividad::where('idActividad' , $act->idActividad)->get();
                     /*cantidad de personas proyectadas, la capacidad de todos los palcos*/
                     $palco = Palco::where('idActividad' , $act->idActividad)->sum('capacidad');
                     $getPalco = Palco::where('idActividad' , $act->idActividad)->get();
-                    foreach ($getPalco as $p) {
-                        $ingresosxact += $p->costo * $p->capacidad;
-
-                    }
-
-                    $palcoSub = PalcoSub::where('idActividad' , $act->idActividad)->sum('capacidad');
-                    $capacidad = $palco + $palcoSub;
-                    if ($capacidad == null) {
-                       $capacidad = 0;
-                    }
                     
+                    $palcoSub = PalcoSub::where('idActividad' , $act->idActividad)->sum('capacidad');
+                    
+                    $capacidad += $palco + $palcoSub;
                     $sum->nempleados += $act->empleo;
                     $sum->cantMujeres += $act->cantMujeres;
                     $sum->cantHombres += $act->cantHombres;
@@ -584,23 +579,21 @@ class DashboardController extends Controller {
                     $horasProximas += $inicio->diffInHours($fin);
                     $cantidadEmpleos += $act->empleo;
                     //buscar aforo por modalidad
-                    $aforoAct = 0; 
+                    
                     $palco = Palco::where('idActividad', $act->idActividad)->get();
                     foreach ($palco as $p) {
                         $aforoAct += $p->capacidad;
                     }
                      //buscar las subactividades para calcular la cantidad de horas por modalidad
                     $sub = EventoActividad::where('idActividad', $act->idActividad)->get();
-                    foreach ($sub as $s) {
-                        //calcula modalidad
-                        foreach ($modalidad as $m) {
-                            if ($act->modalidad == $m->idModalidad) {
-                                $m->cantidad++;
-                                $m->horas += $inicio->diffInHours($fin);
-                                $m->aforo += $aforoAct;
-                            }
+                    foreach ($modalidad as $m) {
+                        if ($act->modalidad == $m->idModalidad) {
+                            $m->cantidad++;
+                            $m->horas += $inicio->diffInHours($fin);
+                            $m->aforo += $aforoAct;
                         }
                     }
+                    
                 }else{
                     $sub = EventoActividad::where('idActividad', $act->idActividad)->get();
                     foreach ($sub as $s) {
@@ -615,15 +608,14 @@ class DashboardController extends Controller {
                         $fin = new Carbon($direccion[0]->fechaFin);
                         $horasProximas += $inicio->diffInHours($fin);
                         $palco = PalcoSub::where('idActividad', $s->idEventoActividad)->get();
+                       //AFORO, AFORO POR ACTIVIDAD E INGRESO
                         foreach ($palco as $p) {
                             $ingresosxact += $p->costo * $p->capacidad;
-                        }
-                            //AFORO POR MODALIDAD
-                        foreach ($palco as $p) {
                             $aforo += $p->capacidad;
                             $aforoAct = $p->capacidad;
                         }
-
+                            //AFORO POR MODALIDAD
+                      
                         //calcula modalidad
                         foreach ($modalidad as $m) {
                             if ($s->modalidad == $m->idModalidad) {
@@ -635,7 +627,7 @@ class DashboardController extends Controller {
                     }
 
                 }
-            $cantSub += count($sub); //llena la cantidad de subactividades
+               $cantSub += count($sub); //llena la cantidad de subactividades
             }//Fin foreach actividades
 
             foreach ($costos as $costo) {
@@ -648,6 +640,7 @@ class DashboardController extends Controller {
             //Calculo del consumo 
             //PALCOS
             foreach ($consumopalco as $consumo) {   
+                //Calcula el total del consumo en los palcos
                 $totalPalco += $consumo->consumo * $consumo->venta;
                 //si es snack
                 if ($consumo->producto == 7) {
@@ -664,6 +657,7 @@ class DashboardController extends Controller {
             }
             //CALLE
             foreach ($consumocalle as $consumo) {
+                //Calcula el total del consumo en la calle
                 $totalCalle += $consumo->consumo * $consumo->venta;
                 //si es snack
                 if ($consumo->producto == 7) {
@@ -680,14 +674,7 @@ class DashboardController extends Controller {
             }
 
             //calcular el consumo en la calle  y en los palcos
-            
-            foreach ($consumopalco as $consumo) {
-                $totalPalco += $consumo->consumo * $consumo->venta;
-            }
            
-            foreach ($consumocalle as $consumo) {
-                $totalCalle += $consumo->consumo * $consumo->venta;
-            }
             foreach ($costos as $costo) {
                 $proveedores = CostoProvee::where('idCosto', $costo->idCosto)->get();
                 foreach ($proveedores as $p) {
@@ -709,7 +696,7 @@ class DashboardController extends Controller {
                 }
             }
        }//Fin de foreach eventos
-
+   
        //Total de los consumos
         $consumoT = new stdClass();
         $consumoT->totalPalco = $totalPalco;
@@ -743,7 +730,7 @@ class DashboardController extends Controller {
         $totales->agrupaciones = Agrupacion::where('departamento' , $request->idDepartamento)->count();
         $totales->palco = $totalPalco;
         $totales->calle = $totalCalle;
-       
+    
         // $costos = CostoEvento::all();
         //$ingresos = IngresoEvento::all();
         //calcula provee y patrocinio
@@ -762,7 +749,7 @@ class DashboardController extends Controller {
         $totalEmpresa->cantProvee = $cantProvee;
         $totalEmpresa->cantConsumo = $cantC;
 
-    //    dd($capacidad);
+          //dd($horasProximas);
         return response()->json(['error'=>false,'actividad' => $mapa, 'totales' => $totales, 'totalEmpresa' => $totalEmpresa, 'horas' => $horasProximas , 'cantidadEmpleos' => $cantidadEmpleos , 'cantActividades' => $cantActividades , 'cantSub' => $cantSub , 'totalAgrupacion' => $totalAgrupacion , 'totalParticipante' => $totalParticipante, 'sum' => $sum , 'ingCos' => $ingCos , 'consumo' => $consumoT , 'modalidad' => $modalidad , 'capacidad' => $capacidad ]);
     }
     

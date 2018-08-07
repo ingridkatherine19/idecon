@@ -9,7 +9,7 @@
 </section>-->
 
 <!-- Main content -->
-<!-- Main content -->
+<!-- Main content --> 
 <section ng-show="!ver" class="content">
 
   <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
@@ -517,6 +517,518 @@
         <span class="info-box-icon" style="color: #38efc5; background-color: white"><i class="fa fa-recycle" style="font-size: 39px !important"></i></span>
         <div class="info-box-content">
           <span class="info-box-text" style="font-size: small; color: black !important">${{reciclado[2].total2}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">PLÁSTICO</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-15 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #38efc5; background-color: white"><i class="fa fa-recycle" style="font-size: 39px !important"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: small; color: black !important">${{reciclado[3].total2}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">CARTÓN</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-15 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #38efc5; background-color: white"><i class="fa fa-recycle" style="font-size: 39px !important"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: small; color: black !important">${{reciclado[4].total2}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">ORGÁNICO</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-xs-12">
+      <div class="box" style="border:none !important;">
+        <div class="box-header with-border">
+          <i class="fa fa-angle-right" style="color: #00EAB5 "></i>
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RECICLADO</h3>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding" >
+          <ul style="font-size: x-small;" class="nav nav-pills nav-stacked">
+            <li><a href=""> Aluminio <span class="pull-right" style="color: #B6BBC0 !important">{{reciclado[0].kg2}} Kg </span></a></li>
+            <li><a href=""> Vidrio <span class="pull-right" style="color: #B6BBC0 !important">{{reciclado[1].kg2}} Kg </span></a></li>
+            <li><a href=""> Plástico <span class="pull-right" style="color: #B6BBC0 !important">{{reciclado[2].kg2}} Kg </span></a></li>
+            <li><a href=""> Cartón <span class="pull-right" style="color: #B6BBC0 !important">{{reciclado[3].kg2}} Kg </span></a></li>
+            <li><a href=""> Orgánico <span class="pull-right" style="color: #B6BBC0 !important">{{reciclado[4].kg2}} Kg </span></a></li>
+            
+          </ul>
+        </div>
+      </div>
+      <!-- /.box -->
+    </div>
+    <div class="col-md-4 col-xs-12">
+      <div class="box" style="border:none !important;">
+        <div class="box-header with-border">
+          <i class="fa fa-angle-right" style="color: #00EAB5 "></i>
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">REDUCCIÓN</h3>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding" >
+          <ul style="font-size: x-small;" class="nav nav-pills nav-stacked">
+            <li><a href=""> Árboles <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionArboles}} Unds </span></a></li>
+            <li><a href=""> Agua <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionAgua}} Lts </span></a></li>
+            <li><a href=""> Petróleo <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionPetro}} Lts </span></a></li>
+            <li><a href=""> Energía Eléctrica <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionKwh}} Kwh </span></a></li>
+            <li><a href="">  Co2 <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionCo2}} Tn </span></a></li>
+            
+          </ul>
+        </div>
+      </div>
+      <!-- /.box -->
+    </div>
+    <div class="col-md-4 col-xs-12">
+      <div class="box" style="border:none !important;">
+        <div class="box-header with-border">
+          <i class="fa fa-angle-right" style="color: #00EAB5 "></i>
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">REUTILIZACIÓN</h3>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding" style="height: 186px" >
+          <ul style="font-size: x-small;" class="nav nav-pills nav-stacked">
+            <li><a href=""> Gas Natural M3 <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionNatural}} m<sup>3</sup></span></a>
+            </li>
+            <li><a href=""> Bio Gas M3 <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionGas}} m<sup>3</sup></span></a>
+            </li>
+            <li><a href=""> Bio Etanol <span class="pull-right" style="color: #B6BBC0 !important">{{impacto.reduccionBio}} m<sup>3</sup></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-solid">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">REUTILIZACIÓN</h3> 
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-3">
+                <img src="imagenes/ecologia/chaqueta.jpg" style="width: 100%">
+                 <p style="text-align: center; color: gray">Reciclados <span style="color: #f3c280">{{reciclado[2].cantidad}} = {{reciclado[2].camisa}}</span> Chaquetas</p>
+                 
+            </div>
+            <div class="col-md-3">
+                <img src="imagenes/ecologia/marco.jpg" style="width: 100%">
+                <p style="text-align: center; color: gray">Reciclados <span style="color: #f3c280">{{reciclado[2].kg2}}kg = {{reciclado[2].marco}}</span> Marcos</p> 
+                
+            </div>
+            <div class="col-md-3">
+                <img src="imagenes/ecologia/rin.jpg" style="width: 100%; padding-top: 3% ">
+                <p style="text-align: center; color: gray">Reciclados <span style="color: #f3c280">{{reciclado[0].cantidad}} = {{reciclado[0].llanta}}</span> Rines</p>  
+                
+            </div>
+            <div class="col-md-3">
+                <img src="imagenes/ecologia/silla.jpg" style="width: 100%; padding-top: 3% ">
+                <p style="text-align: center; color: gray">Reciclados <span style="color: #f3c280">{{reciclado[0].cantidad}} = {{reciclado[0].silla}}</span> Sillas</p>  
+                
+            </div>
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+
+</section>
+
+<section class="content" ng-show="ver" ng-if="user.tipo==5">
+
+  <!--ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd-->
+  <div class="row">
+      <div class="col-md-6">
+        <div class="callout boxBlue">
+              <h4 class="pull-right" style="margin-bottom: 0%">Bienvenido a Creko
+                <span id ="fecha" style="margin-left: 4px">{{fechaActual | date : format : timezone}}</span>
+              </h4>
+              <br>
+             <div class="row">
+               <div class="col-md-3 col-xs-6">
+                 <div class="avatar" style="background-image: url(../public/img/perfil.png)"></div>
+                </div>
+               <br>
+               <div class="col-md-4 col-xs-6">
+                 <h3 style="margin: 0px">{{user.nombre}} </h3>
+                 <p style="font-size: small; margin: 0px"><i class="fa fa-map-marker"></i> Valledupar , Colombia</p>
+               </div>
+               <div class="col-md-5 col-xs-12" style="padding: 0px">
+                  <p style="margin: 0px; text-align: justify; font-size: small;">Herramientas al servicio de las empresas culturales, para formular, ajustar y evaluar. </p>
+               </div>
+             </div>
+        </div>  
+        <div class="col-md-6" style="padding-left: 0px ;">
+          <div class="info-box">
+            <span class="info-box-icon iconosPrincipal"><i class="fa fa-users"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text" style="font-size: medium; color: black !important">{{totalActividades.empleo+totaljunta}}</span>
+              <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TOTAL EMPLEADOS</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+        </div>
+        <div class="col-md-6" style="padding-left: 0px ;">
+          <div class="info-box">
+            <span class="info-box-icon iconosPrincipal"><i class="fa fa-users"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text" style="font-size: medium; color: black !important">{{totaljunta}}</span>
+              <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">ORGANIZADORES</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+        </div>
+        <div class="col-md-6" style="padding-left: 0px">
+          <div class="info-box">
+            <span class="info-box-icon iconosPrincipal"><i class="fa fa-arrow-up"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text" style="font-size: medium; color: black !important">${{subIngreso2}}</span>
+              <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TOTAL INGRESOS</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+        </div>
+        <div class="col-md-6" style="padding-left: 0px ;">
+          <div class="info-box">
+            <span class="info-box-icon iconosPrincipal"><i class="fa fa-arrow-down"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text" style="font-size: medium; color: black !important">${{subCosto2}}</span>
+              <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TOTAL EGRESOS</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+        </div>  
+      </div>
+      <div class="col-md-6 col-xs-6">
+        <div class="box" style="border-top:white !important; ">
+            <div class="box-header">
+              <!-- tools box -->
+              <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">MAPA DE ACTIVIDADES</h3>
+            </div>
+        <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <div class="row">
+              <div class="col-md-12 col-sm-8"  >
+                <div class="pad">
+                  <!-- Map will be created here -->
+                  <div style="width: 97% !important; height: 300px !important" id="map2"></div>
+                </div>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.box-body -->
+        </div>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #4fc5fa; background-color: white"><i class="fa fa-clock-o"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">{{totalActividades.horas}} hrs</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important"> ENTRETENIMIENTO</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #4fc5fa; background-color: white"><i class="fa fa-group"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">{{totalActividades.aforo}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">AFORO</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #4fc5fa; background-color: white"><i class="fa fa-bar-chart"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">{{totalActividades.cantidad}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">ACTIVIDADES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #4fc5fa; background-color: white"><i class="fa fa-user"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">{{totalActividades.cantidadSub}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">SUB-ACTIVIDADES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    
+    
+  </div>
+  <!-- /.row -->
+  
+    <div class="row">
+      <div class="col-md-3">
+          <div class="box" style="border: none !important;">
+            <div class=" box-header bgBlue" style="padding: 0px">
+             <center><h4 class="widget-user-username letraBlanca" style="margin-top: 5%;margin-bottom: 5%;">HRS. ENTRETENIMIENTO</h4></center>
+            </div>
+            <div class="box-footer no-padding" style="height: 172px">
+              <ul class="nav nav-stacked">
+                <li ng-repeat="m in modalidad"><a style="font-size: small"> {{m.nombre}} <span class="pull-right" style="color: #B6BBC0 !important">{{m.horas}} hrs</span></a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- /.widget-user -->
+        </div>
+        <div class="col-md-3">
+           <div class="box" style="border: none !important;">
+            <div class=" box-header bgAgua" style="padding: 0px">
+              <center><h4 class="widget-user-username letraBlanca" style="margin-top: 5%;margin-bottom: 5%;">AFORO</h4></center>
+            </div>
+            <div class="box-footer no-padding" style="height: 172px">
+              <ul class="nav nav-stacked">
+                <li ng-repeat="m in modalidad"><a style="font-size: small"> {{m.nombre}} <span class="pull-right" style="color: #B6BBC0 !important">{{m.aforo}}</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+           <div class="box" style="border: none !important;">
+            <div class="widget-user-header">
+              <div class=" box-header bgGray" style="padding: 0px">
+               <center><h4 class="widget-user-username letraBlanca" style="margin-top: 5%;margin-bottom: 5%;">GRUPOS ARTÍSTICOS</h4></center>
+              </div>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                <li><a href=""> Cantidad <span class="pull-right" style="color: #B6BBC0 !important">{{cultural.grupos}}</span></a></li>
+                <li><a href=""> Artistas <span class="pull-right" style="color: #B6BBC0 !important">{{cultural.artistas}}</span></a></li>
+                <li><a href=""> Hombres <span class="pull-right" style="color: #B6BBC0 !important">{{cultural.artistasH}}</span></a></li>
+                <li><a href=""> Mujeres <span class="pull-right" style="color: #B6BBC0 !important">{{cultural.artistasM}}</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+           <div class="box" style="border: none !important;">
+            <div class="widget-user-header">
+              <div class=" box-header bgOrange" style="padding: 0px">
+               <center><h4 class="widget-user-username letraBlanca" style="margin-top: 5%;margin-bottom: 5%;">PARTICIPANTES</h4></center>
+              </div>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                <li><a href=""> Hombres <span class="pull-right" style="color: #B6BBC0 !important">{{cultural.participantesH}}</span></a></li>
+                <li><a href=""> Mujeres <span class="pull-right" style="color: #B6BBC0 !important">{{cultural.participantesM}}</span></a></li>
+                <li><a href=""> Naturales <span class="pull-right" style="color: #B6BBC0 !important">{{cultural.participantesN}}</span></a></li>
+                <li><a href=""> Juridicos <span class="pull-right" style="color: #B6BBC0 !important">{{cultural.participantesJ}}</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon " style="color: #ff9140; background-color: white"><i class="fa fa-mars"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">{{sum.cantHombres}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important"> HOMBRES EMPLEADOS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #ff9140; background-color: white"><i class="fa fa-venus"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">{{sum.cantMujeres}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">MUJERES EMPLEADAS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #ff9140; background-color: white"><i class="fa fa-dollar"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">${{totalConsumo.totalPalco}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">INGRESOS POR PALCO</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #ff9140; background-color: white "><i class="fa fa-dollar"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">${{totalConsumo.totalCalle}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">INGRESOS POR CALLE</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    
+  </div>
+  <!-- /.row -->
+  
+  <div class="row">
+    <div class="col-md-3 col-xs-12">
+      <div style="padding: 0px">
+        <div class="box " style="border:none !important; background-color:white; font-size: small !important; ">
+          <div class="box-header with-border">
+            <i class="fa fa-angle-right" style="color: #00EAB5 "></i>
+            <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">INGRESOS GENERADOS</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-footer no-padding" style="background-color: white;">
+            <ul class="nav nav-pills nav-stacked" style="margin-top: 0px">
+              <li><a style="font-size: x-small; overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px" class="">Por actividad <span class="pull-right"  > ${{ingresoxact2}}</span></a></li>
+              <li><a style="font-size: x-small; overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px" class="">Otros ingresos <span class="pull-right"  > ${{otrosIngresos2}}</span></a></li>
+              <li><a style="font-size: x-small; overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px" class="">Por hora <span class="pull-right"  > ${{ingresoxhoras}}</span></a></li>
+              <li><a style="font-size: x-small; overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px" class="">Por minuto <span class="pull-right"  > ${{ingresoxminutos}}</span></a></li>
+              <li><a style="font-size: x-small; overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px;background-color: #c6c5c2d1" class="">Total <span class="pull-right"  > ${{subIngreso2}}</span></a></li>
+            </ul>
+          </div>
+          <!-- /.footer -->
+        </div>
+        <!-- /.box -->
+      </div>
+    </div>
+    <div class="col-md-3 col-xs-12">
+      <div style="padding: 0px">
+        <div class="box " style="border:none !important; background-color:white; font-size: small !important; ">
+          <div class="box-header with-border">
+            <i class="fa fa-angle-right" style="color: #00EAB5 "></i>
+            <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">EGRESOS </h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-footer no-padding" style="background-color: white;">
+            <ul class="nav nav-pills nav-stacked" style="margin-top: 0px">
+              <li><a style="font-size: x-small; overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px" class="">Por actividad <span class="pull-right"  > ${{costoxact2}}</span></a></li>
+              <li><a style="font-size: x-small; overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px" class="">Otros costos <span class="pull-right"  > ${{otrosCostos2}}</span></a></li>
+              <li><a style="font-size: x-small; overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px" class="">Por hora <span class="pull-right"  > ${{costoxhoras}}</span></a></li>
+              <li><a style="font-size: x-small; overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px" class="">Por minuto <span class="pull-right"  > ${{costoxminutos}}</span></a></li>
+              <li><a style="font-size: x-small; overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px;background-color: #c6c5c2d1" class="">Total <span class="pull-right"  > ${{subCosto2}}</span></a></li>
+            </ul>
+          </div>
+          <!-- /.footer -->
+        </div>
+        <!-- /.box -->
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+      <div class="box" style="border:none !important;">
+        <div class="box-header with-border">
+          <i class="fa fa-angle-right" style="color: #00EAB5 "></i>
+          <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">CONSUMO ESTIMADO</h3>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-body no-padding table-responsive" style="height: 173px">
+          <table class="table table-hover table-striped">
+              <tbody>
+              <tr>
+                <td class="mailbox-name"><a style="color: #B6BBC0 !important;font-size: small"></a></td>
+                <td class="mailbox-subject" style="color: #B6BBC0;font-size: small">PALCOS</td>
+                <td class="mailbox-subject" style="color: #B6BBC0;font-size: small">CALLE</td>
+                <td class="mailbox-date" style="color: #B6BBC0;font-size: small">TOTAL</td>
+              </tr>
+                
+              <tr>
+                <td class="mailbox-name"><a style="color: #00a3ee !important;font-size: small">Bebidas</a></td>
+                <td class="mailbox-subject" style="font-size: x-small">${{totalConsumo.bebidasPalco}}</td>
+                <td class="mailbox-subject" style="font-size: x-small">${{totalConsumo.bebidascalle}}</td>
+                <td class="mailbox-date" style="font-size: x-small">${{totalConsumo.totalBebidas}}</td>
+              </tr>
+              <tr>
+                <td class="mailbox-name"><a style="color: #00a3ee !important;font-size: small">Snacks</a></td>
+                <td class="mailbox-subject" style="font-size: x-small">${{totalConsumo.snacksPalco}}</td>
+                <td class="mailbox-subject" style="font-size: x-small">${{totalConsumo.snackscalle}}</td>
+                <td class="mailbox-date" style="font-size: x-small">${{totalConsumo.totalSnacks}}</td>
+              </tr>
+              <tr>
+                <td class="mailbox-name"><a style="color: #00a3ee !important;font-size: small">Comidas</a></td>
+                <td class="mailbox-subject" style="font-size: x-small">${{totalConsumo.comidasPalco}}</td>
+                <td class="mailbox-subject" style="font-size: x-small">${{totalConsumo.comidascalle}}</td>
+                <td class="mailbox-date" style="font-size: x-small">${{totalConsumo.totalComidas}}</td>
+              </tr>
+              
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+  <div class="row">
+   <div class="col-md-15 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #38efc5; background-color: white"><i class="fa fa-recycle" style="font-size: 39px !important"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: small; color: black !important">${{reciclado[0].total2}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">ALUMINIO</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-15 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #38efc5; background-color: white"><i class="fa fa-recycle" style="font-size: 39px !important"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: small; color: black !important">${{reciclado[1].total2}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">VIDRIO</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-15 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #38efc5; background-color: white"><i class="fa fa-recycle" style="font-size: 39px !important"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: small; color: black !important">${{reciclado[2].total2}}</span>
           <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">PLASTICO</span>
         </div>
         <!-- /.info-box-content -->
@@ -647,239 +1159,6 @@
       <!-- /.box -->
     </div>
   </div>
-
-</section>
-
-<section class="content" ng-show="ver" ng-if="user.tipo==5">
-  <div class="row">
-    <div class="col-md-3 col-xs-3">
-      <div class="small-box bg-caja">
-        <div class="inner linea1">
-          <h2 class="numero1">${{subIngreso2}}</h2>
-
-          <p class="text1">Ingresos</p>
-        </div>
-        <div class="icon icon1">
-          <i class="fa fa-arrow-up"></i>
-        </div>
-        
-      </div> 
-    </div>
-    <div class="col-md-3 col-xs-3">
-      <div class="small-box bg-caja">
-        <div class="inner linea2">
-          <h2 class="numero2">${{subCosto2}}</h2>
-          <p class="text2">Egresos</p>
-        </div>
-        <div class="icon icon2">
-          <i class="fa fa-arrow-down"></i>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 col-xs-3">
-      <div class="small-box bg-caja">
-        <div class="inner linea3">
-          <h2 class="numero3">{{totaljunta}}</h2>
-
-          <p class="text3">Organizadores</p>
-        </div>
-        <div class="icon icon3">
-          <i class="fa fa-group"></i>
-        </div>
-      </div>  
-    </div>
-    <div class="col-md-3 col-xs-3">
-      <!-- small box -->
-      <div class="small-box bg-caja">
-        <div class="inner linea4">
-          <h2 class="numero4">5</h2>
-
-          <p class="text4">Valoración</p>
-        </div>
-        <div class="icon icon4">
-          <i class="fa fa-star "></i>
-        </div>
-      </div>
-    </div>
-    
-  </div>
-
-  <div class="row">
-    <div class="col-md-6 col-xs-12" >
-    <div class="box" style="border-top:white !important; ">
-        <div class="box-header">
-          <h3 class="box-title" style="font-weight: 100 ! important; ">
-            Mapa de Actividades 
-          </h3>
-        </div>
-    <!-- /.box-header -->
-    <div class="box-body no-padding">
-      <div class="row">
-        <div class="col-md-12 col-sm-8" style="padding-right: 0px !important; ">
-          <div class="pad">
-            <!-- Map will be created here -->
-            <div style="width: 97% !important; height: 375px !important" id="map2"></div>
-          </div>
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </div>
-    <!-- /.box-body -->
-  </div>
-
-  </div>
-    <div class="col-md-6 col-xs-12" style="padding-left: 0px">
-      <div class="box" style="background-color: #fafafb;border: none !important; height: 450px !important">
-        <div class="box-header with-border">
-          <h3 class="box-title">Resumen</h3>
-           <div class="box-tools pull-right">
-          </div>
-        </div>
-        <div class="box-body">
-          <div class="row">
-            <div class="col-md-6 col-xs-12 col-sm-12" >
-              <div class="cuadro1" style=" height: 180px; ">
-                <h3 class="text-center" style="font-size:-webkit-xxx-large; color:white; margin: 0px;  padding-top: 15%">
-                  <i style="font-size:larger" class="fa fa-clock-o"></i>
-                </h3>
-                <h3 class="text-center" style="font-size:x-large; margin: 0px; color:white">{{totalActividades.horas}} Horas</h3>
-              </div>
-            </div>
-            <div class="col-md-6 col-xs-12 col-sm-12">
-              <div class="cuadro2" style="height: 180px; ">
-                 <h3 class="text-center" style="font-size:-webkit-xxx-large; color:white; margin: 0px;  padding-top: 15%">
-                  <i style="font-size:larger" class="fa fa-users"></i>
-                </h3>
-                <h3 class="text-center" style="font-size:x-large; margin: 0px; color:white"> {{totalActividades.empleo}} Empleos</h3>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-6 col-xs-12 col-sm-12">
-              <div class="cuadro3" style=" height: 180px;">
-                  <h3 class="text-center" style="font-size:-webkit-xxx-large; color:white; margin: 0px;  padding-top: 15%">
-                  <i style="font-size:larger" class="fa fa-line-chart"></i>
-                </h3>
-                <h3 class="text-center" style="font-size:x-large; margin: 0px; color:white">{{totalActividades.cantidad+totalActividades.cantidadSub}} Actividades</h3>
-              </div>
-            </div>
-            <div class="col-md-6 col-xs-12 col-sm-12 ">
-              <div class="cuadro4" style="height: 180px; ">
-                 <h3 class="text-center" style="font-size:-webkit-xxx-large; color:white; margin: 0px;  padding-top: 15%">
-                  <i style="font-size:larger" class="fa fa-area-chart"></i>
-                </h3>
-                <h3 class="text-center" style="font-size:x-large; margin: 0px; color:white">{{totalActividades.aforo}} Aforo</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.box-body -->
-      </div>
-    </div><!--ROW-->
-  </div>
-
-  <div class="row">
-    <h3 style="padding-left:1% ; margin-top: 0px">Reciclar</h3>
-    <div class="col-md-15 col-xs-15" ng-repeat="r in reciclado">
-      <div class="box"  style="background-color: #fafafb;border:none !important;">
-        <div class="box-header with-border">
-          <h3 class="box-title"> <i class="fa fa-recycle" style="color: green"></i> {{r.material}} </h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <div class="row">
-            <ul class="nav nav-pills nav-stacked"  style=" margin-top: 0px">
-              <li style="font-size: small;"><a>Kg Reciclados
-                <span class="pull-right"><span style="color: #9c3842; font-size: medium;" >{{r.kg2}}Kg</span></span></a></li>
-              <li style="font-size: small;"><a >Valor por Kg <span class="pull-right"><span style="color:#9c3842; font-size: medium;">${{r.valor2}}</span></span></a>
-              </li>
-              <li style="font-size: small;"><a >Total <span class="pull-right"><span  style="font-size: medium; color:green">${{r.total2}}</span></span></a>
-              </li>
-            </ul>
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
-    </div>
-  </div>
-
-  <div class="row">
-      <h3 style="padding-left:1% ; margin-top: 0px">Reutilización</h3>
-      <div class="col-md-3 col-xs-6" >
-        <div class="box"  style="background-color: #fafafb;border:none !important;">
-          <div class="box-header with-border">
-            <h3 class="box-title"> <i class="fa fa-recycle" style="color: green"></i> Plástico PET </h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <img src="imagenes/ecologia/eco.png" style="width: 100%">
-            <p style="text-align: center;">Reciclados <span style="color: #469730">{{reciclado[2].cantidad}} = {{reciclado[2].camisa}}</span> Chaquetas</p>             
-          </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-      </div>
-
-
-      <div class="col-md-3 col-xs-6" >
-        <div class="box"  style="background-color: #fafafb;border:none !important;">
-          <div class="box-header with-border">
-            <h3 class="box-title"> <i class="fa fa-recycle" style="color: green"></i> Plástico PET </h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <img src="imagenes/ecologia/marco.png" style="width: 100%">
-            <p style="text-align: center;">Reciclados <span style="color: #469730">{{reciclado[2].kg2}}kg = {{reciclado[2].marco}}</span> Marcos</p>             
-          </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-      </div>
-
-      <div class="col-md-3 col-xs-6" >
-        <div class="box"  style="background-color: #fafafb;border:none !important;">
-          <div class="box-header with-border">
-            <h3 class="box-title"> <i class="fa fa-recycle" style="color: green"></i> Aluminio</h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <img src="imagenes/ecologia/llanta.png" style="width: 100%">
-            <p style="text-align: center;">Reciclados <span style="color: #469730">{{reciclado[0].cantidad}} = {{reciclado[0].llanta}}</span> Rines</p>         
-          </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-      </div>
-
-      <div class="col-md-3 col-xs-6" >
-        <div class="box"  style="background-color: #fafafb;border:none !important;">
-          <div class="box-header with-border">
-            <h3 class="box-title"> <i class="fa fa-recycle" style="color: green"></i> Orgánico </h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <div class="row">
-              <ul class="nav nav-pills nav-stacked"  style=" margin-top: 0px; ">
-                <li style="font-size: small;"><a >Compostaje <span class="pull-right"><span style="color:#9c3842; font-size: small;">{{organico.compostaje}}</span></span></a>
-                </li>
-                <li style="font-size: small;"><a>Gas Natural M3<span class="pull-right"><span  style="font-size: small; color:green">{{organico.natural}}</span></span></a>
-                </li>
-                <li style="font-size: small;"><a>Bio Gas M3<span class="pull-right"><span  style="font-size: small; color:green">{{organico.gas}}</span></span></a>
-                </li>
-                <li style="font-size: small;"><a>Bio Etanol<span class="pull-right"><span  style="font-size: small; color:green">{{organico.bio}}</span></span></a>
-                </li>
-              </ul>
-            </div>
-            <!-- /.row -->
-          </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-      </div>
-    </div>
+  <!--ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff-->
     
 </section>

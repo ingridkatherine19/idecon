@@ -44,8 +44,25 @@ $routeProvider.when('/mievento', {
     socioeconomica: 0,
     cultural: 0
   }
+  /*----------------------DEFINIENDO SELECT'S-------------------------*/
+  $scope.selectSexo = [
+      { name: "Masculino",  id: 0 },
+      { name: "Femenino", id: 1 }
+  ];
+  $scope.nivelAcademico = [
+      { name: "Educación Media",  id: 0 },
+      { name: "Técnico", id: 1 },
+      { name: "Técnico Profesional", id: 2 },
+      { name: "Tecnólogo", id: 3 },
+      { name: "Profesional", id: 4 },
+      { name: "Especialización", id: 5 },
+      { name: "Maestría", id: 6 },
+      { name: "Doctorado", id: 7 },
+      { name: "Ninguno", id: 8 },
+  ];
+  /*----------------------FIN SELECT'S-------------------------*/
 
-  //trae todas las maquinas
+
   $scope.all = function(){
     //todos los eventos
     $http({

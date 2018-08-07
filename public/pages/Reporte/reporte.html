@@ -15,7 +15,7 @@
 </section>
 <!-- Main content -->
 <section ng-show="ver" class="content">
-
+ 
   <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 2px;" class="row">
     <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: medium; color: #B6BBC0 !important">RECURSOS DISPONIBLES</h3>  
   </div>  <br>
@@ -499,10 +499,11 @@
         <!-- /.box-body -->
         <div class="box-footer no-padding" style="height: 186px">
           <ul style="font-size: x-small;" class="nav nav-pills nav-stacked">
-            <li><a href=""> Agua <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalAgua}} Lts</span></span></a></li>
-            <li><a href=""> Petróleo <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalPetro}} Lts</span></span></a></li>
-            <li><a href=""> Bauxita <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalBauxita}} Tn</span></span></a></li>
-            <li><a href=""> Mineral de hierro <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalHierro}} Tn</span></span></a></li>
+            <li><a href=""> Agua <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalAgua}} </span></span></a></li>
+            <li><a href=""> Petróleo <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalPetro}} </span></span></a></li>
+            <li><a href=""> Bauxita <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalBauxita}} </span></span></a></li>
+            <li><a href=""> Mineral de hierro <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalHierro}}</span></span></a></li>
+            <li><a href=""> CO2 <span class="pull-right" style="color: #B6BBC0 !important">${{impacto.totalCo2}}</span></span></a></li>
           </ul>
         </div>
       </div>
@@ -635,6 +636,7 @@
             <li><a href=""> Gas Natural <span class="pull-right" style="color: #B6BBC0 !important">{{organico.natural}} m<sup>3</sup></span></span></span></a></li>
             <li><a href=""> Bio Gas <span class="pull-right" style="color: #B6BBC0 !important">{{organico.gas}} m<sup>3</sup></span></a></li>
             <li><a href=""> Bio Etanol <span class="pull-right" style="color: #B6BBC0 !important">{{organico.bio}} m<sup>3</sup></span></span></a></li>
+            <li><a href=""> CO2 <span class="pull-right" style="color: #B6BBC0 !important">{{organico.co2}} Tn</span></a></li>
           </ul>
         </div>
       </div>
@@ -650,7 +652,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <img src="imagenes/ecologia/eco.png" style="width: 100%">
+            <img src="imagenes/ecologia/chaqueta.jpg" style="width: 100%">
             <p style="text-align: center; font-size: x-small;">Reciclados <span style="color: #469730">{{reciclado[2].cantidad}} = {{reciclado[2].camisa}}</span> Chaquetas</p>             
           </div>
           <!-- /.box-body -->
@@ -666,7 +668,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <img src="imagenes/ecologia/marco.png" style="width: 100%">
+            <img src="imagenes/ecologia/marco.jpg" style="width: 100%">
             <p style="text-align: center; font-size: x-small;">Reciclados <span style="color: #469730">{{reciclado[2].kg2}}kg = {{reciclado[2].marco}}</span> Marcos</p>             
           </div>
           <!-- /.box-body -->
@@ -681,7 +683,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <img src="imagenes/ecologia/llanta.png" style="width: 100%">
+            <img src="imagenes/ecologia/rin.jpg" style="width: 100%">
             <p style="text-align: center; font-size: x-small;">Reciclados <span style="color: #469730">{{reciclado[0].cantidad}} = {{reciclado[0].llanta}}</span> Rines</p>         
           </div>
           <!-- /.box-body -->

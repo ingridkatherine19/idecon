@@ -198,14 +198,14 @@
           </div>
           <div class="col-md-3 col-xs-12">
               <label style="color:black;font-weight: 300;">Departamento:</label>
-              <select style="border-radius: 9px" id="departamento" class="form-control">
-                  <option value="{{departamento}}" ng-repeat="departamento in departamentos">{{departamento.nombre}}</option>
+              <select style="border-radius: 9px" id="departamento" ng-model="evento.departamento" class="form-control" ng-change="buscarCiudades(evento.departamento)">
+                  <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos">{{departamento.nombre}}</option>
               </select>
           </div>
           <div class="col-md-3 col-xs-12">
               <label style="color:black;font-weight: 300;">Ciudad:</label>
               <select style="border-radius: 9px" id="ciudad" class="form-control" ng-model="evento.ciudad">
-                  <option value="{{ciudad}}" ng-repeat="ciudad in ciudades" >{{ciudad.nombre}}</option>
+                  <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" >{{ciudad.nombre}}</option>
               </select>
           </div>
           
@@ -214,7 +214,7 @@
           <div class="col-md-3 col-xs-12">
               <label style="color:black;font-weight: 300;">Región:</label>
               <select style="border-radius: 9px" id="region" class="form-control" ng-model="evento.region">
-                  <option value="{{region}}" ng-repeat="region in regiones" >{{region.nombre}}</option>
+                  <option value="{{region.idRegion}}" ng-repeat="region in regiones" >{{region.nombre}}</option>
               </select>
           </div>
           <div class="col-md-3 col-xs-12">
