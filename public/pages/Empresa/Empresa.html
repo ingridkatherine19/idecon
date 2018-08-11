@@ -178,6 +178,12 @@
                 </div>
             </div><br>
             <div class="row" style="font-size: smaller">
+              <div class="col-md-4 col-xs-12">
+                <label style="font-weight: 300;">Tipo de Empresa:</label>
+                  <select class="form-control pageList" name="tipo empresa" ng-model="empresa.sector" style="border-radius: 9px" required>
+                      <option ng-repeat="tipo in tipoEmpresa" ng-selected ="tipo.id == tipoSelect" value="{{tipo.id}}">{{tipo.name}}</option>
+                  </select>
+                </div>
                 <div class="col-md-4 col-xs-12">
                 <label style="font-weight: 300;">Gerente:</label>
                   <input type="text" class="form-control" ng-model="empresa.gerente" style="border-radius: 9px" required>
@@ -188,15 +194,15 @@
                      <option value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos" ng-selected ="departamento.idDepartamento == departamentoSelect">{{departamento.nombre}}</option>
                   </select>
                 </div>
-                <div class="col-md-4 col-xs-12">
+            </div><br>
+
+            <div class="row" style="font-size: smaller">
+               <div class="col-md-4 col-xs-12">
                     <label style="font-weight: 300;">Ciudad:</label>
                     <select ng-model="empresa.ciudad" class="form-control" style="border-radius: 9px" required>
                       <option ng-repeat="ciudad in ciudades" ng-selected ="ciudad.idCiudad == ciudadSelect" value="{{ciudad.idCiudad}}">{{ciudad.nombre}}</option>
                     </select>
                 </div>
-            </div><br>
-
-            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
                   <label style="font-weight: 300;">Dirección:</label>
                   <input id="direccion" ng-model="empresa.direccion" type="text" style="border-radius: 9px" class="form-control" required>
@@ -205,15 +211,16 @@
                 <label style="font-weight: 300;">Telefono1:</label>
                   <input class="form-control" type="number" ng-model="empresa.telefono1" style="border-radius: 9px" required> 
                 </div>
-                <div class="col-md-4 col-xs-12">
-                <label style="font-weight: 300;">Telefono2:</label>
-                  <input class="form-control" type="number" ng-model="empresa.telefono2" style="border-radius: 9px">
-                </div>
+
             </div><br>
           <div style="margin-left: 1px;margin-right: 1px;border-bottom: #B6BBC0 solid 1px;" class="row">
             <h3 style=" margin-bottom: 1%;margin-left: 1%;font-size: small; color: #B6BBC0 !important">DETALLES</h3>  
           </div><br>
             <div class="row" style="font-size: smaller">
+                <div class="col-md-4 col-xs-12">
+                  <label style="font-weight: 300;">Telefono2:</label>
+                  <input class="form-control" type="number" ng-model="empresa.telefono2" style="border-radius: 9px">
+                </div>
                 <div class="col-md-4 col-xs-12">
                   <label style="font-weight: 300;">Número de Empleados:</label>
                   <input style="border-radius: 9px" ng-model="empresa.nempleados" type="number" class="form-control" required>
@@ -222,12 +229,12 @@
                   <label style="font-weight: 300;">Cantidad de Mujeres:</label>
                   <input style="border-radius: 9px" id="direccion" ng-model="empresa.cantMujeres" type="number" class="form-control" required>
                 </div>
+            </div><br>
+            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
                   <label style="font-weight: 300;"<>Cantidad de Hombres:</label>
                   <input style="border-radius: 9px" id="direccion" ng-model="empresa.cantHombres" type="number" class="form-control" required>
                 </div>
-            </div><br>
-            <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
                   <label style="font-weight: 300;">Correo:</label>
                   <input style="border-radius: 9px" type="email" class="form-control"  ng-model="empresa.correo" required>
@@ -236,12 +243,12 @@
                   <label style="font-weight: 300;">Facebook (opcional):</label>
                   <input style="border-radius: 9px" type="text" class="form-control"  ng-model="empresa.facebook">
                 </div>
+            </div><br>
+              <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
                   <label style="font-weight: 300;">Twitter (opcional):</label>
                   <input style="border-radius: 9px" type="text" class="form-control"  ng-model="empresa.twitter">
                 </div>
-            </div><br>
-              <div class="row" style="font-size: smaller">
                 <div class="col-md-4 col-xs-12">
                   <label style="font-weight: 300;">Youtube (opcional):</label>
                   <input style="border-radius: 9px" type="text" class="form-control"  ng-model="empresa.youtube">

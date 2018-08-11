@@ -1782,6 +1782,23 @@ $routeProvider.when('/dashboard', {
     
   }
 
+  $scope.allSocio = function(){
+    $http({
+        url: path + 'socio/reporte',
+        method: 'get',
+        params: {
+          idEvento: $rootScope.user.idEvento
+        },
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).success(function (response) {
+      $scope.totalEmpleo = response.empleos;
+      console.log($scope.totalEmpleo);
+      
+    });
+  }
+
 
   /*---------------fin del usuario del evento----------------------*/
 
@@ -1808,7 +1825,8 @@ $routeProvider.when('/dashboard', {
     //$scope.medioambientalAll();
     $scope.medioambiental();
     $scope.actTipo();
-    $scope.allConsumo();    
+    $scope.allConsumo();
+    $scope.allSocio();    
   }
   
  
