@@ -8,9 +8,7 @@
       </ol>
 </section>
 <section ng-show="!ver" class="content">
-
   <div id="cargando" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white url(https://camo.githubusercontent.com/c42feb9a8f376b4cea25daa05378ffc793ae2da4/687474703a2f2f692e696d6775722e636f6d2f4453487a6e73472e676966) no-repeat center center">
-   
   </div>
 </section>
 <!-- Main content -->
@@ -20,7 +18,6 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
         <span class="info-box-icon iconosPrincipal"><i class="fa fa-bullhorn"></i></span>
-
         <div class="info-box-content">
           <span class="info-box-text" style="font-size: large; color: black !important">{{total.eventos}}</span>
           <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TOTAL EVENTOS</span>
@@ -44,7 +41,6 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
         <span class="info-box-icon iconosPrincipal"><i class="fa fa-building-o"></i></span>
-
         <div class="info-box-content">
           <span class="info-box-text" style="font-size: large; color: black !important">{{total.empresas}}</span>
           <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">TOTAL EMPRESAS</span>
@@ -57,7 +53,6 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
         <span class="info-box-icon iconosPrincipal"><i class="fa fa-user"></i></span>
-
         <div class="info-box-content">
           <span class="info-box-text" style="font-size: large; color: black !important">{{total.participantes}}</span>
           <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">PARTICIPANTES</span>
@@ -69,9 +64,7 @@
     <!-- /.col -->
   </div>
   <!-- /.row -->
-
   <div class="row">
-    
     <div class="col-md-8 col-sm-12 ">
       <div class="box " style="border:none !important;">
         <div class="box-header with-border">
@@ -89,7 +82,6 @@
               </div>
             </div>
           </div>
-          
           <!-- /.box-tools -->
         </div>
         <!-- /.box-header -->
@@ -100,7 +92,7 @@
               <tbody>
               <tr>
                 <th style="font-size: small; color: #B6BBC0 !important;">NOMBRE</th>
-                <th ng-if="evento.ciudad" style="font-size: small; color: #B6BBC0 !important;"> CIUDAD</th>
+                <th ng-if="eventos[0].ciudad" style="font-size: small; color: #B6BBC0 !important;"> CIUDAD</th>
                 <th style="font-size: small; color: #B6BBC0 !important;">FECHA</th>
                 <th style="font-size: small; color: #B6BBC0 !important;">DIAS</th>
                 <th style="font-size: small; color: #B6BBC0 !important;"></th>

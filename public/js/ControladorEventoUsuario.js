@@ -14,11 +14,12 @@ $routeProvider.when('/mievento', {
 .controller('EventoUsuarioCtrl', ['$http', '$scope', '$rootScope', '$timeout', function($http, $scope, $rootScope, $timeout) {
   localStorage.setItem("user", JSON.stringify(user));
   $rootScope.user = JSON.parse(localStorage.getItem('user')); 
-  //console.log($rootScope.user);
+  console.log($rootScope.user);
   //declaracionde variables
   $scope.evento ={
     nombre:''
   };
+
 
   $scope.labels = ["Sin valor comercial", "Con boleta de ingreso", "Con valor comercial"];
   $scope.data = [300, 500, 100];

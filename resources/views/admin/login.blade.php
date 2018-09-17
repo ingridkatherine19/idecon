@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-5" >
 
-                <form class="login-form" action="http://192.168.100.238/ideconNuevo/public/" method="post" style="margin-top:30%;">        
+                <form class="login-form" action="http://localhost/ideconNuevo/public/" method="post" style="margin-top:30%;">        
                     <div class="login-wrap" style="background-color: white">
                         <p class="pLogin"> Iniciar Sesión</p>
                         <div class="input-group" style="border-bottom: 1px solid #8b9199;padding: 0;">

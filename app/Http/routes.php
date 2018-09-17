@@ -256,10 +256,7 @@ Route::get('pregunta/update', [ 'uses' => 'EncuestaController@Update']);
 Route::get('pregunta/all', [ 'uses' => 'EncuestaController@preguntaAll']);
 Route::get('pregunta/delete', [ 'uses' => 'EncuestaController@preguntaDelete']);
 Route::get('reporte/encuesta2', [ 'uses' => 'EncuestaController@reporteEncuesta2']);
-
-
-
-
+Route::get('buscar/encuesta', [ 'uses' => 'EncuestaController@buscar']);
 
 //Asociacion 
 Route::get('asociacion/all', [ 'uses' => 'AsociacionController@all']);

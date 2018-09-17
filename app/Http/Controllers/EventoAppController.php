@@ -23,6 +23,7 @@ use App\Modelos\Empresa;
 use App\Modelos\IngresoEvento;
 use App\Modelos\IngresoConsume;
 use App\Modelos\TipoPresupuesto;
+use App\Modelos\Costoactividad;
 use DB;
 use stdClass;
 use Carbon\Carbon;
@@ -644,22 +645,39 @@ class EventoAppController extends Controller {
 
     public function InteresEmpresa(Request $request){
         //todos los consumos necesarios para el evento (costos del evento) 
+        $interesCostos = array();
+        $costos = CostoEvento::where('idEvento', $request->idEvento)->where('app',1)->get();
+        
+        foreach ($costos as $c) {
+            # code...
+            $tipo = TipoPresupuesto::where('idTipo', $c->tipo)->get();
+            $c->tipoD = $tipo[0]->nombre;
+            array_push($interesCostos, $c);
+        }
+        //buscamos las actividades del evento para buscar costos que queremos que se muestren en la app
+        $actividades = Actividad::where('idEvento', $request->idEvento)->get();
+        foreach ($actividades as $actividad) {
+            $costosAct = Costoactividad::where('idActividad', $actividad->idActividad)->where('app',1)->get();
+            foreach ($costosAct as $c) {
+                $c->tipoD = "Actividad " . $actividad->nombre;
+                array_push($interesCostos, $c);
+            }
+        }
 
-        $costos = CostoEvento::where('idEvento', $request->idEvento)->where('tipo','<>', 2)->get();
-        foreach ($costos as $costo) {
-            $tipo = TipoPresupuesto::where('idTipo', $costo->tipo)->get();
-            $costo->tipoD = $tipo[0]->nombre;    
-        }     
         //todo lo que ofrecemos que las empresas puedan adquirir (ingresos)
 
         $ingresos = IngresoEvento::where('idEvento', $request->idEvento)->get();
+        
         foreach ($ingresos as $ingreso) {
             $tipo = TipoPresupuesto::where('idTipo', $ingreso->tipo)->get();
             $ingreso->tipoD = $tipo[0]->nombre;    
         }
+
+        //dd($ingresos);
+        
         //0:participante, 1: empresa, 2: grupos artisticos
         //todas las actividades del evento que la participacion sea juridica
-        $actividades = Actividad::where('idEvento', $request->idEvento)->where('tipoPoblacion', 1)->get();
+        $actividades = Actividad::where('idEvento', $request->idEvento)->get();
         
         foreach ($actividades as $act) {
 
@@ -723,7 +741,7 @@ class EventoAppController extends Controller {
             $act->detalle = 0;
         }
 
-        return response()->json(['error'=>false, 'costos' =>$costos, 'ingresos' => $ingresos, 'actividades' => $actividades]);
+        return response()->json(['error'=>false, 'costos' =>$interesCostos, 'ingresos' => $ingresos, 'actividades' => $actividades]);
     }
 
     public function InteresAgrupacion(Request $request){

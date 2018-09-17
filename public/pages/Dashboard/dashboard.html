@@ -32,13 +32,13 @@
     <div class="row">
       <div class="col-md-6">
         <div class="callout boxBlue">
-              <h4 class="pull-right" style="margin-bottom: 0%">Bienvenido a Creko
+              <h4 class="pull-right" style="margin-bottom: 0%">Bienvenido a Sitena
                 <span id ="fecha" style="margin-left: 4px">{{fechaActual | date : format : timezone}}</span>
               </h4>
               <br>
              <div class="row">
                <div class="col-md-3 col-xs-6">
-                 <div class="avatar" style="background-image: url(../public/img/perfil.png)"></div>
+                 <div class="avatar" style="background-image: url(../public/imagenes/logo-sitena.jpg)"></div>
                 </div>
                <br>
                <div class="col-md-4 col-xs-6">
@@ -154,8 +154,7 @@
           <div class="chart">
             <canvas id="pie" style="height: 150px !important" class="chart chart-pie" chart-data="cantEmpresas" chart-labels="s" chart-options="options" legend="true">
             </canvas>
-
-         </div>
+          </div>
         </div>
         <div class="box-footer no-padding" style="background-color: white; height: 130px">
           <ul class="nav nav-pills nav-stacked" style="margin-top: 0px !important">
@@ -275,12 +274,150 @@
       <!-- /.info-box -->
     </div>
     <!-- /.col -->
-    
-    
   </div>
-  <!-- /.row -->
-  
     <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon iconosPrincipal"><i class="fa fa-university"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">{{totales.empresas}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">EMPRESAS</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #4fc5fa; background-color: white"><i class="fa fa-hotel"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">{{totales.hotel}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">HOTELES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #4fc5fa; background-color: white"><i class="ion ion-wineglass"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">{{totales.restaurantes}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">RESTAURANTES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="color: #4fc5fa; background-color: white"><i class="fa fa-map-marker"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text" style="font-size: medium; color: black !important">{{totales.lugar}}</span>
+          <span class="info-box-number" style="font-size: small; color: #B6BBC0 !important">LUGARES</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  	<div class="row">
+	  	<div class="col-md-6">
+	      <div class="box" style="border: none !important;">
+	        <div class="box-header with-border">
+	            <h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">TIPO DE EMPRESAS</h3>
+	            <div class="box-tools pull-right"></div>
+	        </div>
+	        <div class="box-body" style="height: 198px">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="chart">
+                  <canvas id="pie" style="height: 150px !important" class="chart chart-pie" chart-data="dataE" chart-labels="labelsE" chart-options="options" legend="true">
+                  </canvas>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <ul class="nav nav-pills nav-stacked" style="margin-top: 0px !important">
+                  <li ng-repeat="e in tipoempresaArray"><a style="font-size: small; overflow:hidden;white-space:nowrap;text-overflow: ellipsis; padding-left: 2px">{{e.nombre}}:<span class="pull-right" ng-style="color" style="color: #B6BBC0 !important">{{e.promedio.toFixed(0)}}%</span></a></li>
+              </ul>
+              </div>
+            </div>
+          </div>
+	        <div class="box-footer no-padding" >
+	        </div>
+	      </div>
+	    </div>
+         <div class="col-md-6 col-xs-12">
+          <div class="box" style="border:none !important;">
+            <div class="box-header with-border">
+             <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">EMPRESAS LOCALES Y EXTERNAS</h3></center>
+            </div>
+            <div class="box-body">
+              <div class="col-md-12">
+                <ul class="nav nav-pills nav-stacked" style="margin-top: 0px">
+                  <div class="col-md-4">
+                    <center><h3 style="font-size: small; color: #B6BBC0 !important; padding-top: 11%">PROVEEDORES</h3></center>
+                  </div>
+                  <div class="col-md-4">
+                    <li >
+                      <h4 ><i class="fa fa-circle" style="color: #00eab5"></i> Local <span class="pull-right" >{{totalEL.proveeLocal}}</span></h4>
+                    </li>
+                  </div>
+                  <div class="col-md-4">
+                    <li>
+                      <h4><i class="fa fa-circle" style="color: #ff6c00"></i> Externo <span class="pull-right">{{totalEL.proveeLocal}}</span></h4>
+                    </li>
+                  </div>  
+                </ul>
+              </div>    
+              <div class="col-md-12">
+                <ul class="nav nav-pills nav-stacked" style="margin-top: 0px">
+                  <div class="col-md-4">
+                    <center><h3 style="font-size: small; color: #B6BBC0 !important ; padding-top: 11%">PATROCINADORES</h3></center>
+                  </div>
+                  <div class="col-md-4">
+                    <li>
+                      <h4><i class="fa fa-circle" style="color: #00eab5"></i>Local <span class="pull-right" >{{totalEL.patroLocal}}</span></h4>
+                    </li>
+                  </div>
+                  <div class="col-md-4">
+                    <li>
+                      <h4><i class="fa fa-circle" style="color: #ff6c00"></i>Externo <span class="pull-right" >{{totalEL.patroExtreno}}</span></h4>
+                    </li>
+                  </div>  
+                </ul>
+              </div>   
+              <div class="col-md-12">
+                <ul class="nav nav-pills nav-stacked" style="margin-top: 0px">
+                  <div class="col-md-4">
+                    <center><h3 style="font-size: small; color: #B6BBC0 !important ; padding-top: 11%">CONSUMIDORES</h3></center>
+                  </div>
+                  <div class="col-md-4">
+                  <li>
+                    <h4><i class="fa fa-circle" style="color: #00eab5"></i> Local<span class="pull-right">{{totalEL.consumeLocal}}</span></h4>
+                  </li>
+                  </div>
+                  <div class="col-md-4">
+                    <li>
+                      <h4><i class="fa fa-circle" style="color: #ff6c00"></i>Externo <span class="pull-right" >{{totalEL.consumeExtreno}}</span></h4>
+                    </li>
+                  </div>  
+                </ul>
+              </div>  
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer no-padding" >
+                     
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+  	</div>
+  <!-- /.row -->
+   <div class="row">
       <div class="col-md-3">
           <div class="box" style="border: none !important;">
             <div class=" box-header bgBlue" style="padding: 0px">
@@ -1135,22 +1272,18 @@
             <div class="col-md-3">
                 <img src="imagenes/ecologia/chaqueta.jpg" style="width: 100%">
                  <p style="text-align: center; color: gray">Reciclados <span style="color: #f3c280">{{reciclado[2].cantidad}} = {{reciclado[2].camisa}}</span> Chaquetas</p>
-                 
             </div>
             <div class="col-md-3">
                 <img src="imagenes/ecologia/marco.jpg" style="width: 100%">
                 <p style="text-align: center; color: gray">Reciclados <span style="color: #f3c280">{{reciclado[2].kg2}}kg = {{reciclado[2].marco}}</span> Marcos</p> 
-                
             </div>
             <div class="col-md-3">
                 <img src="imagenes/ecologia/rin.jpg" style="width: 100%; padding-top: 3% ">
                 <p style="text-align: center; color: gray">Reciclados <span style="color: #f3c280">{{reciclado[0].cantidad}} = {{reciclado[0].llanta}}</span> Rines</p>  
-                
             </div>
             <div class="col-md-3">
                 <img src="imagenes/ecologia/silla.jpg" style="width: 100%; padding-top: 3% ">
                 <p style="text-align: center; color: gray">Reciclados <span style="color: #f3c280">{{reciclado[0].cantidad}} = {{reciclado[0].silla}}</span> Sillas</p>  
-                
             </div>
           </div>
         </div>

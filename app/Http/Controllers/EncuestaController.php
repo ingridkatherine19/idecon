@@ -10,7 +10,7 @@ use DB;
 use stdClass;
 
 class EncuestaController extends Controller {
-
+  /*Encuesta 2 es la encuesta que se está usando actualmente.*/
     public function preguntaCreate (Request $request){
         $pregunta = new Pregunta();
         $pregunta->idEvento = $request->idEvento;
@@ -18,6 +18,18 @@ class EncuestaController extends Controller {
         $pregunta->tipo = $request->tipo;
         $pregunta->save();
         return response()->json(['error'=>false, 'pregunta' => $pregunta]);
+    }
+
+    public function buscar (Request $request){
+      $existe = false;
+      $preguntas = Pregunta::where('idEvento' , $request->idEvento)->get();
+      foreach ($preguntas as $p) {
+        $encuesta = Encuesta2::where('idEvento' , $p->idEvento)->where('idUsuario' , $request->idUsuario)->get();
+      }
+      if (isset($encuesta[0])) {
+        $existe = true;
+      }
+      return response()->json(['error'=>false, 'preguntas' => $preguntas , 'existe' => $existe]);
     }
 
      public function Update(Request $request) {
@@ -831,9 +843,15 @@ class EncuestaController extends Controller {
   
     
     public function create(Request $request){
-        $respuesta = json_decode($request->respuesta);
-        //dd($respuesta);
-        $encuesta = new Encuesta();
+        $preguntas = json_decode($request->preguntas);
+        foreach ($preguntas as $p) {
+          $encuesta = new Encuesta2();
+          $encuesta->idPregunta = $p->idPregunta;
+          $encuesta->idUsuario = $p->idUsuario;
+          $encuesta->respuesta = $p->respuesta;
+          $encuesta->save();
+        }
+       /* $encuesta = new Encuesta();
         $encuesta->tipo = $request->idTipo;
         $encuesta->calificacionActividad  = $respuesta[0]->respuesta;
         $encuesta->orientacion  = $respuesta[1]->respuesta;
@@ -845,7 +863,7 @@ class EncuestaController extends Controller {
         $encuesta->medio  = $respuesta[7]->respuesta;
         $encuesta->nuevoEvento = $respuesta[8]->respuesta;
         $encuesta->comentario = $respuesta[8]->comentario;
-        $encuesta->save();
+        $encuesta->save();*/
         
         return response()->json(['error'=>false, 'encuesta' => $encuesta]);
     }

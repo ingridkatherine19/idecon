@@ -840,9 +840,11 @@ $routeProvider.when('/reporte', {
       //plastico
       $scope.reciclado[2].marco = $scope.reciclado[2].kg / 6;
       $scope.reciclado[2].marco = $scope.numberFormat(Math.round($scope.reciclado[2].marco).toString());
-      $scope.reciclado[2].cantidad = $scope.reciclado[2].kg / 30;
+      
+      
+      $scope.reciclado[2].cantidad = (($scope.reciclado[2].kg*1000) / 30);
+      $scope.reciclado[2].camisa = ((($scope.reciclado[2].kg*1000) / 30) / 40);
       $scope.reciclado[2].cantidad = $scope.numberFormat(Math.round($scope.reciclado[2].cantidad).toString());
-      $scope.reciclado[2].camisa = $scope.reciclado[2].cantidad / 40;
       $scope.reciclado[2].camisa = $scope.numberFormat(Math.round($scope.reciclado[2].camisa).toString());
       //aluminio
       $scope.reciclado[0].llanta = $scope.reciclado[0].cantidad / 80;

@@ -246,9 +246,7 @@
                   <td class="mailbox-attachment" style="font-size: small">{{r.total}}</td>
                   <td>            
                     <div class="btn-group">
-                 
                       <button ng-if="!r.editar" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="r.editar=true; cambiarButton(r)"><i class="icon ion-edit"></i></button>
-                    
                       <button ng-if="r.editar == true" type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actualizarMaterial(r, $index)"><i class="fa fa-check"></i></button>
                     </div>
                   </td>
@@ -309,10 +307,8 @@
                   <td class="mailbox-attachment" style="font-size: small">{{consumo.desperdicio}}</td>
                   <td>            
                     <div class="btn-group">
-                 
                       <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" ng-click="actOrganico(consumo)" data-toggle="modal" data-target="#myModal3"><i class="fa fa-edit"></i></button>
                       <button type="button" style="background-color: transparent;color: #b6bbc0;font-size: medium;" class="btn btn-clean btn-sm" data-toggle="modal" data-target="#myModal6" ng-click="cargarEliminar(consumo, 3)"><i class="fa fa-trash-o"></i></button>
-                    
                     </div>
                   </td>
                 </tr>
@@ -584,11 +580,11 @@
               </div>
               <div class="col-md-6">
                 <ul class="nav nav-pills nav-stacked" >
-                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #ff6c00"></i> Orgánicos <span class="pull-right" style="color: #B6BBC0 !important">{{data[0]}}</span></a></li>
-                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #e0ca7f"></i> Aluminio <span class="pull-right" style="color: #B6BBC0 !important">{{data[1]}}</span></a></li>
-                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f1a64d"></i> Vidrio <span class="pull-right" style="color: #B6BBC0 !important">{{data[2]}}</span></a></li>
-                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00abf8"></i> Plástico PET <span class="pull-right" style="color: #B6BBC0 !important">{{data[3]}}</span></a></li>
-                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f24b45"></i>Cartón <span class="pull-right" style="color: #B6BBC0 !important">{{data[4]}}</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00eab5"></i> Aluminio <span class="pull-right" style="color: #B6BBC0 !important">{{data[0]}}</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #ff6c00"></i> Vidrio <span class="pull-right" style="color: #B6BBC0 !important">{{data[1]}}</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00abf8"></i> Plástico PET <span class="pull-right" style="color: #B6BBC0 !important">{{data[2]}}</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f24b45"></i> Cartón <span class="pull-right" style="color: #B6BBC0 !important">{{data[3]}}</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #d03b43"></i>Orgánico <span class="pull-right" style="color: #B6BBC0 !important">{{data[4]}}</span></a></li>
                 </ul>
               </div>
             </div>
@@ -607,7 +603,7 @@
             <center><h3 class="box-title" style="font-size: small; color: #B6BBC0 !important">RECICLADO POR PORCENTAJE</h3></center>
           </div>
           <!-- /.box-header -->
-          <p ng-if="data2[0] == 0&&data2[1] == 0&&data2[2] == 0&&data2[3] == 0&&data2[4] == 0" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%; " >Aun no hay calculos de reciclaje</p>
+          <p ng-if="data2[0] == 0&&data2[1] == 0&&data2[2] == 0&&data2[3] == 0&&data2[4] == 0" style="font-size: small; color: #B6BBC0 !important;padding-left: 3%; " >Aun no hay cálculos de reciclaje</p>
           <div ng-if="data2[0] != 0||data2[1] != 0||data2[2] != 0||data2[3] != 0||data2[4] != 0" class="box-body ">
             <div>
               <div class="col-md-6 col-xs-12" style="top: 30px ! important">
@@ -616,11 +612,11 @@
               </div>
               <div class="col-md-6 col-xs-12">
                 <ul class="nav nav-pills nav-stacked" >
-                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #ff6c00"></i> Orgánicos <span class="pull-right" style="color: #B6BBC0 !important">{{data2[0]}}%</span></a></li>
-                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #e0ca7f"></i> Aluminio <span class="pull-right" style="color: #B6BBC0 !important">{{data2[1]}}%</span></a></li>
-                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f1a64d"></i> Vidrio <span class="pull-right" style="color: #B6BBC0 !important">{{data2[2]}}%</span></a></li>
-                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00abf8"></i> Plástico PET <span class="pull-right" style="color: #B6BBC0 !important">{{data2[3]}}%</span></a></li>
-                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f24b45"></i>Cartón <span class="pull-right" style="color: #B6BBC0 !important">{{data2[4]}}%</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00eab5"></i> Aluminio <span class="pull-right" style="color: #B6BBC0 !important">{{data2[0]}}%</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #ff6c00 "></i> Vidrio <span class="pull-right" style="color: #B6BBC0 !important">{{data2[1]}}%</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #00abf8"></i> Plástico PET <span class="pull-right" style="color: #B6BBC0 !important">{{data2[2]}}%</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #f24b45"></i> Cartón <span class="pull-right" style="color: #B6BBC0 !important">{{data2[3]}}%</span></a></li>
+                  <li style="font-size: small;"><a href=""><i class="fa fa-circle" style="color: #d03b43"></i>Orgánico <span class="pull-right" style="color: #B6BBC0 !important">{{data2[4]}}%</span></a></li>
                 </ul>
               </div>
             </div>

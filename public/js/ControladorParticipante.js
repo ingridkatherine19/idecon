@@ -43,7 +43,9 @@ $routeProvider.when('/participante', {
   $scope.estadoCivil = [
         { name: "Soltero",  id: 0 },
         { name: "Casado", id: 1 },
-        { name: "Viudo", id: 2 }
+        { name: "Viudo", id: 2 },
+        { name: "Unión Libre", id: 3 },
+        { name: "Otros", id: 4 }
   ];
 
 

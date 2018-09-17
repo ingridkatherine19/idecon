@@ -175,7 +175,7 @@ $routeProvider.when('/consumo', {
   }
 
 
-  //---------------------CALLE--------------*------
+  //---------------------CALLE--------------------
 
   //llenar la variable de lo que se va a actualizar
   $scope.actCalle = function(consumo){
@@ -192,8 +192,6 @@ $routeProvider.when('/consumo', {
   }
 
   $scope.editarConsumoCalle = function(consumo){
-    
-
     $scope.consumoSelect.consumo = $scope.consumoconsumo2.replace(/\./g,'');
     $scope.consumoSelect.consumo = parseInt($scope.consumoSelect.consumo);
     $scope.consumoSelect.venta =  $scope.consumoventa2.replace(/\./g,'');
@@ -332,7 +330,7 @@ $routeProvider.when('/consumo', {
       $scope.reciclado = response.reciclado;
       $scope.impacto = response.impacto;
       $scope.ver = true;
-
+      console.log($scope.reciclado);
       $scope.selectPalco = response.selectPalco;
       $scope.selectCalle = response.selectCalle;
       $scope.selectOrganico = response.selectOrganico;
@@ -361,7 +359,7 @@ $routeProvider.when('/consumo', {
         
         $scope.data.push(Math.round(value.tonelada));
       });
-      //console.log($scope.data2);
+      console.log($scope.data);
       //se agregan los puntos a la tabla Potencial de material Reciclable
       angular.forEach($scope.reciclado, function (value, key){
         value.kg = $scope.numberFormat(Math.round(value.kg).toString());

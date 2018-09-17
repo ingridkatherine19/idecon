@@ -392,7 +392,7 @@
                    <!-- text input -->
                     <div class="form-group">
                       <label style="font-weight: 300;">Departamento: </label>
-                      <select style="border-radius: 9px" id="departamento" class="form-control"  >
+                      <select style="border-radius: 9px"  ng-model="detalle.idDepartamento" class="form-control" ng-change="buscarCiudades(detalle.idDepartamento)"  >
                           <option ng-selected="departamento.idDepartamento == detalle.idDepartamento" value="{{departamento.idDepartamento}}" ng-repeat="departamento in departamentos">{{departamento.nombre}}</option>
                       </select>
                     </div> 

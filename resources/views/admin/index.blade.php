@@ -86,9 +86,9 @@
         <!-- Logo -->
         <a class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>C</b></span>
+          <span class="logo-mini"><b>S</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">Creko</span>
+          <span class="logo-lg">SITENA</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" style="background-color: #fff  !important">
@@ -222,13 +222,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="img/perfil.png" class="user-image" alt="User Image">
+                  <img src="imagenes/logo-sitena.jpg" class="user-image" alt="User Image">
                   <span class="hidden-xs">{{$user->nombre}}</span>
                 </a>
                 <ul class="dropdown-menu" >
                   <!-- User image -->
                   <li class="user-header" style="background-color: #00a3ee ! important">
-                    <img src="img/perfil.png" class="img-circle" alt="User Image">
+                    <img src="imagenes/logo-sitena.jpg" class="img-circle" alt="User Image">
 
                     <p>
                       {{$user->nombre}}

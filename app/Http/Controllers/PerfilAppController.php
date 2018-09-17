@@ -39,7 +39,7 @@ class PerfilAppController extends Controller {
         $departamento = Departamento::find($empresa[0]->departamento);
         $empresa[0]->nombreCiudad = $ciudad->nombre;
         $empresa[0]->nombreDepartamento = $departamento->nombre;
-       
+        
         //Busca Las actividades en las que participó
         $actividadempresa = ActividadEmpresa::where('idEmpresa' , $empresa[0]->idEmpresa)->get();
          //Cuenta en la cantidad de actividades que ha participado
@@ -52,7 +52,6 @@ class PerfilAppController extends Controller {
             $p->nombreEvento = $evento->descripcion;
         }
         $empresa[0]->premios = $premios;
-
         foreach ($actividadempresa as $a) {
            $act = Actividad::find($a->idActividad);
            $evento = Evento::find($act->idEvento);
@@ -129,13 +128,10 @@ class PerfilAppController extends Controller {
                 foreach ($sub as $s) {
                     //calcula aforo
                     $palco = PalcoSub::where('idActividad', $s->idEventoActividad)->get();
-                    
-
                     $s->palco = $palco;
                     foreach ($palco as $p) {
                         $aforo += $p->capacidad;
                     }
-
                     //calcula horas
                     $direccion = DireccionSub::where('idActividad', $s->idEventoActividad)->get();
                     $s->direccion = $direccion;
@@ -175,6 +171,7 @@ class PerfilAppController extends Controller {
 
         //busco los ingresos del evento
         $ingresos = IngresoConsume::where('idConsumidor', $empresa[0]->idEmpresa)->get();
+        
         foreach ($ingresos as $ingreso) {
             $i = IngresoEvento::find($ingreso->idIngreso);
             $tipoingreso = TipoPresupuesto::find($i->tipo);
@@ -292,14 +289,11 @@ class PerfilAppController extends Controller {
                 foreach ($sub as $s) {
                     //calcula aforo
                     $palco = PalcoSub::where('idActividad', $s->idEventoActividad)->get();
-                    
-
                     $s->palco = $palco;
                     foreach ($palco as $p) {
                         $aforo += $p->capacidad;
                         $aforoTotal += $aforo;
                     }
-
                     //calcula horas
                     $direccion = DireccionSub::where('idActividad', $s->idEventoActividad)->get();
                     $s->direccion = $direccion;

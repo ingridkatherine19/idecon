@@ -174,9 +174,14 @@ class ResumenAppController extends Controller {
                 } 
             }
         }
+
+        $total = new stdClass();
+        $total->eventosPasados = count($eventoPasado);
+        $total->eventosProximos = count($eventoProximo);
+        //dd();
        
 
-        return response()->json(['error'=>false,'eventos' => $eventos, 'empresas' => $empresas, 'tipoEmpresa' => $tipoEmpresa, 'cantidadEmpresa' => $cantidadEmpresa, 'cantidadEmpleos' => $cantidadEmpleos, 'capacidad' => $capacidad, 'hoteles' => $hoteles, 'restaurantes' => $restaurantes, 'agrupaciones' => $agrupaciones, 'participantes' => $participantes, 'horasPasadas' => $horasPasadas, 'horasProximas' => $horasProximas]);
+        return response()->json(['error'=>false,'eventos' => $eventos, 'empresas' => $empresas, 'tipoEmpresa' => $tipoEmpresa, 'cantidadEmpresa' => $cantidadEmpresa, 'cantidadEmpleos' => $cantidadEmpleos, 'capacidad' => $capacidad, 'hoteles' => $hoteles, 'restaurantes' => $restaurantes, 'agrupaciones' => $agrupaciones, 'participantes' => $participantes, 'horasPasadas' => $horasPasadas, 'horasProximas' => $horasProximas, 'total' => $total]);
     }
 
     public function inicioAgrupacion(Request $request){
@@ -463,9 +468,12 @@ class ResumenAppController extends Controller {
             }
         }
         
-        
+        $total = new stdClass();
+        $total->eventosPasados = count($eventoPasado);
+        $total->eventosProximos = count($eventoProximo);
+        //dd($total);
 
-        return response()->json(['error'=>false,'eventos' => $eventos,'capacidad' => $capacidad, 'actividades' => $activi, 'hoteles' => $hoteles, 'restaurantes' => $restaurantes, 'lugares' => $lugares, 'agrupaciones' => $agrupaciones, 'horasPasadas' => $horasPasadas, 'horasProximas' => $horasProximas]);
+        return response()->json(['error'=>false,'eventos' => $eventos,'capacidad' => $capacidad, 'actividades' => $activi, 'hoteles' => $hoteles, 'restaurantes' => $restaurantes, 'lugares' => $lugares, 'agrupaciones' => $agrupaciones, 'horasPasadas' => $horasPasadas, 'horasProximas' => $horasProximas, 'total' => $total]);
     }
 
 

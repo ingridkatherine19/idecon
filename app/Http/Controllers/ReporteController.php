@@ -674,8 +674,13 @@ class ReporteController extends Controller {
         $totalEmpleos->grupo = $empleosGrupos;
         $totalEmpleos->mujeres = $empleosM;
         $totalEmpleos->hombres = $empleosH;
-        $totalEmpleos->porcHombre = ($empleosH*100)/$empleos; 
-        $totalEmpleos->porcMujer = ($empleosM*100)/$empleos;
+        if($empleos != 0){
+            $totalEmpleos->porcHombre = ($empleosH*100)/$empleos; 
+            $totalEmpleos->porcMujer = ($empleosM*100)/$empleos;
+        }else{
+            $totalEmpleos->porcHombre = 0; 
+            $totalEmpleos->porcMujer = 0;
+        }
         $empleos += $empleosGrupos;
         $totalEmpleos->total = $empleos;
          

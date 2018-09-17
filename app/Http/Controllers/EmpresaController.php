@@ -24,7 +24,7 @@ class EmpresaController extends Controller {
     }
 
     public function create(Request $request) {
-       // dd($request->ciudad);
+     
       //  $ciudad = json_decode($request->ciudad);
         $empresa = Empresa::where('nit' , $request->nit)->get();
           if (isset($empresa[0])) {
@@ -35,6 +35,7 @@ class EmpresaController extends Controller {
             $empresa->nit = $request->nit;
             $empresa->sector = $request->sector;
             $empresa->gerente = $request->gerente;
+            $empresa->tipo = $request->tipoempresa;
             $empresa->departamento = $request->departamento;
             $empresa->ciudad = $request->ciudad;
             $empresa->direccion = $request->direccion;

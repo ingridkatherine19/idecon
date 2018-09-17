@@ -86,7 +86,7 @@ $routeProvider
     }).success(function (response) {
       $scope.departamentos = response.departamentos;
       //console.log($scope.departamentos);
-      
+       
     });
 
     //buscar cioudades

@@ -1151,7 +1151,7 @@ class ConsumoController extends Controller {
         $impacto->reduccionCo2 += ((($vidrio->kg*2560))/1000)/1000;
         $impacto->reduccionCo2 += ($plastico->kg/1000)*1.5;
         $impacto->reduccionCo2 += (($carton->kg/1000)*900)/1000;
-        $impacto->reduccionCo2 += (($organico->kg/1000)*250)/1000;
+        $impacto->reduccionCo2 += (($organico->kg/1000)*250);
         $valor = Beneficio::where('tipoImpacto', 11)->where('idEvento', $request->idEvento)->get();
         if (count($valor) != 0) {
             $impacto->costoCo2 = $valor[0]->costo;
@@ -1595,7 +1595,7 @@ class ConsumoController extends Controller {
 
                     //SE SUMAN LOS KG DE DESPERDICIOS
                     $organico->kg += $consumo->desperdicio;
-
+ 
                 }
                 if ($consumo->producto == 2) {
                     $consumo->productoN = 'Leche';
@@ -2073,7 +2073,7 @@ class ConsumoController extends Controller {
             if ($plastico->cantidad != 0) {
                 //PLASTICO
                 $plastico->kg += ( (30.00*$plastico->cantidad)+($plastico->cantidad*2.00)+(($plastico->cantidad/24)*50.00)+(($aluminio->cantidad/4)*3.75)+(($aluminio->cantidad/24)*27.50))/1000;
-                $plastico->tonelada += $plastico->kg/1000;
+                $plastico->tonelada += $plastico->kg/1000; 
                 $plastico->total += $plastico->kg * $plastico->valor;
                 
             }

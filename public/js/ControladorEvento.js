@@ -863,7 +863,7 @@ $routeProvider.when('/evento', {
         }
     }).success(function (response) {
       $scope.eventos = response.eventos;
-      //console.log($scope.eventos);
+      console.log($scope.eventos);
       $scope.ver = true;
     });
     $scope.totalBox();

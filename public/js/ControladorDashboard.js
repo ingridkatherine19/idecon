@@ -20,6 +20,8 @@ $routeProvider.when('/dashboard', {
   $scope.dataGrafica = []; 
   $scope.labelData =[];
   $scope.cantidadData=[];
+  $scope.labelsE = [];
+  $scope.dataE =  [];
   $scope.ruta = 'evento/all';
   $scope.mostrarTab = 1;
   $scope.recarga = false;
@@ -294,9 +296,9 @@ $routeProvider.when('/dashboard', {
       //plastico
       $scope.reciclado[2].marco = $scope.reciclado[2].kg / 6;
       $scope.reciclado[2].marco = $scope.numberFormat(Math.round($scope.reciclado[2].marco).toString());
-      $scope.reciclado[2].cantidad = $scope.reciclado[2].kg / 30;
+      $scope.reciclado[2].cantidad = (($scope.reciclado[2].kg*1000) / 30);
+      $scope.reciclado[2].camisa = ((($scope.reciclado[2].kg*1000)/30)/ 40);
       $scope.reciclado[2].cantidad = $scope.numberFormat(Math.round($scope.reciclado[2].cantidad).toString());
-      $scope.reciclado[2].camisa = $scope.reciclado[2].cantidad / 40;
       $scope.reciclado[2].camisa = $scope.numberFormat(Math.round($scope.reciclado[2].camisa).toString());
       //aluminio
       $scope.reciclado[0].llanta = $scope.reciclado[0].cantidad / 80;
@@ -436,9 +438,7 @@ $routeProvider.when('/dashboard', {
 
     }).success(function (response) {
 
-        console.log(response.eventos);
         $scope.eventos = response.eventos;
-        
         //trae todo el reporte semanal de la cantidad de actividades realizadas
         $scope.semanal = response.semanal;
         //agregando los meses
@@ -981,8 +981,8 @@ $routeProvider.when('/dashboard', {
         //reutilizacion de material
         //plastico
         $scope.reciclado[2].marco = $scope.reciclado[2].kg / 6;
-        $scope.reciclado[2].cantidad = $scope.reciclado[2].kg / 30;
-        $scope.reciclado[2].camisa = $scope.reciclado[2].cantidad / 40;
+        $scope.reciclado[2].cantidad = (($scope.reciclado[2].kg*1000) / 30);
+        $scope.reciclado[2].camisa = ((($scope.reciclado[2].kg*1000)/30)/ 40);
         $scope.reciclado[2].marco = $scope.numberFormat(Math.round($scope.reciclado[2].marco).toString());
         $scope.reciclado[2].cantidad = $scope.numberFormat(Math.round($scope.reciclado[2].cantidad).toString());
         $scope.reciclado[2].camisa = $scope.numberFormat(Math.round($scope.reciclado[2].camisa).toString());
@@ -1171,13 +1171,21 @@ $routeProvider.when('/dashboard', {
               "Content-Type": "application/json"
           }
       }).success(function (response) {
-
+        $scope.dataE =  [];
         $scope.actividades = response.actividad;
         $scope.totales = response.totales;
         $scope.totales.palco = $scope.numberFormat($scope.totales.palco.toString());
         $scope.totales.calle = $scope.numberFormat($scope.totales.calle.toString());
         $scope.totalModalidad = response.modalidad;
         $scope.horas = response.horas;
+        $scope.tipoempresaArray = response.tipoempresaArray;
+        $scope.totalEL = response.totalEL; // total de empresas locales y externas
+        
+        //Llena la gráfica de las empresas locales y externas
+        angular.forEach($scope.tipoempresaArray, function (value, key){
+     		$scope.labelsE.push(value.nombre);
+     		$scope.dataE.push(value.cantidad);
+        });
         $scope.minutos = $scope.horas*60;
 
         //total de ingresos y egresos
@@ -1282,13 +1290,21 @@ $routeProvider.when('/dashboard', {
               "Content-Type": "application/json"
           }
       }).success(function (response) {
+        $scope.dataE =  [];
         $scope.actividades = response.actividad;
         $scope.totales = response.totales;
         $scope.totales.palco = $scope.numberFormat($scope.totales.palco.toString());
         $scope.totales.calle = $scope.numberFormat($scope.totales.calle.toString());
         $scope.totalModalidad = response.modalidad;
         $scope.horas = response.horas;
-
+        $scope.tipoempresaArray = response.tipoempresaArray;
+        $scope.totalEL = response.totalEL; // total de empresas locales y externas
+    
+        //Llena la gráfica de las empresas locales y externas
+        angular.forEach($scope.tipoempresaArray, function (value, key){
+     		$scope.labelsE.push(value.nombre);
+     		$scope.dataE.push(value.cantidad);
+        });
         $scope.minutos = $scope.horas*60;
         //total de ingresos y egresos
         $scope.totalIngCos = response.ingCos;

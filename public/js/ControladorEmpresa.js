@@ -19,11 +19,18 @@ $routeProvider.when('/empresa', {
   $scope.button = "Guardar"; // Botón inicializado en guardar 
 
   //Select de los tipos de empresas 
-  $scope.tipoEmpresa = [
+  $scope.tamanoEmpresa = [
         { name: "Micro Empresa",  id: 0 },
         { name: "Pequeña Empresa", id: 1 },
         { name: "Mediana Empresa",  id: 2 },
         { name: "Grande Empresa",  id: 3 }
+  ];
+  //Select de los tipos de empresas 
+  $scope.tipoEmpresa = [
+        { name: "Público",  id: 0 },
+        { name: "Privado", id: 1 },
+        { name: "Mixto",  id: 2 },
+        { name: "Otros",  id: 3 }
   ];
 
 
@@ -39,6 +46,7 @@ $routeProvider.when('/empresa', {
     }).success(function (response) {
       $scope.reporte = response.reporte;
       $scope.sectorR = response.sectorArray;
+      console.log($scope.sectorR);
       $scope.ver = true;
       $scope.labels = ["Micro", "Pequeña", "Mediana", "Grande"];;
       $scope.data = [];
@@ -103,6 +111,7 @@ $routeProvider.when('/empresa', {
     $scope.empresa.telefono1 = parseInt(empresa.telefono1);
     $scope.empresa.telefono2 = parseInt(empresa.telefono2);
     $scope.tipoSelect = empresa.sector;
+    $scope.claseSelect = empresa.tipo;
     $scope.departamentoSelect = empresa.departamento;
     $scope.buscarCiudad($scope.departamentoSelect);
     $scope.ciudadSelect = empresa.ciudad;
@@ -142,7 +151,7 @@ $routeProvider.when('/empresa', {
   }
   
   $scope.buscarCiudad = function(idDepartamento){
-    
+    console.log(idDepartamento);
     $http({
         url: path + 'ciudad/all',
         method: 'get',

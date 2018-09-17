@@ -15,6 +15,9 @@ use App\Modelos\Colormodalidad;
 use App\Modelos\Empresa;
 use App\Modelos\Agrupacion;
 use App\Modelos\Participante;
+use App\Modelos\Restaurante;
+use App\Modelos\Hotel;
+use App\Modelos\Lugar;
 use App\Modelos\CostoEvento;
 use App\Modelos\IngresoEvento;
 use App\Modelos\CostoProvee;
@@ -51,6 +54,10 @@ class DashboardController extends Controller {
         $ingresos = array();
         $consumopalco = array();
         $consumocalle = array();  
+        $publicoEmpresa = 0;
+        $privadoEmpresa = 0;
+        $mixtoEmpresa = 0;
+        $otroEmpresa = 0;
         //calcular las horas de entretenimiento pasadas y por venir
         $date = Carbon::now();
         $eventoPasado = Evento::where('fechaFin' ,'<', $date)->count();
@@ -60,6 +67,16 @@ class DashboardController extends Controller {
         $agrupacionesAsociadas = array();
         $participantesAsociados = array();
         $empresasAsociadas = array();
+        $tipoempresaArray = array();
+        //Variables para calcular empresas locales y externas
+        $cantproveeLocal = 0;
+        $cantproveeExterno = 0;
+        $cantconsumeLocal = 0;
+        $cantconsumeExterno = 0;
+        $cantpatroLocal = 0;
+        $cantpatroExterno = 0;
+        $totalEL = new stdClass();
+
         foreach ($eventos as $evento) {
             //costos del evento contiene otros costos agregados
             $costo = CostoEvento::where('idEvento', $evento->idEvento)->get();
@@ -91,10 +108,8 @@ class DashboardController extends Controller {
                 }else{
                     $sum->cantMujeres ++;
                 }
-                    
             }
-        
-            //buscando las actividades
+           //buscando las actividades
             $act = Actividad::where('idEvento', $evento->idEvento)->get();
             foreach ($act as $a) {
                 //ingresas las actividadddes 
@@ -118,28 +133,78 @@ class DashboardController extends Controller {
                         $palcoSub += PalcoSub::where('idActividad', $s->idEventoActividad)->sum('capacidad');
                     }
                 }
-
                 //las agrupaciones asociadas a la actividad 
                 $aa = Actividadagrupacion::where('idActividad', $a->idActividad)->get();
                 foreach ($aa as $a) {
-                    # code...
                     array_push($agrupacionesAsociadas, $a);
                 }
                 //los participantes asociados a la actividad 
                 $pa = Actividadparticipante::where('idActividad', $a->idActividad)->get();
                 foreach ($pa as $p) {
-                    # code...
                     array_push($participantesAsociados, $p);
                 }
                 //las empresas asociadas a la actividad 
                 $ea = Actividadempresa::where('idActividad', $a->idActividad)->get();
                 foreach ($ea as $e) {
-                    # code...
                     array_push($empresasAsociadas, $e);
                 }
-                      
+           }
+          
+            //Calcula el total de las empresas locales y externas, si son proveedoras, patrocinadoras o consumidoras
+            $costosE = CostoEvento::where('idEvento', $evento->idEvento)->get();
+            foreach ($costosE as $c) {
+                $costoSelect = CostoProvee::where('idCosto', $c->idCosto)->get();
+                foreach ($costoSelect as $co) {
+                    $empresaSelect = Empresa::find($co->idProveedor);
+                    if ($co->subsidio == 1) {
+                        if($empresaSelect->departamento == $evento->idDepartamento && $empresaSelect->ciudad == $evento->idCiudad){
+                            $cantpatroLocal++;
+                        }else{
+                            $cantpatroExterno++;
+                        }
+                    }else{
+                        if($empresaSelect->departamento == $evento->idDepartamento && $empresaSelect->ciudad == $evento->idCiudad){
+                            $cantproveeLocal++;
+                        }else{
+                            $cantproveeExterno++;
+                        }
+                    }
+                }
             }
-            
+        }
+        //buscar todos los ingresos y las empresas las cuales consumen los ingresos del evento
+        $ingresosE = IngresoEvento::where('idEvento', $evento->idEvento)->get();
+        foreach ($ingresosE as $i) {
+            $ingresoSelect = IngresoConsume::where('idIngreso', $i->idIngreso)->get();
+            foreach ($ingresoSelect as $in) {
+                $empresaSelect = Empresa::find($in->idConsumidor);
+                if($empresaSelect->departamento == $evento->idDepartamento && $empresaSelect->ciudad == $evento->idCiudad){
+                    $cantconsumeLocal++;
+                }else{
+                    $cantconsumeExterno++;
+                }   
+            }
+        }
+        if ((count($cantconsumeLocal)!=0) || (count($cantconsumeExterno)!=0)) {
+            $totalEL->consumeLocal = $cantconsumeLocal;
+            $totalEL->consumeExtreno = $cantconsumeExterno;
+        }else{
+            $totalEL->consumeLocal = 0;
+            $totalEL->consumeExtreno = 0;    
+        }
+        if ((count($cantproveeLocal)!=0)|| (count($cantproveeExterno)!=0)) {
+            $totalEL->proveeLocal = $cantproveeLocal;
+            $totalEL->proveeExtreno = $cantproveeExterno;
+        }else{
+            $totalEL->proveeLocal = 0;
+            $totalEL->proveeExtreno = 0;
+        }
+        if ((count($cantpatroLocal)!=0) || (count($cantpatroExterno)!=0)) {
+            $totalEL->patroLocal = $cantpatroLocal;
+            $totalEL->patroExtreno = $cantpatroExterno;
+        }else{
+            $totalEL->patroLocal = 0;
+            $totalEL->patroExtreno = 0;
         }
         //total de actividades
         $cantActividades = count($actividades);
@@ -151,7 +216,6 @@ class DashboardController extends Controller {
             $m->aforo = 0;
             $m->horas = 0;
         }
-
         /*Totales de las agrupaciones */
         $totalAgrupacion->cantidad = count($agrupacionesAsociadas);//se debe filtrar por localidad
         $totalAgrupacion->miembros = 0;
@@ -178,26 +242,19 @@ class DashboardController extends Controller {
             $participante = Participante::find($p->idParticipante);
             //calcula participantes por sexo
             if ($participante->sexo == 0) {
-                # code...
                 $totalParticipante->mujeres++;
             }else{
                 $totalParticipante->hombres ++;
             }
             //calcula participantes naturales y juridicos
             if ($participante->tipo == 0) {
-                # code...
                 $totalParticipante->natural ++;
             }else{
                 $totalParticipante->juridico ++;
             }
             
         }
-        /*Suma de ingresos y egresos de los eventos , y de la cantidad de empleados*/
-        //$sum->costos = CostoEvento::sum('costo');
-        //$sum->ingresos = IngresoEvento::sum('costo');
-        
         //calcular ingresos y egresos totales (por actividades, otros, hora, minutos)
-
         $ingresosxact = 0;
         $otrosIngresos = 0;
         $costosxact = 0;
@@ -224,7 +281,6 @@ class DashboardController extends Controller {
 
             }
         }
-
         //recorro los costos y los agrego al presupuesto
         foreach ($costos as $costo) {
             $otrosCostos += $costo->costo;
@@ -236,7 +292,6 @@ class DashboardController extends Controller {
 
         $totalIngresos = $ingresosxact + $otrosIngresos;
         $totalCostos = $costosxact + $otrosCostos;
-
         //totales de ingresos y costos 
         $ingCos = new stdClass();
         $ingCos->totalIngresos = $totalIngresos;
@@ -332,18 +387,6 @@ class DashboardController extends Controller {
                         $m->aforo += $aforoAct;
                     }
                 }
-                //buscar las subactividades para calcular la cantidad de horas por modalidad
-                /*$sub = EventoActividad::where('idActividad', $act->idActividad)->get();
-                foreach ($sub as $s) {
-                    //calcula modalidad
-                    foreach ($modalidad as $m) {
-                        if ($act->modalidad == $m->idModalidad) {
-                            $m->cantidad++;
-                            $m->horas += $inicio->diffInHours($fin);
-                            $m->aforo += $aforoAct;
-                        }
-                    }
-                }*/
 
             }else{
                 $sub = EventoActividad::where('idActividad', $act->idActividad)->get();
@@ -378,9 +421,66 @@ class DashboardController extends Controller {
                 }
             }
          }
+       //Calculo de empresa por sector: 0: publico; 1: privado; 2: Mixto, 3: Otros
+        $empresas = Empresa::all(); // Todas las empresas
+        $cantEmpresasA = count($empresasAsociadas);
+        foreach ($empresas as $em) { //Recorro todas las empresas
+            foreach ($empresasAsociadas as $e) { //Recorro las que están asociadas
+                if ($em->tipo == 0 && $em->idEmpresa == $e->idEmpresa) {
+                    $publicoEmpresa += 1 ;
+                }elseif ($em->tipo == 1 && $em->idEmpresa == $e->idEmpresa) {
+                    $privadoEmpresa +=1;
+                }elseif ($em->tipo == 2 && $em->idEmpresa == $e->idEmpresa) {
+                    $mixtoEmpresa += 1;
+                }elseif ($em->tipo == 3 && $em->idEmpresa == $e->idEmpresa) {
+                    $otroEmpresa += 1;
+                }
+            }
+        }
+        if (count($cantEmpresasA) != 0) {
+            $promPublico = ($publicoEmpresa * 100)/ $cantEmpresasA;
+            $promPrivado = ($privadoEmpresa * 100)/ $cantEmpresasA;
+            $promMixto = ($mixtoEmpresa * 100)/ $cantEmpresasA;
+            $promOtro = ($otroEmpresa * 100)/ $cantEmpresasA;
+        }
+        if ($publicoEmpresa != 0) {
+            $obj =  new stdClass();
+            $obj->numero = 0;
+            $obj->nombre = 'Público';
+            $obj->cantidad = $publicoEmpresa;
+            $obj->promedio = $promPublico;
+            $obj->color = '#3c8dbc'; 
+            array_push($tipoempresaArray, $obj);
+        }
+        if ($privadoEmpresa != 0) {
+             $obj =  new stdClass();
+             $obj->numero = 1;
+             $obj->nombre = 'Privado';
+             $obj->cantidad = $privadoEmpresa;
+             $obj->promedio = $promPrivado; 
+             $obj->color = '#00a65a'; 
+             array_push($tipoempresaArray, $obj);
+        }
+        if ($mixtoEmpresa != 0) {
+             $obj =  new stdClass();
+             $obj->numero = 2;
+             $obj->nombre = 'Mixto';
+             $obj->cantidad = $mixtoEmpresa;
+             $obj->promedio = $promMixto; 
+             $obj->color = '#D81B60';
+             array_push($tipoempresaArray, $obj);
+        }
+        if ($otroEmpresa != 0) {
+            $obj =  new stdClass();
+             $obj->numero = 3;
+             $obj->nombre = 'Otro';
+             $obj->cantidad = $otroEmpresa;
+             $obj->promedio = $promOtro; 
+             $obj->color = '#605ca8';
+             array_push($tipoempresaArray, $obj);
+        }
         //calcular el consumo en la calle  y en los palcos
         //$consumopalco = Consumopalco::all();
-
         $totalPalco = 0;
         foreach ($consumopalco as $consumo) {
             $totalPalco += $consumo->consumo * $consumo->venta;
@@ -397,7 +497,10 @@ class DashboardController extends Controller {
         $totales->agrupaciones = Agrupacion::count();
         $totales->palco = $totalPalco;
         $totales->calle = $totalCalle;
-        
+        //Calculo de empresas locales y externas, total de restaurantes, hoteles y lugares 
+        $totales->restaurantes = Restaurante::count();
+        $totales->hotel = Hotel::count();
+        $totales->lugar = Lugar::count();
         //calculo de empresas
         $patrocinio = 0;
         $provee = 0;
@@ -405,8 +508,6 @@ class DashboardController extends Controller {
         $cantP = 0;
         $cantProvee = 0;
         $cantC = 0;
-        //$costos = CostoEvento::all();
-        //$ingresos = IngresoEvento::all();
         //calcula provee y patrocinio
         foreach ($costos as $costo) {
             $proveedores = CostoProvee::where('idCosto', $costo->idCosto)->get();
@@ -435,12 +536,11 @@ class DashboardController extends Controller {
         $totalEmpresa->cantPatrocinio = $cantP;
         $totalEmpresa->cantProvee = $cantProvee;
         $totalEmpresa->cantConsumo = $cantC;
-        //dd($totales);
-        return response()->json(['error'=>false,'actividad' => $mapa, 'totales' => $totales, 'totalEmpresa' => $totalEmpresa, 'horas' => $horasProximas , 'cantidadEmpleos' => $cantidadEmpleos , 'cantActividades' => $cantActividades , 'capacidad' => $capacidad ,'cantSub' => $cantSub , 'totalAgrupacion' => $totalAgrupacion , 'totalParticipante' => $totalParticipante , 'sum' => $sum, 'modalidad' => $modalidad, 'ingCos' =>$ingCos, 'consumo' => $consumoT]);
+       
+        return response()->json(['error'=>false,'actividad' => $mapa, 'totales' => $totales, 'totalEmpresa' => $totalEmpresa, 'horas' => $horasProximas , 'cantidadEmpleos' => $cantidadEmpleos , 'cantActividades' => $cantActividades , 'capacidad' => $capacidad ,'cantSub' => $cantSub , 'totalAgrupacion' => $totalAgrupacion , 'totalParticipante' => $totalParticipante , 'sum' => $sum, 'modalidad' => $modalidad, 'ingCos' =>$ingCos, 'consumo' => $consumoT , 'tipoempresaArray' => $tipoempresaArray , 'totalEL' => $totalEL]);
     }
 
     public function allDepartamento(Request $request){
-
         $mapa = array();
         $horasPasadas = 0;
         $horasProximas = 0;
@@ -477,9 +577,24 @@ class DashboardController extends Controller {
         $capacidad = 0;
         $palco = 0;
         $palcoSub = 0;
-
+        $agrupacionesAsociadas = array();
+        $participantesAsociados = array();
+        $empresasAsociadas = array();
+        $tipoempresaArray = array();
         $totalAgrupacion = new stdClass();
         $totalParticipante = new stdClass();
+        //Variables para calcular empresas locales y externas
+        $cantproveeLocal = 0;
+        $cantproveeExterno = 0;
+        $cantconsumeLocal = 0;
+        $cantconsumeExterno = 0;
+        $cantpatroLocal = 0;
+        $cantpatroExterno = 0;
+        $publicoEmpresa = 0;
+        $privadoEmpresa = 0;
+        $mixtoEmpresa = 0;
+        $otroEmpresa = 0;
+        $totalEL = new stdClass();
         //calcular las horas de entretenimiento pasadas y por venir
         $date = Carbon::now();
         $eventoPasado = Evento::where('idDepartamento' , $request->idDepartamento)->where('fechaFin' ,'<', $date)->get();
@@ -491,9 +606,7 @@ class DashboardController extends Controller {
             $m->horas = 0;
         }
         $cantSub = 0; //Guarda la cantidad de las subactividades
-
         /*Totales de las agrupaciones */
-
         $totalAgrupacion->cantidad = Agrupacion::where('departamento' , $request->idDepartamento)->count();
         $totalAgrupacion->miembros = Agrupacion::where('departamento' , $request->idDepartamento)->sum('nempleados');
         $totalAgrupacion->mujeres = Agrupacion::where('departamento' , $request->idDepartamento)->sum('cantMujeres');
@@ -515,14 +628,11 @@ class DashboardController extends Controller {
         $totalParticipante->juridico = Participante::where('departamento' , $request->idDepartamento)->where('tipo' , 1)->count();
 
         foreach ($evento as $e) {
-
             $actividades = Actividad::where('idEvento' , $e->idEvento)->get();
             $cantActividades += count($actividades);
-            
             /*Suma de ingresos y egresos de los eventos , y de la cantidad de empleados*/
             $sum->costos += CostoEvento::where('idEvento' , $e->idEvento)->sum('costo');
             $sum->ingresos += IngresoEvento::where('idEvento' , $e->idEvento)->sum('costo');
-            
             //ingresoos agregados al evento
             $ingresos = IngresoEvento::where('idEvento' , $e->idEvento)->get();
             $costos = CostoEvento::where('idEvento' , $e->idEvento)->get();
@@ -539,25 +649,34 @@ class DashboardController extends Controller {
                 }else{
                     $sum->cantMujeres ++;
                 }
-                    
             }
-            
             foreach ($actividades as $act) {
-                    $aforoAct = 0;
-                    $costosxact += $act->costo;
-                    $sub = EventoActividad::where('idActividad' , $act->idActividad)->get();
-                    /*cantidad de personas proyectadas, la capacidad de todos los palcos*/
-                    $palco = Palco::where('idActividad' , $act->idActividad)->sum('capacidad');
-                    $getPalco = Palco::where('idActividad' , $act->idActividad)->get();
-                    
-                    $palcoSub = PalcoSub::where('idActividad' , $act->idActividad)->sum('capacidad');
-                    
-                    $capacidad += $palco + $palcoSub;
-                    $sum->nempleados += $act->empleo;
-                    $sum->cantMujeres += $act->cantMujeres;
-                    $sum->cantHombres += $act->cantHombres;
-                    
-
+                $aforoAct = 0;
+                $costosxact += $act->costo;
+                $sub = EventoActividad::where('idActividad' , $act->idActividad)->get();
+                /*cantidad de personas proyectadas, la capacidad de todos los palcos*/
+                $palco = Palco::where('idActividad' , $act->idActividad)->sum('capacidad');
+                $getPalco = Palco::where('idActividad' , $act->idActividad)->get();
+                $palcoSub = PalcoSub::where('idActividad' , $act->idActividad)->sum('capacidad');
+                $capacidad += $palco + $palcoSub;
+                $sum->nempleados += $act->empleo;
+                $sum->cantMujeres += $act->cantMujeres;
+                $sum->cantHombres += $act->cantHombres;
+              //las agrupaciones asociadas a la actividad 
+                $aa = Actividadagrupacion::where('idActividad', $act->idActividad)->get();
+                foreach ($aa as $a) {
+                    array_push($agrupacionesAsociadas, $a);
+                }
+                //los participantes asociados a la actividad 
+                $pa = Actividadparticipante::where('idActividad', $act->idActividad)->get();
+                foreach ($pa as $p) {
+                    array_push($participantesAsociados, $p);
+                }
+                //las empresas asociadas a la actividad 
+                $ea = Actividadempresa::where('idActividad', $act->idActividad)->get();
+                foreach ($ea as $e) {
+                    array_push($empresasAsociadas, $e);
+                }
                 if ($act->lugar == 1) {//mismo lugar
                     $direccion = DireccionActividad::where('idActividad', $act->idActividad)->get();
                     $data = new stdClass();
@@ -579,7 +698,6 @@ class DashboardController extends Controller {
                     $horasProximas += $inicio->diffInHours($fin);
                     $cantidadEmpleos += $act->empleo;
                     //buscar aforo por modalidad
-                    
                     $palco = Palco::where('idActividad', $act->idActividad)->get();
                     foreach ($palco as $p) {
                         $aforoAct += $p->capacidad;
@@ -594,7 +712,7 @@ class DashboardController extends Controller {
                         }
                     }
                     
-                }else{
+                }else{//Diferentes lugares
                     $sub = EventoActividad::where('idActividad', $act->idActividad)->get();
                     foreach ($sub as $s) {
                         $direccion = DireccionSub::where('idActividad' , $s->idEventoActividad)->get();
@@ -614,8 +732,7 @@ class DashboardController extends Controller {
                             $aforo += $p->capacidad;
                             $aforoAct = $p->capacidad;
                         }
-                            //AFORO POR MODALIDAD
-                      
+                        //AFORO POR MODALIDAD
                         //calcula modalidad
                         foreach ($modalidad as $m) {
                             if ($s->modalidad == $m->idModalidad) {
@@ -625,7 +742,6 @@ class DashboardController extends Controller {
                             }
                         }
                     }
-
                 }
                $cantSub += count($sub); //llena la cantidad de subactividades
             }//Fin foreach actividades
@@ -695,7 +811,8 @@ class DashboardController extends Controller {
                     $cantC++;
                 }
             }
-       }//Fin de foreach eventos
+    
+        }//Fin de foreach eventos
    
        //Total de los consumos
         $consumoT = new stdClass();
@@ -710,8 +827,6 @@ class DashboardController extends Controller {
         $consumoT->totalBebidas = $palcoBebidas + $calleBebidas;
         $consumoT->totalSnacks = $palcoSnacks + $calleSnacks;
         $consumoT->totalComidas = $palcoComidas + $calleComidas;
-        
-        
         $totalIngresos = $ingresosxact + $otrosIngresos;
         $totalCostos = $costosxact + $otrosCostos;
 
@@ -731,10 +846,70 @@ class DashboardController extends Controller {
         $totales->palco = $totalPalco;
         $totales->calle = $totalCalle;
     
-        // $costos = CostoEvento::all();
-        //$ingresos = IngresoEvento::all();
-        //calcula provee y patrocinio
-       
+        $totales->restaurantes = Restaurante::where('departamento' , $request->idDepartamento)->count();
+        $totales->hotel = Hotel::where('departamento' , $request->idDepartamento)->count();
+        $totales->lugar = Lugar::where('departamento' , $request->idDepartamento)->count();
+        
+        //Calculo de empresa por sector: 0: publico; 1: privado; 2: Mixto, 3: Otros
+        $empresas = Empresa::where('departamento' , $request->idDepartamento)->get(); // Todas las empresas
+        $cantEmpresasA = count($empresasAsociadas);
+        foreach ($empresas as $em) { //Recorro todas las empresas
+            foreach ($empresasAsociadas as $e) { //Recorro las que están asociadas
+                if ($em->tipo == 0 && $em->idEmpresa == $e->idEmpresa) {
+                    $publicoEmpresa += 1 ;
+                }elseif ($em->tipo == 1 && $em->idEmpresa == $e->idEmpresa) {
+                    $privadoEmpresa +=1;
+                }elseif ($em->tipo == 2 && $em->idEmpresa == $e->idEmpresa) {
+                    $mixtoEmpresa += 1;
+                }elseif ($em->tipo == 3 && $em->idEmpresa == $e->idEmpresa) {
+                    $otroEmpresa += 1;
+                }
+            }
+        }
+      if($cantEmpresasA != 0){
+        $promPublico = ($publicoEmpresa * 100)/ $cantEmpresasA;
+        $promPrivado = ($privadoEmpresa * 100)/ $cantEmpresasA;
+        $promMixto = ($mixtoEmpresa * 100)/ $cantEmpresasA;
+        $promOtro = ($otroEmpresa * 100)/ $cantEmpresasA;
+
+        if ($publicoEmpresa != 0) {
+            $obj =  new stdClass();
+            $obj->numero = 0;
+            $obj->nombre = 'Publico';
+            $obj->cantidad = $publicoEmpresa;
+            $obj->promedio = $promPublico;
+            $obj->color = '#3c8dbc'; 
+            array_push($tipoempresaArray, $obj);
+        }
+        if ($privadoEmpresa != 0) {
+             $obj =  new stdClass();
+             $obj->numero = 1;
+             $obj->nombre = 'Privado';
+             $obj->cantidad = $privadoEmpresa;
+             $obj->promedio = $promPrivado; 
+             $obj->color = '#00a65a'; 
+             array_push($tipoempresaArray, $obj);
+        }
+        if ($mixtoEmpresa != 0) {
+             $obj =  new stdClass();
+             $obj->numero = 2;
+             $obj->nombre = 'Mixto';
+             $obj->cantidad = $mixtoEmpresa;
+             $obj->promedio = $promMixto; 
+             $obj->color = '#D81B60';
+             array_push($tipoempresaArray, $obj);
+        }
+        if ($otroEmpresa != 0) {
+            $obj =  new stdClass();
+             $obj->numero = 3;
+             $obj->nombre = 'Otro';
+             $obj->cantidad = $otroEmpresa;
+             $obj->promedio = $promOtro; 
+             $obj->color = '#605ca8';
+             array_push($tipoempresaArray, $obj);
+        }   
+      }
+
         $totalEmpresa = new stdClass();
         $totalEmpresa->patrocinio = 0;
         $totalEmpresa->provee = 0;
@@ -748,9 +923,66 @@ class DashboardController extends Controller {
         $totalEmpresa->cantPatrocinio = $cantP;
         $totalEmpresa->cantProvee = $cantProvee;
         $totalEmpresa->cantConsumo = $cantC;
+        foreach ($evento as $e) {
+            //Calcula el total de las empresas locales y externas, si son proveedoras, patrocinadoras o consumidoras
+            $costosE = CostoEvento::where('idEvento', $e->idEvento)->get();
+            foreach ($costosE as $c) {
+                $costoSelect = CostoProvee::where('idCosto', $c->idCosto)->get();
+                foreach ($costoSelect as $co) {
+                    $empresaSelect = Empresa::find($co->idProveedor);
+                    if ($co->subsidio == 1) {
+                        if($empresaSelect->departamento == $e->idDepartamento && $empresaSelect->ciudad == $e->idCiudad){
+                            $cantpatroLocal++;
+                        }else{
+                            $cantpatroExterno++;
+                        }
+                    }else{
+                        if($empresaSelect->departamento == $e->idDepartamento && $empresaSelect->ciudad == $e->idCiudad){
+                            $cantproveeLocal++;
+                        }else{
+                            $cantproveeExterno++;
+                        }
+                    }
+                }
+            }
+                //buscar todos los ingresos y las empresas las cuales consumen los ingresos del evento
+            $ingresosE = IngresoEvento::where('idEvento', $e->idEvento)->get();
+            foreach ($ingresosE as $i) {
+                $ingresoSelect = IngresoConsume::where('idIngreso', $i->idIngreso)->get();
+                foreach ($ingresoSelect as $in) {
+                    $empresaSelect = Empresa::find($in->idConsumidor);
+                    if($empresaSelect->departamento == $e->idDepartamento && $empresaSelect->ciudad == $e->idCiudad){
+                        $cantconsumeLocal++;
+                    }else{
+                        $cantconsumeExterno++;
+                    }   
+                }
+            }
+        }
+        
+        if ((count($cantconsumeLocal)!=0) || (count($cantconsumeExterno)!=0)) {
+            $totalEL->consumeLocal = $cantconsumeLocal;
+            $totalEL->consumeExtreno = $cantconsumeExterno;
+        }else{
+            $totalEL->consumeLocal = 0;
+            $totalEL->consumeExtreno = 0;    
+        }
+        if ((count($cantproveeLocal)!=0)|| (count($cantproveeExterno)!=0)) {
+            $totalEL->proveeLocal = $cantproveeLocal;
+            $totalEL->proveeExtreno = $cantproveeExterno;
+        }else{
+            $totalEL->proveeLocal = 0;
+            $totalEL->proveeExtreno = 0;
+        }
+        if ((count($cantpatroLocal)!=0) || (count($cantpatroExterno)!=0)) {
+            $totalEL->patroLocal = $cantpatroLocal;
+            $totalEL->patroExtreno = $cantpatroExterno;
+        }else{
+            $totalEL->patroLocal = 0;
+            $totalEL->patroExtreno = 0;
+        }
 
-          //dd($horasProximas);
-        return response()->json(['error'=>false,'actividad' => $mapa, 'totales' => $totales, 'totalEmpresa' => $totalEmpresa, 'horas' => $horasProximas , 'cantidadEmpleos' => $cantidadEmpleos , 'cantActividades' => $cantActividades , 'cantSub' => $cantSub , 'totalAgrupacion' => $totalAgrupacion , 'totalParticipante' => $totalParticipante, 'sum' => $sum , 'ingCos' => $ingCos , 'consumo' => $consumoT , 'modalidad' => $modalidad , 'capacidad' => $capacidad ]);
+        return response()->json(['error'=>false,'actividad' => $mapa, 'totales' => $totales, 'totalEmpresa' => $totalEmpresa, 'horas' => $horasProximas , 'cantidadEmpleos' => $cantidadEmpleos , 'cantActividades' => $cantActividades , 'cantSub' => $cantSub , 'totalAgrupacion' => $totalAgrupacion , 'totalParticipante' => $totalParticipante, 'sum' => $sum , 'ingCos' => $ingCos , 'consumo' => $consumoT , 'modalidad' => $modalidad , 'capacidad' => $capacidad , 'tipoempresaArray' => $tipoempresaArray , 'totalEL' => $totalEL]);
     }
     
 
