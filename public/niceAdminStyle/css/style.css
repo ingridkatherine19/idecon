@@ -168,7 +168,7 @@ table tr th { color: #688a7e;}
 
 .login-img3-body{
 
-  background: url('../img/login2.png') no-repeat center center fixed; 
+  background: url('../img/login3.png') no-repeat center center fixed; 
 
   -webkit-background-size: cover;
 
@@ -181,7 +181,7 @@ table tr th { color: #688a7e;}
 }
 
 .buttonLogin {
-    background-color: #06A2EB !important;
+    background-color: #00508a !important;
     color: white;
 }
 
@@ -421,7 +421,7 @@ table tr th { color: #688a7e;}
 }
 
 .pLogin {
-    color:black !important;
+    color:#00508a !important;
     font-size: x-large !important;
 }
 

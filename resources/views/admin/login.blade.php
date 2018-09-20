@@ -33,12 +33,12 @@
   <body class="login-img3-body" >
 
     <div class="container">
-        <img src="../public/niceAdminStyle/img/logoweb.png" style="width: 16%;position: relative !important;left: 72% !important;top: 70px !important;z-index: 1000 !important;color: #FFFFFF !important;font-weight: bold !important;">
+        
         <div class="row">
             <div class="col-md-7">
             </div>
             <div class="col-md-5" >
-
+            <img src="../public/niceAdminStyle/img/logoSitena.png" style="width: 80%;position: relative !important;left: 10% !important;top: 75px !important;z-index: 1000 !important;color: #FFFFFF !important;font-weight: bold !important;">
                 <form class="login-form" action="http://localhost/ideconNuevo/public/" method="post" style="margin-top:30%;">        
                     <div class="login-wrap" style="background-color: white">
                         <p class="pLogin"> Iniciar Sesión</p>
